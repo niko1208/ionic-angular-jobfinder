@@ -1,0 +1,23 @@
+page-login{
+    ion-icon.nav_back{
+        position: fixed;
+        left: 20px;
+        top: 30px;
+        font-size: 26px;
+    }
+    ion-content{
+        background: url(../assets/images/login_background.png);
+        background-size: cover;
+        background-position: center;
+    }
+    div.div_content{
+        margin-top: 350px;
+    }
+    div.div_bottom{
+        position: fixed;
+        bottom: 20px;
+        left: 0px;
+        width: 100%;
+        font-size: 10px;
+    }
+}

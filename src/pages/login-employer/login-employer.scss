@@ -1,0 +1,26 @@
+page-login-employer{
+    ion-icon.nav_back{
+        position: fixed;
+        left: 20px;
+        top: 30px;
+        font-size: 26px;
+    }
+    ion-content{
+        background: url(../assets/images/register_background.png);
+        background-size: cover;
+        background-position: center;
+    }
+    div.div_form{
+        margin-top: 150px;
+    }
+    ion-item.form-item{
+        border-radius: 50px;
+        margin: 10px 0px;
+    }
+    div.div_forgot_password{
+        margin-top: 50px;
+    }
+    div.div_forgot_password span{
+        color: $jblue;
+    }
+}

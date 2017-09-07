@@ -1,0 +1,24 @@
+<ion-content>
+
+    <img class="img_logo" src="assets/images/Jobfinder_logo.png"/>
+    <ion-icon class="nav_back" ios="ios-arrow-back" md="md-arrow-back" (click)="goback()"></ion-icon>
+
+    <div class="div_form" padding>
+        <h2 text-center>Welcome!</h2>
+        <ion-item class="form-item">        
+            <ion-label> <ion-icon name="mail"></ion-icon></ion-label>
+            <ion-input clearInput type="text" placeholder="Email" [(ngModel)]="email"></ion-input>
+        </ion-item>
+        <ion-item class="form-item">        
+            <ion-label> <ion-icon name="lock"></ion-icon></ion-label>
+            <ion-input type="password" [(ngModel)]="password" placeholder="Password"></ion-input>
+        </ion-item>
+        <button ion-button full round color="jblue" (click)="login()">Login</button>
+    </div>
+
+    <div class="div_forgot_password" text-center>
+        <small>Forgot Password?</small>
+        <span>Click here to reset!</span>
+    </div>
+
+</ion-content>

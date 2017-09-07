@@ -1,0 +1,15 @@
+page-splash {
+    ion-slides{
+        height: 80%;
+    }
+    ion-slide{
+        position: relative;
+    }
+    div.title{
+        position: absolute;
+        top: 140px;
+        left: calc(50% - 130px);
+        width: 260px;
+        text-align: center;
+    }
+}

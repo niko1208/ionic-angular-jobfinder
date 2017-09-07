@@ -1,0 +1,28 @@
+<ion-content>
+  <img class="img_logo" src="assets/images/Jobfinder_logo.png"/>
+  <ion-slides pager id='slides'>
+    <ion-slide>
+      <div class="title">Create job ads from your<br/> mobile in minutes</div>
+      <img src="assets/images/splash_background01.png" />
+    </ion-slide>
+    <ion-slide>
+      <div class="title">Cut your hiring down to minutes and shortlist applicatnts from your phone in one tap</div>
+      <img src="assets/images/splash_background02.png" />
+    </ion-slide>
+    <ion-slide>
+      <div class="title">Chat in real time and interview your candidates live</div>
+      <img src="assets/images/splash_background03.png" />
+    </ion-slide>
+  </ion-slides>
+  <div class="buttons" padding>
+    <div text-center>Signup or Login to Get Started!</div>
+    <ion-row>
+      <ion-col padding>
+        <button ion-button full round color="jblue" (click)="goSignup()">Signup</button>
+      </ion-col>
+      <ion-col padding>
+        <button ion-button full round color="jgreen" (click)="goLogin()">Login</button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

@@ -1,0 +1,11 @@
+<ion-content>
+  <img class="img_logo" src="assets/images/Jobfinder_logo.png"/>
+  <ion-icon class="nav_back" ios="ios-arrow-back" md="md-arrow-back" (click)="goback()"></ion-icon>
+
+  <div class="div_content" padding>
+      <h2 text-center>SIGN IN AS</h2>
+      <button ion-button full round color="jblue" (click)="goEmployerLogin()">employer</button>
+      <button ion-button full round color="jgreen" (click)="goSeekerLogin()">Job seeker</button>
+  </div>
+  <div class="div_bottom" text-center (click)="goTerms()">TERMS OF SERVICE</div>
+</ion-content>
