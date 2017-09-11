@@ -5,6 +5,11 @@ import { Injectable} from '@angular/core';
 export class Config {
     public navOptions: any;
     public navOptionsBack: any;
+    public platform: any;
+    public deviceToken: any;
+    public user_type: any;
+    public user_id: any;
+
     constructor() {
         this.navOptions = {
             animation: 'ios-transition'

@@ -1,4 +1,10 @@
-page-signup{
+page-signup-verify{
+    ion-icon.nav_back{
+        position: fixed;
+        left: 20px;
+        top: 30px;
+        font-size: 26px;
+    }
     ion-content{
         background: url(../assets/images/register_background.png);
         background-size: cover;
@@ -11,16 +17,10 @@ page-signup{
         border-radius: 50px;
         margin: 10px 0px;
     }
-    
-    div.div_login{
+    div.div_forgot_password{
         margin-top: 10px;
     }
-    div.div_login span{
+    div.div_forgot_password span{
         color: $jblue;
-    }
-    ion-select.select-md{
-        width: calc(100% - 25px);
-        max-width: 100%;
-        padding-left: 0px;
     }
 }

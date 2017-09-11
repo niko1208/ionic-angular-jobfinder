@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.jobfinder.job" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.jobfinder.job123" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>JobFinder</name>
     <description>Job Finder</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">JobFinder Team</author>
@@ -84,4 +84,7 @@
     <plugin name="cordova-plugin-statusbar" spec="^2.2.2" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.1" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
+    <plugin name="phonegap-plugin-push" spec="^1.10.5">
+        <variable name="SENDER_ID" value="931832809761" />
+    </plugin>
 </widget>

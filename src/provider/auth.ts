@@ -11,16 +11,25 @@ export class Auth {
         
     }
 
-    login_employer(item) {
+    login(item, user_type) {
         let url = this.config.getAPIURL();
-        url = `${url}/employer/signin.php`;
+        url = `${url}/${user_type}/signin.php`;
         item = this.config.getFormData(item);
         return this.http.post(url, item).map((response:Response)=>
             response.json());
     }
-    login_seeker(item) {
+
+    signup(item, user_type) {
         let url = this.config.getAPIURL();
-        url = `${url}/seeker/signin.php`;
+        url = `${url}/${user_type}/signup.php`;
+        item = this.config.getFormData(item);
+        return this.http.post(url, item).map((response:Response)=>
+            response.json());
+    }
+    
+    verify(item, user_type) {
+        let url = this.config.getAPIURL();
+        url = `${url}/${user_type}/verify.php`;
         item = this.config.getFormData(item);
         return this.http.post(url, item).map((response:Response)=>
             response.json());

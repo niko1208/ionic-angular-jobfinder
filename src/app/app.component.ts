@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
+import { Config } from '../provider/config';
 
 import { SplashPage } from '../pages/splash/splash';
 @Component({
@@ -10,13 +12,61 @@ import { SplashPage } from '../pages/splash/splash';
 export class MyApp {
   rootPage:any = SplashPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(public platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public push: Push, public config: Config) {
     platform.ready().then(() => {
+      if(platform.is('ios')) {
+        this.config.platform = 'ios';
+      } else if(platform.is('android')) {
+        this.config.platform = 'android';
+      } else {
+        this.config.platform = 'other';
+      }
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      this.initPushNotification();
       statusBar.styleDefault();
       splashScreen.hide();
     });
   }
+
+  initPushNotification() { 
+    if (!this.platform.is('cordova')) {
+      console.warn('Push notifications not initialized. Cordova is not available - Run in physical device');
+      return;
+    }
+    const options: PushOptions = {
+      android: {
+        senderID: '931832809761'
+      },
+      ios: {
+        alert: 'true',
+        badge: false,
+        sound: 'true'
+      },
+      windows: {}
+    };
+    const pushObject: PushObject = this.push.init(options);
+    
+    pushObject.on('registration').subscribe((data: any) => {
+      console.log('device token -> ' + data.registrationId);
+      this.config.deviceToken = data.registrationId;
+      alert("Device : " + this.config.deviceToken);
+    });
+
+    pushObject.on('notification').subscribe((data: any) => {
+      alert('message -> ' + data.message);
+      //if user using app and push notification comes
+      if (data.additionalData.foreground) { 
+        
+      } else {
+        //if user NOT using app and push notification comes
+        //TODO: Your logic on click of push notification directly
+        console.log('Push notification clicked');
+      }
+    });
+
+    pushObject.on('error').subscribe(error => alert('Error with Push plugin' + error));
+  }
+  
 }
 

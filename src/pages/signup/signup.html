@@ -14,17 +14,20 @@
         </ion-item>
         <ion-item class="form-item">        
             <ion-label> <ion-icon name="phone-portrait"></ion-icon></ion-label>
-            <ion-input clearInput type="text" placeholder="Phone" [(ngModel)]="phone"></ion-input>
+            <ion-input clearInput type="tel" placeholder="Phone" [(ngModel)]="phone"></ion-input>
         </ion-item>
         <ion-item class="form-item">        
-            <ion-label> <ion-icon name="mail"></ion-icon></ion-label>
-            
+            <ion-label> <ion-icon  ios="ios-help" md="md-help"></ion-icon></ion-label>
+            <ion-select [(ngModel)]="type" placeholder="Employer or Job Seeker">
+                <ion-option value="employer">Employer</ion-option>
+                <ion-option value="jobseeker">Job Seeker</ion-option>
+            </ion-select>
         </ion-item>
         <ion-item class="form-item">        
             <ion-label> <ion-icon name="lock"></ion-icon></ion-label>
             <ion-input type="password" [(ngModel)]="password" placeholder="Password"></ion-input>
         </ion-item>
-        <div text-center padding><input type="checkbox"> I accept the Terms of Use</div>
+        <div text-center padding><ion-checkbox [(ngModel)]="isterms"></ion-checkbox> I accept the Terms of Use</div>
         <button ion-button full round color="jblue" (click)="signup()">Signup</button>
     </div>
 

@@ -10,9 +10,17 @@ import { LoginPage } from '../pages/login/login';
 import { LoginEmployerPage } from '../pages/login-employer/login-employer';
 import { LoginSeekerPage } from '../pages/login-seeker/login-seeker';
 import { SignupPage } from '../pages/signup/signup';
+import { SignupVerifyPage } from '../pages/signup-verify/signup-verify';
 import { TermsPage } from '../pages/terms/terms';
+import { EmployerTabsPage } from '../pages/employer/tabs/employer-tabs';
+import { EmployerHomePage } from '../pages/employer/home/employer-home';
+import { EmployerSettingPage } from '../pages/employer/setting/employer-setting';
+import { EmployerPostJobPage } from '../pages/employer/postjob/employer-postjob';
+import { EmployerActivityPage } from '../pages/employer/activity/employer-activity';
+import { EmployerMessagePage } from '../pages/employer/message/employer-message';
 
 import { HttpModule } from '@angular/http';
+import { Push } from '@ionic-native/push';
 
 import { Config } from '../provider/config';
 import { UtilService } from '../provider/util-service';
@@ -26,7 +34,15 @@ import { Auth } from '../provider/auth';
     LoginEmployerPage,
     LoginSeekerPage,
     SignupPage,
-    TermsPage
+    SignupVerifyPage,
+    TermsPage,
+
+    EmployerTabsPage,
+    EmployerHomePage,
+    EmployerSettingPage,
+    EmployerPostJobPage,
+    EmployerActivityPage,
+    EmployerMessagePage
   ],
   imports: [
     BrowserModule,
@@ -41,7 +57,15 @@ import { Auth } from '../provider/auth';
     LoginEmployerPage,
     LoginSeekerPage,
     SignupPage,
-    TermsPage
+    SignupVerifyPage,
+    TermsPage,
+
+    EmployerTabsPage,
+    EmployerHomePage,
+    EmployerSettingPage,
+    EmployerPostJobPage,
+    EmployerActivityPage,
+    EmployerMessagePage
   ],
   providers: [
     StatusBar,
@@ -49,6 +73,7 @@ import { Auth } from '../provider/auth';
     Config,
     UtilService,
     Auth,
+    Push,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

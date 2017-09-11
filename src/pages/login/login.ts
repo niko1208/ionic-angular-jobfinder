@@ -20,9 +20,11 @@ export class LoginPage {
   }
 
   goEmployerLogin() {
+      this.config.user_type = "employer";
       this.navCtrl.push(LoginEmployerPage, null, this.config.navOptions);
   }
   goSeekerLogin() {
+      this.config.user_type = "jobseeker";
       this.navCtrl.push(LoginSeekerPage, null, this.config.navOptions);
   }
   goTerms() {
