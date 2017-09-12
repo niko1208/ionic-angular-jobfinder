@@ -6,6 +6,8 @@ import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { Config } from '../provider/config';
 
 import { SplashPage } from '../pages/splash/splash';
+import { EmployerTabsPage } from '../pages/employer/tabs/employer-tabs';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -14,6 +16,17 @@ export class MyApp {
 
   constructor(public platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public push: Push, public config: Config) {
     platform.ready().then(() => {
+      let user_id = localStorage.getItem('user_id');
+      let user_type = localStorage.getItem('user_type');
+      if(user_id != null && user_id != "") {
+        this.config.user_id = user_id;
+        if(user_type == 'employer') {
+          this.rootPage = EmployerTabsPage;
+        } else {
+          
+        }
+      }
+
       if(platform.is('ios')) {
         this.config.platform = 'ios';
       } else if(platform.is('android')) {

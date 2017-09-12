@@ -1,12 +1,40 @@
 <ion-header>
     <ion-navbar color="jblue">
-        <ion-icon name="list" item-start></ion-icon>
-        <ion-icon name="map" item-start></ion-icon>
+        <ion-icon name="list" class="iconlist"></ion-icon>
+        <ion-icon name="map" class="iconmap"></ion-icon>
         <ion-title text-center>Profile</ion-title>
-        <ion-icon name="heart" end></ion-icon>
+        <ion-icon name="heart" class="iconheart" (click)="goLiked()"></ion-icon>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
-
+    <div class="top_header">
+        <ion-searchbar #q [(ngModel)]="searchValue" (keyup.enter)="search(q.value)" pleceholder="">
+        </ion-searchbar>
+        <div style="padding: 0px 8px;">
+            <ion-select #indus interface="popover" [(ngModel)]="queryIndustry" (ionChange)="change(indus.value)">
+                <ion-option value="">#alljobs</ion-option>
+                <ion-option *ngFor="let item of arrIndustry; let i = index;" value="{{item}}">{{item}}</ion-option>
+            </ion-select>
+        </div>
+    </div>
+    <ion-slides pager id='slides'>
+        <ion-slide *ngFor="let item of list; let i = index;">
+            <img src="{{item.user_avatar_url}}" class="user_avatar" />
+            <div>{{item.user_name}}</div>
+            <div>About</div>
+            <small>{{item.user_about}}</small>
+            <ion-row class="buttons">
+                <ion-col padding>
+                    <button ion-button full round class="bt_green" (click)="like(i)">Like</button>
+                </ion-col>
+                <ion-col padding>
+                    <button ion-button full round class="bt_blue" (click)="invite(i)">Invite</button>
+                </ion-col>
+                <ion-col col-12 padding style="padding-top:0px">
+                    <button ion-button full round color="jblue" (click)="readMore(i)">Tap to Read More</button>
+                </ion-col>
+            </ion-row>
+        </ion-slide>
+    </ion-slides>
 </ion-content>

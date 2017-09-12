@@ -1,3 +1,58 @@
 page-employer-home{
-    
+    .iconlist,
+    .iconmap,
+    .iconheart{
+        position: absolute;
+        top: 20px;
+        font-size: 24px;
+        color: #fff;
+        left: 10px;
+    }
+    .iconheart{
+        left: auto;
+        right: 10px;
+    }
+    .iconmap{
+        left: 40px;
+    }
+    .select-md{
+        max-width: 100%;
+        width: 100%;
+        border: 1px solid #ccc;
+    }
+    .user_avatar{
+        width: 80px;
+        height: 80px;
+        border: 2px solid #fff;
+        box-shadow: #555 0px 0px 1px;
+        border-radius: 100px;
+    }
+    .top_header{
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        z-index: 99;
+    }
+    .bt_green{
+        border: 2px solid #7cbb22;
+        background: #fff;
+        color: #7cbb22;
+    }
+    .bt_blue{
+        border: 2px solid #3ac7f3;
+        background: #fff;
+        color: #3ac7f3;
+    }
+    ion-slides{
+        margin-top: 120px;
+        height: calc(100% - 120px);
+    }
+    .swiper-slide{
+        display: block
+    }
+    .buttons{
+        position: absolute;
+        bottom: 20px;
+    }
 }

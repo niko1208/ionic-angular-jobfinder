@@ -1,0 +1,83 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title>Profile</ion-title>
+        <ion-buttons right>
+            <ion-label (click)="invite()" class="fright">Invite</ion-label>
+            <ion-label (click)="liked()" class="fright">Like</ion-label>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <img src="{{list?.resultUser.user_avatar_url}}"/>
+    <ion-label class="lb_title">GENERAL INFO</ion-label>
+    <ion-item>
+        <ion-label class='lb_icon'><ion-icon name='ios-contact-outline'></ion-icon></ion-label>
+        <ion-label>Name</ion-label>
+        <ion-label text-right>{{list?.resultUser.user_name}}</ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-label class='lb_icon'><ion-icon name='ios-information-circle-outline'></ion-icon></ion-label>
+        <ion-label>About</ion-label>
+        <ion-label text-right>{{list?.resultUser.user_about}}</ion-label>
+        <ion-label class='lb_icon lb_icon_right'><ion-icon name="ios-arrow-forward-outline"></ion-icon></ion-label>
+    </ion-item>
+    
+    <ion-label class="lb_title">experience</ion-label>
+    <ion-item *ngFor="let item of list?.resultExperience">
+        <ion-label class='lb_icon'><ion-icon name='ios-briefcase-outline'></ion-icon></ion-label>
+        <ion-label>Experience</ion-label>
+        <ion-label text-right>
+            {{item.experience_company}}<br/>
+            {{item.experience_role}}<br/>
+            {{item.experience_description}}
+        </ion-label>
+        <ion-label class='lb_icon lb_icon_right'><ion-icon name="ios-arrow-forward-outline"></ion-icon></ion-label>
+    </ion-item>
+
+    <ion-label class="lb_title">current work</ion-label>
+    <ion-item *ngFor="let item of list?.resultCurWork">
+        <ion-label class='lb_icon'><ion-icon name='ios-construct-outline'></ion-icon></ion-label>
+        <ion-label>{{item.curwork_company}}</ion-label>
+        <ion-label text-right>
+            {{item.curwork_role}}<br/>
+            {{item.curwork_description}}
+        </ion-label>
+        <ion-label class='lb_icon lb_icon_right'><ion-icon name="ios-arrow-forward-outline"></ion-icon></ion-label>
+    </ion-item>
+
+    <ion-label class="lb_title">Education</ion-label>
+    <ion-item *ngFor="let item of list?.resultEducation">
+        <ion-label class='lb_icon'><ion-icon name='ios-school-outline'></ion-icon></ion-label>
+        <ion-label>{{item.education_school}}</ion-label>
+        <ion-label text-right>
+            {{item.education_level}}<br/>
+            {{item.education_area}}
+        </ion-label>
+        <ion-icon name="arrow-forward"></ion-icon>
+    </ion-item>
+
+    <ion-label class="lb_title">Language</ion-label>
+    <ion-item *ngFor="let item of list?.resultLanguage">
+        <ion-label class='lb_icon'><ion-icon name='ios-book-outline'></ion-icon></ion-label>
+        <ion-label>{{item.language_language}}</ion-label>
+        <ion-label text-right>
+            {{item.language_proficiency}}
+        </ion-label>
+        <ion-icon name="arrow-forward"></ion-icon>
+    </ion-item>
+
+    <ion-label class="lb_title">Reference</ion-label>
+    <ion-item *ngFor="let item of list?.resultReference">
+        <ion-label class='lb_icon'><ion-icon name='ios-contacts-outline'></ion-icon></ion-label>
+        <ion-label>{{item.reference_name}}</ion-label>
+        <ion-label text-right>
+            {{item.reference_position}}<br/>
+            {{item.reference_company}}<br/>
+            {{item.reference_email}}<br/>
+            {{item.reference_mobile}}
+        </ion-label>
+        <ion-icon name="arrow-forward"></ion-icon>
+    </ion-item>
+
+</ion-content>

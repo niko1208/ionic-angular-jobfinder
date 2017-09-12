@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>Invite</ion-title>
+    </ion-navbar>
+    <ion-toolbar>
+        <ion-searchbar #q [(ngModel)]="searchValue" (keyup.enter)="search(q.value)" pleceholder="">
+        </ion-searchbar>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let item of list; let i = index;">
+            <img class="user_avatar" src="{{item.job_job_avatar_url}}" />
+            <div class="desc">
+                <div>{{item.job_company_name}}</div>
+                <small>Post {{getDate(item.job_job_create_date) | amTimeAgo}}</small><br/>
+                <small>Viewed: {{item.views}}, Applied: {{item.applies}}</small>
+            </div>
+            <button ion-button round color="jblue" class="bt_small" (click)="invite(i)">Invite</button>
+        </ion-item>
+    </ion-list>
+</ion-content>

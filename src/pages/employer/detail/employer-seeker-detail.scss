@@ -1,0 +1,37 @@
+page-employer-seeker-detail{
+    ion-content.content-md{
+        background: #eee;
+    }
+    .lb_title{
+        text-transform: uppercase;
+        padding-left: 10px;
+    }
+    ion-item ion-label{
+        font-size: 12px;
+    }
+    .lb_icon.label-md{
+        font-size: 16px;
+        width: 24px;
+        max-width: 24px;
+        text-align: center;
+    }
+    .lb_icon.label-md ion-icon{
+        width: 24px;
+        height: 24px;
+        border-radius: 4px;
+        background: #3ac7f3;
+        color: #fff;
+        padding: 2px;
+    }
+    .lb_icon.lb_icon_right.label-md{
+        max-width: 18px;
+    }
+    .lb_icon.lb_icon_right.label-md ion-icon{
+        background: #fff;
+        color: #aaa;
+    }
+    .fright{
+        float: right;
+        color: #fff;
+    }
+}

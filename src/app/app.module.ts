@@ -3,7 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-
+import { MomentModule } from 'angular2-moment';
 import { MyApp } from './app.component';
 import { SplashPage } from '../pages/splash/splash';
 import { LoginPage } from '../pages/login/login';
@@ -13,7 +13,12 @@ import { SignupPage } from '../pages/signup/signup';
 import { SignupVerifyPage } from '../pages/signup-verify/signup-verify';
 import { TermsPage } from '../pages/terms/terms';
 import { EmployerTabsPage } from '../pages/employer/tabs/employer-tabs';
+
 import { EmployerHomePage } from '../pages/employer/home/employer-home';
+import { EmployerInvitePage } from '../pages/employer/invite/employer-invite';
+import { EmployerSavedPage } from '../pages/employer/saved/employer-saved';
+import { EmployerSeekerDetailPage } from '../pages/employer/detail/employer-seeker-detail';
+
 import { EmployerSettingPage } from '../pages/employer/setting/employer-setting';
 import { EmployerPostJobPage } from '../pages/employer/postjob/employer-postjob';
 import { EmployerActivityPage } from '../pages/employer/activity/employer-activity';
@@ -25,6 +30,7 @@ import { Push } from '@ionic-native/push';
 import { Config } from '../provider/config';
 import { UtilService } from '../provider/util-service';
 import { Auth } from '../provider/auth';
+import { EmployerService } from '../provider/employer-service';
 
 @NgModule({
   declarations: [
@@ -42,11 +48,15 @@ import { Auth } from '../provider/auth';
     EmployerSettingPage,
     EmployerPostJobPage,
     EmployerActivityPage,
-    EmployerMessagePage
+    EmployerMessagePage,
+    EmployerInvitePage,
+    EmployerSavedPage,
+    EmployerSeekerDetailPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    MomentModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -65,7 +75,10 @@ import { Auth } from '../provider/auth';
     EmployerSettingPage,
     EmployerPostJobPage,
     EmployerActivityPage,
-    EmployerMessagePage
+    EmployerMessagePage,
+    EmployerInvitePage,
+    EmployerSavedPage,
+    EmployerSeekerDetailPage
   ],
   providers: [
     StatusBar,
@@ -74,6 +87,7 @@ import { Auth } from '../provider/auth';
     UtilService,
     Auth,
     Push,
+    EmployerService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

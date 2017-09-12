@@ -46,10 +46,19 @@ export class LoginEmployerPage {
       this.auth.login(param, "employer")
       .subscribe(data => {
           loader.dismissAll();
-          this.navCtrl.push(EmployerTabsPage, null, this.config.navOptions).then(()=> {
-            const index = this.viewCtrl.index;
-            this.navCtrl.remove(index);
-        });
+          if(data.status == "success") {
+            this.config.user_id = data.resultUser.user_id;
+            localStorage.setItem('user_id', this.config.user_id);
+            localStorage.setItem('user_type', "employer");
+
+            this.navCtrl.push(EmployerTabsPage, null, this.config.navOptions).then(()=> {
+                const index = this.viewCtrl.index;
+                this.navCtrl.remove(index);
+            });
+          } else {
+            this.util.createAlert("Login Failed", data.result);
+          }
+          
       })
   }
 
