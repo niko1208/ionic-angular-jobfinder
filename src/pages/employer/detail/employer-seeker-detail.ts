@@ -4,7 +4,9 @@ import { Config } from '../../../provider/config';
 import { UtilService } from '../../../provider/util-service';
 import { EmployerService } from '../../../provider/employer-service';
 import { EmployerInvitePage } from '../invite/employer-invite';
-import { EmployerSavedPage } from '../saved/employer-saved';
+import { EmployerAboutPage } from '../about/employer-about';
+import { EmployerExperiencePage } from '../experience/employer-experience';
+import { EmployerWorkPage } from '../work/employer-work';
 
 @Component({
   selector: 'page-employer-seeker-detail',
@@ -34,7 +36,7 @@ export class EmployerSeekerDetailPage {
     loader.present();
     let param = {"seeker_id" : this.jobSeekerID};
     this.employerService.postData("loadjobseekerinfo", param)
-    .subscribe(data => { 
+    .subscribe(data => { console.log(data);
         loader.dismissAll();
         if(data.status == "success") {
           this.list = data;
@@ -42,12 +44,39 @@ export class EmployerSeekerDetailPage {
     })
   }
 
-  invite() {
+  goInvite() {
     this.navCtrl.push(EmployerInvitePage, {seeker_id: this.jobSeekerID});
   }
 
-  liked() {
-    this.navCtrl.push(EmployerSavedPage, {seeker_id: this.jobSeekerID});
+  goLiked() {
+    let loader = this.loading.create({
+      content: 'Loading...',
+    });
+    loader.present();
+    let seekerID = this.jobSeekerID;
+    let param = {"employer_id" : this.config.user_id, "seeker_id" : seekerID};
+    this.employerService.likeJobSeeker(param)
+    .subscribe(data => { 
+        loader.dismissAll();
+        if(data.status == "success") {
+          this.util.createAlert("Success", "Liked!");
+        } else {
+          this.util.createAlert("Failed", data.result);
+        }
+    })
   }
+
+  goAbout(item) {
+    this.navCtrl.push(EmployerAboutPage, {data: item});
+  }
+
+  goExperience(item) {
+    this.navCtrl.push(EmployerExperiencePage, {data: item});
+  }
+
+  goCurWork(item) {
+    this.navCtrl.push(EmployerWorkPage, {data: item});
+  }
+
 
 }

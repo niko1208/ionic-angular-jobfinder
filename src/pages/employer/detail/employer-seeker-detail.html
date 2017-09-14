@@ -2,8 +2,8 @@
     <ion-navbar color="jblue">
         <ion-title>Profile</ion-title>
         <ion-buttons right>
-            <ion-label (click)="invite()" class="fright">Invite</ion-label>
-            <ion-label (click)="liked()" class="fright">Like</ion-label>
+            <div (click)="goInvite()" class="fright">Invite</div>
+            <div (click)="goLiked()" class="fright">Like</div>
         </ion-buttons>
     </ion-navbar>
 </ion-header>
@@ -16,7 +16,7 @@
         <ion-label>Name</ion-label>
         <ion-label text-right>{{list?.resultUser.user_name}}</ion-label>
     </ion-item>
-    <ion-item>
+    <ion-item (click)="goAbout(list.resultUser)">
         <ion-label class='lb_icon'><ion-icon name='ios-information-circle-outline'></ion-icon></ion-label>
         <ion-label>About</ion-label>
         <ion-label text-right>{{list?.resultUser.user_about}}</ion-label>
@@ -24,7 +24,7 @@
     </ion-item>
     
     <ion-label class="lb_title">experience</ion-label>
-    <ion-item *ngFor="let item of list?.resultExperience">
+    <ion-item *ngFor="let item of list?.resultExperience" (click)="goExperience(item)">
         <ion-label class='lb_icon'><ion-icon name='ios-briefcase-outline'></ion-icon></ion-label>
         <ion-label>Experience</ion-label>
         <ion-label text-right>
@@ -36,7 +36,7 @@
     </ion-item>
 
     <ion-label class="lb_title">current work</ion-label>
-    <ion-item *ngFor="let item of list?.resultCurWork">
+    <ion-item *ngFor="let item of list?.resultCurWork" (click)="goCurWork(item)">
         <ion-label class='lb_icon'><ion-icon name='ios-construct-outline'></ion-icon></ion-label>
         <ion-label>{{item.curwork_company}}</ion-label>
         <ion-label text-right>
@@ -79,5 +79,13 @@
         </ion-label>
         <ion-icon name="arrow-forward"></ion-icon>
     </ion-item>
+    <ion-row class="buttons">
+        <ion-col padding>
+            <button ion-button full round class="bt_green" (click)="goLiked()">Like</button>
+        </ion-col>
+        <ion-col padding>
+            <button ion-button full round class="bt_blue" (click)="goInvite()">Invite</button>
+        </ion-col>
+    </ion-row>
 
 </ion-content>

@@ -4,13 +4,29 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding class='desc'>
     <ion-row>
-        <ion-col col-4 align-right>Company : </ion-col>
-        <ion-col col-8>aa</ion-col>
+        <ion-col col-4 text-right>Company : </ion-col>
+        <ion-col col-8>{{data?.curwork_company}}</ion-col>
     </ion-row>
     <ion-row>
-        <ion-col col-4 align-right>Company : </ion-col>
-        <ion-col col-8>aa</ion-col>
+        <ion-col col-4 text-right>City : </ion-col>
+        <ion-col col-8>{{data?.curwork_city}}</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-4 text-right>Country : </ion-col>
+        <ion-col col-8>{{data?.curwork_country}}</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-4 text-right>Role : </ion-col>
+        <ion-col col-8>{{data?.curwork_role}}</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-4 text-right>Period : </ion-col>
+        <ion-col col-8>{{data?.curwork_period}}</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-12>Description : </ion-col>
+        <ion-col col-12><div class='desc'>{{data?.curwork_description}}</div></ion-col>
     </ion-row>
 </ion-content>

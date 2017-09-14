@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>About</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding class='desc'>
+    <ion-row>
+        <ion-col col-4 text-right>Mobile : </ion-col>
+        <ion-col col-8>{{data?.user_mobile}}</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-4 text-right>Email : </ion-col>
+        <ion-col col-8>{{data?.user_email}}</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-4 text-right>Gender : </ion-col>
+        <ion-col col-8>{{data?.user_email}}aa</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-4 text-right>Date of Birth : </ion-col>
+        <ion-col col-8>{{data?.user_birthday}}</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-12>About : </ion-col>
+        <ion-col col-12><div class="desc">{{data?.user_about}}</div></ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-12>Introduction Video : </ion-col>
+        <ion-col col-12>
+            <video poster="{{data?.user_video_thumb_url}}">
+                <source src="{{data?.user_video_url}}" type="video/mp4">
+            </video>
+        </ion-col>
+    </ion-row>
+</ion-content>

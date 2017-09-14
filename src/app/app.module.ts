@@ -18,6 +18,9 @@ import { EmployerHomePage } from '../pages/employer/home/employer-home';
 import { EmployerInvitePage } from '../pages/employer/invite/employer-invite';
 import { EmployerSavedPage } from '../pages/employer/saved/employer-saved';
 import { EmployerSeekerDetailPage } from '../pages/employer/detail/employer-seeker-detail';
+import { EmployerAboutPage } from '../pages/employer/about/employer-about';
+import { EmployerExperiencePage } from '../pages/employer/experience/employer-experience';
+import { EmployerWorkPage } from '../pages/employer/work/employer-work';
 
 import { EmployerSettingPage } from '../pages/employer/setting/employer-setting';
 import { EmployerPostJobPage } from '../pages/employer/postjob/employer-postjob';
@@ -51,7 +54,10 @@ import { EmployerService } from '../provider/employer-service';
     EmployerMessagePage,
     EmployerInvitePage,
     EmployerSavedPage,
-    EmployerSeekerDetailPage
+    EmployerSeekerDetailPage,
+    EmployerAboutPage,
+    EmployerExperiencePage,
+    EmployerWorkPage
   ],
   imports: [
     BrowserModule,
@@ -78,7 +84,10 @@ import { EmployerService } from '../provider/employer-service';
     EmployerMessagePage,
     EmployerInvitePage,
     EmployerSavedPage,
-    EmployerSeekerDetailPage
+    EmployerSeekerDetailPage,
+    EmployerAboutPage,
+    EmployerExperiencePage,
+    EmployerWorkPage
   ],
   providers: [
     StatusBar,

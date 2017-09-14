@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>Experience</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding class='desc'>
+    <ion-row>
+        <ion-col col-4 text-right>Company : </ion-col>
+        <ion-col col-8>{{data?.experience_company}}</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-4 text-right>City : </ion-col>
+        <ion-col col-8>{{data?.experience_city}}</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-4 text-right>Country : </ion-col>
+        <ion-col col-8>{{data?.experience_country}}</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-4 text-right>Role : </ion-col>
+        <ion-col col-8>{{data?.experience_role}}</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-4 text-right>Period : </ion-col>
+        <ion-col col-8>{{data?.experience_period}}</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-4 text-right>Though : </ion-col>
+        <ion-col col-8>{{data?.experience_though}}</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-12>Description : </ion-col>
+        <ion-col col-12><div class='desc'>{{data?.experience_description}}</div></ion-col>
+    </ion-row>
+</ion-content>

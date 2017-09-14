@@ -34,4 +34,17 @@ page-employer-seeker-detail{
         float: right;
         color: #fff;
     }
+    ion-buttons div{
+        padding-left: 10px;
+    }
+    .bt_green{
+        border: 2px solid #7cbb22;
+        background: #fff;
+        color: #7cbb22;
+    }
+    .bt_blue{
+        border: 2px solid #3ac7f3;
+        background: #fff;
+        color: #3ac7f3;
+    }
 }

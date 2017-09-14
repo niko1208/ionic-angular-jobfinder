@@ -26,3 +26,16 @@
 button.button{
     box-shadow: none;
 }
+video{
+    max-width: 100%;
+}
+ion-row ion-col div.desc{
+    border: 1px solid #eee;
+    border-radius: 3px;
+    padding: 5px 10px;
+    min-height: 80px;
+}
+ion-content.desc ion-row ion-col:nth-child(2){
+    font-weight: bold;
+    color: #333;
+}
