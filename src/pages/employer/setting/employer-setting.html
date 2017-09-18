@@ -1,2 +1,67 @@
-<ion-content>
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>Settings</ion-title>
+        <ion-buttons right>
+            <div class="fright" (click)="done()">Done</div>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class='cont_detail'>
+    <ion-label class="lb_title">discovery settings</ion-label>
+    <ion-item>
+        <ion-label class='lb_icon'><ion-icon name='ios-contact-outline'></ion-icon></ion-label>
+        <ion-label>My current Location</ion-label>
+        <ion-label text-right>{{user_setting?.setting_emp_location_address}}</ion-label>
+    </ion-item>
+    <ion-item no-lines>
+        <ion-label class='lb_icon'><ion-icon name='ios-contact-outline'></ion-icon></ion-label>
+        <ion-label>Maximum Distance</ion-label>
+        <ion-label text-right>100 km</ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-range min="0" max="100" [(ngModel)]="distance" color="secondary">
+            <ion-label range-left>0</ion-label>
+            <ion-label range-right>100</ion-label>
+        </ion-range>
+    </ion-item>
+    
+    <ion-label class="lb_title">Edit profile</ion-label>
+    <ion-item>
+        <ion-label class='lb_icon'><ion-icon name='ios-contact-outline'></ion-icon></ion-label>
+        <ion-label>Username</ion-label>
+        <ion-label text-right (click)="goProfile()">Create Yours<ion-icon name="ios-arrow-forward-outline"></ion-icon></ion-label>
+    </ion-item>
+    
+    <ion-label class="lb_title">notifications</ion-label>
+    <ion-item>
+        <ion-label class='lb_icon'><ion-icon name='ios-contact-outline'></ion-icon></ion-label>
+        <ion-label>Chat Messages</ion-label>
+        <ion-label text-right></ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-label class='lb_icon'><ion-icon name='ios-appstore-outline'></ion-icon></ion-label>
+        <ion-label>New Applications</ion-label>
+        <ion-label text-right></ion-label>
+    </ion-item>
+    
+    <ion-label class="lb_title">premium account</ion-label>
+    <ion-item (click)="ads()">
+        <ion-label class='lb_icon'><ion-icon name='ios-megaphone-outline'></ion-icon></ion-label>
+        <ion-label>Manage Ads</ion-label>
+        <ion-label text-right><ion-icon name="ios-arrow-forward-outline"></ion-icon></ion-label>
+    </ion-item>
+    
+    <ion-label class="lb_title">Contact us</ion-label>
+    <ion-item>
+        <ion-label class='lb_icon'><ion-icon name='ios-contact-outline'></ion-icon></ion-label>
+        <ion-label>Help & Support</ion-label>
+        <ion-label text-right><ion-icon name="ios-arrow-forward-outline"></ion-icon></ion-label>
+    </ion-item>
+    <ion-item (click)="logout()">
+        <ion-label class='lb_icon'><ion-icon name='ios-contact-outline'></ion-icon></ion-label>
+        <ion-label>Log Out</ion-label>
+        <ion-label text-right><ion-icon name="ios-arrow-forward-outline"></ion-icon></ion-label>
+    </ion-item>
+    
 </ion-content>

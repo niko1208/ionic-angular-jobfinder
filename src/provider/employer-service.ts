@@ -34,4 +34,10 @@ export class EmployerService {
         return this.http.post(url, item).map(response=>
             response.json());
     }
+    PostData_raw(surl, item) {
+        let url = this.config.getAPIURL();
+        url = `${url}/employer/${surl}.php`;
+        return this.http.post(url, item).map(response=>
+            response.json());
+    }
 }

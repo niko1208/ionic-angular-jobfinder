@@ -48,8 +48,15 @@ export class LoginEmployerPage {
           loader.dismissAll();
           if(data.status == "success") {
             this.config.user_id = data.resultUser.user_id;
+            this.config.user_type = "employer";
+            let resultUser = JSON.stringify(data.resultUser);
+            let resultSetting = JSON.stringify(data.resultSetting);
+            let resultProfile = JSON.stringify(data.resultProfile);
             localStorage.setItem('user_id', this.config.user_id);
             localStorage.setItem('user_type', "employer");
+            localStorage.setItem('user_info', resultUser);
+            localStorage.setItem('user_setting', resultSetting);
+            localStorage.setItem('user_profile', resultProfile);
 
             this.navCtrl.push(EmployerTabsPage, null, this.config.navOptions).then(()=> {
                 const index = this.viewCtrl.index;

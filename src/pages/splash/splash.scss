@@ -12,4 +12,31 @@ page-splash {
         width: 260px;
         text-align: center;
     }
+    
+    .arrow_prev,
+    .arrow_next{
+        position: absolute;
+        font-size: 30px;
+        top: 40%;
+        cursor: pointer;
+        z-index: 99;
+    }
+    .arrow_prev{
+        left: 10px;
+    }
+    .arrow_next{
+        right: 10px;
+    }
+    @media (min-width: 500px) {
+        ion-content{
+            padding-top: 100px;
+        }
+        ion-slides{
+            height: calc(100% - 150px) !important;
+        }
+        .buttons{
+            max-width: 500px;
+            margin: auto;
+        }
+    }
 }

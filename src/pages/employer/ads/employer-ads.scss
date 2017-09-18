@@ -1,0 +1,110 @@
+page-employer-ads{
+    .back_img{
+        background: #ddd;
+        height: 150px;
+        position: relative;
+        background-size: cover;
+        background-position: center;
+        cursor: pointer;
+    }
+    .image{
+        position: relative;
+        top: -60px;
+        width: 120px;
+        height: 120px;
+        margin: 0px auto;
+        background: #ddd;
+        border: 2px solid #fff;
+        box-shadow: #aaa 0px 0px 1px;
+        border-radius: 100px;
+        overflow: hidden;
+        margin-bottom: -40px;
+        cursor: pointer;
+    }
+    .image img{
+        width: 100%;
+        height: 100%;
+    }
+    .div_sec ion-textarea{
+        border-radius: 50px;
+        border: 1px solid #ddd;
+        margin: 10px;
+    }
+    .div_sec ion-textarea{
+        border-radius: 5px;
+        min-height: 100px;
+    }
+    div.uploadGallery{
+        border: 1px solid #ddd;
+        border-radius: 50px;
+        padding: 5px 10px;
+        height: 30px;
+        max-width: 400px;
+        margin: 20px;
+        margin-left: 10px;
+        font-weight: bold;
+    }
+    div.uploadGallery ion-icon{
+        float: right;
+        background: #3ac7f3;
+        font-size: 24px;
+        color: #fff;
+        border-radius: 50px;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+    }
+    ion-card.job{
+        width: 200px;
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+        display: inline-block;
+    }
+    ion-card.photo{
+        width: 150px;
+        height: 150px;
+        background-size: cover;
+        background-position: center;
+        display: inline-block;
+    }
+    div.back_overlay{
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.3);
+        color: #fff;
+        text-align: center;
+    }
+    div.job_title{
+        font-weight: bold;
+        font-size: 18px;
+        padding-top: 30px;
+    }
+    div.job_time{
+        padding-top: 20px;
+    }
+    
+    @media (max-width: 767px) {
+        .back_img{
+            height: 80px;
+        }
+        .image{
+            top: -50px;
+            width: 100px;
+            height: 100px;
+        }
+    }
+    @media (max-width: 500px) {
+        ion-card.job{
+            width: 46%;
+            height: 200px;
+            margin: 1.9%;
+
+        }
+        ion-card.photo{
+            width: 30%;
+            height: 150px;
+            margin: 1.5%;
+        }
+    }
+}

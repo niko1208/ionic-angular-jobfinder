@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>Edit Profile</ion-title>
+        <ion-buttons right>
+            <div class="fright" (click)="save()">Save</div>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class='cont_detail'>
+    <div class="back_img" id="back_img">
+    </div>
+    <div class="image" (click)="upload_image()">
+        <img id="image_emp" src="{{userinfo.user_avatar_url}}" />
+    </div>
+    <input type="file" name="file_image" id="file_image" (change)="setFileImage($event)" #fileInp style="display:none" />
+
+    <ion-label class="lb_title">general Info</ion-label>
+    <ion-item class="div_sec">
+        <ion-label class='lb_icon'><ion-icon name='ios-contact-outline'></ion-icon></ion-label>
+        <ion-label>Name</ion-label>
+        <ion-input [(ngModel)]="userinfo.user_name" text-right></ion-input>
+    </ion-item>
+    <ion-item class="div_sec">
+        <ion-label class='lb_icon'><ion-icon name='ios-information-outline'></ion-icon></ion-label>
+        <ion-label>About</ion-label>
+        <ion-textarea [(ngModel)]="data.profile_emp_about" text-right style="min-height:100px; overflow:hidden;"></ion-textarea>
+    </ion-item>
+    <ion-item class="div_sec">
+        <ion-label class='lb_icon'><ion-icon name='ios-flag-outline'></ion-icon></ion-label>
+        <ion-label>Founded</ion-label>
+        <ion-input [(ngModel)]="data.profile_emp_founded" text-right></ion-input>
+    </ion-item>
+
+    <ion-label class="lb_title">industry</ion-label>
+    <ion-item class="div_sec">
+        <ion-label class='lb_icon'><ion-icon name='ios-construct-outline'></ion-icon></ion-label>
+        <ion-select #indus  [(ngModel)]="data.profile_emp_tech" style="width:calc(100% - 40px); max-width: 100%; padding-left: 0px;">
+            <ion-option value="#alljobs">#alljobs</ion-option>
+            <ion-option *ngFor="let item of arrIndustry; let i = index;" value="{{item}}">{{item}}</ion-option>
+        </ion-select>
+    </ion-item>
+    
+    <ion-label class="lb_title">business size</ion-label>
+    <ion-item class="div_sec">
+        <ion-label class='lb_icon'><ion-icon name='ios-people-outline'></ion-icon></ion-label>
+        <ion-label>{{data.profile_emp_bus_size_title}}</ion-label>
+        <ion-select #position  [(ngModel)]="data.profile_emp_bus_size_title" text-right>
+            <ion-option value="Small">1 ~ 50 Employers</ion-option>
+            <ion-option value="Medium">50 ~ 500 Employers</ion-option>
+            <ion-option value="Large">500 ~ 2000 Employers</ion-option>
+            <ion-option value="Enterprise">2000 ~ 5000 Employers</ion-option>
+        </ion-select>
+    </ion-item>
+    <br/>
+</ion-content>

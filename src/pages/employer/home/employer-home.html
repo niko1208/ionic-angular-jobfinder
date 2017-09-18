@@ -18,7 +18,9 @@
             </ion-select>
         </div>
     </div>
-    <ion-slides pager id='slides'>
+    <ion-icon class="arrow_prev" name="ios-arrow-back-outline" (click)="prev()"></ion-icon>
+    <ion-icon class="arrow_next" name="ios-arrow-forward-outline" (click)="next()"></ion-icon>
+    <ion-slides pager id='slides' #slides>
         <ion-slide *ngFor="let item of list; let i = index;">
             <img src="{{item.user_avatar_url}}" class="user_avatar" />
             <div>{{item.user_name}}</div>

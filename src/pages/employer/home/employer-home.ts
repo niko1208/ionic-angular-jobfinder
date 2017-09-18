@@ -1,5 +1,5 @@
-import { Component  } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { Component , ViewChild } from '@angular/core';
+import { NavController, LoadingController, Slides } from 'ionic-angular';
 import { Config } from '../../../provider/config';
 import { EmployerInvitePage } from '../invite/employer-invite';
 import { EmployerSavedPage } from '../saved/employer-saved';
@@ -16,6 +16,8 @@ export class EmployerHomePage {
   arrIndustry = [];
   queryIndustry = "";
   list: any;
+  @ViewChild('slides') slides: Slides;
+
   constructor(public navCtrl: NavController, 
     public config: Config,
     public util: UtilService,
@@ -28,6 +30,7 @@ export class EmployerHomePage {
 
   ionViewWillEnter() {
     this.loadData();
+    this.slides.lockSwipes(true);
   }
 
   loadData() {
@@ -61,6 +64,18 @@ export class EmployerHomePage {
           this.util.createAlert("Failed", data.result);
         }
     })
+  }
+
+  prev() {
+    this.slides.lockSwipes(false);
+    this.slides.slidePrev();
+    this.slides.lockSwipes(true);
+  }
+
+  next() {
+    this.slides.lockSwipes(false);
+    this.slides.slideNext();
+    this.slides.lockSwipes(true);
   }
 
   invite(i) {

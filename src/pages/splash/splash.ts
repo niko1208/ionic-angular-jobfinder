@@ -1,5 +1,5 @@
 import { Component, ViewChild  } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController,  } from 'ionic-angular';
 import { Slides } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { SignupPage } from '../signup/signup';
@@ -25,6 +25,18 @@ export class SplashPage {
 
   ionViewWillEnter() {
 
+  }
+
+  prev() {
+    this.slides.lockSwipes(false);
+    this.slides.slidePrev();
+    this.slides.lockSwipes(true);
+  }
+
+  next() {
+    this.slides.lockSwipes(false);
+    this.slides.slideNext();
+    this.slides.lockSwipes(true);
   }
 
   goSignup() {

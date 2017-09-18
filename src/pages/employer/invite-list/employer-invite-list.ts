@@ -1,26 +1,27 @@
 import { Component  } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, NavParams } from 'ionic-angular';
 import { Config } from '../../../provider/config';
 import { UtilService } from '../../../provider/util-service';
 import { Auth } from '../../../provider/auth';
 import { EmployerService } from '../../../provider/employer-service';
-import { EmployerApplicantPage } from '../applicant/employer-applicant';
-import { EmployerPostJobEditPage } from '../postjob-edit/employer-postjob-edit';
+import { EmployerSeekerDetailPage } from '../detail/employer-seeker-detail';
 
 @Component({
-  selector: 'page-employer-activity',
-  templateUrl: 'employer-activity.html'
+  selector: 'page-employer-invite-list',
+  templateUrl: 'employer-invite-list.html'
 })
-export class EmployerActivityPage {
+export class EmployerInviteListPage {
 
   list: any;
+  data: any;
   constructor(public navCtrl: NavController, 
     public config: Config,
     public util: UtilService,
     public auth: Auth,
     public employerService: EmployerService,
-    public loading: LoadingController) {
-        
+    public loading: LoadingController,
+    public navParams: NavParams) {
+        this.data = navParams.get('data');
   }
   ionViewWillEnter() {
     this.loadData();
@@ -31,9 +32,9 @@ export class EmployerActivityPage {
       content: 'Loading...',
     });
     loader.present();
-    let param = {"employer_id" : this.config.user_id};
-    this.employerService.postData("loadmyjobs", param)
-    .subscribe(data => { 
+    let param = {"job_id" : this.data.job_id};
+    this.employerService.postData("loadjobinvites", param)
+    .subscribe(data => { console.log(data);
         loader.dismissAll();
         if(data.status == "success") {
           this.list = data.result;
@@ -44,19 +45,14 @@ export class EmployerActivityPage {
       return new Date(date+' UTC');
   }
 
-  edit(i) {
-    this.navCtrl.push(EmployerPostJobEditPage, {
-      data: this.list[i],
-      bedit: true
-    }, this.config.navOptions);
+  delete(i) {
+
   }
 
   view(i) {
-    this.navCtrl.push(EmployerApplicantPage, {
-      data: this.list[i]
-    }, this.config.navOptions);
+    let seekerID = this.list[i].user_id;
+    this.navCtrl.push(EmployerSeekerDetailPage, {seeker_id: seekerID});
   }
-
 
 
 }

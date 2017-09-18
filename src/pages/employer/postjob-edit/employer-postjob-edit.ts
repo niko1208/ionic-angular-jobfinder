@@ -7,10 +7,10 @@ import { EmployerService } from '../../../provider/employer-service';
 import * as $ from 'jquery';
 
 @Component({
-  selector: 'page-employer-postjob',
-  templateUrl: 'employer-postjob.html'
+  selector: 'page-employer-postjob-edit',
+  templateUrl: 'employer-postjob-edit.html'
 })
-export class EmployerPostJobPage {
+export class EmployerPostJobEditPage {
 
   arrIndustry = [];
   arrPosition = [];
@@ -46,26 +46,18 @@ export class EmployerPostJobPage {
   ionViewWillEnter() {
     this.file_image_back = null;
     this.file_image = null;
-    $('#back_img').css('background-image', '');
-    $('#image').attr('src', '');
-    this.company_name = "";
-    this.job_title = "";
-    this.job_desc = "";
-    this.job_req = "";
-    this.job_industry = "#alljobs";
-    this.job_time = "Full Time";
-    /*this.bedit = this.navParams.get('bedit');
-    this.data = this.navParams.get('data');
-    if(this.bedit) { console.log(this.data);
-      $('#back_img').css('background-image', 'url('+this.data.job_job_background_url+')');
-      $('#image').attr('src', this.data.job_job_avatar_url);
+    this.bedit = true;
+    this.data = this.navParams.get('data'); 
+    if(this.bedit) { 
+      $('#back_img1').css('background-image', 'url('+this.data.job_job_background_url+')');
+      $('#image1').attr('src', this.data.job_job_avatar_url);
       this.company_name = this.data.job_company_name;
       this.job_title = this.data.job_job_title;
       this.job_desc = this.data.job_job_description;
       this.job_req = this.data.job_job_requirement;
       this.job_industry = this.data.job_job_industry;
       this.job_time = this.data.job_time_available;
-    }*/
+    }
   }
   getDataUri(url, callback) {
       var image = new Image();
@@ -113,7 +105,7 @@ export class EmployerPostJobPage {
     var reader  = new FileReader();
 
     reader.addEventListener("load", function () {
-      $('#back_img').css('background-image', 'url('+reader.result+')');
+      $('#back_img1').css('background-image', 'url('+reader.result+')');
     }, false);
 
     if (file) {
@@ -130,7 +122,7 @@ export class EmployerPostJobPage {
     var reader  = new FileReader();
 
     reader.addEventListener("load", function () {
-      $('#image').attr('src', reader.result);
+      $('#image1').attr('src', reader.result);
     }, false);
 
     if (file) {
@@ -144,7 +136,7 @@ export class EmployerPostJobPage {
         this.util.createAlert("Error", "Please insert your company image!");
         return;
       }
-      if(this.file_image_back == null) {
+      if(this.file_image == null) {
         this.util.createAlert("Error", "Please insert your background image!");
         return;
       }

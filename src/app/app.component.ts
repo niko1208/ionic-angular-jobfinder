@@ -20,6 +20,7 @@ export class MyApp {
       let user_type = localStorage.getItem('user_type');
       if(user_id != null && user_id != "") {
         this.config.user_id = user_id;
+        this.config.user_type = user_type;
         if(user_type == 'employer') {
           this.rootPage = EmployerTabsPage;
         } else {

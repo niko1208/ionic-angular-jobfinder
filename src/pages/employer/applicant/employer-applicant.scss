@@ -1,0 +1,79 @@
+page-employer-applicant{
+    .user_avatar{
+        width: 70px;
+        height: 70px;
+        border: 2px solid #fff;
+        box-shadow: #555 0px 0px 1px;
+        border-radius: 100px;
+    }
+    .back_img{
+        background: #ddd;
+        height: 150px;
+        background-size: cover;
+        background-position: center;
+    }
+    .image{
+        position: relative;
+        top: -60px;
+        width: 120px;
+        height: 120px;
+        margin: 0px auto;
+        background: #ddd;
+        border: 2px solid #fff;
+        box-shadow: #aaa 0px 0px 1px;
+        border-radius: 100px;
+        overflow: hidden;
+        margin-bottom: -40px;
+    }
+    .image img{
+        width: 100%;
+        height: 100%;
+    }
+    .div_title{
+        text-align: center;
+    }
+    ion-item.item-md{
+        border-bottom: 1px solid #eee;
+    }
+    ion-item img,
+    ion-item div.desc{
+        float: left;
+    }
+    ion-item div.desc{
+        width: calc(100% - 180px);
+        padding: 5px;
+        padding-left: 10px;
+    }
+    ion-item button.button-md{
+        margin-top: 5px;
+        display: block;
+        width: 70px;
+    }
+    ion-buttons{
+        float: right;
+    }
+    div.fright{
+        color: #333;
+    }
+    div.fright ion-icon{
+        font-size: 30px;
+        margin-right: 10px;
+    }
+    .icon_button{
+        font-size: 30px;
+        margin-left: 10px;
+        margin-top: 20px;
+        cursor: pointer;
+    }
+
+    @media (max-width: 767px) {
+        .back_img{
+            height: 80px;
+        }
+        .image{
+            top: -50px;
+            width: 100px;
+            height: 100px;
+        }
+    }
+}

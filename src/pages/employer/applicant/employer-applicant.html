@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>Applicants</ion-title>
+        <div class='fright' (click)="goApplied()">
+            <ion-icon class="fright" name="ios-paper-outline"></ion-icon>
+        </div>
+    </ion-navbar>
+    <ion-toolbar>
+        <ion-searchbar #q [(ngModel)]="searchValue" (keyup.enter)="search(q.value)" pleceholder="">
+        </ion-searchbar>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="back_img" [style.backgroundImage]="'url('+data?.job_job_background_url+')'">
+    </div>
+    <div class="image">
+        <img src="{{data?.job_job_avatar_url}}" />
+    </div>
+    <div class="div_title">
+        <div>{{data?.job_company_name}}</div>
+        <small>{{data?.job_job_description}}</small><br/>
+        <small>Post {{getDate(data?.job_job_create_date) | amTimeAgo}}</small><br/>
+        <small>Viewed: {{data?.views}}, Applied: {{data?.applies}}</small>
+    </div>
+    <ion-list>
+        <ion-item *ngFor="let item of list; let i = index;">
+            <img class="user_avatar" src="{{item.user_avatar_url}}" (click)="view(i)" />
+            <div class="desc">
+                <div>{{item.user_name}}</div>
+                <small>Applied {{getDate(item.applied_date) | amTimeAgo}}</small><br/>
+                <small></small>
+            </div>
+            <div class="fright">
+                <ion-icon class='icon_button' name="ios-person-add-outline" (click)="add(i)"></ion-icon>
+                <ion-icon class='icon_button' name="ios-trash-outline" (click)="delete(i)"></ion-icon>
+            </div>
+        </ion-item>
+    </ion-list>
+</ion-content>

@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>Manage Ads</ion-title>
+        <ion-buttons right>
+            <div class="fright" (click)="done()">Done</div>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class='cont_detail'>
+    <div class="back_img" id="back_img">
+    </div>
+    <div class="image" (click)="upload_image()">
+        <img id="image_ads" src="{{general?.tbl_ads_avatar_url}}" />
+    </div>
+    <input type="file" name="file_image" id="file_image" (change)="setFileImage($event)" #fileInp style="display:none" />
+
+    <div class="div_sec">
+        <ion-label text-center>Description :</ion-label>
+        <ion-textarea [(ngModel)]="desc"></ion-textarea>
+    </div>
+
+    <ion-card class='job' *ngFor="let item of list" [style.backgroundImage]="'url('+item?.job_job_avatar_url+')'">
+        <div class='back_overlay'>
+            <div class="job_title">{{item.job_job_title}}</div>
+            <div class="job_time">{{item.job_time_available}}</div>
+        </div>
+    </ion-card>
+
+    <div class="uploadGallery">
+        Upload your Picture Gallery: 
+        <ion-icon name="ios-cloud-upload-outline" (click)="upload_photo()"></ion-icon>
+    </div>
+    <input type="file" name="file_photo" id="file_photo" (change)="setFilePhoto($event)" #fileInp1 style="display:none" />
+
+    <ion-card class='photo' *ngFor="let item of photolist" [style.backgroundImage]="'url('+item?.ads_photos_url+')'">
+    </ion-card>
+
+    <br/>
+</ion-content>

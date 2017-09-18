@@ -57,7 +57,9 @@ export class EmployerInvitePage {
   }
 
   getDate(date) {
-      return new Date(date);
+    var da = new Date(date+' UTC'); 
+    //var da_utc = new Date(da.getUTCFullYear(), da.getUTCMonth(), da.getUTCDate(),  da.getUTCHours(), da.getUTCMinutes(), da.getUTCSeconds());
+    return da;
   }
 
 }

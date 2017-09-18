@@ -21,9 +21,14 @@ import { EmployerSeekerDetailPage } from '../pages/employer/detail/employer-seek
 import { EmployerAboutPage } from '../pages/employer/about/employer-about';
 import { EmployerExperiencePage } from '../pages/employer/experience/employer-experience';
 import { EmployerWorkPage } from '../pages/employer/work/employer-work';
+import { EmployerApplicantPage } from '../pages/employer/applicant/employer-applicant';
+import { EmployerInviteListPage } from '../pages/employer/invite-list/employer-invite-list';
+import { EmployerEditProfilePage } from '../pages/employer/editprofile/employer-editprofile';
+import { EmployerAdsPage } from '../pages/employer/ads/employer-ads';
 
 import { EmployerSettingPage } from '../pages/employer/setting/employer-setting';
 import { EmployerPostJobPage } from '../pages/employer/postjob/employer-postjob';
+import { EmployerPostJobEditPage } from '../pages/employer/postjob-edit/employer-postjob-edit';
 import { EmployerActivityPage } from '../pages/employer/activity/employer-activity';
 import { EmployerMessagePage } from '../pages/employer/message/employer-message';
 
@@ -50,6 +55,7 @@ import { EmployerService } from '../provider/employer-service';
     EmployerHomePage,
     EmployerSettingPage,
     EmployerPostJobPage,
+    EmployerPostJobEditPage,
     EmployerActivityPage,
     EmployerMessagePage,
     EmployerInvitePage,
@@ -57,7 +63,11 @@ import { EmployerService } from '../provider/employer-service';
     EmployerSeekerDetailPage,
     EmployerAboutPage,
     EmployerExperiencePage,
-    EmployerWorkPage
+    EmployerWorkPage,
+    EmployerApplicantPage,
+    EmployerInviteListPage,
+    EmployerEditProfilePage,
+    EmployerAdsPage
   ],
   imports: [
     BrowserModule,
@@ -80,6 +90,7 @@ import { EmployerService } from '../provider/employer-service';
     EmployerHomePage,
     EmployerSettingPage,
     EmployerPostJobPage,
+    EmployerPostJobEditPage,
     EmployerActivityPage,
     EmployerMessagePage,
     EmployerInvitePage,
@@ -87,7 +98,11 @@ import { EmployerService } from '../provider/employer-service';
     EmployerSeekerDetailPage,
     EmployerAboutPage,
     EmployerExperiencePage,
-    EmployerWorkPage
+    EmployerWorkPage,
+    EmployerApplicantPage,
+    EmployerInviteListPage,
+    EmployerEditProfilePage,
+    EmployerAdsPage
   ],
   providers: [
     StatusBar,

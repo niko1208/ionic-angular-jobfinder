@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>Invites</ion-title>
+    </ion-navbar>
+    <ion-toolbar>
+        <ion-searchbar #q [(ngModel)]="searchValue" (keyup.enter)="search(q.value)" pleceholder="">
+        </ion-searchbar>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let item of list; let i = index;">
+            <img class="user_avatar" src="{{item.user_avatar_url}}" (click)="view(i)"/>
+            <div class="desc">
+                <div>{{item.user_name}}</div>
+                <small></small><br/>
+                <small></small>
+            </div>
+            <div class='fright' (click)="delete(i)">
+                <ion-icon name="ios-close"></ion-icon>
+            </div>
+        </ion-item>
+    </ion-list>
+</ion-content>

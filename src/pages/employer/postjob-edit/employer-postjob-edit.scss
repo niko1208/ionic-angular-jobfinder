@@ -1,4 +1,4 @@
-page-employer-postjob{
+page-employer-postjob-edit{
     .back_img{
         background: #ddd;
         height: 150px;
@@ -29,14 +29,14 @@ page-employer-postjob{
         position: absolute;
         right: 10px;
         bottom: 10px;
-        font-size: 44px;
+        font-size: 30px;
         cursor: pointer;
     }
     .cam_image{
         position: absolute;
         top: 30px;
-        left: 42px;
-        font-size: 44px;
+        left: 38px;
+        font-size: 30px;
         cursor: pointer;
     }
     .div_sec{
@@ -75,13 +75,6 @@ page-employer-postjob{
             top: -50px;
             width: 100px;
             height: 100px;
-        }
-        .cam_back,
-        .cam_image{
-            font-size: 30px;
-        }
-        .cam_image{
-            left: 38px;
         }
     }
 }

@@ -39,3 +39,64 @@ ion-content.desc ion-row ion-col:nth-child(2){
     font-weight: bold;
     color: #333;
 }
+
+.tabs-md .tab-button[aria-selected=true]{
+    background: #3ac7f3;
+}
+.tabs-md .tab-button[aria-selected=true] .tab-button-icon,
+.tabs-md .tab-button[aria-selected=true] .tab-button-text{
+    color: #fff;
+}
+
+ion-content.cont_detail.content-md{
+    background: #eee;
+    
+    .lb_title{
+        text-transform: uppercase;
+        padding-left: 10px;
+    }
+    ion-item ion-label{
+        font-size: 12px;
+    }
+    .lb_icon.label-md{
+        font-size: 16px;
+        width: 24px;
+        max-width: 24px;
+        text-align: center;
+    }
+    .lb_icon.label-md ion-icon{
+        width: 24px;
+        height: 24px;
+        border-radius: 4px;
+        background: #212121;
+        color: #ccc;
+        padding: 2px;
+    }
+    .lb_icon.lb_icon_right.label-md{
+        max-width: 18px;
+    }
+    .lb_icon.lb_icon_right.label-md ion-icon{
+        background: #fff;
+        color: #aaa;
+    }
+    ion-item .input-wrapper ion-label:last-child{
+        color: #888;
+    }
+}
+
+.fright{
+    float: right;
+    color: #fff;
+}
+
+.user_avatar{
+    cursor: pointer;
+}
+
+@media (min-width: 500px) {
+    button.button.button-md{
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
