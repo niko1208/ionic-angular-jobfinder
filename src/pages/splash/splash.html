@@ -5,10 +5,10 @@
   <ion-slides pager id='slides'>
     <ion-slide>
       <div class="title">Create job ads from your<br/> mobile in minutes</div>
-      <img src="assets/images/splash_background01.png" />
+      <img src="assets/images/splash_background01.png" id='img' (window:resize)="onResize($event)" />
     </ion-slide>
     <ion-slide>
-      <div class="title">Cut your hiring down to minutes and shortlist applicatnts from your phone in one tap</div>
+      <div class="title">Cut your hiring down to minutes and shortlist applicants from your phone in one tap</div>
       <img src="assets/images/splash_background02.png" />
     </ion-slide>
     <ion-slide>

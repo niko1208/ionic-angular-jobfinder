@@ -17,11 +17,14 @@
 
 
 .img_logo{
-    max-width: 200px;
+    max-width: 300px;
     position: fixed;
     top: 30px;
-    left: calc(50% - 100px);
+    left: calc(50% - 150px);
     z-index: 9;
+}
+.slide-zoom{
+    height: 100%;
 }
 button.button{
     box-shadow: none;
@@ -91,6 +94,9 @@ ion-content.cont_detail.content-md{
 
 .user_avatar{
     cursor: pointer;
+}
+div.scroll-content{
+    overflow-y: auto;
 }
 
 @media (min-width: 500px) {

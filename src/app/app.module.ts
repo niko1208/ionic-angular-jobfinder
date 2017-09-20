@@ -39,6 +39,7 @@ import { Config } from '../provider/config';
 import { UtilService } from '../provider/util-service';
 import { Auth } from '../provider/auth';
 import { EmployerService } from '../provider/employer-service';
+import { MessageService } from '../provider/message-service';
 
 @NgModule({
   declarations: [
@@ -112,6 +113,7 @@ import { EmployerService } from '../provider/employer-service';
     Auth,
     Push,
     EmployerService,
+    MessageService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

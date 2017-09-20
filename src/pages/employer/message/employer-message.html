@@ -1,2 +1,68 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>Messaging</ion-title>
+    </ion-navbar>
+</ion-header>
+
 <ion-content>
+    <ion-row>
+        <ion-col col-4>
+            <ion-list>
+                <ion-item class='item' id="item_{{i}}" *ngFor="let item of list; let i = index;" (click)="openMessage(item, i)">
+                    <img class="user_avatar" src="{{item.user_avatar_url}}" />
+                    <div class="desc">
+                        <div><b>{{item.user_name}}</b></div>
+                        <div>{{item.message_text}}</div>
+                    </div>
+                    <div class="date"><small>{{getDate(item.mdate) | amTimeAgo}}</small></div>
+                </ion-item>
+            </ion-list>
+        </ion-col>
+        <ion-col col-8 *ngIf="sitem">
+            <ion-list class="chat_room">
+                <ion-item *ngFor="let item of mlist; let i = index;">
+                    <div *ngIf="item.senderID == item.my_senderID" class="sec_send">
+                        <div class="sec_uname">{{user_info.user_name}}, {{getDate(item.mdate) | amTimeAgo}}</div>
+                        <div class="sec_message" *ngIf="item.message_type == 'text'">{{item.message_text}}</div>
+                        <div class="sec_photo" *ngIf="item.message_type == 'photo'">
+                            <a href="{{item.message_thumb_url}}" target="_blank">
+                                <img src="{{item.message_thumb_url}}"/>
+                            </a>
+                        </div>
+                        <div class="sec_video" *ngIf="item.message_type == 'video'">
+                            <a href="{{item.message_source_url}}" target="_blank">
+                                <video poster="{{item.message_thumb_url}}">
+                                    <source src="{{item.message_source_url}}" type="video/mp4">
+                                </video>
+                            </a>
+                        </div>
+                    </div>
+                    <div *ngIf="item.senderID != item.my_senderID" class="sec_receive">
+                        <img class="img_sender" src="{{item.img_url}}" />
+                        <div class="sec_uname">{{sitem.user_name}}, {{getDate(item.mdate) | amTimeAgo}}</div>
+                        <div class="sec_message" *ngIf="item.message_type == 'text'">{{item.message_text}}</div>
+                        <div class="sec_photo" *ngIf="item.message_type == 'photo'">
+                            <a href="{{item.message_thumb_url}}" target="_blank">
+                                <img src="{{item.message_thumb_url}}"/>
+                            </a>
+                        </div>
+                        <div class="sec_video" *ngIf="item.message_type == 'video'">
+                            <a href="{{item.message_source_url}}" target="_blank">
+                                <video poster="{{item.message_thumb_url}}">
+                                    <source src="{{item.message_source_url}}" type="video/mp4">
+                                </video>
+                            </a>
+                        </div>
+                    </div>
+                </ion-item>
+            </ion-list>
+            <div class="div_box">
+                <div class="loading" *ngIf="isLoading"><div>Sending...</div></div>
+                <ion-textarea [(ngModel)]="sendText"></ion-textarea>
+                <ion-icon name="ios-attach" (click)="upload_image()"></ion-icon>
+                <input type="file" name="file_image" id="file_image" #fileInp (change)="setFileImage($event)" style="display:none" />
+                <button ion-button round color="jblue" class="bt_small" (click)="send()">Send</button>
+            </div>
+        </ion-col>
+    </ion-row>
 </ion-content>

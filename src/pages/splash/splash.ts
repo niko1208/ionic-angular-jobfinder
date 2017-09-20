@@ -4,6 +4,7 @@ import { Slides } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { SignupPage } from '../signup/signup';
 import { Config } from '../../provider/config';
+import $ from 'jquery';
 
 @Component({
   selector: 'page-splash',
@@ -20,11 +21,20 @@ export class SplashPage {
   ngAfterViewInit() {
     let w = document.querySelector('#slides').clientWidth;
     let h = w * 1063 / 750;
-    document.getElementById('slides').style.height = h + 'px';
+    //document.getElementById('slides').style.height = h + 'px';
   }
 
-  ionViewWillEnter() {
+  onResize() {
+    let w = document.querySelector('#img').clientWidth;
+    let ww = document.querySelector('.scroll-content').clientWidth;
+    w = (ww - w) / 2;
+    w = w + 10;
+    $('.arrow_prev').css('left', w+'px');
+    $('.arrow_next').css('right', w+'px');
+  }
 
+  ionViewDidLoad() {
+    
   }
 
   prev() {
