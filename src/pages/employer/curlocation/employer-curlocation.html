@@ -1,0 +1,16 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>My Location</ion-title>
+        <ion-buttons right>
+            <div class="fright" (click)="done()">Done</div>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div class="top_header">
+        <ion-searchbar #q [(ngModel)]="searchValue" (keyup.enter)="search(q.value)" pleceholder="">
+        </ion-searchbar>
+    </div>
+    <div #map1 id='map1'></div>
+</ion-content>

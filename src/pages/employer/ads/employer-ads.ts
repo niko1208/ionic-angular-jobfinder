@@ -46,8 +46,9 @@ export class EmployerAdsPage {
         if(data.status == "success") {
             this.general = data.resultGeneral; 
             this.list = data.resultMyJobs; 
-            this.photolist = data.resultPhotos; 
-            this.desc = this.general.tbl_ads_description;
+            this.photolist = data.resultPhotos;
+            if(this.general != null)
+              this.desc = this.general.tbl_ads_description;
         }
     })
   }

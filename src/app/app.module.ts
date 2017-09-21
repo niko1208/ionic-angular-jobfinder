@@ -15,6 +15,7 @@ import { TermsPage } from '../pages/terms/terms';
 import { EmployerTabsPage } from '../pages/employer/tabs/employer-tabs';
 
 import { EmployerHomePage } from '../pages/employer/home/employer-home';
+import { EmployerHomeMapPage } from '../pages/employer/home-map/employer-home-map';
 import { EmployerInvitePage } from '../pages/employer/invite/employer-invite';
 import { EmployerSavedPage } from '../pages/employer/saved/employer-saved';
 import { EmployerSeekerDetailPage } from '../pages/employer/detail/employer-seeker-detail';
@@ -25,6 +26,7 @@ import { EmployerApplicantPage } from '../pages/employer/applicant/employer-appl
 import { EmployerInviteListPage } from '../pages/employer/invite-list/employer-invite-list';
 import { EmployerEditProfilePage } from '../pages/employer/editprofile/employer-editprofile';
 import { EmployerAdsPage } from '../pages/employer/ads/employer-ads';
+import { EmployerCurLocationPage } from '../pages/employer/curlocation/employer-curlocation';
 
 import { EmployerSettingPage } from '../pages/employer/setting/employer-setting';
 import { EmployerPostJobPage } from '../pages/employer/postjob/employer-postjob';
@@ -68,7 +70,9 @@ import { MessageService } from '../provider/message-service';
     EmployerApplicantPage,
     EmployerInviteListPage,
     EmployerEditProfilePage,
-    EmployerAdsPage
+    EmployerAdsPage,
+    EmployerHomeMapPage,
+    EmployerCurLocationPage
   ],
   imports: [
     BrowserModule,
@@ -103,7 +107,9 @@ import { MessageService } from '../provider/message-service';
     EmployerApplicantPage,
     EmployerInviteListPage,
     EmployerEditProfilePage,
-    EmployerAdsPage
+    EmployerAdsPage,
+    EmployerHomeMapPage,
+    EmployerCurLocationPage
   ],
   providers: [
     StatusBar,

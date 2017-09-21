@@ -1,4 +1,4 @@
-page-employer-home{
+page-employer-home-map{
     .iconlist,
     .iconmap,
     .iconheart{
@@ -45,45 +45,18 @@ page-employer-home{
         background: #fff;
         color: #3ac7f3;
     }
-    ion-slides{
-        margin-top: 120px;
+    #map{
+        width: 100%;
+        margin-top: 110px;
         height: calc(100% - 120px);
     }
-    .swiper-slide{
-        display: block
-    }
-    .buttons{
-        position: absolute;
-        bottom: 20px;
-        max-width: 450px;
-    }
-    .searchbar-md{
-        z-index: 9;
-    }
-    .arrow_prev,
-    .arrow_next{
-        position: absolute;
-        font-size: 30px;
-        top: 40%;
+    .div_info{
+        padding: 3px 5px;
+        border-radius: 3px;
+        box-shadow: #ccc 1px 1px 3px;
+        background: #fff;
+        font-weight: bold;
+        border-bottom: 2px solid #3ac7f3;
         cursor: pointer;
-        z-index: 99;
-    }
-    .arrow_prev{
-        left: 10px;
-    }
-    .arrow_next{
-        right: 10px;
-    }
-
-    @media (min-width: 500px) {
-        .buttons{
-            left: calc(50% - 225px);
-        }
-    }
-    @media (min-width: 768px) {
-        .user_avatar{
-            width: 150px;
-            height: 150px;
-        }
     }
 }

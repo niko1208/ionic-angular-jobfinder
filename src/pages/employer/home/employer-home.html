@@ -1,7 +1,7 @@
 <ion-header>
     <ion-navbar color="jblue">
         <ion-icon name="list" class="iconlist"></ion-icon>
-        <ion-icon name="map" class="iconmap"></ion-icon>
+        <ion-icon name="map" class="iconmap" (click)="goMap()"></ion-icon>
         <ion-title text-center>Profile</ion-title>
         <ion-icon name="heart" class="iconheart" (click)="goLiked()"></ion-icon>
     </ion-navbar>
@@ -24,6 +24,7 @@
         <ion-slide *ngFor="let item of list; let i = index;">
             <img src="{{item.user_avatar_url}}" class="user_avatar" />
             <div>{{item.user_name}}</div>
+            <small>{{item.distance}}</small>
             <div>About</div>
             <small>{{item.user_about}}</small>
             <ion-row class="buttons">

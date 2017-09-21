@@ -6,6 +6,7 @@ import { EmployerSavedPage } from '../saved/employer-saved';
 import { EmployerSeekerDetailPage } from '../detail/employer-seeker-detail';
 import { UtilService } from '../../../provider/util-service';
 import { EmployerService } from '../../../provider/employer-service';
+import { EmployerHomeMapPage } from '../home-map/employer-home-map';
 
 @Component({
   selector: 'page-employer-home',
@@ -34,6 +35,7 @@ export class EmployerHomePage {
   }
 
   loadData() {
+    let user_setting = JSON.parse(localStorage.getItem('user_setting'));
     let loader = this.loading.create({
       content: 'Loading...',
     });
@@ -42,8 +44,12 @@ export class EmployerHomePage {
     this.employerService.loadMatchedJobSeekers(param)
     .subscribe(data => {
         loader.dismissAll();
-        if(data.status = "success") {
+        if(data.status = "success") { 
           this.list = data.result;
+          for(let i=0; i<this.list.length; i++) {
+            let item = this.list[i];
+            this.list[i]['distance'] = this.config.calcCrow(this.list[i].setting_location_lat, this.list[i].setting_location_lng, user_setting.setting_emp_location_lat, user_setting.setting_emp_location_lng);
+          }
         }
     })
   }
@@ -94,6 +100,10 @@ export class EmployerHomePage {
 
   goLiked() {
     this.navCtrl.push(EmployerSavedPage);
+  }
+
+  goMap() {
+    this.navCtrl.push(EmployerHomeMapPage);
   }
 
   search(value) {
