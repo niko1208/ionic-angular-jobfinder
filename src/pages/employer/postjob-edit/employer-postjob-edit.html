@@ -48,7 +48,10 @@
     </div>
     <div class="div_sec">
         <ion-label>Job Location :</ion-label>
-        <ion-input [(ngModel)]="job_location" disabled readonly></ion-input>
+        <ion-input [(ngModel)]="job_location" disabled readonly style="background: #f3f3f3;" (click)="jobLocation()"></ion-input>
+    </div>
+    <div class="div_sec" text-center>
+        <button ion-button round color='jred' (click)="deleteJob()">Delete</button>
     </div>
     <br/>
 </ion-content>

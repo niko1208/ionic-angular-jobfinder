@@ -36,7 +36,7 @@ export class EmployerActivityPage {
     .subscribe(data => { 
         loader.dismissAll();
         if(data.status == "success") {
-          this.list = data.result;
+          this.list = data.result; console.log(this.list);
         }
     })
   }

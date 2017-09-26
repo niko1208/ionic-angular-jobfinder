@@ -12,7 +12,11 @@ page-splash {
         width: 260px;
         text-align: center;
     }
-    
+    ion-slides ion-slide:first-child img{
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+    }
     .arrow_prev,
     .arrow_next{
         position: absolute;

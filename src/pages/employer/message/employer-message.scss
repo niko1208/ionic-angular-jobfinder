@@ -135,7 +135,7 @@ page-employer-message{
         left: 0px;
         top: 0px;
         width: 100%;
-        height: 120%;
+        height: 110%;
         z-index: 9;
     }
     .loading div{
@@ -150,5 +150,8 @@ page-employer-message{
         border-radius: 30px;
         margin-top: 26px;
         margin-right: 5px;
+    }
+    .vc{
+        display: none;
     }
 }

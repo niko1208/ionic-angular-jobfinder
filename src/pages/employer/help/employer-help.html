@@ -1,0 +1,14 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>Help & Support</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-item *ngFor="let item of sections">
+        <h3 (click)="clickSection(item)">{{item.title}}</h3>
+        <div [ngClass]="{'show_div':item.expand}">{{item.contents}}</div>
+        <ion-icon class="arrow" name="ios-arrow-forward" *ngIf="!(item.expand)"></ion-icon>
+        <ion-icon class="arrow" name="ios-arrow-down" *ngIf="item.expand"></ion-icon>
+    </ion-item>
+</ion-content>

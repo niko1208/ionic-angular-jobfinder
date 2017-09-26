@@ -4,6 +4,7 @@ import { Config } from '../../../provider/config';
 import { UtilService } from '../../../provider/util-service';
 import { Auth } from '../../../provider/auth';
 import { EmployerService } from '../../../provider/employer-service';
+import { EmployerPostjobLocationPage } from '../postjob-location/employer-postjob-location';
 import * as $ from 'jquery';
 
 @Component({
@@ -21,6 +22,7 @@ export class EmployerPostJobPage {
   job_req = "";
   job_industry = "#alljobs";
   job_time = "Full Time";
+  job_location = "";
 
   file_image_back = null;
   file_image = null;
@@ -41,6 +43,7 @@ export class EmployerPostJobPage {
         this.arrIndustry = ["#hospitality", "#entertainment", "#fastfood", "#construction", "#sales", "#retail", "#notforprofit", "#logistics", "#administration", "#agedcare", "#banking", "#callcentre", "#childcare", "#consumergoods", "#creative", "#defence", "#education", "#entrepreneur", "#financialservices", "#government", "#healthcare", "#hr", "#legal", "#manufacturing", "#marketing", "#media", "#mining", "#officesupport", "#professionalservices", "#property", "#recreation", "#recruitment", "#selfemployed", "#software", "#sports", "#technicalsupport", "#technology", "#telecommunications", "#tourism", "#trades", "#transport", "#cleaning", "#fashion", "#hairandbeauty", "#services"];
         this.arrPosition = ["Full Time", "Part Time", "Casual", "Contract", "Internship"];
 
+        this.data = {'job_location_address':'', 'job_location_lat':'', 'job_location_lng':''};
   }
 
   ionViewWillEnter() {
@@ -54,6 +57,7 @@ export class EmployerPostJobPage {
     this.job_req = "";
     this.job_industry = "#alljobs";
     this.job_time = "Full Time";
+    this.job_location = this.data.job_location_address;
     /*this.bedit = this.navParams.get('bedit');
     this.data = this.navParams.get('data');
     if(this.bedit) { console.log(this.data);
@@ -172,7 +176,7 @@ export class EmployerPostJobPage {
     if(this.bedit) {
       job_id = this.data.job_id;
     }
-    let param = {"avatar" : this.file_image, "background" : this.file_image_back, "employer_id" : this.config.user_id, "employer_name" : user_name, "company_name" : this.company_name, "job_title" : this.job_title, "job_description" : this.job_desc, "job_requirement" : this.job_req, "time_available" : this.job_time, "industry" : this.job_industry, "location_address" : "location_address", "location_lat" : "location_lat", "location_lng" : "location_lng", "job_id" : job_id};
+    let param = {"avatar" : this.file_image, "background" : this.file_image_back, "employer_id" : this.config.user_id, "employer_name" : user_name, "company_name" : this.company_name, "job_title" : this.job_title, "job_description" : this.job_desc, "job_requirement" : this.job_req, "time_available" : this.job_time, "industry" : this.job_industry, "location_address" : this.data.job_location_address, "location_lat" : this.data.job_location_lat, "location_lng" : this.data.job_location_lng, "job_id" : job_id};
     
     let loader = this.loading.create({
       content: 'Loading...',
@@ -196,6 +200,10 @@ export class EmployerPostJobPage {
           }
       })
     }
+  }
+
+  jobLocation() {
+    this.navCtrl.push(EmployerPostjobLocationPage, {data: this.data});
   }
 
 }

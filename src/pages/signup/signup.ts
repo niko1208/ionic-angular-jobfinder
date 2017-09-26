@@ -34,6 +34,10 @@ export class SignupPage {
       });
   }
 
+  goback() {
+      this.navCtrl.pop();
+  }
+
   signup() {
     if(this.name == "") {
         this.util.createAlert("Error", "Please insert Name!");

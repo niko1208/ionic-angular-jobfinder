@@ -53,4 +53,87 @@ export class Config {
     {
         return Value * Math.PI / 180;
     }
+
+    
+    getDiffDateString(timeDiff)
+    {
+        //Less than 1min <60
+        //Less than 1hour <3600
+        //Less than 1day <86400
+        //Less than 1month <2592000
+        //Less than 1year < 946080000
+        var strDiffDate : String = "";
+        var divDiffRest = 0;
+        if( timeDiff > 946080000) {
+            divDiffRest = timeDiff / 946080000;
+            divDiffRest = Math.floor(divDiffRest);
+            if( divDiffRest == 1)
+            {
+                strDiffDate = ""+divDiffRest+" year ago";
+            }
+            else
+            {
+                strDiffDate = ""+divDiffRest+" year ago";
+            }
+        }
+        else if( timeDiff > 2592000 && timeDiff <= 946080000)
+        {
+            divDiffRest = timeDiff / 2592000;
+            divDiffRest = Math.floor(divDiffRest);
+            if (divDiffRest == 1)
+            {
+                strDiffDate = ""+divDiffRest+" month ago";
+            }
+            else
+            {
+                strDiffDate = ""+divDiffRest+" months ago";
+            }
+        }
+        else if (timeDiff > 86400 && timeDiff <= 2592000)
+        {
+            divDiffRest = timeDiff / 86400;
+            divDiffRest = Math.floor(divDiffRest);
+            if (divDiffRest == 1)
+            {
+                strDiffDate = ""+divDiffRest+" day ago";
+            }
+            else
+            {
+                strDiffDate = ""+divDiffRest+" days ago";
+            }
+        }
+        else if (timeDiff > 3600 && timeDiff <= 86400)
+        {
+            divDiffRest = timeDiff / 3600;
+            divDiffRest = Math.floor(divDiffRest);
+            if (divDiffRest == 1)
+            {
+                strDiffDate = ""+divDiffRest+" hour ago";
+            }
+            else
+            {
+                strDiffDate = ""+divDiffRest+" hours ago";
+            }
+        }
+        else if (timeDiff > 60 && timeDiff <= 3600)
+        {
+            divDiffRest = timeDiff / 60;
+            divDiffRest = Math.floor(divDiffRest);
+            if (divDiffRest == 1)
+            {
+                strDiffDate = ""+divDiffRest+" min ago";
+            }
+            else
+            {
+                strDiffDate = "("+divDiffRest+") mins ago";
+            }
+        }
+        else
+        {
+            strDiffDate = "less than 1 min";
+        }
+        
+        return strDiffDate
+    }
+    
 }

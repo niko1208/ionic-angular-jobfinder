@@ -6,12 +6,14 @@ page-login-employer{
         font-size: 26px;
     }
     ion-content{
-        background: url(../assets/images/register_background.png);
+        background: url(../assets/images/login_background001.jpg);
         background-size: cover;
         background-position: center;
     }
     div.div_form{
+        margin: auto;
         margin-top: 150px;
+        max-width: 600px;
     }
     ion-item.form-item{
         border-radius: 50px;

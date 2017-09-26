@@ -149,6 +149,10 @@ export class EmployerHomeMapPage {
       this.viewCtrl.dismiss();
   }
 
+  goLiked() {
+    this.navCtrl.push(EmployerSavedPage);
+  }
+
   search(value) {
     
   }

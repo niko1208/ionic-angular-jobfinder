@@ -1,9 +1,11 @@
 <ion-header>
     <ion-navbar color="jblue">
         <ion-title text-center>Applicants</ion-title>
-        <div class='fright' (click)="goApplied()">
-            <ion-icon class="fright" name="ios-paper-outline"></ion-icon>
-        </div>
+        <ion-buttons right>
+            <div class="fright" (click)="goApplied()">
+                <ion-icon class="fright" name="ios-paper-outline"></ion-icon>
+            </div>
+        </ion-buttons>
     </ion-navbar>
     <ion-toolbar>
         <ion-searchbar #q [(ngModel)]="searchValue" (keyup.enter)="search(q.value)" pleceholder="">
@@ -18,8 +20,8 @@
         <img src="{{data?.job_job_avatar_url}}" />
     </div>
     <div class="div_title">
-        <div>{{data?.job_company_name}}</div>
-        <small>{{data?.job_job_description}}</small><br/>
+        <h3>{{data?.job_company_name}}</h3>
+        <div>{{data?.job_job_description}}</div>
         <small>Post {{getDate(data?.job_job_create_date) | amTimeAgo}}</small><br/>
         <small>Viewed: {{data?.views}}, Applied: {{data?.applies}}</small>
     </div>
@@ -28,13 +30,49 @@
             <img class="user_avatar" src="{{item.user_avatar_url}}" (click)="view(i)" />
             <div class="desc">
                 <div>{{item.user_name}}</div>
-                <small>Applied {{getDate(item.applied_date) | amTimeAgo}}</small><br/>
-                <small></small>
+                <small>Applied {{item.applied_date}}</small><br/>
+                <small>{{item.dis}}</small>
             </div>
             <div class="fright">
-                <ion-icon class='icon_button' name="ios-person-add-outline" (click)="add(i)"></ion-icon>
                 <ion-icon class='icon_button' name="ios-trash-outline" (click)="delete(i)"></ion-icon>
+                <ion-icon class='icon_button' name="ios-paper-outline" color="color_{{item.job_applicants_seeker_state}}" (click)="add(i)"></ion-icon>
+                <ion-icon name='bot' *ngIf="data?.job_bot_state == '1'" (click)="openbot(i)" style="  margin-top: 20px;"><img src="assets/images/AVABOT.PNG"/></ion-icon>
             </div>
         </ion-item>
     </ion-list>
 </ion-content>
+<div class='alertbox' *ngIf="isshowAlert">
+    <div class='overlay'></div>
+    <div class='alertbox_wrapper'>
+        <div text-center><h2>Please tap on</h2></div>
+        <ion-row>
+            <ion-col col-3>
+                <img src='assets/images/AVABOT.PNG' style='width:30px;height:30px;border-radius:30px'/>
+            </ion-col>
+            <ion-col col-9>
+                <div>to View Chat Bot History</div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-3>
+                <ion-icon class='icon_button' name="ios-paper-outline"></ion-icon>
+            </ion-col>
+            <ion-col col-9>
+                <div>For Shortlist or</div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-3>
+                <ion-icon class='icon_button' name="ios-trash-outline"></ion-icon>
+            </ion-col>
+            <ion-col col-9>
+                <div>For Decline</div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <button ion-button full round color="jblue" (click)="ok()">Ok</button>
+            </ion-col>
+        </ion-row>
+    </div>
+</div>

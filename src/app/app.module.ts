@@ -27,12 +27,16 @@ import { EmployerInviteListPage } from '../pages/employer/invite-list/employer-i
 import { EmployerEditProfilePage } from '../pages/employer/editprofile/employer-editprofile';
 import { EmployerAdsPage } from '../pages/employer/ads/employer-ads';
 import { EmployerCurLocationPage } from '../pages/employer/curlocation/employer-curlocation';
+import { EmployerChatbotPage } from '../pages/employer/chatbot/employer-chatbot';
 
 import { EmployerSettingPage } from '../pages/employer/setting/employer-setting';
 import { EmployerPostJobPage } from '../pages/employer/postjob/employer-postjob';
 import { EmployerPostJobEditPage } from '../pages/employer/postjob-edit/employer-postjob-edit';
 import { EmployerActivityPage } from '../pages/employer/activity/employer-activity';
 import { EmployerMessagePage } from '../pages/employer/message/employer-message';
+import { EmployerHelpPage } from '../pages/employer/help/employer-help';
+import { EmployerPostjobLocationPage } from '../pages/employer/postjob-location/employer-postjob-location';
+import { EmployerEditjobLocationPage } from '../pages/employer/editjob-location/employer-editjob-location';
 
 import { HttpModule } from '@angular/http';
 import { Push } from '@ionic-native/push';
@@ -72,7 +76,11 @@ import { MessageService } from '../provider/message-service';
     EmployerEditProfilePage,
     EmployerAdsPage,
     EmployerHomeMapPage,
-    EmployerCurLocationPage
+    EmployerCurLocationPage,
+    EmployerChatbotPage,
+    EmployerHelpPage,
+    EmployerPostjobLocationPage,
+    EmployerEditjobLocationPage
   ],
   imports: [
     BrowserModule,
@@ -109,7 +117,11 @@ import { MessageService } from '../provider/message-service';
     EmployerEditProfilePage,
     EmployerAdsPage,
     EmployerHomeMapPage,
-    EmployerCurLocationPage
+    EmployerCurLocationPage,
+    EmployerChatbotPage,
+    EmployerHelpPage,
+    EmployerPostjobLocationPage,
+    EmployerEditjobLocationPage
   ],
   providers: [
     StatusBar,

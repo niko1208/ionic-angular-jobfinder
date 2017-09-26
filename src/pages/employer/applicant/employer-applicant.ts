@@ -6,6 +6,7 @@ import { Auth } from '../../../provider/auth';
 import { EmployerService } from '../../../provider/employer-service';
 import { EmployerInviteListPage } from '../invite-list/employer-invite-list';
 import { EmployerSeekerDetailPage } from '../detail/employer-seeker-detail';
+import { EmployerChatbotPage } from '../chatbot/employer-chatbot';
 
 @Component({
   selector: 'page-employer-applicant',
@@ -15,6 +16,7 @@ export class EmployerApplicantPage {
 
   list: any;
   data: any;
+  isshowAlert = false;
   constructor(public navCtrl: NavController, 
     public config: Config,
     public util: UtilService,
@@ -25,10 +27,16 @@ export class EmployerApplicantPage {
         this.data = navParams.get('data');
   }
   ionViewWillEnter() {
+    this.isshowAlert = true;
     this.loadData();
   }
 
+  ok() {
+    this.isshowAlert = false;
+  }
+
   loadData() {
+    let user_setting = JSON.parse(localStorage.getItem('user_setting'));
     let loader = this.loading.create({
       content: 'Loading...',
     });
@@ -40,8 +48,8 @@ export class EmployerApplicantPage {
         if(data.status == "success") {
             this.list = data.result;
             for(let i=0; i<this.list.length; i++) {
-              //this.list[i]['applied_date'] = new Date(this.list[i].timediff*1000);
-              //console.log(this.list[i].timediff + '======' + this.list[i].applied_date);
+              this.list[i]['applied_date'] = this.config.getDiffDateString(this.list[i].timediff);
+              this.list[i]['dis'] = this.config.calcCrow(this.list[i].setting_location_lat, this.list[i].setting_location_lng, user_setting.setting_emp_location_lat, user_setting.setting_emp_location_lng);
             }
         }
     })
@@ -90,6 +98,11 @@ export class EmployerApplicantPage {
     this.navCtrl.push(EmployerSeekerDetailPage, {seeker_id: seekerID});
   }
 
-
+  openbot(i) {
+    let seekerID = this.list[i].user_id;
+    let avatar_url = this.list[i].user_avatar_url;
+    let user_name = this.list[i].user_name;
+    this.navCtrl.push(EmployerChatbotPage, {seeker_id: seekerID, job_id: this.data.job_id, avatar:avatar_url, user_name: user_name});
+  }
 
 }

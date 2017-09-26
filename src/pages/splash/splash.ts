@@ -19,22 +19,32 @@ export class SplashPage {
   }
 
   ngAfterViewInit() {
-    let w = document.querySelector('#slides').clientWidth;
-    let h = w * 1063 / 750;
+    //let w = document.querySelector('#slides').clientWidth;
+    //let h = w * 1063 / 750;
     //document.getElementById('slides').style.height = h + 'px';
+    
   }
 
   onResize() {
+    let user_id = localStorage.getItem('user_id');
+    if(user_id != null && user_id != "") {
+      return;
+    }
+
     let w = document.querySelector('#img').clientWidth;
     let ww = document.querySelector('.scroll-content').clientWidth;
     w = (ww - w) / 2;
     w = w + 10;
     $('.arrow_prev').css('left', w+'px');
     $('.arrow_next').css('right', w+'px');
+    $('#img').css('left', w+"px")
   }
 
   ionViewDidLoad() {
-    
+    let self = this;
+    setTimeout(() => {
+      self.onResize();
+    }, 1000);
   }
 
   prev() {

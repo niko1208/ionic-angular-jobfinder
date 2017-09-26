@@ -63,6 +63,10 @@
                 <input type="file" name="file_image" id="file_image" #fileInp (change)="setFileImage($event)" style="display:none" />
                 <button ion-button round color="jblue" class="bt_small" (click)="send()">Send</button>
             </div>
+            <div class='vc'>
+                <video class="video" id="videop"></video>
+                <canvas #canvas id="canvas"></canvas>
+            </div>
         </ion-col>
     </ion-row>
 </ion-content>

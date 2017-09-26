@@ -7,6 +7,7 @@ import { EmployerEditProfilePage } from '../editprofile/employer-editprofile';
 import { EmployerAdsPage } from '../ads/employer-ads';
 import { EmployerService } from '../../../provider/employer-service';
 import { EmployerCurLocationPage } from '../curlocation/employer-curlocation';
+import { EmployerHelpPage } from '../help/employer-help';
 
 @Component({
   selector: 'page-employer-setting',
@@ -86,7 +87,14 @@ export class EmployerSettingPage {
     this.navCtrl.push(EmployerCurLocationPage);
   }
   ads() {
+    if(this.user_info.user_membership == 'basic') {
+      this.util.createAlert("Premium Member Access Only", "");
+      return;
+    }
     this.navCtrl.push(EmployerAdsPage, {}, this.config.navOptions);
+  }
+  help() {
+    this.navCtrl.push(EmployerHelpPage, {}, this.config.navOptions);
   }
 
   logout() {

@@ -30,7 +30,7 @@
     <ion-item>
         <ion-label class='lb_icon'><ion-icon name='ios-contact-outline'></ion-icon></ion-label>
         <ion-label>Username</ion-label>
-        <ion-label text-right (click)="goProfile()">Create Yours<ion-icon name="ios-arrow-forward-outline"></ion-icon></ion-label>
+        <ion-label text-right (click)="goProfile()">Create Yours<ion-icon name="ios-arrow-forward-outline" style="padding-left:10px"></ion-icon></ion-label>
     </ion-item>
     
     <ion-label class="lb_title">notifications</ion-label>
@@ -57,7 +57,7 @@
     </ion-item>
     
     <ion-label class="lb_title">Contact us</ion-label>
-    <ion-item>
+    <ion-item (click)="help()">
         <ion-label class='lb_icon'><ion-icon name='ios-contact-outline'></ion-icon></ion-label>
         <ion-label>Help & Support</ion-label>
         <ion-label text-right><ion-icon name="ios-arrow-forward-outline"></ion-icon></ion-label>

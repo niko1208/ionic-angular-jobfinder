@@ -40,7 +40,7 @@ page-employer-applicant{
         float: left;
     }
     ion-item div.desc{
-        width: calc(100% - 180px);
+        width: calc(100% - 200px);
         padding: 5px;
         padding-left: 10px;
     }
@@ -58,12 +58,45 @@ page-employer-applicant{
     div.fright ion-icon{
         font-size: 30px;
         margin-right: 10px;
+        float: right;
     }
     .icon_button{
         font-size: 30px;
         margin-left: 10px;
         margin-top: 20px;
         cursor: pointer;
+    }
+    ion-icon img{
+        width: 30px;
+        height: 30px;
+        border-radius: 30px;
+    }
+    .alertbox{
+        position: fixed;
+        z-index: 99999;
+        width: 100%;
+        height: 100%;
+    }
+    .alertbox_wrapper{
+        position: fixed;
+        z-index: 9999;
+        width: 300px;
+        height: auto;
+        left: calc(50% - 150px);
+        top: calc(50% - 100px);
+        background: #fff;
+        padding: 20px;
+    }
+    .alertbox_wrapper .icon_button{
+        margin-top: 0px;
+    }
+    .alertbox_wrapper ion-col div{
+        margin-top: 5px;
+    }
+    .alertbox .overlay{
+        background: rgba(0,0,0,0.5);
+        width: 100%;
+        height: 100%;
     }
 
     @media (max-width: 767px) {
