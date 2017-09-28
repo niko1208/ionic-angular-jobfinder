@@ -51,6 +51,9 @@ export class EmployerHomePage {
             this.list[i]['distance'] = this.config.calcCrow(this.list[i].setting_location_lat, this.list[i].setting_location_lng, user_setting.setting_emp_location_lat, user_setting.setting_emp_location_lng);
           }
         }
+    }, error => {
+        loader.dismissAll();
+        alert("Error");
     })
   }
 
@@ -69,6 +72,9 @@ export class EmployerHomePage {
         } else {
           this.util.createAlert("Failed", data.result);
         }
+    }, error => {
+        loader.dismissAll();
+        alert("Error");
     })
   }
 

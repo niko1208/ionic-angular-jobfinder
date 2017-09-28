@@ -38,6 +38,7 @@ export class EmployerEditjobLocationPage {
   loadData() {
     this.data = this.navParams.get('data');
     let self = this;
+    self.address = this.data.job_location_address;
     if(this.data.job_location_address == 'location_address') {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
@@ -45,14 +46,20 @@ export class EmployerEditjobLocationPage {
             self.lng = position.coords.longitude;
             self.loadMap();
           }, function() {
+            self.lat = 22.285831;
+            self.lng = 114.1582283;
             alert('The Geolocation service failed');
             self.loadMap();
           });
         } else {
+          self.lat = 22.285831;
+          self.lng = 114.1582283;
           alert("Browser doesn't support Geolocation");
           self.loadMap();
         }
     } else {
+      self.lat = this.data.job_location_lat;
+      self.lng = this.data.job_location_lng;
       self.loadMap();
     }
   }
@@ -60,7 +67,9 @@ export class EmployerEditjobLocationPage {
   loadMap(){
     console.log('loadmap');
     
-    let latLng = new google.maps.LatLng(this.data.job_location_lat, this.data.job_location_lng);
+    var self = this;
+
+    let latLng = new google.maps.LatLng(this.lat, this.lng);
     let mapOptions = {
       center: latLng,
       zoom: 15,
@@ -72,7 +81,6 @@ export class EmployerEditjobLocationPage {
         position: latLng
     });
 
-    var self = this;
     this.infowindow = new google.maps.InfoWindow({
         map: this.map,
         position: latLng,
@@ -113,6 +121,7 @@ export class EmployerEditjobLocationPage {
     this.data.job_location_address = this.address;
     this.data.job_location_lat = this.lat;
     this.data.job_location_lng = this.lng;
+    console.log(this.lat+'----'+this.lng);
     this.viewCtrl.dismiss();
   }
 

@@ -59,7 +59,7 @@ export class EmployerHomeMapPage {
 
   loadMap(){
     let user_setting = JSON.parse(localStorage.getItem('user_setting'));
-    
+    console.log(user_setting);
     let latLng = new google.maps.LatLng(user_setting.setting_emp_location_lat, user_setting.setting_emp_location_lng);
     let mapOptions = {
       center: latLng,

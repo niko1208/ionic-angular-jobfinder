@@ -21,7 +21,7 @@ export class Config {
     }
 
     getAPIURL() {
-        return "http://jobfinder.cloud/jobfinder";
+        return "https://jobfinder.cloud/jobfinder";
     }
     
     getFormData(item) {

@@ -42,14 +42,15 @@ export class EmployerPostJobEditPage {
     public navParams: NavParams) {
         this.arrIndustry = ["#hospitality", "#entertainment", "#fastfood", "#construction", "#sales", "#retail", "#notforprofit", "#logistics", "#administration", "#agedcare", "#banking", "#callcentre", "#childcare", "#consumergoods", "#creative", "#defence", "#education", "#entrepreneur", "#financialservices", "#government", "#healthcare", "#hr", "#legal", "#manufacturing", "#marketing", "#media", "#mining", "#officesupport", "#professionalservices", "#property", "#recreation", "#recruitment", "#selfemployed", "#software", "#sports", "#technicalsupport", "#technology", "#telecommunications", "#tourism", "#trades", "#transport", "#cleaning", "#fashion", "#hairandbeauty", "#services"];
         this.arrPosition = ["Full Time", "Part Time", "Casual", "Contract", "Internship"];
-
+        this.data = this.navParams.get('data');
+        console.log(this.data);
   }
 
   ionViewWillEnter() {
     this.file_image_back = null;
     this.file_image = null;
     this.bedit = true;
-    this.data = this.navParams.get('data'); console.log(this.data);
+    
     if(this.bedit) { 
       $('#back_img1').css('background-image', 'url('+this.data.job_job_background_url+')');
       $('#image1').attr('src', this.data.job_job_avatar_url);
@@ -167,6 +168,8 @@ export class EmployerPostJobEditPage {
     if(this.bedit) {
       job_id = this.data.job_id;
     }
+    console.log(this.data);
+    
     let param = {"avatar" : this.file_image, "background" : this.file_image_back, "employer_id" : this.config.user_id, "employer_name" : user_name, "company_name" : this.company_name, "job_title" : this.job_title, "job_description" : this.job_desc, "job_requirement" : this.job_req, "time_available" : this.job_time, "industry" : this.job_industry, "location_address" : this.data.job_location_address, "location_lat" : this.data.job_location_lat, "location_lng" : this.data.job_location_lng, "job_id" : job_id};
     
     let loader = this.loading.create({

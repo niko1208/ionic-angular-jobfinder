@@ -30,14 +30,14 @@ export class SplashPage {
     if(user_id != null && user_id != "") {
       return;
     }
-
+    /*
     let w = document.querySelector('#img').clientWidth;
     let ww = document.querySelector('.scroll-content').clientWidth;
     w = (ww - w) / 2;
     w = w + 10;
     $('.arrow_prev').css('left', w+'px');
     $('.arrow_next').css('right', w+'px');
-    $('#img').css('left', w+"px")
+    $('#img').css('left', w+"px")*/
   }
 
   ionViewDidLoad() {

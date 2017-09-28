@@ -34,4 +34,12 @@ export class Auth {
         return this.http.post(url, item).map((response:Response)=>
             response.json());
     }
+    
+    reset(item) {
+        let url = this.config.getAPIURL();
+        url = `${url}/admin/api/resetpassword.php`;
+        item = this.config.getFormData(item);
+        return this.http.post(url, item).map((response:Response)=>
+            response.json());
+    }
 }

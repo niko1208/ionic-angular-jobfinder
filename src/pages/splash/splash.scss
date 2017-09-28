@@ -1,8 +1,14 @@
 page-splash {
+    
+    ion-content{
+        background: url(../assets/images/splash_background000.jpg);
+        background-size: cover;
+        background-position: center;
+    }
     ion-slides{
         height: 80%;
     }
-    ion-slide{
+    ion-slide, .div_img{
         position: relative;
     }
     div.title{
@@ -30,6 +36,20 @@ page-splash {
     }
     .arrow_next{
         right: 10px;
+    }
+    .div_img{
+        height: calc(100% - 150px) !important;
+        text-align: center;
+    }
+    .div_img img{
+        max-width: 100%;
+        max-height: 100%;
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+    }
+    .div_img .title{
+        font-size: 20px
     }
     @media (min-width: 500px) {
         ion-content{

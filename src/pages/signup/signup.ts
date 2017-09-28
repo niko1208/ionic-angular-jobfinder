@@ -5,6 +5,7 @@ import { SignupVerifyPage } from '../signup-verify/signup-verify';
 import { Config } from '../../provider/config';
 import { UtilService } from '../../provider/util-service';
 import { Auth } from '../../provider/auth';
+import { TermsPage } from '../terms/terms';
 
 @Component({
   selector: 'page-signup',
@@ -77,6 +78,14 @@ export class SignupPage {
         }
     })
     
+  }
+  goTerms() {
+      this.navCtrl.push(TermsPage, null, this.config.navOptions);
+  }
+  clickTerm() {
+      if(this.isterms) {
+          this.goTerms();
+      }
   }
 
 }

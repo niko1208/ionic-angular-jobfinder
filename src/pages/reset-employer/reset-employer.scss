@@ -1,18 +1,16 @@
-page-login-employer{
+page-reset-employer{
     ion-icon.nav_back{
         position: fixed;
         left: 20px;
         top: 30px;
         font-size: 26px;
     }
-    ion-content{
-        background: url(../assets/images/login_background001.jpg);
-        background-size: cover;
-        background-position: center;
+    ion-content.content-md{
+        background: #ddd;
     }
     div.div_form{
         margin: auto;
-        margin-top: 150px;
+        margin-top: 200px;
         max-width: 500px;
     }
     ion-item.form-item{

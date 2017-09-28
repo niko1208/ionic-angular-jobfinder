@@ -28,7 +28,7 @@
             <ion-label> <ion-icon name="lock"></ion-icon></ion-label>
             <ion-input type="password" [(ngModel)]="password" placeholder="Password"></ion-input>
         </ion-item>
-        <div text-center padding><ion-checkbox [(ngModel)]="isterms"></ion-checkbox> I accept the Terms of Use</div>
+        <div text-center padding><ion-checkbox [(ngModel)]="isterms" (click)="clickTerm()"></ion-checkbox> I accept the Terms of Use</div>
         <button ion-button full round color="jblue" (click)="signup()">Signup</button>
     </div>
 
@@ -36,5 +36,4 @@
         <small>Already a member?</small>&nbsp;
         <span (click)="goLogin()">Login</span>
     </div>
-
 </ion-content>

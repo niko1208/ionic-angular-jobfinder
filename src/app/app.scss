@@ -106,3 +106,12 @@ div.scroll-content{
         margin-right: auto;
     }
 }
+
+@media (max-height: 650px) {
+    div.scroll-content{
+        min-height: 560px;
+    }
+    .ion-page > ion-content{
+        overflow-y: scroll;
+    }
+}

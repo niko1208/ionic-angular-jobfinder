@@ -4,6 +4,7 @@ import { Config } from '../../provider/config';
 import { UtilService } from '../../provider/util-service';
 import { Auth } from '../../provider/auth';
 import { EmployerTabsPage } from '../employer/tabs/employer-tabs';
+import { ResetEmployerPage } from '../reset-employer/reset-employer';
 
 @Component({
   selector: 'page-login-employer',
@@ -65,8 +66,14 @@ export class LoginEmployerPage {
           } else {
             this.util.createAlert("Login Failed", data.result);
           }
-          
+      }, error => {
+          loader.dismissAll();
+          alert("Error");
       })
+  }
+
+  goReset() {
+      this.navCtrl.push(ResetEmployerPage, null, this.config.navOptions);
   }
 
 }

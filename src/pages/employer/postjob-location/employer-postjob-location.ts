@@ -36,23 +36,25 @@ export class EmployerPostjobLocationPage {
   loadData() {
     this.data = this.navParams.get('data');
     let self = this;
-    if(this.data.job_location_address == 'location_address') {
+    if(this.data.job_location_address == 'location_address' || this.data.job_location_address == '') {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
             self.data.job_location_lat = position.coords.latitude;
             self.data.job_location_lng = position.coords.longitude;
             self.loadMap();
           }, function() {
+            self.data.job_location_lat = 22.285831;
+            self.data.job_location_lng = 114.1582283;
             alert('The Geolocation service failed');
             self.loadMap();
           });
         } else {
+          self.data.job_location_lat = 22.285831;
+          self.data.job_location_lng = 114.1582283;
           alert("Browser doesn't support Geolocation");
           self.loadMap();
         }
     } else {
-        self.data.job_location_lat = -34.397;
-        self.data.job_location_lng = 150.644;
         self.loadMap();
     }
   }

@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { SplashPage } from '../pages/splash/splash';
 import { LoginPage } from '../pages/login/login';
 import { LoginEmployerPage } from '../pages/login-employer/login-employer';
+import { ResetEmployerPage } from '../pages/reset-employer/reset-employer';
 import { LoginSeekerPage } from '../pages/login-seeker/login-seeker';
 import { SignupPage } from '../pages/signup/signup';
 import { SignupVerifyPage } from '../pages/signup-verify/signup-verify';
@@ -80,7 +81,8 @@ import { MessageService } from '../provider/message-service';
     EmployerChatbotPage,
     EmployerHelpPage,
     EmployerPostjobLocationPage,
-    EmployerEditjobLocationPage
+    EmployerEditjobLocationPage,
+    ResetEmployerPage
   ],
   imports: [
     BrowserModule,
@@ -121,7 +123,8 @@ import { MessageService } from '../provider/message-service';
     EmployerChatbotPage,
     EmployerHelpPage,
     EmployerPostjobLocationPage,
-    EmployerEditjobLocationPage
+    EmployerEditjobLocationPage,
+    ResetEmployerPage
   ],
   providers: [
     StatusBar,

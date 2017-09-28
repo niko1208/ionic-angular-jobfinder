@@ -137,7 +137,7 @@ export class EmployerMessagePage {
         this.pending = false;
     }, error => {
         this.pending = false;
-        alert("Error");
+        //alert("Error");
     });
   }
   getDate(date) {
@@ -153,7 +153,7 @@ export class EmployerMessagePage {
     this.isLoading = true;
     this.file_image = event.srcElement.files[0];
     let room_id = this.sitem.message_room_id;
-    let my_type = this.sitem.message_sender_type;
+    let my_type = this.sitem.message_sender_type; my_type = "employer";
     let other_id = this.sitem.user_id;
     var fullPath = $("#file_image").val();    
     var filename = fullPath.replace(/^.*[\\\/]/, '');
@@ -236,7 +236,7 @@ export class EmployerMessagePage {
   send() {
     this.isLoading = true;
     let room_id = this.sitem.message_room_id;
-    let my_type = this.sitem.message_sender_type;
+    let my_type = this.sitem.message_sender_type; my_type = "employer";
     let other_id = this.sitem.user_id;
     let param = {"room_id" : room_id, "sender_type" : my_type, "sender_id" : this.config.user_id, "message_text" : this.sendText, "message_type" : "text", "other_id" : other_id};
 
@@ -257,7 +257,7 @@ export class EmployerMessagePage {
     let self = this;
     setTimeout(() => {
       self.loadBack();
-    }, 3000);
+    }, 5000);
 
     if(!(this.pending)) {
       this.loadNewMessage();
