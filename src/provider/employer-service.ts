@@ -40,4 +40,11 @@ export class EmployerService {
         return this.http.post(url, item).map(response=>
             response.json());
     }
+
+    
+    getDataExternal(surl) {
+        let url = surl;
+        return this.http.get(url).map(response=>
+            response.json());
+    }
 }

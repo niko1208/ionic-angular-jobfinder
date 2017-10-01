@@ -11,6 +11,7 @@
     <div class="top_header">
         <ion-searchbar #q [(ngModel)]="searchValue" (keyup.enter)="search(q.value)" pleceholder="">
         </ion-searchbar>
+        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
     </div>
     <div #map1 id='map1'></div>
 </ion-content>

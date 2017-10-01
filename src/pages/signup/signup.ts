@@ -1,5 +1,5 @@
 import { Component  } from '@angular/core';
-import { NavController, ViewController } from 'ionic-angular';
+import { NavController, ViewController, LoadingController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { SignupVerifyPage } from '../signup-verify/signup-verify';
 import { Config } from '../../provider/config';
@@ -16,7 +16,7 @@ export class SignupPage {
   public name = "";
   public email = "";
   public phone = "";
-  public type = "";
+  public type = "employer";
   public password = "";
   public isterms = false;
 
@@ -24,7 +24,8 @@ export class SignupPage {
     public viewCtrl: ViewController,
     public config: Config,
     public util: UtilService,
-    public auth: Auth) {
+    public auth: Auth,
+    public loading: LoadingController) {
 
   }
 
@@ -68,14 +69,23 @@ export class SignupPage {
     let vcode = Math.floor(Math.random() * (9999-1000))+1000;
     let param = {"name" : this.name, "email" : this.email, "phone" : this.phone, "password" : this.phone, "verify_code" : vcode};
   
+    let loader = this.loading.create({
+    content: 'Loading...',
+    });
+    loader.present();
     this.auth.signup(param, this.type)
     .subscribe(data => {
+        loader.dismissAll();
         if(data.status = "success") {
-            this.config.user_id = data.resultUser.user_id;
+          this.config.user_id = data.resultUser.user_id;
+          this.config.user_type = this.type;
           this.navCtrl.push(SignupVerifyPage, null, this.config.navOptions);
         } else {
           this.util.createAlert("Registration Failed", data.result);
         }
+    }, err => {
+        loader.dismissAll();
+        this.util.createAlert("Registration Failed", "");
     })
     
   }

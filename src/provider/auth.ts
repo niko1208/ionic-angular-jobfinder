@@ -29,7 +29,7 @@ export class Auth {
     
     verify(item, user_type) {
         let url = this.config.getAPIURL();
-        url = `${url}/${user_type}/verify.php`;
+        url = `${url}/${user_type}/verifycode.php`;
         item = this.config.getFormData(item);
         return this.http.post(url, item).map((response:Response)=>
             response.json());

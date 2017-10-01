@@ -9,10 +9,10 @@
 
 <ion-content class='cont_detail'>
     <ion-label class="lb_title">discovery settings</ion-label>
-    <ion-item>
+    <ion-item (click)="goLocation()">
         <ion-label class='lb_icon'><ion-icon name='ios-contact-outline'></ion-icon></ion-label>
         <ion-label>My current Location</ion-label>
-        <ion-label text-right (click)="goLocation()">{{user_setting?.setting_emp_location_address}}</ion-label>
+        <ion-label text-right>{{user_setting?.setting_emp_location_address}}</ion-label>
     </ion-item>
     <ion-item no-lines>
         <ion-label class='lb_icon'><ion-icon name='ios-contact-outline'></ion-icon></ion-label>
