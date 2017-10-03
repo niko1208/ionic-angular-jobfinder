@@ -18,6 +18,8 @@ export class EmployerPostjobLocationPage {
   map: any;
   marker: any;
   infowindow: any;
+  placesService:any;
+  placedetails: any;
 
   constructor(public navCtrl: NavController, 
     public config: Config,
@@ -111,12 +113,36 @@ export class EmployerPostjobLocationPage {
     });
   }
   
+  private getPlaceDetail(place_id:string):void {
+      var self = this;
+      var request = {
+          query: place_id
+      };
+      this.placesService = new google.maps.places.PlacesService(this.map);
+      this.placesService.textSearch(request, callback);
+      function callback(place, status) { 
+        if(place.length > 0) {
+          place = place[0];
+          if (status == google.maps.places.PlacesServiceStatus.OK) {
+              self.marker.setPosition(place.geometry.location); 
+              self.map.setCenter(place.geometry.location);
+              self.infowindow.setContent(place.formatted_address);
+              self.data.job_location_address = place.formatted_address;
+              self.data.job_location_lat = place.geometry.location.lat(); 
+              self.data.job_location_lng = place.geometry.location.lng();
+          } else {
+              
+          }
+        }
+      }
+  }
+
   done() {
     
     this.viewCtrl.dismiss();
   }
 
   search(value) {
-    
+    this.getPlaceDetail(value);
   }
 }

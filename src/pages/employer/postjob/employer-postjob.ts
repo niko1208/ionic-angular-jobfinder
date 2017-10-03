@@ -1,10 +1,11 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { NavController, LoadingController, NavParams } from 'ionic-angular';
+import { NavController, LoadingController, NavParams, AlertController, ViewController } from 'ionic-angular';
 import { Config } from '../../../provider/config';
 import { UtilService } from '../../../provider/util-service';
 import { Auth } from '../../../provider/auth';
 import { EmployerService } from '../../../provider/employer-service';
 import { EmployerPostjobLocationPage } from '../postjob-location/employer-postjob-location';
+import { EmployerAddbotPage } from '../addbot/employer-addbot';
 import * as $ from 'jquery';
 
 @Component({
@@ -39,7 +40,9 @@ export class EmployerPostJobPage {
     public auth: Auth,
     public employerService: EmployerService,
     public loading: LoadingController,
-    public navParams: NavParams) {
+    public navParams: NavParams,
+    public alertCtrl: AlertController,
+    public viewCtrl: ViewController) {
         this.arrIndustry = ["#hospitality", "#entertainment", "#fastfood", "#construction", "#sales", "#retail", "#notforprofit", "#logistics", "#administration", "#agedcare", "#banking", "#callcentre", "#childcare", "#consumergoods", "#creative", "#defence", "#education", "#entrepreneur", "#financialservices", "#government", "#healthcare", "#hr", "#legal", "#manufacturing", "#marketing", "#media", "#mining", "#officesupport", "#professionalservices", "#property", "#recreation", "#recruitment", "#selfemployed", "#software", "#sports", "#technicalsupport", "#technology", "#telecommunications", "#tourism", "#trades", "#transport", "#cleaning", "#fashion", "#hairandbeauty", "#services"];
         this.arrPosition = ["Full Time", "Part Time", "Casual", "Contract", "Internship"];
 
@@ -134,6 +137,7 @@ export class EmployerPostJobPage {
   }
 
   post() {
+    
     if(!(this.bedit)) {
       if(this.file_image == null) {
         this.util.createAlert("Error", "Please insert your company image!");
@@ -168,30 +172,51 @@ export class EmployerPostJobPage {
       job_id = this.data.job_id;
     }
     let param = {"avatar" : this.file_image, "background" : this.file_image_back, "employer_id" : this.config.user_id, "employer_name" : user_name, "company_name" : this.company_name, "job_title" : this.job_title, "job_description" : this.job_desc, "job_requirement" : this.job_req, "time_available" : this.job_time, "industry" : this.job_industry, "location_address" : this.data.job_location_address, "location_lat" : this.data.job_location_lat, "location_lng" : this.data.job_location_lng, "job_id" : job_id};
-    
-    let loader = this.loading.create({
-      content: 'Loading...',
-    });
-    loader.present();
 
-    if(this.bedit) {
-      this.employerService.postData("editjob_web", param)
-      .subscribe(data => { console.log(data);
-          loader.dismissAll();
-          if(data.status == "success") {
-            
+    let alert = this.alertCtrl.create({
+      title: "Alert!",
+      message: "Dear Premium Member. Would you like to automate your candidate pre-screening process with AVA, our intelligent Chat Bot?",
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: "Sure! Add Bot",
+          handler: data => {
+            this.navCtrl.push(EmployerAddbotPage, {param: param, view: this.viewCtrl}, this.config.navOptions);
           }
-      })
-    } else {
-      this.employerService.postData("createjob", param)
-      .subscribe(data => { console.log(data);
-          loader.dismissAll();
-          if(data.status == "success") {
-            this.util.createAlert("Success", "Job has been successfully Posted!");
-            this.cleanField();
+        }, 
+        {
+          text: "No, Thanks",
+          role: 'cancel',
+          handler: data => {
+            let loader = this.loading.create({
+              content: 'Loading...',
+            });
+            loader.present();
+
+            if(this.bedit) {
+              this.employerService.postData("editjob_web", param)
+              .subscribe(data => { console.log(data);
+                  loader.dismissAll();
+                  if(data.status == "success") {
+                    
+                  }
+              })
+            } else {
+              this.employerService.postData("createjob", param)
+              .subscribe(data => { console.log(data);
+                  loader.dismissAll();
+                  if(data.status == "success") {
+                    this.util.createAlert("Success", "Job has been successfully Posted!");
+                    this.cleanField();
+                    this.navCtrl.pop();
+                  }
+              })
+            }
           }
-      })
-    }
+        }
+      ]
+    });
+    alert.present();
   }
 
   cleanField() {

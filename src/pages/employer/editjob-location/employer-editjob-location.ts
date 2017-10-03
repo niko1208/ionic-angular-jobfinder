@@ -20,6 +20,7 @@ export class EmployerEditjobLocationPage {
   map: any;
   marker: any;
   infowindow: any;
+  placesService:any;
 
   constructor(public navCtrl: NavController, 
     public config: Config,
@@ -125,7 +126,31 @@ export class EmployerEditjobLocationPage {
     this.viewCtrl.dismiss();
   }
 
+  private getPlaceDetail(place_id:string):void {
+      var self = this;
+      var request = {
+          query: place_id
+      };
+      this.placesService = new google.maps.places.PlacesService(this.map);
+      this.placesService.textSearch(request, callback);
+      function callback(place, status) { 
+        if(place.length > 0) {
+          place = place[0];
+          if (status == google.maps.places.PlacesServiceStatus.OK) {
+              self.marker.setPosition(place.geometry.location); 
+              self.map.setCenter(place.geometry.location);
+              self.infowindow.setContent(place.formatted_address);
+              self.address = place.formatted_address;
+              self.lat = place.geometry.location.lat(); 
+              self.lng = place.geometry.location.lng();
+          } else {
+              
+          }
+        }
+      }
+  }
+
   search(value) {
-    
+    this.getPlaceDetail(value);
   }
 }

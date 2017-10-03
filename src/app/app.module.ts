@@ -29,6 +29,8 @@ import { EmployerEditProfilePage } from '../pages/employer/editprofile/employer-
 import { EmployerAdsPage } from '../pages/employer/ads/employer-ads';
 import { EmployerCurLocationPage } from '../pages/employer/curlocation/employer-curlocation';
 import { EmployerChatbotPage } from '../pages/employer/chatbot/employer-chatbot';
+import { EmployerAddbotPage } from '../pages/employer/addbot/employer-addbot';
+import { EmployerBotweightPage } from '../pages/employer/botweight/employer-botweight';
 
 import { EmployerSettingPage } from '../pages/employer/setting/employer-setting';
 import { EmployerPostJobPage } from '../pages/employer/postjob/employer-postjob';
@@ -82,7 +84,9 @@ import { MessageService } from '../provider/message-service';
     EmployerHelpPage,
     EmployerPostjobLocationPage,
     EmployerEditjobLocationPage,
-    ResetEmployerPage
+    ResetEmployerPage,
+    EmployerAddbotPage,
+    EmployerBotweightPage
   ],
   imports: [
     BrowserModule,
@@ -124,7 +128,9 @@ import { MessageService } from '../provider/message-service';
     EmployerHelpPage,
     EmployerPostjobLocationPage,
     EmployerEditjobLocationPage,
-    ResetEmployerPage
+    ResetEmployerPage,
+    EmployerAddbotPage,
+    EmployerBotweightPage
   ],
   providers: [
     StatusBar,
