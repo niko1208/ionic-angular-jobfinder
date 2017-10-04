@@ -38,6 +38,8 @@ export class EmployerSavedPage {
         loader.dismissAll();
         if(data.status == "success") {
           this.list = data.result;
+        } else {
+          this.util.createAlert("Failed", data.result);
         }
     })
   }
@@ -58,6 +60,8 @@ export class EmployerSavedPage {
         loader.dismissAll();
         if(data.status == "success") {
           this.list.slice(i, 1);
+        } else {
+          this.util.createAlert("Failed", data.result);
         }
     })
   }

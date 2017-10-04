@@ -30,6 +30,10 @@ export class ResetEmployerPage {
           this.util.createAlert("Error", "Please insert Email!");
           return;
       }
+      if(!(this.config.validateEmail(this.email))) {
+        this.util.createAlert("Error", "Please insert a valid email!");
+        return;
+      }
 
       let loader = this.loading.create({
         content: 'Loading...',

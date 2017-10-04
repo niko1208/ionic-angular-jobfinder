@@ -49,6 +49,8 @@ export class EmployerAdsPage {
             this.photolist = data.resultPhotos;
             if(this.general != null)
               this.desc = this.general.tbl_ads_description;
+        } else {
+          this.util.createAlert("Failed", data.result);
         }
     })
   }
@@ -94,6 +96,10 @@ export class EmployerAdsPage {
 
   done() {
     let param = {"avatar" : this.file_image, "employer_id" : this.config.user_id, "description" : this.desc};
+
+    if(this.desc == "") {
+       this.util.createAlert("Failed", "Please add Description for your Ads!");
+    }
     
     let loader = this.loading.create({
       content: 'Loading...',

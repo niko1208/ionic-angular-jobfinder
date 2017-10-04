@@ -18,7 +18,8 @@ export class MyApp {
     platform.ready().then(() => {
       let user_id = localStorage.getItem('user_id');
       let user_type = localStorage.getItem('user_type');
-      if(user_id != null && user_id != "") {
+      let user_state = localStorage.getItem('user_state');
+      if(user_id != null && user_id != "" && user_state == '1') {
         this.config.user_id = user_id;
         this.config.user_type = user_type;
         if(user_type == 'employer') {

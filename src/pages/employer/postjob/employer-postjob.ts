@@ -164,6 +164,10 @@ export class EmployerPostJobPage {
       this.util.createAlert("Error", "Please insert your Job  requirement!");
       return;
     }
+    if(this.job_location == "") {
+      this.util.createAlert("Error", "Please insert Job Location!");
+      return;
+    }
 
     let user_info = JSON.parse(localStorage.getItem('user_info'));
     let user_name = user_info.user_name;
@@ -206,7 +210,7 @@ export class EmployerPostJobPage {
               .subscribe(data => { console.log(data);
                   loader.dismissAll();
                   if(data.status == "success") {
-                    this.util.createAlert("Success", "Job has been successfully Posted!");
+                    this.util.createAlert("Congratulations", "Job has been created successfully!");
                     this.cleanField();
                     this.navCtrl.pop();
                   }

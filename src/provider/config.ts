@@ -9,6 +9,7 @@ export class Config {
     public deviceToken: any;
     public user_type: any;
     public user_id: any;
+    public user_state: any;
 
     constructor() {
         this.navOptions = {
@@ -18,6 +19,11 @@ export class Config {
             animation: 'ios-transition',
             direction: 'back'
         };
+    }
+
+    validateEmail(email) {
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+         return re.test(email);
     }
 
     getAPIURL() {

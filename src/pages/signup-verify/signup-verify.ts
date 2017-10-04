@@ -28,7 +28,7 @@ export class SignupVerifyPage {
 
   verify() {
       if(this.vcode == "") {
-          this.util.createAlert("Error", "Please insert Verify Code!");
+          this.util.createAlert("Error", "Please insert your verification code!");
           return;
       }
       let loader = this.loading.create({
@@ -41,17 +41,17 @@ export class SignupVerifyPage {
           loader.dismissAll();
           if(data.status == 'success') {
               if(this.config.user_type == 'employer') {
-                this.util.createAlert("Success", "You have successfully created your Jobfinder Account.");
+                //this.util.createAlert("Success", "You have successfully created your Jobfinder Account.");
                 this.navCtrl.push(LoginEmployerPage, null, this.config.navOptions);
               } else {
                 this.navCtrl.push(LoginSeekerPage, null, this.config.navOptions);
               }
           } else {
-              this.util.createAlert("Error", "Your code is not valid.");
+              this.util.createAlert("Failed", data.result);
           }
       }, err => {
           loader.dismissAll();
-          this.util.createAlert("Error", "Your code is not valid.");
+          this.util.createAlert("Failed", "");
       });
   }
 

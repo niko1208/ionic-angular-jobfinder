@@ -59,28 +59,40 @@ export class EmployerEditProfilePage {
   }
 
   save() {
-    
+    if(!(this.file_image)) {
+      this.util.createAlert("", "Please insert your avatar");
+    }
+    if(this.userinfo.user_name == "") {
+      this.util.createAlert("", "Please insert your name");
+    }
+    if(this.data.profile_emp_about == "" || this.data.profile_emp_about == "Please select Founded Date") {
+      this.util.createAlert("", "Please insert your description");
+    }
+    if(this.data.profile_emp_founded == "") {
+      this.util.createAlert("", "When was your company founded? Please select date");
+    }
+
     var strBusSizeMin = '1';
     var strBusSizeMax = '50';
     if (this.data.profile_emp_bus_size_title == "Small")
     {
-        strBusSizeMin = "1"
-        strBusSizeMax = "50"
+        strBusSizeMin = "1";
+        strBusSizeMax = "50";
     }
     else if (this.data.profile_emp_bus_size_title == "Medium")
     {
-        strBusSizeMin = "50"
-        strBusSizeMax = "500"
+        strBusSizeMin = "50";
+        strBusSizeMax = "500";
     }
     else if (this.data.profile_emp_bus_size_title == "Large")
     {
-        strBusSizeMin = "500"
-        strBusSizeMax = "2000"
+        strBusSizeMin = "500";
+        strBusSizeMax = "2000";
     }
     else if (this.data.profile_emp_bus_size_title == "Enterprise")
     {
-        strBusSizeMin = "2000"
-        strBusSizeMax = "5000"
+        strBusSizeMin = "2000";
+        strBusSizeMax = "5000";
     }
     
     let param = {"avatar" : this.file_image, "employer_id" : this.config.user_id, "name" : this.userinfo.user_name, "about" : this.data.profile_emp_about, "founded" : this.data.profile_emp_founded, "info_tech" : this.data.profile_emp_tech, "bus_size_title" : this.data.profile_emp_bus_size_title, "bus_size_min" : strBusSizeMin, "bus_size_max" : strBusSizeMax};
@@ -98,6 +110,9 @@ export class EmployerEditProfilePage {
           let resultProfile = JSON.stringify(data.resultProfile);
           localStorage.setItem('user_info', resultUser);
           localStorage.setItem('user_profile', resultProfile);
+          this.util.createAlert("", "SUCCESS!")
+        } else {
+          this.util.createAlert("Failed", data.result)
         }
     })
     

@@ -5,6 +5,7 @@ import { UtilService } from '../../provider/util-service';
 import { Auth } from '../../provider/auth';
 import { EmployerTabsPage } from '../employer/tabs/employer-tabs';
 import { ResetEmployerPage } from '../reset-employer/reset-employer';
+import { SignupVerifyPage } from '../signup-verify/signup-verify';
 
 @Component({
   selector: 'page-login-employer',
@@ -33,6 +34,10 @@ export class LoginEmployerPage {
           this.util.createAlert("Error", "Please insert Email!");
           return;
       }
+      if(!(this.config.validateEmail(this.email))) {
+        this.util.createAlert("Error", "Please insert a valid email!");
+        return;
+      }
       if(this.password == "") {
           this.util.createAlert("Error", "Please insert Password!");
           return;
@@ -50,25 +55,36 @@ export class LoginEmployerPage {
           if(data.status == "success") {
             this.config.user_id = data.resultUser.user_id;
             this.config.user_type = "employer";
+            this.config.user_state = data.resultUser.user_state;
+
             let resultUser = JSON.stringify(data.resultUser);
             let resultSetting = JSON.stringify(data.resultSetting);
             let resultProfile = JSON.stringify(data.resultProfile);
-            localStorage.setItem('user_id', this.config.user_id);
-            localStorage.setItem('user_type', "employer");
             localStorage.setItem('user_info', resultUser);
             localStorage.setItem('user_setting', resultSetting);
             localStorage.setItem('user_profile', resultProfile);
+            
+            localStorage.setItem('user_id', this.config.user_id);
+            localStorage.setItem('user_state', this.config.user_state);
+            localStorage.setItem('user_type', "employer");
 
-            this.navCtrl.push(EmployerTabsPage, null, this.config.navOptions).then(()=> {
-                const index = this.viewCtrl.index;
-                this.navCtrl.remove(index);
-            });
+            if(data.resultUser.user_state == '0') {
+                this.navCtrl.push(SignupVerifyPage, null, this.config.navOptions).then(()=> {
+                    const index = this.viewCtrl.index;
+                    this.navCtrl.remove(index);
+                });
+            } else {
+                this.navCtrl.push(EmployerTabsPage, null, this.config.navOptions).then(()=> {
+                    const index = this.viewCtrl.index;
+                    this.navCtrl.remove(index);
+                });
+            }
           } else {
-            this.util.createAlert("Login Failed", data.result);
+            this.util.createAlert("SignIn Failed", data.result);
           }
       }, error => {
           loader.dismissAll();
-          alert("Error");
+          this.util.createAlert("SignIn Failed", "");
       })
   }
 

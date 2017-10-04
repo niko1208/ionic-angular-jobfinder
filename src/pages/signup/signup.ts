@@ -53,6 +53,10 @@ export class SignupPage {
         this.util.createAlert("Error", "Please insert Email!");
         return;
     }
+    if(!(this.config.validateEmail(this.email))) {
+        this.util.createAlert("Error", "Please insert a valid email!");
+        return;
+    }
     if(this.type == "") {
         this.util.createAlert("Error", "Please select your User Type!");
         return;
@@ -76,7 +80,7 @@ export class SignupPage {
     this.auth.signup(param, this.type)
     .subscribe(data => {
         loader.dismissAll();
-        if(data.status = "success") {
+        if(data.status == "success") {
           this.config.user_id = data.resultUser.user_id;
           this.config.user_type = this.type;
           this.navCtrl.push(SignupVerifyPage, null, this.config.navOptions);

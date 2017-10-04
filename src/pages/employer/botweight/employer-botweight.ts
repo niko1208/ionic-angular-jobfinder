@@ -36,15 +36,26 @@ export class EmployerBotweightPage {
 
   loadData() {
     for(let i=0; i<this.list.length; i++) {
-      this.list[i]['weight'] = 0;
+      if(this.list[i].bot_question_answer_count == '0')
+        this.list[i]['weight'] = 0;
+      else
+        this.list[i]['weight'] = 1;
     }
   }
 
   add(i){
+    if(this.list[i].bot_question_answer_count == '0') {
+      this.util.createAlert("", "This value is locked as default");
+      return;
+    }
     if(eval(this.list[i].weight) < 10)
       this.list[i].weight = eval(this.list[i].weight) + 1;
   }
   remove(i) {
+    if(this.list[i].bot_question_answer_count == '0') {
+      this.util.createAlert("", "This value is locked as default");
+      return;
+    }
     if(eval(this.list[i].weight) > 1)
       this.list[i].weight = eval(this.list[i].weight) - 1;
   }

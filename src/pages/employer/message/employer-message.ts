@@ -198,6 +198,8 @@ export class EmployerMessagePage {
                   if(data.status == "success") {
                     self.loadNewMessage();
                     self.file_image = null;
+                  } else {
+                    self.util.createAlert("Internet connection failed", "Please check your internet connection and try again.");
                   }
                   self.file_image = null;
                   self.pending = false;
@@ -205,7 +207,7 @@ export class EmployerMessagePage {
                   self.isLoading = false;
                   self.file_image = null;
                   self.pending = false;
-                  alert("Error");
+                  self.util.createAlert("Internet connection failed", "Please check your internet connection and try again.");
               });
               
           }
@@ -219,6 +221,8 @@ export class EmployerMessagePage {
           if(data.status == "success") {
             this.loadNewMessage();
             this.file_image = null;
+          } else {
+            this.util.createAlert("Internet connection failed", "Please check your internet connection and try again.");
           }
           this.file_image = null;
           this.pending = false;
@@ -226,7 +230,7 @@ export class EmployerMessagePage {
           this.isLoading = false;
           this.file_image = null;
           this.pending = false;
-          alert("Error");
+          this.util.createAlert("Internet connection failed", "Please check your internet connection and try again.");
       });
     }
     
@@ -246,10 +250,12 @@ export class EmployerMessagePage {
         if(data.status == "success") { 
           this.loadNewMessage();
           this.sendText = "";
+        } else {
+          this.util.createAlert("Internet connection failed", "Please check your internet connection and try again.");
         }
     }, error => {
       this.isLoading = false;
-        alert("Error");
+      this.util.createAlert("Internet connection failed", "Please check your internet connection and try again.");
     });
   }
 
