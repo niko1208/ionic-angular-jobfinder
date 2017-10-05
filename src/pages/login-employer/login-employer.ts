@@ -13,8 +13,8 @@ import { SignupVerifyPage } from '../signup-verify/signup-verify';
 })
 export class LoginEmployerPage {
 
-    public email: any = "markhan0321@gmail.com";
-    public password: any = "123123";
+    public email: any = "";
+    public password: any = "";
 
   constructor(public navCtrl: NavController, 
     public config: Config,
@@ -69,7 +69,7 @@ export class LoginEmployerPage {
             localStorage.setItem('user_type', "employer");
 
             if(data.resultUser.user_state == '0') {
-                this.navCtrl.push(SignupVerifyPage, null, this.config.navOptions).then(()=> {
+                this.navCtrl.push(SignupVerifyPage, {email: this.email}, this.config.navOptions).then(()=> {
                     const index = this.viewCtrl.index;
                     this.navCtrl.remove(index);
                 });

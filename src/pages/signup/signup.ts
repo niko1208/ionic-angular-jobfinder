@@ -71,7 +71,7 @@ export class SignupPage {
     }
     
     let vcode = Math.floor(Math.random() * (9999-1000))+1000;
-    let param = {"name" : this.name, "email" : this.email, "phone" : this.phone, "password" : this.phone, "verify_code" : vcode};
+    let param = {"name" : this.name, "email" : this.email, "phone" : this.phone, "password" : this.password, "verify_code" : vcode};
   
     let loader = this.loading.create({
     content: 'Loading...',
@@ -83,7 +83,7 @@ export class SignupPage {
         if(data.status == "success") {
           this.config.user_id = data.resultUser.user_id;
           this.config.user_type = this.type;
-          this.navCtrl.push(SignupVerifyPage, null, this.config.navOptions);
+          this.navCtrl.push(SignupVerifyPage, {email: this.email}, this.config.navOptions);
         } else {
           this.util.createAlert("Registration Failed", data.result);
         }

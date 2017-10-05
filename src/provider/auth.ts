@@ -35,6 +35,14 @@ export class Auth {
             response.json());
     }
     
+    reverify(item, user_type) {
+        let url = this.config.getAPIURL();
+        url = `${url}/${user_type}/verifycodesend.php`;
+        item = this.config.getFormData(item);
+        return this.http.post(url, item).map((response:Response)=>
+            response.json());
+    }
+    
     reset(item) {
         let url = this.config.getAPIURL();
         url = `${url}/admin/api/resetpassword.php`;

@@ -4,6 +4,7 @@
     <ion-icon class="nav_back" ios="ios-arrow-back" md="md-arrow-back" (click)="goback()"></ion-icon>
 
     <div class="div_form" padding>
+        <h3>Jobfinder has sent a verification code to your email</h3>
         <h2 text-center>Verify Code</h2>
         <ion-item class="form-item">        
             <ion-input clearInput type="tel" placeholder="" [(ngModel)]="vcode"></ion-input>
@@ -12,7 +13,7 @@
     </div>
 
     <div class="div_forgot_password" text-center>
-        <span (click)="resend()">Resend Verify Code</span>
+        <span (click)="resend()" style="cursor:pointer">Resend Verify Code</span>
     </div>
 
 </ion-content>

@@ -177,50 +177,59 @@ export class EmployerPostJobPage {
     }
     let param = {"avatar" : this.file_image, "background" : this.file_image_back, "employer_id" : this.config.user_id, "employer_name" : user_name, "company_name" : this.company_name, "job_title" : this.job_title, "job_description" : this.job_desc, "job_requirement" : this.job_req, "time_available" : this.job_time, "industry" : this.job_industry, "location_address" : this.data.job_location_address, "location_lat" : this.data.job_location_lat, "location_lng" : this.data.job_location_lng, "job_id" : job_id};
 
-    let alert = this.alertCtrl.create({
-      title: "Alert!",
-      message: "Dear Premium Member. Would you like to automate your candidate pre-screening process with AVA, our intelligent Chat Bot?",
-      enableBackdropDismiss: false,
-      buttons: [
-        {
-          text: "Sure! Add Bot",
-          handler: data => {
-            this.navCtrl.push(EmployerAddbotPage, {param: param, view: this.viewCtrl}, this.config.navOptions);
+    if(user_info.user_membership == 'basic') {
+      let loader = this.loading.create({
+        content: 'Loading...',
+      });
+      loader.present();
+      this.employerService.postData("createjob", param)
+      .subscribe(data => { console.log(data);
+          loader.dismissAll();
+          if(data.status == "success") {
+            this.util.createAlert("Congratulations", "Job has been created successfully!");
+            this.cleanField();
+            //this.navCtrl.pop();
+          } else {
+            this.util.createAlert("Failed", data.result);
           }
-        }, 
-        {
-          text: "No, Thanks",
-          role: 'cancel',
-          handler: data => {
-            let loader = this.loading.create({
-              content: 'Loading...',
-            });
-            loader.present();
-
-            if(this.bedit) {
-              this.employerService.postData("editjob_web", param)
-              .subscribe(data => { console.log(data);
-                  loader.dismissAll();
-                  if(data.status == "success") {
-                    
-                  }
-              })
-            } else {
+      })
+    } else {
+      let alert = this.alertCtrl.create({
+        title: "Alert!",
+        message: "Dear Premium Member. Would you like to automate your candidate pre-screening process with AVA, our intelligent Chat Bot?",
+        enableBackdropDismiss: false,
+        buttons: [
+          {
+            text: "Sure! Add Bot",
+            handler: data => {
+              this.navCtrl.push(EmployerAddbotPage, {param: param, view: this.viewCtrl}, this.config.navOptions);
+            }
+          }, 
+          {
+            text: "No, Thanks",
+            role: 'cancel',
+            handler: data => {
+              let loader = this.loading.create({
+                content: 'Loading...',
+              });
+              loader.present();
               this.employerService.postData("createjob", param)
               .subscribe(data => { console.log(data);
                   loader.dismissAll();
                   if(data.status == "success") {
                     this.util.createAlert("Congratulations", "Job has been created successfully!");
                     this.cleanField();
-                    this.navCtrl.pop();
+                    //this.navCtrl.pop();
+                  } else {
+                    this.util.createAlert("Failed", data.result);
                   }
               })
             }
           }
-        }
-      ]
-    });
-    alert.present();
+        ]
+      });
+      alert.present();
+    }
   }
 
   cleanField() {
