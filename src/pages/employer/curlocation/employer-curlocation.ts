@@ -46,11 +46,33 @@ export class EmployerCurLocationPage {
             postal_code_suffix: { set: false, short:'', long:'' },              // codigo postal - sufijo
         }    
     };    
-    this.loadMap();
+    this.user_setting = JSON.parse(localStorage.getItem('user_setting'));
+    console.log(this.user_setting);
+    let self = this;
+    if(this.user_setting == null || (this.user_setting != null && this.user_setting.setting_emp_location_lat == '')) {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            self.user_setting.setting_emp_location_lat = position.coords.latitude;
+            self.user_setting.setting_emp_location_lng = position.coords.longitude;
+            self.loadMap();
+          }, function() {
+            self.user_setting.setting_emp_location_lat = 22.285831;
+            self.user_setting.setting_emp_location_lng = 114.1582283;
+            alert('The Geolocation service failed');
+            self.loadMap();
+          });
+        } else {
+          self.user_setting.setting_emp_location_lat = 22.285831;
+          self.user_setting.setting_emp_location_lng = 114.1582283;
+          alert("Browser doesn't support Geolocation");
+          self.loadMap();
+        }
+    } else { 
+      self.loadMap();
+    }
   }
   
   loadMap(){
-    this.user_setting = JSON.parse(localStorage.getItem('user_setting'));
     
     let latLng = new google.maps.LatLng(this.user_setting.setting_emp_location_lat, this.user_setting.setting_emp_location_lng);
     let mapOptions = {

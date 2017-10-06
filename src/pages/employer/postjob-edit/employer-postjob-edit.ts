@@ -182,15 +182,9 @@ export class EmployerPostJobEditPage {
       .subscribe(data => { console.log(data);
           loader.dismissAll();
           if(data.status == "success") {
-            
-          }
-      })
-    } else {
-      this.employerService.postData("createjob", param)
-      .subscribe(data => { console.log(data);
-          loader.dismissAll();
-          if(data.status == "success") {
-            
+            this.navCtrl.pop();
+          } else {
+            this.util.createAlert("Job Edit Failed", data.result);
           }
       })
     }
@@ -201,7 +195,21 @@ export class EmployerPostJobEditPage {
   }
 
   deleteJob() {
+    let loader = this.loading.create({
+      content: 'Loading...',
+    });
+    loader.present();
 
+    let param = {"job_id" : this.data.job_id};
+    this.employerService.postData("deletejob", param)
+    .subscribe(data => { console.log(data);
+        loader.dismissAll();
+        if(data.status == "success") {
+          this.navCtrl.pop();
+        } else {
+          this.util.createAlert("Job Delete Failed", data.result);
+        }
+    })
   }
 
 }

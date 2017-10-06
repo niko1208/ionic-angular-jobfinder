@@ -61,15 +61,19 @@ export class EmployerEditProfilePage {
   save() {
     if(!(this.file_image)) {
       this.util.createAlert("", "Please insert your avatar");
+      return;
     }
     if(this.userinfo.user_name == "") {
       this.util.createAlert("", "Please insert your name");
+      return;
     }
     if(this.data.profile_emp_about == "" || this.data.profile_emp_about == "Please select Founded Date") {
       this.util.createAlert("", "Please insert your description");
+      return;
     }
     if(this.data.profile_emp_founded == "") {
       this.util.createAlert("", "When was your company founded? Please select date");
+      return;
     }
 
     var strBusSizeMin = '1';
