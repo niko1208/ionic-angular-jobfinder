@@ -56,6 +56,7 @@ import { SeekerCurLocationPage } from '../pages/seeker/curlocation/seeker-curloc
 import { SeekerEditProfilePage } from '../pages/seeker/editprofile/seeker-editprofile';
 import { SeekerJobdetailPage } from '../pages/seeker/jobdetail/seeker-jobdetail';
 import { SeekerSavedPage } from '../pages/seeker/saved/seeker-saved';
+import { SeekerAppliedPage } from '../pages/seeker/applied/seeker-applied';
 
 
 
@@ -118,7 +119,8 @@ import { MessageService } from '../provider/message-service';
     SeekerCurLocationPage,
     SeekerEditProfilePage,
     SeekerJobdetailPage,
-    SeekerSavedPage
+    SeekerSavedPage,
+    SeekerAppliedPage
   ],
   imports: [
     BrowserModule,
@@ -175,7 +177,8 @@ import { MessageService } from '../provider/message-service';
     SeekerCurLocationPage,
     SeekerEditProfilePage,
     SeekerJobdetailPage,
-    SeekerSavedPage
+    SeekerSavedPage,
+    SeekerAppliedPage
   ],
   providers: [
     StatusBar,

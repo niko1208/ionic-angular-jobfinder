@@ -6,6 +6,7 @@ import { EmployerService } from '../../../provider/employer-service';
 import { SeekerService } from '../../../provider/seeker-service';
 import { SeekerJobdetailPage } from '../jobdetail/seeker-jobdetail';
 import { SeekerSavedPage } from '../saved/seeker-saved';
+import { SeekerAppliedPage } from '../applied/seeker-applied';
 
 @Component({
   selector: 'page-seeker-jobs',
@@ -148,6 +149,10 @@ export class SeekerJobsPage {
 
   goLiked() {
     this.navCtrl.push(SeekerSavedPage);
+  }
+
+  goApplied() {
+    this.navCtrl.push(SeekerAppliedPage);
   }
 
   goMap() {
