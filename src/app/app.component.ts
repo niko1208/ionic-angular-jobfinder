@@ -7,6 +7,7 @@ import { Config } from '../provider/config';
 
 import { SplashPage } from '../pages/splash/splash';
 import { EmployerTabsPage } from '../pages/employer/tabs/employer-tabs';
+import { SeekerTabsPage } from '../pages/seeker/tabs/seeker-tabs';
 
 @Component({
   templateUrl: 'app.html'
@@ -25,7 +26,22 @@ export class MyApp {
         if(user_type == 'employer') {
           this.rootPage = EmployerTabsPage;
         } else {
+          let user_info = JSON.parse(localStorage.getItem('user_info'));
+          let user_setting = JSON.parse(localStorage.getItem('user_setting'));
+          let user_curwork = JSON.parse(localStorage.getItem('user_curwork'));
+          let user_education = JSON.parse(localStorage.getItem('user_education'));
+          let user_experience = JSON.parse(localStorage.getItem('user_experience'));
+          let user_language = JSON.parse(localStorage.getItem('user_language'));
+          let user_reference = JSON.parse(localStorage.getItem('user_reference'));
+          this.config.userinfo['user_info'] = user_info;
+          this.config.userinfo['user_setting'] = user_setting;
+          this.config.userinfo['user_curwork'] = user_curwork;
+          this.config.userinfo['user_education'] = user_education;
+          this.config.userinfo['user_experience'] = user_experience;
+          this.config.userinfo['user_language'] = user_language;
+          this.config.userinfo['user_reference'] = user_reference;
           
+          this.rootPage = SeekerTabsPage;
         }
       }
 

@@ -1,0 +1,37 @@
+page-seeker-jobdetail{
+    div{
+        font-size: 16px;
+    }
+    .back_img{
+        height: 160px;
+        background-size: cover;
+        background-position: center;
+    }
+    .user_avatar{
+        width: 100px;
+        height: 100px;
+        border: 2px solid #fff;
+        box-shadow: #555 0px 0px 1px;
+        border-radius: 100px;
+        position: relative;
+        top: -50px;
+    }
+    .bt_green{
+        border: 2px solid #7cbb22;
+        background: #7cbb22;
+        color: #fff;
+    }
+    .bt_blue{
+        border: 2px solid #3ac7f3;
+        background: #3ac7f3;
+        color: #fff;
+    }
+    .jobbot{
+        width: 40px;
+        height: 40px;
+        border-radius: 50px;
+        position: absolute;
+        right: 10px;
+        top: 90px;
+    }
+}

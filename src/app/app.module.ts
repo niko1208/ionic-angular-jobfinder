@@ -41,6 +41,24 @@ import { EmployerHelpPage } from '../pages/employer/help/employer-help';
 import { EmployerPostjobLocationPage } from '../pages/employer/postjob-location/employer-postjob-location';
 import { EmployerEditjobLocationPage } from '../pages/employer/editjob-location/employer-editjob-location';
 
+
+
+import { SeekerTabsPage } from '../pages/seeker/tabs/seeker-tabs';
+import { SeekerHomePage } from '../pages/seeker/home/seeker-home';
+import { SeekerSettingPage } from '../pages/seeker/setting/seeker-setting';
+import { SeekerProfilePage } from '../pages/seeker/profile/seeker-profile';
+import { SeekerJobsPage } from '../pages/seeker/jobs/seeker-jobs';
+import { SeekerMessagePage } from '../pages/seeker/message/seeker-message';
+
+import { SeekerAdsPage } from '../pages/seeker/ads/seeker-ads';
+import { SeekerIndustryPage } from '../pages/seeker/industry/seeker-industry';
+import { SeekerCurLocationPage } from '../pages/seeker/curlocation/seeker-curlocation';
+import { SeekerEditProfilePage } from '../pages/seeker/editprofile/seeker-editprofile';
+import { SeekerJobdetailPage } from '../pages/seeker/jobdetail/seeker-jobdetail';
+import { SeekerSavedPage } from '../pages/seeker/saved/seeker-saved';
+
+
+
 import { HttpModule } from '@angular/http';
 import { Push } from '@ionic-native/push';
 
@@ -48,6 +66,7 @@ import { Config } from '../provider/config';
 import { UtilService } from '../provider/util-service';
 import { Auth } from '../provider/auth';
 import { EmployerService } from '../provider/employer-service';
+import { SeekerService } from '../provider/seeker-service';
 import { MessageService } from '../provider/message-service';
 
 @NgModule({
@@ -86,7 +105,20 @@ import { MessageService } from '../provider/message-service';
     EmployerEditjobLocationPage,
     ResetEmployerPage,
     EmployerAddbotPage,
-    EmployerBotweightPage
+    EmployerBotweightPage,
+
+    SeekerTabsPage,
+    SeekerHomePage,
+    SeekerSettingPage,
+    SeekerJobsPage,
+    SeekerProfilePage,
+    SeekerMessagePage,
+    SeekerAdsPage,
+    SeekerIndustryPage,
+    SeekerCurLocationPage,
+    SeekerEditProfilePage,
+    SeekerJobdetailPage,
+    SeekerSavedPage
   ],
   imports: [
     BrowserModule,
@@ -130,7 +162,20 @@ import { MessageService } from '../provider/message-service';
     EmployerEditjobLocationPage,
     ResetEmployerPage,
     EmployerAddbotPage,
-    EmployerBotweightPage
+    EmployerBotweightPage,
+
+    SeekerTabsPage,
+    SeekerHomePage,
+    SeekerSettingPage,
+    SeekerJobsPage,
+    SeekerProfilePage,
+    SeekerMessagePage,
+    SeekerAdsPage,
+    SeekerIndustryPage,
+    SeekerCurLocationPage,
+    SeekerEditProfilePage,
+    SeekerJobdetailPage,
+    SeekerSavedPage
   ],
   providers: [
     StatusBar,
@@ -140,6 +185,7 @@ import { MessageService } from '../provider/message-service';
     Auth,
     Push,
     EmployerService,
+    SeekerService,
     MessageService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

@@ -1,0 +1,17 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>My Location</ion-title>
+        <ion-buttons right>
+            <div class="fright" (click)="done()">Done</div>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div class="top_header">
+        <ion-searchbar #q [(ngModel)]="searchValue" (keyup.enter)="search(q.value)" pleceholder="">
+        </ion-searchbar>
+        <!--<input id="pac-input" class="controls" type="text" placeholder="Search Box">-->
+    </div>
+    <div #mapseekercurlocation id='mapseekercurlocation'></div>
+</ion-content>

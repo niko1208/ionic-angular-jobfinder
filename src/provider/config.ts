@@ -10,6 +10,10 @@ export class Config {
     public user_type: any;
     public user_id: any;
     public user_state: any;
+    public arrIndustry = [];
+    public arrPosition = [];
+
+    public userinfo = {};
 
     constructor() {
         this.navOptions = {
@@ -19,6 +23,9 @@ export class Config {
             animation: 'ios-transition',
             direction: 'back'
         };
+
+        this.arrIndustry = ["#alljobs", "#hospitality", "#entertainment", "#fastfood", "#construction", "#sales", "#retail", "#notforprofit", "#logistics", "#administration", "#agedcare", "#banking", "#callcentre", "#childcare", "#consumergoods", "#creative", "#defence", "#education", "#entrepreneur", "#financialservices", "#government", "#healthcare", "#hr", "#legal", "#manufacturing", "#marketing", "#media", "#mining", "#officesupport", "#professionalservices", "#property", "#recreation", "#recruitment", "#selfemployed", "#software", "#sports", "#technicalsupport", "#technology", "#telecommunications", "#tourism", "#trades", "#transport", "#cleaning", "#fashion", "#hairandbeauty", "#services"];
+        this.arrPosition = ["Full Time", "Part Time", "Casual", "Contract", "Internship"];
     }
 
     validateEmail(email) {

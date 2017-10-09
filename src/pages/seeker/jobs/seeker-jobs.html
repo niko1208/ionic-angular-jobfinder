@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-icon name="list" class="iconlist"></ion-icon>
+        <ion-icon name="map" class="iconmap" (click)="goMap()"></ion-icon>
+        <ion-title text-center>Jobs</ion-title>
+        <ion-icon name="heart" class="iconheart" (click)="goLiked()"></ion-icon>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div class="top_header">
+        <ion-searchbar #q [(ngModel)]="searchValue" (keyup.enter)="search(q.value)" pleceholder="">
+        </ion-searchbar>
+        <div style="padding: 0px 8px;">
+            <ion-select #indus interface="popover" [(ngModel)]="queryIndustry" (ionChange)="change(indus.value)" style="padding: 4px 5px;">
+                <ion-option value="">#alljobs</ion-option>
+                <ion-option *ngFor="let item of arrIndustry; let i = index;" value="{{item}}">{{item}}</ion-option>
+            </ion-select>
+        </div>
+    </div>
+    <ion-icon class="arrow_prev" name="ios-arrow-back-outline" (click)="prev()"></ion-icon>
+    <ion-icon class="arrow_next" name="ios-arrow-forward-outline" (click)="next()"></ion-icon>
+    <ion-slides pager id='slides' #slides>
+        <ion-slide *ngFor="let item of list; let i = index;">
+            <div class="back_img" [style.backgroundImage]="'url('+item.job_job_background_url+')'"></div>
+            <img src="{{item.job_job_avatar_url}}" class="user_avatar" />
+            <img class="jobbot" *ngIf="item.job_bot_state == '1'" src="assets/images/AVABOT.PNG"/>
+            <div>{{item.job_company_name}}</div>
+            <div>{{item.job_job_title}}</div>
+            <small>Posted {{item.timeago}}</small><br/>
+            <small>{{item.applicants_cnt}} applies &nbsp;&nbsp; {{item.distance}}</small>
+            <div>Job Description</div>
+            <small>{{item.job_job_description}}</small>
+            <ion-row class="buttons">
+                <ion-col padding>
+                    <button ion-button full round class="bt_green" (click)="like(i)">Like</button>
+                </ion-col>
+                <ion-col padding>
+                    <button ion-button full round class="bt_blue" (click)="apply(i)">Apply</button>
+                </ion-col>
+                <ion-col col-12 padding style="padding-top:0px">
+                    <button ion-button full round color="jblue" (click)="readMore(i)">Tap to Read More</button>
+                </ion-col>
+            </ion-row>
+        </ion-slide>
+    </ion-slides>
+</ion-content>

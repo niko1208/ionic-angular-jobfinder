@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>Choose Industry</ion-title>
+        <ion-buttons right>
+            <div class="fright" (click)="done()">Done</div>
+        </ion-buttons>
+    </ion-navbar>
+    <ion-toolbar class='tbar'>
+        <ion-row>
+            <ion-col [ngClass]="(item == dd.time)?'sel':''" *ngFor="let item of aryTime; let i = index;" (click)="seltime(i)">
+                {{item}}
+            </ion-col>
+        </ion-row>
+        <ion-searchbar #q [(ngModel)]="searchValue" (keyup.enter)="search(q.value)" pleceholder="">
+        </ion-searchbar>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class='cont_detail'>
+    <div style='height: 24px'></div>
+    <ion-item *ngFor="let item of aryIndustry; let i = index;">
+        <ion-label class='lblabel'>{{item.text}}</ion-label>
+        <ion-checkbox [(ngModel)]="item.check" (click)="sel(i, item)"></ion-checkbox>
+    </ion-item>
+</ion-content>

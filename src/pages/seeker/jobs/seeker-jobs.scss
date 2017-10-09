@@ -1,0 +1,104 @@
+page-seeker-jobs{
+    .back_img{
+        height: 80px;
+        background-size: cover;
+        background-position: center;
+    }
+    .iconlist,
+    .iconmap,
+    .iconheart{
+        position: absolute;
+        top: 20px;
+        font-size: 24px;
+        color: #fff;
+        left: 10px;
+        z-index: 9;
+    }
+    .iconheart{
+        left: auto;
+        right: 10px;
+    }
+    .iconmap{
+        left: 40px;
+    }
+    .select-md{
+        max-width: 100%;
+        width: 100%;
+        border: 1px solid #ccc;
+    }
+    .user_avatar{
+        width: 100px;
+        height: 100px;
+        border: 2px solid #fff;
+        box-shadow: #555 0px 0px 1px;
+        border-radius: 100px;
+        position: relative;
+        top: -50px;
+    }
+    .top_header{
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        z-index: 99;
+    }
+    .bt_green{
+        border: 2px solid #7cbb22;
+        background: #fff;
+        color: #7cbb22;
+    }
+    .bt_blue{
+        border: 2px solid #3ac7f3;
+        background: #fff;
+        color: #3ac7f3;
+    }
+    ion-slides{
+        margin-top: 80px;
+        height: calc(100% - 120px);
+    }
+    .swiper-slide{
+        display: block
+    }
+    .buttons{
+        position: absolute;
+        bottom: 20px;
+        max-width: 450px;
+    }
+    .jobbot{
+        width: 40px;
+        height: 40px;
+        border-radius: 50px;
+        position: absolute;
+        right: 10px;
+        top: 90px;
+    }
+    .searchbar-md{
+        z-index: 9;
+    }
+    .arrow_prev,
+    .arrow_next{
+        position: absolute;
+        font-size: 30px;
+        top: 40%;
+        cursor: pointer;
+        z-index: 99;
+    }
+    .arrow_prev{
+        left: 10px;
+    }
+    .arrow_next{
+        right: 10px;
+    }
+
+    @media (min-width: 500px) {
+        .buttons{
+            left: calc(50% - 225px);
+        }
+    }
+    @media (min-width: 768px) {
+        .user_avatar{
+            width: 150px;
+            height: 150px;
+        }
+    }
+}

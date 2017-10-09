@@ -1,0 +1,21 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>Bookmark Jobs</ion-title>
+    </ion-navbar>
+    <ion-toolbar>
+        <ion-searchbar #q [(ngModel)]="searchValue" (keyup.enter)="search(q.value)" pleceholder="">
+        </ion-searchbar>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let item of list; let i = index;" (click)="goDetail(i)">
+            <img class="user_avatar" src="{{item.job_job_avatar_url}}" />
+            <div class="desc">
+                <div>{{item.job_company_name}}</div>
+                <small>{{item.job_job_title}}</small>
+            </div>
+        </ion-item>
+    </ion-list>
+</ion-content>
