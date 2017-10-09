@@ -4,6 +4,12 @@ import { Config } from '../../../provider/config';
 import { UtilService } from '../../../provider/util-service';
 import { Auth } from '../../../provider/auth';
 import { SeekerService } from '../../../provider/seeker-service';
+import { SeekerEditaboutPage } from '../editabout/seeker-editabout';
+import { SeekerEditcurworkPage } from '../editcurwork/seeker-editcurwork';
+import { SeekerEditeducationPage } from '../editeducation/seeker-editeducation';
+import { SeekerEditexperiencePage } from '../editexperience/seeker-editexperience';
+import { SeekerEditlanguagePage } from '../editlanguage/seeker-editlanguage';
+import { SeekerEditreferencePage } from '../editreference/seeker-editreference';
 import * as $ from 'jquery';
 
 @Component({
@@ -22,7 +28,7 @@ export class SeekerEditProfilePage {
   language: any;
   reference: any;
 
-  @ViewChild('file_image_seditprofile') fileInput: ElementRef;
+  @ViewChild('fileInpsedit') fileInput: ElementRef;
 
   constructor(public navCtrl: NavController, 
     public config: Config,
@@ -32,18 +38,12 @@ export class SeekerEditProfilePage {
     public loading: LoadingController,
     public navParams: NavParams) {
         
-    this.userinfo = this.config.userinfo['user_info'];
-    this.experience = this.config.userinfo['user_experience'];
-    this.curwork = this.config.userinfo['user_curwork'];
-    this.education = this.config.userinfo['user_education'];
-    this.language = this.config.userinfo['user_language'];
-    this.reference = this.config.userinfo['user_reference'];
-    console.log(this.userinfo);
-    console.log(this.experience);
-    console.log(this.curwork);
-    console.log(this.education);
-    console.log(this.language);
-    console.log(this.reference);
+            this.userinfo = this.config.userinfo['user_info'];
+            this.experience = this.config.userinfo['user_experience'];
+            this.curwork = this.config.userinfo['user_curwork'];
+            this.education = this.config.userinfo['user_education'];
+            this.language = this.config.userinfo['user_language'];
+            this.reference = this.config.userinfo['user_reference'];
   }
 
   ionViewWillEnter() {
@@ -52,6 +52,28 @@ export class SeekerEditProfilePage {
   }
 
   loadData() {
+    let param = {"seeker_id" : this.config.user_id};
+    let loader = this.loading.create({
+      content: 'Loading...',
+    });
+    loader.present();
+    this.seekerService.postData("loadmyinfo", param)
+    .subscribe(data => { console.log(data);
+        loader.dismissAll();
+        if(data.status == "success") {
+            this.userinfo = data.resultUser;
+            this.experience = data.resultExperience;
+            this.curwork = data.resultCurWork;
+            this.education = data.resultEducation;
+            this.language = data.resultLanguage;
+            this.reference = data.resultReference;
+        } else {
+          this.util.createAlert("Failed to Load!", data.result);
+        }
+    }, err => {
+      loader.dismissAll();
+      this.util.createAlert("Server Failed!", "");
+    });
   }
 
   upload_image() {
@@ -71,6 +93,31 @@ export class SeekerEditProfilePage {
     }
   }
 
+  goAbout() {
+      this.navCtrl.push(SeekerEditaboutPage, {data: this.userinfo}, this.config.navOptions);
+  }
+
+  goCurwork(item) {
+    let edit = (item == null)? false : true;
+      this.navCtrl.push(SeekerEditcurworkPage, {data: item, edit:edit}, this.config.navOptions);
+  }
+  goExp(item){
+    let edit = (item == null)? false : true;
+    this.navCtrl.push(SeekerEditexperiencePage, {data: item, edit:edit}, this.config.navOptions);
+  }
+  goEdu(item){
+    let edit = (item == null)? false : true;
+    this.navCtrl.push(SeekerEditeducationPage, {data: item, edit:edit}, this.config.navOptions);
+  }
+  goLang(item){
+    let edit = (item == null)? false : true;
+    this.navCtrl.push(SeekerEditlanguagePage, {data: item, edit:edit}, this.config.navOptions);
+  }
+  goRef(item){
+    let edit = (item == null)? false : true;
+    this.navCtrl.push(SeekerEditreferencePage, {data: item, edit:edit}, this.config.navOptions);
+  }
+
   save() {
     if(!(this.file_image)) {
       this.util.createAlert("", "Please insert your avatar");
@@ -80,54 +127,20 @@ export class SeekerEditProfilePage {
       this.util.createAlert("", "Please insert your name");
       return;
     }
-    if(this.data.profile_emp_about == "" || this.data.profile_emp_about == "Please select Founded Date") {
-      this.util.createAlert("", "Please insert your description");
-      return;
-    }
-    if(this.data.profile_emp_founded == "") {
-      this.util.createAlert("", "When was your company founded? Please select date");
-      return;
-    }
 
-    var strBusSizeMin = '1';
-    var strBusSizeMax = '50';
-    if (this.data.profile_emp_bus_size_title == "Small")
-    {
-        strBusSizeMin = "1";
-        strBusSizeMax = "50";
-    }
-    else if (this.data.profile_emp_bus_size_title == "Medium")
-    {
-        strBusSizeMin = "50";
-        strBusSizeMax = "500";
-    }
-    else if (this.data.profile_emp_bus_size_title == "Large")
-    {
-        strBusSizeMin = "500";
-        strBusSizeMax = "2000";
-    }
-    else if (this.data.profile_emp_bus_size_title == "Enterprise")
-    {
-        strBusSizeMin = "2000";
-        strBusSizeMax = "5000";
-    }
-    
-    let param = {"avatar" : this.file_image, "employer_id" : this.config.user_id, "name" : this.userinfo.user_name, "about" : this.data.profile_emp_about, "founded" : this.data.profile_emp_founded, "info_tech" : this.data.profile_emp_tech, "bus_size_title" : this.data.profile_emp_bus_size_title, "bus_size_min" : strBusSizeMin, "bus_size_max" : strBusSizeMax};
+    let param = {"avatar" : this.file_image, "seeker_id" : this.config.user_id, "name" : this.userinfo.user_name};
     
     let loader = this.loading.create({
       content: 'Loading...',
     });
     loader.present();
 
-    this.seekerService.postData("editprofile_web", param)
+    this.seekerService.postData("editprofile", param)
     .subscribe(data => { 
         loader.dismissAll();
         if(data.status == "success") {
           let resultUser = JSON.stringify(data.resultUser);
-          let resultProfile = JSON.stringify(data.resultProfile);
           localStorage.setItem('user_info', resultUser);
-          localStorage.setItem('user_profile', resultProfile);
-          this.util.createAlert("", "SUCCESS!")
         } else {
           this.util.createAlert("Failed", data.result)
         }

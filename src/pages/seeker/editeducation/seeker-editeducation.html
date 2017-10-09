@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>Work History</ion-title>
+        <ion-buttons right>
+            <div class="fright" tappable (click)="save()">Save</div>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class='cont_detail' padding>
+    
+    <div class="div_sec">
+        <ion-label>School :</ion-label>
+        <ion-input [(ngModel)]="data.education_school"></ion-input>
+    </div>
+    <div class="div_sec">
+        <ion-label>Date Attended :</ion-label>
+        <ion-input [(ngModel)]="data.education_from"></ion-input>
+    </div>
+    <div class="div_sec">
+        <ion-label>To :</ion-label>
+        <ion-input [(ngModel)]="data.education_to"></ion-input>
+    </div>
+    <div class="div_sec">
+        <ion-label>Highest Level Achieved :</ion-label>
+        <ion-select [(ngModel)]="data.education_level">
+            <ion-option value="SPM/O Levels">SPM/O Levels</ion-option>
+            <ion-option value="STPM/A Levels">STPM/A Levels</ion-option>
+            <ion-option value="Diploma">Diploma</ion-option>
+            <ion-option value="Bachelor's Degrees">Bachelor's Degrees</ion-option>
+        </ion-select>
+    </div>
+    <div class="div_sec">
+        <ion-label>Area of Study :</ion-label>
+        <ion-input [(ngModel)]="data.education_area"></ion-input>
+    </div>
+
+    <div text-center *ngIf="edit">
+        <button ion-button round color="jred" (click)="delete()">delete</button>
+    </div>
+</ion-content>

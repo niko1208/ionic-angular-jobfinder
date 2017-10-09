@@ -6,7 +6,8 @@ page-seeker-jobs{
     }
     .iconlist,
     .iconmap,
-    .iconheart{
+    .iconheart,
+    .iconapplied{
         position: absolute;
         top: 20px;
         font-size: 24px;
@@ -16,7 +17,11 @@ page-seeker-jobs{
     }
     .iconheart{
         left: auto;
-        right: 30px;
+        right: 40px;
+    }
+    .iconapplied{
+        left: auto;
+        right: 10px;
     }
     .iconmap{
         left: 40px;

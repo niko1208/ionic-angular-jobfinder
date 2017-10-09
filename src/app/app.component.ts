@@ -81,7 +81,7 @@ export class MyApp {
     pushObject.on('registration').subscribe((data: any) => {
       console.log('device token -> ' + data.registrationId);
       this.config.deviceToken = data.registrationId;
-      alert("Device : " + this.config.deviceToken);
+      //alert("Device : " + this.config.deviceToken);
     });
 
     pushObject.on('notification').subscribe((data: any) => {

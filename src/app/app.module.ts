@@ -57,6 +57,12 @@ import { SeekerEditProfilePage } from '../pages/seeker/editprofile/seeker-editpr
 import { SeekerJobdetailPage } from '../pages/seeker/jobdetail/seeker-jobdetail';
 import { SeekerSavedPage } from '../pages/seeker/saved/seeker-saved';
 import { SeekerAppliedPage } from '../pages/seeker/applied/seeker-applied';
+import { SeekerEditaboutPage } from '../pages/seeker/editabout/seeker-editabout';
+import { SeekerEditcurworkPage } from '../pages/seeker/editcurwork/seeker-editcurwork';
+import { SeekerEditeducationPage } from '../pages/seeker/editeducation/seeker-editeducation';
+import { SeekerEditexperiencePage } from '../pages/seeker/editexperience/seeker-editexperience';
+import { SeekerEditlanguagePage } from '../pages/seeker/editlanguage/seeker-editlanguage';
+import { SeekerEditreferencePage } from '../pages/seeker/editreference/seeker-editreference';
 
 
 
@@ -120,7 +126,13 @@ import { MessageService } from '../provider/message-service';
     SeekerEditProfilePage,
     SeekerJobdetailPage,
     SeekerSavedPage,
-    SeekerAppliedPage
+    SeekerAppliedPage,
+    SeekerEditaboutPage,
+    SeekerEditcurworkPage,
+    SeekerEditeducationPage,
+    SeekerEditexperiencePage,
+    SeekerEditlanguagePage,
+    SeekerEditreferencePage
   ],
   imports: [
     BrowserModule,
@@ -178,7 +190,13 @@ import { MessageService } from '../provider/message-service';
     SeekerEditProfilePage,
     SeekerJobdetailPage,
     SeekerSavedPage,
-    SeekerAppliedPage
+    SeekerAppliedPage,
+    SeekerEditaboutPage,
+    SeekerEditcurworkPage,
+    SeekerEditeducationPage,
+    SeekerEditexperiencePage,
+    SeekerEditlanguagePage,
+    SeekerEditreferencePage
   ],
   providers: [
     StatusBar,

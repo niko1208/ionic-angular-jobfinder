@@ -75,6 +75,14 @@ export class LoginSeekerPage {
                 localStorage.setItem('user_language', resultLanguage);
                 localStorage.setItem('user_reference', resultReference);
                 localStorage.setItem('user_setting', resultSetting);
+
+                this.config.userinfo['user_info'] = resultUser;
+                this.config.userinfo['user_setting'] = resultSetting;
+                this.config.userinfo['user_curwork'] = resultCurWork;
+                this.config.userinfo['user_education'] = resultEducation;
+                this.config.userinfo['user_experience'] = resultExperience;
+                this.config.userinfo['user_language'] = resultLanguage;
+                this.config.userinfo['user_reference'] = resultReference;
                 
               if(this.config.user_state == '1') {
                   this.navCtrl.push(SeekerTabsPage, null, this.config.navOptions).then(()=> {
