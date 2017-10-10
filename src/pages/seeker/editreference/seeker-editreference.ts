@@ -36,6 +36,30 @@ export class SeekerEditreferencePage {
   }
 
   save() {
+    if(this.data.reference_name == "") {
+      this.util.createAlert("", "Please insert Reference's Name!");
+      return;
+    }
+    if(this.data.reference_company == "") {
+      this.util.createAlert("", "Please insert Company!");
+      return;
+    }
+    if(this.data.reference_position == "") {
+      this.util.createAlert("", "Please insert the Position!");
+      return;
+    }
+    if(this.data.reference_email == "") {
+      this.util.createAlert("", "Please insert Contact Email!");
+      return;
+    }
+    if(!(this.config.validateEmail(this.data.reference_email))) {
+      this.util.createAlert("", "Please insert a valid email!");
+      return;
+    }
+    if(this.data.reference_mobile == "") {
+      this.util.createAlert("", "Please insert a Mobile Number!");
+      return;
+    }
     
     let param = {"seeker_id" : this.config.user_id, "id" : this.data.reference_id, "name" : this.data.reference_name, "company" : this.data.reference_company, "position" : this.data.reference_position, "email" : this.data.reference_email, "mobile" : this.data.reference_mobile};
     

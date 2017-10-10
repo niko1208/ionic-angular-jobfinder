@@ -35,6 +35,14 @@ export class SeekerEditlanguagePage {
   }
 
   save() {
+    if(this.data.language_language == "") {
+      this.util.createAlert("", "Please insert Language!");
+      return;
+    }
+    if(this.data.language_proficiency == "") {
+      this.util.createAlert("", "Please insert Level of Proficiency!");
+      return;
+    }
     
     let param = {"seeker_id" : this.config.user_id, "id" : this.data.language_id, "language" : this.data.language_language, "proficiency" : this.data.language_proficiency};
     

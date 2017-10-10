@@ -1,11 +1,12 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { NavController, LoadingController, NavParams, AlertController, ViewController } from 'ionic-angular';
+import { NavController, LoadingController, NavParams, AlertController, ViewController, ActionSheetController } from 'ionic-angular';
 import { Config } from '../../../provider/config';
 import { UtilService } from '../../../provider/util-service';
 import { Auth } from '../../../provider/auth';
 import { EmployerService } from '../../../provider/employer-service';
 import { EmployerPostjobLocationPage } from '../postjob-location/employer-postjob-location';
 import { EmployerAddbotPage } from '../addbot/employer-addbot';
+import { Camera, File, Transfer, FilePath  } from 'ionic-native';
 import * as $ from 'jquery';
 
 @Component({
@@ -31,6 +32,10 @@ export class EmployerPostJobPage {
   bedit = false;
   data: any;
 
+  backimage = null;
+  image = null;
+  opt = 0;
+
   @ViewChild('fileInp') fileInput: ElementRef;
   @ViewChild('fileInp1') fileInput1: ElementRef;
 
@@ -42,6 +47,7 @@ export class EmployerPostJobPage {
     public loading: LoadingController,
     public navParams: NavParams,
     public alertCtrl: AlertController,
+    public actionSheetCtrl: ActionSheetController,
     public viewCtrl: ViewController) {
         this.arrIndustry = ["#hospitality", "#entertainment", "#fastfood", "#construction", "#sales", "#retail", "#notforprofit", "#logistics", "#administration", "#agedcare", "#banking", "#callcentre", "#childcare", "#consumergoods", "#creative", "#defence", "#education", "#entrepreneur", "#financialservices", "#government", "#healthcare", "#hr", "#legal", "#manufacturing", "#marketing", "#media", "#mining", "#officesupport", "#professionalservices", "#property", "#recreation", "#recruitment", "#selfemployed", "#software", "#sports", "#technicalsupport", "#technology", "#telecommunications", "#tourism", "#trades", "#transport", "#cleaning", "#fashion", "#hairandbeauty", "#services"];
         this.arrPosition = ["Full Time", "Part Time", "Casual", "Contract", "Internship"];
@@ -65,6 +71,71 @@ export class EmployerPostJobPage {
       this.job_time = this.data.job_time_available;
     }*/
   }
+  
+  presentActionSheet(opt) {
+    this.opt = opt;
+   const actionSheet = this.actionSheetCtrl.create({
+     title: '',
+     buttons: [
+       {
+         text: 'Camera',
+         handler: () => {
+           //this.clickCamera = true;
+           this.takePicture(opt, Camera.PictureSourceType.CAMERA);
+         }
+       },
+       {
+         text: 'Libaray',
+         handler: () => {
+           //this.clickCamera = true;
+           this.takePicture(opt, Camera.PictureSourceType.PHOTOLIBRARY);
+           //this.upload_image();
+         }
+       },
+       {
+         text: 'Cancel',
+         role: 'cancel',
+         handler: () => {
+         }
+       }
+     ]
+   });
+   actionSheet.present();
+ }
+  
+   takePicture(opt, sourceType){
+     var options = {
+      quality: 50,
+      //allow: true,
+      sourceType: sourceType,
+      destinationType: Camera.DestinationType.DATA_URL,
+      //saveToPhotoAlbum: false,
+      //encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 1000,
+      targetHeight: 1000
+    };
+    Camera.getPicture(options).then((imagePath) => {
+      // imageData is a base64 encoded string
+        if(this.opt == 0) {
+          this.backimage = "data:image/jpeg;base64," + imagePath;
+          $('#back_img').css('background-image', 'url('+this.backimage+')');
+        } else {
+          this.image = "data:image/jpeg;base64," + imagePath;
+          $('#image').attr('src', this.image);
+        }
+        //var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
+        //var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
+        //this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+    }, (err) => {
+       if(this.opt == 0) {
+        this.backimage = null;
+       } else {
+         this.image = null;
+       }
+      console.log(err);
+    });
+  }
+
   getDataUri(url, callback) {
       var image = new Image();
       image.crossOrigin="anonymous";
@@ -90,18 +161,7 @@ export class EmployerPostJobPage {
 
       image.src = url;
   }
-  convBase64ToFile(dataURI) {
-    var byteString = atob(dataURI.split(',')[1]);
-    var ab = new ArrayBuffer(byteString.length);
-    var ia = new Uint8Array(ab);
-    for (var i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-    }
-    var blob = new Blob([ia], { type: 'image/jpeg' });
-    var file = new File([blob], "image.jpg");
-    return file;
-  }
-
+  
   upload_back() {
     this.fileInput.nativeElement.click();
   }
@@ -139,11 +199,11 @@ export class EmployerPostJobPage {
   post() {
     
     if(!(this.bedit)) {
-      if(this.file_image == null) {
+      if(this.image == null) {
         this.util.createAlert("Error", "Please insert your company image!");
         return;
       }
-      if(this.file_image_back == null) {
+      if(this.backimage == null) {
         this.util.createAlert("Error", "Please insert your background image!");
         return;
       }
@@ -175,14 +235,14 @@ export class EmployerPostJobPage {
     if(this.bedit) {
       job_id = this.data.job_id;
     }
-    let param = {"avatar" : this.file_image, "background" : this.file_image_back, "employer_id" : this.config.user_id, "employer_name" : user_name, "company_name" : this.company_name, "job_title" : this.job_title, "job_description" : this.job_desc, "job_requirement" : this.job_req, "time_available" : this.job_time, "industry" : this.job_industry, "location_address" : this.data.job_location_address, "location_lat" : this.data.job_location_lat, "location_lng" : this.data.job_location_lng, "job_id" : job_id};
+    let param = {"avatar" : this.image, "background" : this.backimage, "employer_id" : this.config.user_id, "employer_name" : user_name, "company_name" : this.company_name, "job_title" : this.job_title, "job_description" : this.job_desc, "job_requirement" : this.job_req, "time_available" : this.job_time, "industry" : this.job_industry, "location_address" : this.data.job_location_address, "location_lat" : this.data.job_location_lat, "location_lng" : this.data.job_location_lng, "job_id" : job_id};
 
     if(user_info.user_membership == 'basic') {
       let loader = this.loading.create({
         content: 'Loading...',
       });
       loader.present();
-      this.employerService.postData("createjob", param)
+      this.employerService.postData("createjob1", param)
       .subscribe(data => { console.log(data);
           loader.dismissAll();
           if(data.status == "success") {

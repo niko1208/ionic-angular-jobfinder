@@ -36,6 +36,34 @@ export class SeekerEditexperiencePage {
   }
 
   save() {
+    if(this.data.experience_company == "") {
+      this.util.createAlert("", "Please insert the company name!");
+      return;
+    }
+    if(this.data.experience_city == "") {
+      this.util.createAlert("", "Please insert the city!");
+      return;
+    }
+    if(this.data.experience_country == "") {
+      this.util.createAlert("", "Please insert the country!");
+      return;
+    }
+    if(this.data.experience_role == "") {
+      this.util.createAlert("", "Please insert the title!");
+      return;
+    }
+    if(this.data.experience_period == "") {
+      this.util.createAlert("", "Please insert commencement date!");
+      return;
+    }
+    if(this.data.experience_though == "") {
+      this.util.createAlert("", "Please insert completion date!");
+      return;
+    }
+    if(this.data.curwork_description == "") {
+      this.util.createAlert("", "Please insert the description!");
+      return;
+    }
     
     let param = {"seeker_id" : this.config.user_id, "id" : this.data.experience_id, "company" : this.data.experience_company, "city" : this.data.experience_city, "country" : this.data.experience_country, "role" : this.data.experience_role, "period" : this.data.experience_period, "though" : this.data.experience_though, "description" : this.data.experience_description};
     

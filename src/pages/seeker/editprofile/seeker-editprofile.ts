@@ -58,14 +58,15 @@ export class SeekerEditProfilePage {
          text: 'Camera',
          handler: () => {
            this.clickCamera = true;
-           this.takePicture();
+           this.takePicture(Camera.PictureSourceType.CAMERA);
          }
        },
        {
          text: 'Libaray',
          handler: () => {
-           this.clickCamera = false;
-           this.upload_image();
+           this.clickCamera = true;
+           this.takePicture(Camera.PictureSourceType.PHOTOLIBRARY);
+           //this.upload_image();
          }
        },
        {
@@ -79,20 +80,21 @@ export class SeekerEditProfilePage {
    actionSheet.present();
  }
   
-   takePicture(){
+   takePicture(opt){
      var options = {
       quality: 50,
-      allow: true,
-      sourceType: Camera.PictureSourceType.CAMERA,
+      //allow: true,
+      sourceType: opt,
       destinationType: Camera.DestinationType.DATA_URL,
-      saveToPhotoAlbum: false,
-      encodingType: Camera.EncodingType.JPEG,
+      //saveToPhotoAlbum: false,
+      //encodingType: Camera.EncodingType.JPEG,
       targetWidth: 1000,
       targetHeight: 1000
     };
     Camera.getPicture(options).then((imagePath) => {
       // imageData is a base64 encoded string
-        //this.base64Image = "data:image/jpeg;base64," + imagePath;
+        this.image = "data:image/jpeg;base64," + imagePath;
+        $('#image_eseeker').attr('src', this.image);
         //var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
         //var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
         //this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
@@ -116,7 +118,8 @@ export class SeekerEditProfilePage {
   private copyFileToLocalDir(namePath, currentName, newFileName) {
     File.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
       this.image = newFileName;
-      this.userinfo.user_avatar_url = this.pathForImage(this.image);
+      alert(this.pathForImage(this.image));
+      $('#image_seeker').attr('src', this.pathForImage(this.image));
     }, error => {
       alert('Error while storing file.');
     });
@@ -161,7 +164,7 @@ export class SeekerEditProfilePage {
     var reader  = new FileReader();
 
     reader.addEventListener("load", function () {
-      $('#image_emp').attr('src', reader.result);
+      $('#image_eseeker').attr('src', reader.result);
     }, false);
 
     if (file) {
@@ -204,16 +207,18 @@ export class SeekerEditProfilePage {
       return;
     }
     let image = this.file_image;
-    if(this.clickCamera) image = this.image
+    if(this.clickCamera) image = this.image;
 
-    let param = {"avatar" : image, "seeker_id" : this.config.user_id, "name" : this.userinfo.user_name};
+    let url = "editprofile1";
+    if(this.clickCamera) url = "editprofile1";
+    let param = {"avatar" : image, "seeker_id" : this.config.user_id, "name" : this.userinfo.user_name, cam: this.clickCamera};
     
     let loader = this.loading.create({
       content: 'Loading...',
     });
     loader.present();
 
-    this.seekerService.postData("editprofile", param)
+    this.seekerService.postData(url, param)
     .subscribe(data => { 
         loader.dismissAll();
         if(data.status == "success") {
@@ -222,6 +227,9 @@ export class SeekerEditProfilePage {
         } else {
           this.util.createAlert("Failed", data.result)
         }
+    }, err => {
+      loader.dismissAll();
+      this.util.createAlert("Failed", "Server Error");
     })
     
   }

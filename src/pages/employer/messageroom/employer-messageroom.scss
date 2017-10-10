@@ -59,6 +59,7 @@ page-employer-messageroom{
         border-top-right-radius: 20px;
         border-bottom-right-radius: 20px;
         position: relative;
+        white-space: normal;
     }
     .sec_send,
     .sec_receive{
@@ -103,7 +104,7 @@ page-employer-messageroom{
         overflow-y: scroll;
     }
     ion-list.chat_room{
-        height: calc(100vh - 300px);
+        height: calc(100vh - 260px);
     }
     ion-list.chat_room ion-item .item-inner{
         border-bottom: 0px !important;

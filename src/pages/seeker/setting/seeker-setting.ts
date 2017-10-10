@@ -5,6 +5,7 @@ import { UtilService } from '../../../provider/util-service';
 import { SeekerService } from '../../../provider/seeker-service';
 import { SeekerIndustryPage } from '../industry/seeker-industry';
 import { SeekerCurLocationPage } from '../curlocation/seeker-curlocation';
+import { SeekerHelpPage } from '../help/seeker-help';
 
 @Component({
   selector: 'page-seeker-setting',
@@ -62,6 +63,10 @@ export class SeekerSettingPage {
     console.log()
   }
 
+  help() {
+    this.navCtrl.push(SeekerHelpPage, {}, this.config.navOptions);
+  }
+  
   goindustry() {
     this.navCtrl.push(SeekerIndustryPage, {dd: this.dd}, this.config.navOptions);
   }

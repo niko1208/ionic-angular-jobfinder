@@ -66,9 +66,11 @@ import { SeekerEditlanguagePage } from '../pages/seeker/editlanguage/seeker-edit
 import { SeekerEditreferencePage } from '../pages/seeker/editreference/seeker-editreference';
 import { SeekerMessageroomPage } from '../pages/seeker/messageroom/seeker-messageroom';
 import { SeekerJobsmapPage } from '../pages/seeker/jobsmap/seeker-jobsmap';
+import { SeekerHelpPage } from '../pages/seeker/help/seeker-help';
 
 
-
+import { Camera } from '@ionic-native/camera';
+import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture';
 import { HttpModule } from '@angular/http';
 import { Push } from '@ionic-native/push';
 
@@ -138,7 +140,8 @@ import { MessageService } from '../provider/message-service';
     SeekerEditlanguagePage,
     SeekerEditreferencePage,
     SeekerMessageroomPage,
-    SeekerJobsmapPage
+    SeekerJobsmapPage,
+    SeekerHelpPage
   ],
   imports: [
     BrowserModule,
@@ -205,10 +208,13 @@ import { MessageService } from '../provider/message-service';
     SeekerEditlanguagePage,
     SeekerEditreferencePage,
     SeekerMessageroomPage,
-    SeekerJobsmapPage
+    SeekerJobsmapPage,
+    SeekerHelpPage
   ],
   providers: [
     StatusBar,
+    Camera,
+    MediaCapture,
     SplashScreen,
     Config,
     UtilService,

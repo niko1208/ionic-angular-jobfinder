@@ -33,7 +33,7 @@ export class Config {
          return re.test(email);
     }
 
-    getAPIURL() {
+    public getAPIURL() {
         return "https://jobfinder.cloud/jobfinder";
     }
     

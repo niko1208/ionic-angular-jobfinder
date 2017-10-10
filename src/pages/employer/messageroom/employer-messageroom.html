@@ -47,7 +47,7 @@
             <div class="div_box">
                 <div class="loading" *ngIf="isLoading"><div>Sending...</div></div>
                 <ion-textarea [(ngModel)]="sendText"></ion-textarea>
-                <ion-icon name="ios-attach" (click)="upload_image()"></ion-icon>
+                <ion-icon name="ios-attach" (click)="presentActionSheet()"></ion-icon>
                 <input type="file" name="file_image" id="file_image" #fileInp (change)="setFileImage($event)" style="display:none" />
                 <button ion-button round color="jblue" class="bt_small" (click)="send()">Send</button>
             </div>

@@ -36,6 +36,26 @@ export class SeekerEditeducationPage {
   }
 
   save() {
+    if(this.data.education_school == "") {
+      this.util.createAlert("", "Please insert your school!");
+      return;
+    }
+    if(this.data.education_from == "") {
+      this.util.createAlert("", "Please insert date studied From!");
+      return;
+    }
+    if(this.data.education_to == "") {
+      this.util.createAlert("", "Please insert date studied To!");
+      return;
+    }
+    if(this.data.education_level == "") {
+      this.util.createAlert("", "Please select the Highest level attained!");
+      return;
+    }
+    if(this.data.education_area == "") {
+      this.util.createAlert("", "Please insert the Area of Study!");
+      return;
+    }
     
     let param = {"seeker_id" : this.config.user_id, "id" : this.data.education_id, "school" : this.data.education_school, "from" : this.data.education_from, "to" : this.data.education_to, "level" : this.data.education_level, "area" : this.data.education_area};
     

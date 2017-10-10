@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>Help & Support</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-item *ngFor="let item of sections">
+        <h3 (click)="clickSection(item)">{{item.title}}</h3>
+        <div [ngClass]="{'show_div':item.expand}">{{item.contents[0]}}</div>
+        <ion-icon class="arrow" name="ios-arrow-forward" *ngIf="!(item.expand)"></ion-icon>
+        <ion-icon class="arrow" name="ios-arrow-down" *ngIf="item.expand"></ion-icon>
+    </ion-item>
+    <div padding>Still have questions? Send us a message.</div>
+    <ion-textarea [(ngModel)]="helptext" placeholder="What can we help you with ?"></ion-textarea>
+    <div text-center>
+        <button ion-button round class="bt_blue" (click)="send()">Send</button>
+    </div>
+</ion-content>

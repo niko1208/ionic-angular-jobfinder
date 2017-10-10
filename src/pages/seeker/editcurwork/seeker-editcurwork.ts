@@ -54,6 +54,30 @@ export class SeekerEditcurworkPage {
   }
 
   save() {
+    if(this.data.curwork_company == "") {
+      this.util.createAlert("", "Please insert the company name!");
+      return;
+    }
+    if(this.data.curwork_city == "") {
+      this.util.createAlert("", "Please insert the city!");
+      return;
+    }
+    if(this.data.curwork_country == "") {
+      this.util.createAlert("", "Please insert the country!");
+      return;
+    }
+    if(this.data.curwork_role == "") {
+      this.util.createAlert("", "Please insert the title!");
+      return;
+    }
+    if(this.data.curwork_period == "") {
+      this.util.createAlert("", "Please insert the period date!");
+      return;
+    }
+    if(this.data.curwork_description == "") {
+      this.util.createAlert("", "Please insert the description!");
+      return;
+    }
     
     let param = {"seeker_id" : this.config.user_id, "id" : this.data.curwork_id, "company" : this.data.curwork_company, "city" : this.data.curwork_city, "country" : this.data.curwork_country, "role" : this.data.curwork_role, "period" : this.data.curwork_period, "description" : this.data.curwork_description};
     

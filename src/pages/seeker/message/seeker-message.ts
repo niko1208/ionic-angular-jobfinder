@@ -5,6 +5,7 @@ import { UtilService } from '../../../provider/util-service';
 import { Auth } from '../../../provider/auth';
 import { MessageService } from '../../../provider/message-service';
 import { SeekerMessageroomPage } from '../messageroom/seeker-messageroom';
+
 import * as $ from 'jquery';
 
 @Component({
@@ -27,6 +28,7 @@ export class SeekerMessagePage {
   isLoading = false;
 
   pending = true;
+
 
   @ViewChild('fileInp') fileInput: ElementRef;
 
@@ -101,8 +103,8 @@ export class SeekerMessagePage {
     return da;
   }
 
-  
   upload_image() {
+
     this.fileInput.nativeElement.click();
   }
   setFileImage(event) { 
