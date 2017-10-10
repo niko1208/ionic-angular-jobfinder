@@ -8,6 +8,7 @@ import { SeekerJobdetailPage } from '../jobdetail/seeker-jobdetail';
 import { SeekerSavedPage } from '../saved/seeker-saved';
 import { SeekerAppliedPage } from '../applied/seeker-applied';
 import { SeekerJobsmapPage } from '../jobsmap/seeker-jobsmap';
+import { SeekerChatbotPage } from '../chatbot/seeker-chatbot';
 
 @Component({
   selector: 'page-seeker-jobs',
@@ -33,7 +34,7 @@ export class SeekerJobsPage {
   ionViewWillEnter() {
     
     this.loadData();
-    this.slides.lockSwipes(true);
+    //this.slides.lockSwipes(true);
   }
 
   loadData() {
@@ -84,21 +85,21 @@ export class SeekerJobsPage {
   }
 
   prev() {
-    this.slides.lockSwipes(false);
+    //this.slides.lockSwipes(false);
     this.slides.slidePrev();
-    this.slides.lockSwipes(true);
+    //this.slides.lockSwipes(true);
   }
 
   next() {
-    this.slides.lockSwipes(false);
+    //this.slides.lockSwipes(false);
     this.slides.slideNext();
-    this.slides.lockSwipes(true);
+    //this.slides.lockSwipes(true);
   }
 
   apply(i) {
     let user_info = JSON.parse(localStorage.getItem('user_info'));;
     let job_id = this.list[i].job_id;
-    let employer_id = this.like[i].job_employer_id;
+    let employer_id = this.list[i].job_employer_id;
     let seeker_name = user_info.user_name;
     if(this.list[i].job_bot_state == '1') {
       let param = {"job_id" : job_id, "seeker_id" : this.config.user_id, "employer_id" : employer_id};
@@ -110,7 +111,7 @@ export class SeekerJobsPage {
       .subscribe(data => { 
           loader.dismissAll();
           if(data.status == "success") {
-            
+            this.navCtrl.push(SeekerChatbotPage, {job_id: job_id, user_name:user_info.user_name}, this.config.navOptions);
           } else {
             this.util.createAlert("Failed", data.result);
           }

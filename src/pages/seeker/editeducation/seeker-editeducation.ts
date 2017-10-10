@@ -3,6 +3,7 @@ import { NavController, LoadingController, NavParams, ViewController } from 'ion
 import { Config } from '../../../provider/config';
 import { UtilService } from '../../../provider/util-service';
 import { SeekerService } from '../../../provider/seeker-service';
+import { DatePicker } from '@ionic-native/date-picker';
 
 @Component({
   selector: 'page-seeker-editeducation',
@@ -18,7 +19,8 @@ export class SeekerEditeducationPage {
     public seekerService: SeekerService,
     public loading: LoadingController,
     public viewCtrl: ViewController,
-    public navParams: NavParams) {
+    public navParams: NavParams,
+    private datePicker: DatePicker) {
         this.data = navParams.get('data');
         this.edit = navParams.get('edit');
         if(this.data == null) {
@@ -93,6 +95,32 @@ export class SeekerEditeducationPage {
           this.util.createAlert("Profile Delete Failed", data.result)
         }
     })
+  }
+
+  showDate() {
+    this.datePicker.show({
+      date: new Date(this.data.education_from),
+      mode: 'date',
+      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+    }).then(
+      date => {
+        this.data.education_from = this.config.formatDate(date);
+      },
+      err => console.log('Error occurred while getting date: ', err)
+    );
+  }
+
+  showDate1() {
+    this.datePicker.show({
+      date: new Date(this.data.education_to),
+      mode: 'date',
+      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+    }).then(
+      date => {
+        this.data.education_to = this.config.formatDate(date);
+      },
+      err => console.log('Error occurred while getting date: ', err)
+    );
   }
 
 }

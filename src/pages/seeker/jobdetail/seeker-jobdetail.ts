@@ -3,6 +3,8 @@ import { NavController, LoadingController, NavParams, ViewController } from 'ion
 import { Config } from '../../../provider/config';
 import { UtilService } from '../../../provider/util-service';
 import { SeekerService } from '../../../provider/seeker-service';
+import { SeekerChatbotPage } from '../chatbot/seeker-chatbot';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 @Component({
   selector: 'page-seeker-jobdetail',
@@ -17,7 +19,8 @@ export class SeekerJobdetailPage {
     public seekerService: SeekerService,
     public loading: LoadingController,
     public viewCtrl: ViewController,
-    public navParams: NavParams) {
+    public navParams: NavParams,
+    private socialSharing: SocialSharing) {
         this.data = navParams.get('data');
   }
 
@@ -65,7 +68,7 @@ export class SeekerJobdetailPage {
       .subscribe(data => { 
           loader.dismissAll();
           if(data.status == "success") {
-            
+            this.navCtrl.push(SeekerChatbotPage, {job_id: job_id, user_name:user_info.user_name}, this.config.navOptions);
           } else {
             this.util.createAlert("Failed", data.result);
           }
@@ -94,4 +97,19 @@ export class SeekerJobdetailPage {
     }
   }
 
+  share(idx) {
+    if(idx == 0) {
+      this.socialSharing.shareViaFacebook("See more jobs like this and more at", this.data.job_job_avatar_url, "https://jobfinder.cloud").then(() => {
+        console.log("shareViaFacebook: Success");
+      }).catch(() => {
+        this.util.createAlert("", "You are not connected to Facebook");
+      });
+    } else {
+      this.socialSharing.shareViaTwitter("See more jobs like this and more at", this.data.job_job_avatar_url, "https://jobfinder.cloud").then(() => {
+        console.log("shareViaFacebook: Success");
+      }).catch(() => {
+        this.util.createAlert("", "You are not connected to Twitter");
+      });
+    }
+  }
 }

@@ -74,34 +74,34 @@ export class EmployerPostJobPage {
   
   presentActionSheet(opt) {
     this.opt = opt;
-   const actionSheet = this.actionSheetCtrl.create({
-     title: '',
-     buttons: [
-       {
-         text: 'Camera',
-         handler: () => {
-           //this.clickCamera = true;
-           this.takePicture(opt, Camera.PictureSourceType.CAMERA);
-         }
-       },
-       {
-         text: 'Libaray',
-         handler: () => {
-           //this.clickCamera = true;
-           this.takePicture(opt, Camera.PictureSourceType.PHOTOLIBRARY);
-           //this.upload_image();
-         }
-       },
-       {
-         text: 'Cancel',
-         role: 'cancel',
-         handler: () => {
-         }
-       }
-     ]
-   });
-   actionSheet.present();
- }
+    let actionSheet = this.actionSheetCtrl.create({
+      title: '',
+      buttons: [
+        {
+          text: 'Camera',
+          handler: () => {
+            //this.clickCamera = true;
+            this.takePicture(opt, Camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: 'Libaray',
+          handler: () => {
+            //this.clickCamera = true;
+            this.takePicture(opt, Camera.PictureSourceType.PHOTOLIBRARY);
+            //this.upload_image();
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
   
    takePicture(opt, sourceType){
      var options = {
@@ -116,12 +116,13 @@ export class EmployerPostJobPage {
     };
     Camera.getPicture(options).then((imagePath) => {
       // imageData is a base64 encoded string
+       
         if(this.opt == 0) {
           this.backimage = "data:image/jpeg;base64," + imagePath;
           $('#back_img').css('background-image', 'url('+this.backimage+')');
         } else {
           this.image = "data:image/jpeg;base64," + imagePath;
-          $('#image').attr('src', this.image);
+          $('#imagee').attr('src', this.image);
         }
         //var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
         //var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);

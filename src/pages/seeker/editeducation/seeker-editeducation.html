@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar color="jblue">
-        <ion-title text-center>Work History</ion-title>
+        <ion-title text-center>Education</ion-title>
         <ion-buttons right>
             <div class="fright" tappable (click)="save()">Save</div>
         </ion-buttons>
@@ -15,11 +15,11 @@
     </div>
     <div class="div_sec">
         <ion-label>Date Attended :</ion-label>
-        <ion-input [(ngModel)]="data.education_from"></ion-input>
+        <ion-input [(ngModel)]="data.education_from" disabled readonly (click)="showDate()"></ion-input>
     </div>
     <div class="div_sec">
         <ion-label>To :</ion-label>
-        <ion-input [(ngModel)]="data.education_to"></ion-input>
+        <ion-input [(ngModel)]="data.education_to" disabled readonly (click)="showDate1()"></ion-input>
     </div>
     <div class="div_sec">
         <ion-label>Highest Level Achieved :</ion-label>

@@ -19,7 +19,7 @@
         <ion-textarea [(ngModel)]="desc"></ion-textarea>
     </div>
 
-    <ion-card class='job' *ngFor="let item of list" [style.backgroundImage]="'url('+item?.job_job_avatar_url+')'">
+    <ion-card class='job' *ngFor="let item of list" [style.backgroundImage]="'url('+item?.job_job_avatar_url+')'" (click)="goJobDetail(item)">
         <div class='back_overlay'>
             <div class="job_title">{{item.job_job_title}}</div>
             <div class="job_time">{{item.job_time_available}}</div>

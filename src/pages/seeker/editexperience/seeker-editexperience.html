@@ -27,11 +27,11 @@
     </div>
     <div class="div_sec">
         <ion-label>Period :</ion-label>
-        <ion-input [(ngModel)]="data.experience_period"></ion-input>
+        <ion-input [(ngModel)]="data.experience_period" disabled readonly (click)="showDate()"></ion-input>
     </div>
     <div class="div_sec">
         <ion-label>Though :</ion-label>
-        <ion-input [(ngModel)]="data.experience_though"></ion-input>
+        <ion-input [(ngModel)]="data.experience_though" disabled readonly (click)="showDate1()"></ion-input>
     </div>
     <div class="div_sec">
         <ion-label>Description :</ion-label>

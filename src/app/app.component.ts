@@ -16,35 +16,37 @@ export class MyApp {
   rootPage:any = SplashPage;
 
   constructor(public platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public push: Push, public config: Config) {
-    platform.ready().then(() => {
-      let user_id = localStorage.getItem('user_id');
-      let user_type = localStorage.getItem('user_type');
-      let user_state = localStorage.getItem('user_state');
-      if(user_id != null && user_id != "" && user_state == '1') {
-        this.config.user_id = user_id;
-        this.config.user_type = user_type;
-        if(user_type == 'employer') {
-          this.rootPage = EmployerTabsPage;
-        } else {
-          let user_info = JSON.parse(localStorage.getItem('user_info'));
-          let user_setting = JSON.parse(localStorage.getItem('user_setting'));
-          let user_curwork = JSON.parse(localStorage.getItem('user_curwork'));
-          let user_education = JSON.parse(localStorage.getItem('user_education'));
-          let user_experience = JSON.parse(localStorage.getItem('user_experience'));
-          let user_language = JSON.parse(localStorage.getItem('user_language'));
-          let user_reference = JSON.parse(localStorage.getItem('user_reference'));
-          this.config.userinfo['user_info'] = user_info;
-          this.config.userinfo['user_setting'] = user_setting;
-          this.config.userinfo['user_curwork'] = user_curwork;
-          this.config.userinfo['user_education'] = user_education;
-          this.config.userinfo['user_experience'] = user_experience;
-          this.config.userinfo['user_language'] = user_language;
-          this.config.userinfo['user_reference'] = user_reference;
-          
-          this.rootPage = SeekerTabsPage;
-        }
-      }
 
+    let user_id = localStorage.getItem('user_id');
+    let user_type = localStorage.getItem('user_type');
+    let user_state = localStorage.getItem('user_state');
+    if(user_id != null && user_id != "" && user_state == '1') {
+      this.config.user_id = user_id;
+      this.config.user_type = user_type;
+      if(user_type == 'employer') {
+        this.rootPage = EmployerTabsPage;
+      } else {
+        let user_info = JSON.parse(localStorage.getItem('user_info'));
+        let user_setting = JSON.parse(localStorage.getItem('user_setting'));
+        let user_curwork = JSON.parse(localStorage.getItem('user_curwork'));
+        let user_education = JSON.parse(localStorage.getItem('user_education'));
+        let user_experience = JSON.parse(localStorage.getItem('user_experience'));
+        let user_language = JSON.parse(localStorage.getItem('user_language'));
+        let user_reference = JSON.parse(localStorage.getItem('user_reference'));
+        this.config.userinfo['user_info'] = user_info;
+        this.config.userinfo['user_setting'] = user_setting;
+        this.config.userinfo['user_curwork'] = user_curwork;
+        this.config.userinfo['user_education'] = user_education;
+        this.config.userinfo['user_experience'] = user_experience;
+        this.config.userinfo['user_language'] = user_language;
+        this.config.userinfo['user_reference'] = user_reference;
+        
+        this.rootPage = SeekerTabsPage;
+      }
+    }
+
+    platform.ready().then(() => {
+      
       if(platform.is('ios')) {
         this.config.platform = 'ios';
       } else if(platform.is('android')) {

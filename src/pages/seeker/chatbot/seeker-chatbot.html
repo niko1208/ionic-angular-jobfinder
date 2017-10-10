@@ -1,0 +1,21 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>Chat</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list class="chat_room">
+        <ion-item *ngFor="let item of list; let i = index;">
+            <div *ngIf="item.message_bot_sender == 'bot'" class="sec_send">
+                <img class="jobbot" src="assets/images/AVABOT.PNG"/>
+                <div class="sec_uname">AVA, {{getDate(item.mdate) | amTimeAgo}}</div>
+                <div class="sec_message">{{item.message_bot_text}}</div>
+            </div>
+            <div *ngIf="item.message_bot_sender == 'seeker'" class="sec_receive">
+                <div class="sec_uname">{{user_name}}, {{getDate(item.mdate) | amTimeAgo}}</div>
+                <div class="sec_message">{{item.message_bot_text}}</div>
+            </div>
+        </ion-item>
+    </ion-list>
+</ion-content>

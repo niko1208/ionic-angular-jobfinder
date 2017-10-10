@@ -61,6 +61,9 @@ page-seeker-jobs{
         margin-top: 80px;
         height: calc(100% - 120px);
     }
+    .swiper-pagination{
+        display: none;
+    }
     .swiper-slide{
         display: block
     }
@@ -93,6 +96,16 @@ page-seeker-jobs{
     }
     .arrow_next{
         right: 10px;
+    }
+    button.button-md.bt_blue:hover, 
+    button.button-md.bt_blue:focus,
+    button.button-md.bt_green:hover, 
+    button.button-md.bt_green:focus{
+        background: transparent !important;
+    }
+    .bticon{
+        position: absolute;
+        left: 30px;
     }
 
     @media (min-width: 500px) {

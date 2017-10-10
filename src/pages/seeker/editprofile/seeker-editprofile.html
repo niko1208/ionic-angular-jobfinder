@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content class='cont_detail'>
-    <div class="image" (click)="presentActionSheet()">
-        <img id="image_eseeker" src="{{userinfo.user_avatar_url}}" />
+    <div class="image" id="div_image_eseeker" (click)="presentActionSheet()" [style.backgroundImage]="'url('+userinfo.user_avatar_url+')'">
+        <img id="image_eseeker" src="{{userinfo.user_avatar_url}}" style="display: none" />
     </div>
     <input type="file" name="file_image_seditprofile" id="file_image_seditprofile" (change)="setFileImage($event)" #fileInpsedit style="display:none" />
 
@@ -67,7 +67,7 @@
         <ion-icon class="iconadd" name="add" (click)="goEdu(null)"></ion-icon>
     </ion-label>
     <div *ngFor="let item of education; let i = index;">
-    <ion-item class="div_sec" (click)="goEdu(i)">
+    <ion-item class="div_sec" (click)="goEdu(item)">
         <ion-label class='lb_icon'><ion-icon name='ios-school-outline'></ion-icon></ion-label>
         <ion-label>{{item.education_school}}</ion-label>
         <ion-label text-right>

@@ -94,7 +94,8 @@ export class SeekerEditProfilePage {
     Camera.getPicture(options).then((imagePath) => {
       // imageData is a base64 encoded string
         this.image = "data:image/jpeg;base64," + imagePath;
-        $('#image_eseeker').attr('src', this.image);
+        $('#div_image_eseeker').css('background-image', 'url('+this.image+')');
+        //$('#image_eseeker').attr('src', this.image);
         //var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
         //var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
         //this.copyFileToLocalDir(correctPath, currentName, this.createFileName());

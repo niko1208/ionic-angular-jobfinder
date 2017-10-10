@@ -3,6 +3,7 @@ import { NavController, LoadingController, NavParams, ViewController } from 'ion
 import { Config } from '../../../provider/config';
 import { UtilService } from '../../../provider/util-service';
 import { SeekerService } from '../../../provider/seeker-service';
+import { DatePicker } from '@ionic-native/date-picker';
 
 @Component({
   selector: 'page-seeker-editexperience',
@@ -18,7 +19,8 @@ export class SeekerEditexperiencePage {
     public seekerService: SeekerService,
     public loading: LoadingController,
     public viewCtrl: ViewController,
-    public navParams: NavParams) {
+    public navParams: NavParams,
+    private datePicker: DatePicker) {
         this.data = navParams.get('data');
         this.edit = navParams.get('edit');
         if(this.data == null) {
@@ -83,6 +85,32 @@ export class SeekerEditexperiencePage {
           this.util.createAlert("Failed", data.result)
         }
     })
+  }
+
+  showDate() {
+    this.datePicker.show({
+      date: new Date(this.data.experience_period),
+      mode: 'date',
+      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+    }).then(
+      date => {
+        this.data.experience_period = this.config.formatDate(date);
+      },
+      err => console.log('Error occurred while getting date: ', err)
+    );
+  }
+
+  showDate1() {
+    this.datePicker.show({
+      date: new Date(this.data.experience_though),
+      mode: 'date',
+      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+    }).then(
+      date => {
+        this.data.experience_though = this.config.formatDate(date);
+      },
+      err => console.log('Error occurred while getting date: ', err)
+    );
   }
 
   delete() {

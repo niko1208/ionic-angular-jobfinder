@@ -4,6 +4,7 @@ import { Config } from '../../../provider/config';
 import { UtilService } from '../../../provider/util-service';
 import { SeekerService } from '../../../provider/seeker-service';
 import { EmployerService } from '../../../provider/employer-service';
+import { SeekerJobdetailPage } from '../jobdetail/seeker-jobdetail';
 
 @Component({
   selector: 'page-seeker-ads',
@@ -92,4 +93,7 @@ export class SeekerAdsPage {
     });
   }
 
+  goJobDetail(item) {
+    this.navCtrl.push(SeekerJobdetailPage, {data: item});
+  }
 }
