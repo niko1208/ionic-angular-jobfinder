@@ -1,17 +1,16 @@
 import { Component, ElementRef, ViewChild  } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, NavParams } from 'ionic-angular';
 import { Config } from '../../../provider/config';
 import { UtilService } from '../../../provider/util-service';
 import { Auth } from '../../../provider/auth';
 import { MessageService } from '../../../provider/message-service';
-import { EmployerMessageroomPage } from '../messageroom/employer-messageroom';
 import * as $ from 'jquery';
 
 @Component({
-  selector: 'page-employer-message',
-  templateUrl: 'employer-message.html'
+  selector: 'page-seeker-messageroom',
+  templateUrl: 'seeker-messageroom.html'
 })
-export class EmployerMessagePage {
+export class SeekerMessageroomPage {
 
   user_info: any;
   user_setting: any;
@@ -35,42 +34,63 @@ export class EmployerMessagePage {
     public util: UtilService,
     public auth: Auth,
     public messageService: MessageService,
-    public loading: LoadingController) {
-        
+    public loading: LoadingController,
+    public navParams: NavParams) {
+        this.sitem = navParams.get('item');
   }
   
   ionViewWillEnter() {
     this.user_info = JSON.parse(localStorage.getItem('user_info'));
     this.user_setting = JSON.parse(localStorage.getItem('user_setting'));
-    this.user_profile = JSON.parse(localStorage.getItem('user_profile'));
 
-    this.loadData();
+    this.openMessage(this.sitem);
 
   }
 
-  loadData() {
+  openMessage(item) {
+    this.loadBack();
+    
+    this.pending = true;
+
+    this.sitem = item;
+
+    this.sendText = "";
+    this.file_image = null;
+
+    let room_id = item.room_id;
+    let otherType = "seeker";
+    let otherID = item.user_id;
+    let param = {"room_id" : room_id, "other_type" : otherType, "other_id" : otherID};
     let loader = this.loading.create({
       content: 'Loading...',
     });
     loader.present();
-    let param = {"loader_type" : "employer", "loader_id" : this.config.user_id};
-    this.messageService.postData("loadroom", param)
+
+    this.avatar_url = item.user_avatar_url;
+    //let my_name = this.user_info.user_name;
+    //let my_avatar_url = this.user_info.user_avatar_url;
+
+    this.messageService.postData("loadmessages", param)
     .subscribe(data => { console.log(data);
         loader.dismissAll();
         if(data.status == "success") {
-          this.list = data.result;
-          for(let i =0;i <this.list.length; i++) {
-            this.list[i]['mdate'] = new Date(this.list[i].timediff*1000);
+          this.mlist = data.result;
+          for(let i =0;i <this.mlist.length; i++) {
+            this.mlist[i]['mdate'] = new Date(this.mlist[i].timediff*1000);
+            this.mlist[i]['senderID'] = this.mlist[i]['message_sender_type']+"_"+this.mlist[i]['message_sender_id'];
+            this.mlist[i]['my_senderID'] = "seeker_"+this.config.user_id;
+            this.mlist[i]['img_url'] = this.avatar_url;
           }
+          setTimeout(() => {
+            $('.chat_room').scrollTop($('.chat_room').prop("scrollHeight"));
+          }, 1000);
         }
+        this.pending = false;
     }, error => {
+        this.pending = false;
         loader.dismissAll();
         alert("Error");
     });
-  }
-
-  openMessage(item, i) {
-    this.navCtrl.push(EmployerMessageroomPage, {item: item}, this.config.navOptions);
   }
 
   loadNewMessage() {
@@ -86,7 +106,7 @@ export class EmployerMessagePage {
           for(let i =0;i <mlist.length; i++) {
             mlist[i]['mdate'] = new Date(mlist[i].timediff*1000);
             mlist[i]['senderID'] = mlist[i]['message_sender_type']+"_"+mlist[i]['message_sender_id'];
-            mlist[i]['my_senderID'] = "employer_"+this.config.user_id;
+            mlist[i]['my_senderID'] = "seeker_"+this.config.user_id;
             mlist[i]['img_url'] = this.avatar_url;
           }
           this.mlist = mlist;
@@ -110,7 +130,7 @@ export class EmployerMessagePage {
     this.isLoading = true;
     this.file_image = event.srcElement.files[0];
     let room_id = this.sitem.message_room_id;
-    let my_type = this.sitem.message_sender_type; my_type = "employer";
+    let my_type = this.sitem.message_sender_type; my_type = "seeker";
     let other_id = this.sitem.user_id;
     var fullPath = $("#file_image").val();    
     var filename = fullPath.replace(/^.*[\\\/]/, '');
@@ -197,7 +217,7 @@ export class EmployerMessagePage {
   send() {
     this.isLoading = true;
     let room_id = this.sitem.message_room_id;
-    let my_type = this.sitem.message_sender_type; my_type = "employer";
+    let my_type = this.sitem.message_sender_type; my_type = "seeker";
     let other_id = this.sitem.user_id;
     let param = {"room_id" : room_id, "sender_type" : my_type, "sender_id" : this.config.user_id, "message_text" : this.sendText, "message_type" : "text", "other_id" : other_id};
 

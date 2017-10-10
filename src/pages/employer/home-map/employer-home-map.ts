@@ -85,7 +85,7 @@ export class EmployerHomeMapPage {
         infowindow.open(this.map, this);
     });
     //console.log(user_setting);
-    let rd = user_setting.setting_emp_distance; 
+    let rd = user_setting.setting_distance; 
     rd = rd*0.621371*1609.3; 
     var circle = new google.maps.Circle({
         map: this.map,
@@ -128,6 +128,8 @@ export class EmployerHomeMapPage {
                     position: ll[i],
                     content: "<div class='div_info' id='div_"+i+"'>"+ct[i]+"<br/><small>"+self.config.calcCrow(self.list[i].setting_location_lat, self.list[i].setting_location_lng, user_setting.setting_emp_location_lat, user_setting.setting_emp_location_lng)+"</small><div>"
                 });
+            } else {
+                
             }
             infow[i].open(this.map, this);
             google.maps.event.addListener(infow[i], 'domready', function() {

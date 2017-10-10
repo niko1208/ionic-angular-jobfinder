@@ -37,6 +37,7 @@ import { EmployerPostJobPage } from '../pages/employer/postjob/employer-postjob'
 import { EmployerPostJobEditPage } from '../pages/employer/postjob-edit/employer-postjob-edit';
 import { EmployerActivityPage } from '../pages/employer/activity/employer-activity';
 import { EmployerMessagePage } from '../pages/employer/message/employer-message';
+import { EmployerMessageroomPage } from '../pages/employer/messageroom/employer-messageroom';
 import { EmployerHelpPage } from '../pages/employer/help/employer-help';
 import { EmployerPostjobLocationPage } from '../pages/employer/postjob-location/employer-postjob-location';
 import { EmployerEditjobLocationPage } from '../pages/employer/editjob-location/employer-editjob-location';
@@ -63,6 +64,8 @@ import { SeekerEditeducationPage } from '../pages/seeker/editeducation/seeker-ed
 import { SeekerEditexperiencePage } from '../pages/seeker/editexperience/seeker-editexperience';
 import { SeekerEditlanguagePage } from '../pages/seeker/editlanguage/seeker-editlanguage';
 import { SeekerEditreferencePage } from '../pages/seeker/editreference/seeker-editreference';
+import { SeekerMessageroomPage } from '../pages/seeker/messageroom/seeker-messageroom';
+import { SeekerJobsmapPage } from '../pages/seeker/jobsmap/seeker-jobsmap';
 
 
 
@@ -113,6 +116,7 @@ import { MessageService } from '../provider/message-service';
     ResetEmployerPage,
     EmployerAddbotPage,
     EmployerBotweightPage,
+    EmployerMessageroomPage,
 
     SeekerTabsPage,
     SeekerHomePage,
@@ -132,7 +136,9 @@ import { MessageService } from '../provider/message-service';
     SeekerEditeducationPage,
     SeekerEditexperiencePage,
     SeekerEditlanguagePage,
-    SeekerEditreferencePage
+    SeekerEditreferencePage,
+    SeekerMessageroomPage,
+    SeekerJobsmapPage
   ],
   imports: [
     BrowserModule,
@@ -177,6 +183,7 @@ import { MessageService } from '../provider/message-service';
     ResetEmployerPage,
     EmployerAddbotPage,
     EmployerBotweightPage,
+    EmployerMessageroomPage,
 
     SeekerTabsPage,
     SeekerHomePage,
@@ -196,7 +203,9 @@ import { MessageService } from '../provider/message-service';
     SeekerEditeducationPage,
     SeekerEditexperiencePage,
     SeekerEditlanguagePage,
-    SeekerEditreferencePage
+    SeekerEditreferencePage,
+    SeekerMessageroomPage,
+    SeekerJobsmapPage
   ],
   providers: [
     StatusBar,

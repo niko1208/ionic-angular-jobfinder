@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content class='cont_detail'>
-    <div class="image" (click)="upload_image()">
+    <div class="image" (click)="presentActionSheet()">
         <img id="image_emp" src="{{userinfo.user_avatar_url}}" />
     </div>
     <input type="file" name="file_image_seditprofile" id="file_image_seditprofile" (change)="setFileImage($event)" #fileInpsedit style="display:none" />

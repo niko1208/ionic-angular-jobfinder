@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { NavController, LoadingController, NavParams } from 'ionic-angular';
+import { NavController, LoadingController, NavParams, ActionSheetController  } from 'ionic-angular';
 import { Config } from '../../../provider/config';
 import { UtilService } from '../../../provider/util-service';
 import { Auth } from '../../../provider/auth';
@@ -10,13 +10,16 @@ import { SeekerEditeducationPage } from '../editeducation/seeker-editeducation';
 import { SeekerEditexperiencePage } from '../editexperience/seeker-editexperience';
 import { SeekerEditlanguagePage } from '../editlanguage/seeker-editlanguage';
 import { SeekerEditreferencePage } from '../editreference/seeker-editreference';
+import { Camera, File, Transfer, FilePath  } from 'ionic-native';
 import * as $ from 'jquery';
-
+declare var cordova : any; 
 @Component({
   selector: 'page-seeker-editprofile',
   templateUrl: 'seeker-editprofile.html'
 })
 export class SeekerEditProfilePage {
+
+  public image: any;
 
   file_image = null;
 
@@ -27,6 +30,7 @@ export class SeekerEditProfilePage {
   education: any;
   language: any;
   reference: any;
+  clickCamera = false;
 
   @ViewChild('fileInpsedit') fileInput: ElementRef;
 
@@ -36,6 +40,7 @@ export class SeekerEditProfilePage {
     public auth: Auth,
     public seekerService: SeekerService,
     public loading: LoadingController,
+    public actionSheetCtrl: ActionSheetController,
     public navParams: NavParams) {
         
             this.userinfo = this.config.userinfo['user_info'];
@@ -44,6 +49,77 @@ export class SeekerEditProfilePage {
             this.education = this.config.userinfo['user_education'];
             this.language = this.config.userinfo['user_language'];
             this.reference = this.config.userinfo['user_reference'];
+  }
+  presentActionSheet() {
+   const actionSheet = this.actionSheetCtrl.create({
+     title: '',
+     buttons: [
+       {
+         text: 'Camera',
+         handler: () => {
+           this.clickCamera = true;
+           this.takePicture();
+         }
+       },
+       {
+         text: 'Libaray',
+         handler: () => {
+           this.clickCamera = false;
+           this.upload_image();
+         }
+       },
+       {
+         text: 'Cancel',
+         role: 'cancel',
+         handler: () => {
+         }
+       }
+     ]
+   });
+   actionSheet.present();
+ }
+  
+   takePicture(){
+     var options = {
+      quality: 50,
+      allow: true,
+      sourceType: Camera.PictureSourceType.CAMERA,
+      destinationType: Camera.DestinationType.DATA_URL,
+      saveToPhotoAlbum: false,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 1000,
+      targetHeight: 1000
+    };
+    Camera.getPicture(options).then((imagePath) => {
+      // imageData is a base64 encoded string
+        //this.base64Image = "data:image/jpeg;base64," + imagePath;
+        //var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
+        //var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
+        //this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+    }, (err) => {
+        console.log(err);
+    });
+  }
+  private createFileName() {
+    var d = new Date(),
+    n = d.getTime(),
+    newFileName =  n + ".jpg";
+    return newFileName;
+  }
+  public pathForImage(img) {
+    if (img === null) {
+      return '';
+    } else {
+      return cordova.file.dataDirectory + img;
+    }
+  }
+  private copyFileToLocalDir(namePath, currentName, newFileName) {
+    File.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
+      this.image = newFileName;
+      this.userinfo.user_avatar_url = this.pathForImage(this.image);
+    }, error => {
+      alert('Error while storing file.');
+    });
   }
 
   ionViewWillEnter() {
@@ -120,15 +196,17 @@ export class SeekerEditProfilePage {
 
   save() {
     if(!(this.file_image)) {
-      this.util.createAlert("", "Please insert your avatar");
-      return;
+      //this.util.createAlert("", "Please insert your avatar");
+      //return;
     }
     if(this.userinfo.user_name == "") {
       this.util.createAlert("", "Please insert your name");
       return;
     }
+    let image = this.file_image;
+    if(this.clickCamera) image = this.image
 
-    let param = {"avatar" : this.file_image, "seeker_id" : this.config.user_id, "name" : this.userinfo.user_name};
+    let param = {"avatar" : image, "seeker_id" : this.config.user_id, "name" : this.userinfo.user_name};
     
     let loader = this.loading.create({
       content: 'Loading...',

@@ -7,6 +7,7 @@ import { SeekerService } from '../../../provider/seeker-service';
 import { SeekerJobdetailPage } from '../jobdetail/seeker-jobdetail';
 import { SeekerSavedPage } from '../saved/seeker-saved';
 import { SeekerAppliedPage } from '../applied/seeker-applied';
+import { SeekerJobsmapPage } from '../jobsmap/seeker-jobsmap';
 
 @Component({
   selector: 'page-seeker-jobs',
@@ -156,7 +157,7 @@ export class SeekerJobsPage {
   }
 
   goMap() {
-    //this.navCtrl.push(EmployerHomeMapPage);
+    this.navCtrl.push(SeekerJobsmapPage);
   }
 
   search(value) {

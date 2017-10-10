@@ -1,11 +1,22 @@
 <ion-header>
     <ion-navbar color="jblue">
-        <ion-title text-center>Message</ion-title>
-        <ion-buttons right>
-            <div class="fright" (click)="done()">Done</div>
-        </ion-buttons>
+        <ion-title text-center>Messaging</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
+    <ion-row>
+        <ion-col col-12>
+            <ion-list>
+                <ion-item class='item' id="item_{{i}}" *ngFor="let item of list; let i = index;" (click)="openMessage(item, i)">
+                    <img class="user_avatar" src="{{item.user_avatar_url}}" />
+                    <div class="desc">
+                        <div><b>{{item.user_name}}</b></div>
+                        <div>{{item.message_text}}</div>
+                    </div>
+                    <div class="date"><small>{{getDate(item.mdate) | amTimeAgo}}</small></div>
+                </ion-item>
+            </ion-list>
+        </ion-col>
+    </ion-row>
 </ion-content>
