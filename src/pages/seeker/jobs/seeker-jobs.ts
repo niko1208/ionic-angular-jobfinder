@@ -111,7 +111,7 @@ export class SeekerJobsPage {
       .subscribe(data => { 
           loader.dismissAll();
           if(data.status == "success") {
-            this.navCtrl.push(SeekerChatbotPage, {job_id: job_id, user_name:user_info.user_name}, this.config.navOptions);
+            this.navCtrl.push(SeekerChatbotPage, {job_id: job_id, user_name:user_info.user_name, emp_id:employer_id}, this.config.navOptions);
           } else {
             this.util.createAlert("Failed", data.result);
           }

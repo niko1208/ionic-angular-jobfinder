@@ -29,7 +29,7 @@
     <ion-item class="div_sec">
         <ion-label class='lb_icon'><ion-icon name='ios-flag-outline'></ion-icon></ion-label>
         <ion-label>Founded</ion-label>
-        <ion-input [(ngModel)]="data.profile_emp_founded" text-right></ion-input>
+        <ion-input [(ngModel)]="data.profile_emp_founded" text-right disabled readonly (click)="showDate()"></ion-input>
     </ion-item>
 
     <ion-label class="lb_title">industry</ion-label>

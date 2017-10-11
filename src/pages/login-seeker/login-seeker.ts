@@ -100,4 +100,11 @@ export class LoginSeekerPage {
           this.util.createAlert("SignIn Failed", "Server error!");
       })
   }
+
+  login_fb() {
+
+  }
+  login_g() {
+      
+  }
 }

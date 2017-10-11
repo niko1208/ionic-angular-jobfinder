@@ -46,6 +46,17 @@ page-seeker-chatbot{
         border-radius: 50px;
         z-index: 1;
     }
+    .bt_item{
+        width: 150px;
+        padding: 5px;
+        color: #fff;
+        background: #f11;
+        text-align: center;
+        border-radius: 5px;
+        margin-left: 5px;
+        font-size: 16px;
+        display: inline-block;
+    }
     .sec_send .sec_message{
         background: #ddd;
         color: #000;
@@ -86,10 +97,29 @@ page-seeker-chatbot{
         overflow-y: scroll;
     }
     ion-list.chat_room{
-        height: calc(100vh - 170px);
+        height: calc(100vh - 310px);
     }
     ion-list.chat_room ion-item .item-inner{
         border-bottom: 0px !important;
+    }
+    #upic{
+        height: 40px;
+        min-width: 100%;
+        white-space: nowrap;
+    }
+    .div_box{
+        position: relative;
+    }
+    
+    .bt_small{
+        float: right;
+    }
+    textarea.text-input {
+        display: block;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 5px 10px;
+        min-height: 30px;
     }
     .img_sender{
         width: 30px;
