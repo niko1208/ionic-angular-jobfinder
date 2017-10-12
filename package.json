@@ -40,7 +40,6 @@
         "cordova-plugin-console": "^1.0.5",
         "cordova-plugin-datepicker": "^0.9.3",
         "cordova-plugin-device": "^1.1.4",
-        "cordova-plugin-facebook4": "file:node_modules/cordova-plugin-facebook4",
         "cordova-plugin-file": "^4.0.0",
         "cordova-plugin-media-capture": "^1.4.3",
         "cordova-plugin-nativestorage": "^2.2.2",
