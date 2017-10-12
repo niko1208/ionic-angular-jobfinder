@@ -246,6 +246,9 @@ export class EmployerPostJobEditPage {
           } else {
             this.util.createAlert("Job Edit Failed", data.result);
           }
+      }, err => {
+        loader.dismissAll();
+        this.util.createAlert("Failed", "Server error");
       })
     }
   }

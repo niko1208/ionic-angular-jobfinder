@@ -77,11 +77,6 @@ export class SeekerSettingPage {
     localStorage.setItem('user_state', "");
 
     localStorage.setItem('user_info', '');
-    localStorage.setItem('user_curwork', '');
-    localStorage.setItem('user_education', '');
-    localStorage.setItem('user_experience', '');
-    localStorage.setItem('user_language', '');
-    localStorage.setItem('user_reference', '');
     localStorage.setItem('user_setting', '');
 
     this.config.userinfo = {user_info:null, user_experience:null, user_curwork:null, user_education:null, user_language:null, user_reference:null, user_setting:null};
@@ -99,7 +94,10 @@ export class SeekerSettingPage {
     if(this.isfollow) str_follow = "YES";
     if(this.isshortlist) str_shortlist = "YES";
 
+    this.config.userinfo['user_setting'].setting_distance = this.distance;
+    
     let user_setting = this.config.userinfo['user_setting'];
+
     let param = {"seeker_id" : this.config.user_id, "location_address" : user_setting.setting_location_address, "location_lat" : user_setting.setting_location_lat, "location_lng" : user_setting.setting_location_lng, "distance" : user_setting.setting_distance, "notification_chat" : str_chat, "notification_shortlist" : str_shortlist, "notification_invite" : str_invite, "notification_follow" : str_follow, "industry" : user_setting.setting_industry, "time_available" : user_setting.setting_time_available};
 
     let loader = this.loading.create({

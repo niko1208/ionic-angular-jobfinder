@@ -98,13 +98,17 @@ page-seeker-messageroom{
     .sec_receive .sec_message{
         background: #7cbb22;
     }
+    div.scroll-content{
+        margin-bottom: 0px !important;
+    }
     ion-list,
     ion-list.chat_room{
         height: calc(100vh - 140px);
         overflow-y: scroll;
     }
     ion-list.chat_room{
-        height: calc(100vh - 260px);
+        height: calc(100vh - 190px);
+        margin-bottom: 5px;
     }
     ion-list.chat_room ion-item .item-inner{
         border-bottom: 0px !important;

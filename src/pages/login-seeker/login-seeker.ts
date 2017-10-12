@@ -4,6 +4,7 @@ import { Config } from '../../provider/config';
 import { UtilService } from '../../provider/util-service';
 import { Auth } from '../../provider/auth';
 import { SignupVerifyPage } from '../signup-verify/signup-verify';
+import { ResetEmployerPage } from '../reset-employer/reset-employer';
 import { SeekerTabsPage } from '../seeker/tabs/seeker-tabs';
 import { Facebook } from '@ionic-native/facebook';
 import { NativeStorage } from '@ionic-native/native-storage';
@@ -139,6 +140,10 @@ export class LoginSeekerPage {
       }, err => {
           this.util.createAlert("SignIn Failed", "Server error!");
       })
+  }
+
+  goReset() {
+      this.navCtrl.push(ResetEmployerPage, {userType: "seeker"}, this.config.navOptions);
   }
 
   login_fb() {

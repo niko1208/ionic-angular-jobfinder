@@ -129,7 +129,7 @@ export class EmployerPostJobPage {
         //this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
     }, (err) => {
        if(this.opt == 0) {
-        this.backimage = null;
+         this.backimage = null;
        } else {
          this.image = null;
        }
@@ -137,32 +137,6 @@ export class EmployerPostJobPage {
     });
   }
 
-  getDataUri(url, callback) {
-      var image = new Image();
-      image.crossOrigin="anonymous";
-
-      image.onload = function () {
-          var canvas = document.createElement('canvas');
-          canvas.width = image.naturalWidth; // or 'width' if you want a special/scaled size
-          canvas.height = image.naturalHeight; // or 'height' if you want a special/scaled size
-
-          canvas.getContext('2d').drawImage(image, 0, 0);
-
-          var dataURL = canvas.toDataURL("image/png");
-          dataURL = dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-          callback(dataURL);
-          /*
-          // Get raw image data
-          callback(canvas.toDataURL('image/png').replace(/^data:image\/(png|jpg);base64,/, ''));
-
-          // ... or get as Data URI
-          callback(canvas.toDataURL('image/png'));
-          */
-      };
-
-      image.src = url;
-  }
-  
   upload_back() {
     this.fileInput.nativeElement.click();
   }
@@ -253,6 +227,9 @@ export class EmployerPostJobPage {
           } else {
             this.util.createAlert("Failed", data.result);
           }
+      }, err => {
+        loader.dismissAll();
+        this.util.createAlert("Failed", "Server error");
       })
     } else {
       let alert = this.alertCtrl.create({
@@ -274,7 +251,7 @@ export class EmployerPostJobPage {
                 content: 'Loading...',
               });
               loader.present();
-              this.employerService.postData("createjob", param)
+              this.employerService.postData("createjob1", param)
               .subscribe(data => { console.log(data);
                   loader.dismissAll();
                   if(data.status == "success") {
@@ -284,6 +261,9 @@ export class EmployerPostJobPage {
                   } else {
                     this.util.createAlert("Failed", data.result);
                   }
+              }, err => {
+                loader.dismissAll();
+                this.util.createAlert("Failed", "Server error");
               })
             }
           }

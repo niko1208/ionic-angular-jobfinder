@@ -4,6 +4,7 @@ import { Config } from '../../../provider/config';
 import { UtilService } from '../../../provider/util-service';
 import { SeekerService } from '../../../provider/seeker-service';
 import { SeekerAdsPage } from '../ads/seeker-ads';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'page-seeker-home',
@@ -41,6 +42,10 @@ export class SeekerHomePage {
         loader.dismissAll();
         if(data.status == "success") {
             this.list = data.result;
+            setTimeout(() => {
+              let w = $('#content').width();
+              $('.ads').css('height', w+'px');
+            }, 500);
         } else {
           this.util.createAlert("Failed to Load!", data.result);
         }

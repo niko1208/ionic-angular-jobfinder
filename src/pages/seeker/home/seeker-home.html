@@ -5,7 +5,7 @@
         </ion-title>
     </ion-navbar>
 </ion-header>
-<ion-content>
+<ion-content id="content">
     <ion-card class="ads" *ngFor="let item of list; let i = index;" [style.backgroundImage]="'url('+item.tbl_ads_avatar_url+')'">
         <div class="follow" (click)="follow(item)">
             <img src="assets/images/home_people_icon_check@2x.png" *ngIf="item.follow_cnt == '1'"/>

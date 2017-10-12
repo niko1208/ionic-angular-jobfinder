@@ -88,8 +88,10 @@ export class SeekerEditexperiencePage {
   }
 
   showDate() {
+    let cdate = new Date(this.data.experience_period);
+    if(this.data.experience_period == "") cdate = new Date();
     this.datePicker.show({
-      date: new Date(this.data.experience_period),
+      date: cdate,
       mode: 'date',
       androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
     }).then(
@@ -101,8 +103,10 @@ export class SeekerEditexperiencePage {
   }
 
   showDate1() {
+    let cdate = new Date(this.data.experience_though);
+    if(this.data.experience_though == "") cdate = new Date();
     this.datePicker.show({
-      date: new Date(this.data.experience_though),
+      date: cdate,
       mode: 'date',
       androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
     }).then(

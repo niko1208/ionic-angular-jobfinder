@@ -71,16 +71,18 @@ export class EmployerBotweightPage {
       content: 'Loading...',
     });
     loader.present();
-    this.employerService.postData("createjobbot", param)
+    this.employerService.postData("createjobbot1", param)
     .subscribe(data => { 
         loader.dismissAll();
         if(data.status == "success") {
             this.util.createAlert("Congratulations", "Job has been created successfully!");
             this.navCtrl.pop();
+        } else {
+          this.util.createAlert("Failed", data.result);
         }
     }, err => {
       loader.dismissAll();
-      alert("error");
+      this.util.createAlert("Failed", "Server error");
     })
   }
 }

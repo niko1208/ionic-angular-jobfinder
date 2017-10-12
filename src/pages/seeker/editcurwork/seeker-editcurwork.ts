@@ -102,8 +102,10 @@ export class SeekerEditcurworkPage {
   }
 
   showDate() {
+    let cdate = new Date(this.data.curwork_period);
+    if(this.data.curwork_period == "") cdate = new Date();
     this.datePicker.show({
-      date: new Date(this.data.curwork_period),
+      date: cdate,
       mode: 'date',
       androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
     }).then(

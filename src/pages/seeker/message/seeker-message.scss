@@ -1,23 +1,33 @@
 page-seeker-message{
     .user_avatar{
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
         border: 2px solid #fff;
         box-shadow: #555 0px 0px 1px;
         border-radius: 100px;
     }
+    .list-md{
+        margin: 0px;
+    }
+    ion-item.item-md{
+        padding-left: 2px;
+    }
     ion-item img,
     ion-item div.desc{
         float: left;
+        font-size: 14px;
+        white-space: normal;
     }
     ion-item div.desc{
-        width: calc(100% - 180px);
+        width: calc(100% - 110px);
         padding: 5px;
         padding-left: 10px;
     }
     .date{
         float: right;
         color: #777;
+        position: absolute;
+        right: 10px;
     }
     ion-row ion-col div.desc{
         border: 0px;

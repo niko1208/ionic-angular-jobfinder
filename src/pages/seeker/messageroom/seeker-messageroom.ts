@@ -31,6 +31,8 @@ export class SeekerMessageroomPage {
   image: any;
   video: any;
   isphoto: any;
+  tabBarElement: any;
+  mytimer: any;
 
   @ViewChild('fileInp') fileInput: ElementRef;
 
@@ -43,14 +45,20 @@ export class SeekerMessageroomPage {
     public navParams: NavParams,
     public actionSheetCtrl: ActionSheetController) {
         this.sitem = navParams.get('item');
+        this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
   }
   
   ionViewWillEnter() {
+    this.tabBarElement.style.display = 'none';
     this.user_info = JSON.parse(localStorage.getItem('user_info'));
     this.user_setting = JSON.parse(localStorage.getItem('user_setting'));
 
     this.openMessage(this.sitem);
 
+  }
+  ionViewWillLeave() {
+    this.tabBarElement.style.display = 'flex';
+    clearTimeout(this.mytimer);
   }
 
   presentActionSheet() {
@@ -397,7 +405,7 @@ export class SeekerMessageroomPage {
 
   loadBack() {
     let self = this;
-    setTimeout(() => {
+    this.mytimer = setTimeout(() => {
       self.loadBack();
     }, 5000);
 

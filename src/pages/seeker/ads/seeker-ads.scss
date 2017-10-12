@@ -75,6 +75,9 @@ page-seeker-ads{
         color: rgba(255,255,255,0.8);
         text-align: center;
     }
+    .div_sec ion-textarea{
+        width: calc(100% - 16px);
+    }
     textarea.text-input-md{
         min-height: 100px;
     }
