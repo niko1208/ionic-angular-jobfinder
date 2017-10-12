@@ -74,6 +74,8 @@ import { Camera } from '@ionic-native/camera';
 import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture';
 import { DatePicker } from '@ionic-native/date-picker';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { Facebook } from '@ionic-native/facebook';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 import { HttpModule } from '@angular/http';
 import { Push } from '@ionic-native/push';
@@ -223,6 +225,8 @@ import { MessageService } from '../provider/message-service';
     MediaCapture,
     DatePicker,
     SocialSharing,
+    Facebook,
+    NativeStorage,
     SplashScreen,
     Config,
     UtilService,

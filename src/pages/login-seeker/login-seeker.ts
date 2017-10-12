@@ -5,13 +5,15 @@ import { UtilService } from '../../provider/util-service';
 import { Auth } from '../../provider/auth';
 import { SignupVerifyPage } from '../signup-verify/signup-verify';
 import { SeekerTabsPage } from '../seeker/tabs/seeker-tabs';
+import { Facebook } from '@ionic-native/facebook';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 @Component({
   selector: 'page-login-seeker',
   templateUrl: 'login-seeker.html'
 })
 export class LoginSeekerPage {
-
+    FB_APP_ID: number = 1968148010124162;
     public email: any;
     public password: any;
 
@@ -20,15 +22,53 @@ export class LoginSeekerPage {
     public util: UtilService,
     public loading: LoadingController,
     public viewCtrl: ViewController,
+  	public fb: Facebook,
+  	public nativeStorage: NativeStorage,
     public auth: Auth) {
         this.email = "test5@mail.com";
         this.password = "test5";
+        this.fb.browserInit(this.FB_APP_ID, "v2.8");
   }
 
   goback() {
       this.navCtrl.pop(this.config.navOptionsBack);
   }
-  
+
+  doFbLogin(){
+    let permissions = new Array<string>();
+    let nav = this.navCtrl;
+	let env = this;
+    //the permissions your facebook app needs from the user
+    permissions = ["public_profile"];
+
+
+    this.fb.login(permissions)
+    .then(function(response){
+      let userId = response.authResponse.userID;
+      let params = new Array<string>();
+
+      //Getting name and gender properties
+      env.fb.api("/me?fields=name,gender", params)
+      .then(function(user) {
+        user.picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
+        //now we have the users info, let's save it in the NativeStorage
+        env.nativeStorage.setItem('user',
+        {
+          name: user.name,
+          gender: user.gender,
+          picture: user.picture
+        })
+        .then(function(){
+          alert("success");
+        }, function (error) {
+          console.log(error);
+        })
+      })
+    }, function(error){
+      console.log(error);
+    });
+  }
+
   login() {
       if(this.email == "") {
           this.util.createAlert("", "Please insert Email!");
@@ -102,7 +142,7 @@ export class LoginSeekerPage {
   }
 
   login_fb() {
-
+      this.doFbLogin();
   }
   login_g() {
       
