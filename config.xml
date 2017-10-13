@@ -84,6 +84,14 @@
     <plugin name="cordova-plugin-console" spec="^1.0.5" />
     <plugin name="cordova-plugin-datepicker" spec="^0.9.3" />
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
+    <plugin name="cordova-plugin-facebook4" spec="file:cordova-plugin-facebook4">
+        <variable name="APP_ID" value="1968148010124162" />
+        <variable name="APP_NAME" value="jobfinder" />
+    </plugin>
+    <plugin name="cordova-plugin-geolocation" spec="^2.4.3" />
+    <plugin name="cordova-plugin-googleplus" spec="^5.1.1">
+        <variable name="REVERSED_CLIENT_ID" value="317689615285-2ss4s9gvmj3vj0rrpt0976u282f2sg9c.apps.googleusercontent.com" />
+    </plugin>
     <plugin name="cordova-plugin-media-capture" spec="^1.4.3" />
     <plugin name="cordova-plugin-nativestorage" spec="^2.2.2" />
     <plugin name="cordova-plugin-splashscreen" spec="^4.0.3" />

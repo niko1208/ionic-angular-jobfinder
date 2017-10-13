@@ -75,6 +75,7 @@ import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ion
 import { DatePicker } from '@ionic-native/date-picker';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Facebook } from '@ionic-native/facebook';
+import { GooglePlus } from '@ionic-native/google-plus';
 import { NativeStorage } from '@ionic-native/native-storage';
 
 import { HttpModule } from '@angular/http';
@@ -226,6 +227,7 @@ import { MessageService } from '../provider/message-service';
     DatePicker,
     SocialSharing,
     Facebook,
+    GooglePlus,
     NativeStorage,
     SplashScreen,
     Config,

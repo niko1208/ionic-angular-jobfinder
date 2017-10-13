@@ -24,6 +24,7 @@
         "@ionic-native/core": "3.12.1",
         "@ionic-native/date-picker": "^4.3.1",
         "@ionic-native/facebook": "^4.3.1",
+        "@ionic-native/geolocation": "^4.3.1",
         "@ionic-native/google-plus": "^4.3.1",
         "@ionic-native/media-capture": "^4.3.1",
         "@ionic-native/native-storage": "^4.3.1",
@@ -40,7 +41,10 @@
         "cordova-plugin-console": "^1.0.5",
         "cordova-plugin-datepicker": "^0.9.3",
         "cordova-plugin-device": "^1.1.4",
+        "cordova-plugin-facebook4": "file:cordova-plugin-facebook4",
         "cordova-plugin-file": "^4.0.0",
+        "cordova-plugin-geolocation": "^2.4.3",
+        "cordova-plugin-googleplus": "^5.1.1",
         "cordova-plugin-media-capture": "^1.4.3",
         "cordova-plugin-nativestorage": "^2.2.2",
         "cordova-plugin-splashscreen": "^4.0.3",
@@ -78,7 +82,15 @@
             "cordova-plugin-media-capture": {},
             "cordova-plugin-datepicker": {},
             "cordova-plugin-x-socialsharing": {},
-            "cordova-plugin-nativestorage": {}
+            "cordova-plugin-nativestorage": {},
+            "cordova-plugin-geolocation": {},
+            "cordova-plugin-googleplus": {
+                "REVERSED_CLIENT_ID": "317689615285-2ss4s9gvmj3vj0rrpt0976u282f2sg9c.apps.googleusercontent.com"
+            },
+            "cordova-plugin-facebook4": {
+                "APP_ID": "1968148010124162",
+                "APP_NAME": "jobfinder"
+            }
         },
         "platforms": [
             "android",
