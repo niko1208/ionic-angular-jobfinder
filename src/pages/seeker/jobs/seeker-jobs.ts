@@ -19,6 +19,7 @@ export class SeekerJobsPage {
   arrIndustry = [];
   queryIndustry = "";
   list: any;
+  slist: any;
   @ViewChild('slides') slides: Slides;
 
   constructor(public navCtrl: NavController, 
@@ -54,6 +55,7 @@ export class SeekerJobsPage {
             this.list[i]['timeago'] = this.config.getDiffDateString(this.list[i].timediff);
             this.list[i]['distance'] = this.config.calcCrow(this.list[i].job_location_lat, this.list[i].job_location_lng, user_setting.setting_location_lat, user_setting.setting_location_lng);
           }
+          this.search("");
         } else {
           this.util.createAlert("Failed"!, data.result);
         }
@@ -162,6 +164,16 @@ export class SeekerJobsPage {
   }
 
   search(value) {
-    
+    this.slist = this.filterItems(value);
+  }
+  filterItems(searchTerm) {
+    return this.list.filter((item) => {
+      for(var key in item) { 
+        if(item[key].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+          return true;
+        }
+      }
+      return false;
+    })
   }
 }

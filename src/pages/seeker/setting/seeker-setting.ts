@@ -5,6 +5,7 @@ import { UtilService } from '../../../provider/util-service';
 import { SeekerService } from '../../../provider/seeker-service';
 import { SeekerIndustryPage } from '../industry/seeker-industry';
 import { SeekerCurLocationPage } from '../curlocation/seeker-curlocation';
+import { SplashPage } from '../../splash/splash';
 import { SeekerHelpPage } from '../help/seeker-help';
 
 @Component({
@@ -81,6 +82,14 @@ export class SeekerSettingPage {
 
     this.config.userinfo = {user_info:null, user_experience:null, user_curwork:null, user_education:null, user_language:null, user_reference:null, user_setting:null};
 
+    let loader = this.loading.create({
+      content: 'Login...',
+    });
+    loader.present();
+    setTimeout(() => {
+      loader.dismiss();
+      //this.navCtrl.setRoot(SplashPage);
+    }, 3000);
     window.location.reload();
   }
 

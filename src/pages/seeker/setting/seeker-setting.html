@@ -11,7 +11,7 @@
 <ion-content class='cont_detail'>
     <ion-label class="lb_title">discovery settings</ion-label>
     <ion-item (click)="goLocation()">
-        <ion-label class='lb_icon'><ion-icon name='ios-contact-outline'></ion-icon></ion-label>
+        <ion-label class='lb_icon'><ion-icon name='ios-locate-outline'></ion-icon></ion-label>
         <ion-label>My current Location</ion-label>
         <ion-label text-right>
             <ion-icon class="lbarrowright" name="ios-arrow-forward-outline"></ion-icon>
@@ -19,7 +19,7 @@
         </ion-label>
     </ion-item>
     <ion-item no-lines>
-        <ion-label class='lb_icon'><ion-icon name='ios-contact-outline'></ion-icon></ion-label>
+        <ion-label class='lb_icon'><ion-icon name='ios-navigate-outline'></ion-icon></ion-label>
         <ion-label>Maximum Distance</ion-label>
         <ion-label text-right>100 km</ion-label>
     </ion-item>
@@ -30,7 +30,7 @@
         </ion-range>
     </ion-item>
     <ion-item (click)="goindustry()">
-        <ion-label class='lb_icon'><ion-icon name='ios-contact-outline'></ion-icon></ion-label>
+        <ion-label class='lb_icon'><ion-icon name='ios-briefcase-outline'></ion-icon></ion-label>
         <ion-label>Industry</ion-label>
         <ion-label text-right>
             <ion-icon class="lbarrowright" name="ios-arrow-forward-outline"></ion-icon>
@@ -41,7 +41,7 @@
     
     <ion-label class="lb_title">notifications</ion-label>
     <ion-item>
-        <ion-label class='lb_icon'><ion-icon name='ios-contact-outline'></ion-icon></ion-label>
+        <ion-label class='lb_icon'><ion-icon name='ios-chatboxes-outline'></ion-icon></ion-label>
         <ion-label>Chat Messages</ion-label>
         <ion-label text-right>
             <ion-toggle [(ngModel)]="ischat"></ion-toggle>
@@ -71,12 +71,12 @@
     
     <ion-label class="lb_title">Contact us</ion-label>
     <ion-item (click)="help()">
-        <ion-label class='lb_icon'><ion-icon name='ios-contact-outline'></ion-icon></ion-label>
+        <ion-label class='lb_icon'><ion-icon name='ios-help-outline'></ion-icon></ion-label>
         <ion-label>Help & Support</ion-label>
         <ion-label text-right><ion-icon name="ios-arrow-forward-outline"></ion-icon></ion-label>
     </ion-item>
     <ion-item (click)="logout()">
-        <ion-label class='lb_icon'><ion-icon name='ios-contact-outline'></ion-icon></ion-label>
+        <ion-label class='lb_icon'><ion-icon name='ios-log-out-outline'></ion-icon></ion-label>
         <ion-label>Log Out</ion-label>
         <ion-label text-right><ion-icon name="ios-arrow-forward-outline"></ion-icon></ion-label>
     </ion-item>

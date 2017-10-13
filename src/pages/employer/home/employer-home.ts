@@ -18,6 +18,7 @@ export class EmployerHomePage {
   arrIndustry = [];
   queryIndustry = "";
   list: any;
+  slist: any;
   @ViewChild('slides') slides: Slides;
 
   constructor(public navCtrl: NavController, 
@@ -53,7 +54,7 @@ export class EmployerHomePage {
       return;
     }
     this.loadData();
-    this.slides.lockSwipes(true);
+    //this.slides.lockSwipes(true);
   }
 
   loadData() {
@@ -72,6 +73,7 @@ export class EmployerHomePage {
             let item = this.list[i];
             this.list[i]['distance'] = this.config.calcCrow(this.list[i].setting_location_lat, this.list[i].setting_location_lng, user_setting.setting_emp_location_lat, user_setting.setting_emp_location_lng);
           }
+          this.search("");
         }
     }, error => {
         loader.dismissAll();
@@ -101,15 +103,15 @@ export class EmployerHomePage {
   }
 
   prev() {
-    this.slides.lockSwipes(false);
+    //this.slides.lockSwipes(false);
     this.slides.slidePrev();
-    this.slides.lockSwipes(true);
+    //this.slides.lockSwipes(true);
   }
 
   next() {
-    this.slides.lockSwipes(false);
+    //this.slides.lockSwipes(false);
     this.slides.slideNext();
-    this.slides.lockSwipes(true);
+    //this.slides.lockSwipes(true);
   }
 
   invite(i) {
@@ -135,6 +137,16 @@ export class EmployerHomePage {
   }
 
   search(value) {
-    
+    this.slist = this.filterItems(value);
+  }
+  filterItems(searchTerm) {
+    return this.list.filter((item) => {
+      for(var key in item) { 
+        if(item[key].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+          return true;
+        }
+      }
+      return false;
+    })
   }
 }

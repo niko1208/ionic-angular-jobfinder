@@ -16,6 +16,7 @@ import { EmployerChatbotPage } from '../chatbot/employer-chatbot';
 export class EmployerApplicantPage {
 
   list: any;
+  slist: any;
   data: any;
   isshowAlert = false;
   constructor(public navCtrl: NavController, 
@@ -71,6 +72,7 @@ export class EmployerApplicantPage {
               this.list[i]['applied_date'] = this.config.getDiffDateString(this.list[i].timediff);
               this.list[i]['dis'] = this.config.calcCrow(this.list[i].setting_location_lat, this.list[i].setting_location_lng, user_setting.setting_emp_location_lat, user_setting.setting_emp_location_lng);
             }
+            this.search("");
         }
     })
   }
@@ -123,6 +125,20 @@ export class EmployerApplicantPage {
     let avatar_url = this.list[i].user_avatar_url;
     let user_name = this.list[i].user_name;
     this.navCtrl.push(EmployerChatbotPage, {seeker_id: seekerID, job_id: this.data.job_id, avatar:avatar_url, user_name: user_name});
+  }
+
+  search(value) {
+    this.slist = this.filterItems(value);
+  }
+  filterItems(searchTerm) {
+    return this.list.filter((item) => {
+      for(var key in item) { 
+        if(item[key].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+          return true;
+        }
+      }
+      return false;
+    })
   }
 
 }

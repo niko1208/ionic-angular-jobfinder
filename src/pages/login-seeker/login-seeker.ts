@@ -30,8 +30,8 @@ export class LoginSeekerPage {
   	public gp: GooglePlus,
   	public nativeStorage: NativeStorage,
     public auth: Auth) {
-        this.email = "test5@mail.com";
-        this.password = "test5";
+        this.email = "";// "test5@mail.com";
+        this.password = "";//"test5";
         this.fb.browserInit(this.FB_APP_ID, "v2.8");
   }
 

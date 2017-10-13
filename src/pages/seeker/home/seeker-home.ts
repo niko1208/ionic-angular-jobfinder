@@ -13,6 +13,7 @@ import * as $ from 'jquery';
 export class SeekerHomePage {
 
   list: any;
+  slist: any;
   constructor(public navCtrl: NavController, 
     public config: Config,
     public util: UtilService,
@@ -42,6 +43,7 @@ export class SeekerHomePage {
         loader.dismissAll();
         if(data.status == "success") {
             this.list = data.result;
+            this.search("");
             setTimeout(() => {
               let w = $('#content').width();
               $('.ads').css('height', w+'px');
@@ -89,4 +91,17 @@ export class SeekerHomePage {
     this.navCtrl.push(SeekerAdsPage, {data:item}, this.config.navOptions);
   }
 
+  search(value) {
+    this.slist = this.filterItems(value);
+  }
+  filterItems(searchTerm) {
+    return this.list.filter((item) => {
+      for(var key in item) { 
+        if(item[key].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+          return true;
+        }
+      }
+      return false;
+    })
+  }
 }

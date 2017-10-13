@@ -8,7 +8,7 @@
         </ion-buttons>
     </ion-navbar>
     <ion-toolbar>
-        <ion-searchbar #q [(ngModel)]="searchValue" (keyup.enter)="search(q.value)" pleceholder="">
+        <ion-searchbar #q [(ngModel)]="searchValue" (keyup.enter)="search(q.value)" (ionInput)="search(q.value)" pleceholder="">
         </ion-searchbar>
     </ion-toolbar>
 </ion-header>
@@ -26,7 +26,7 @@
         <small>Viewed: {{data?.views}}, Applied: {{data?.applies}}</small>
     </div>
     <ion-list>
-        <ion-item *ngFor="let item of list; let i = index;">
+        <ion-item *ngFor="let item of slist; let i = index;">
             <img class="user_avatar" src="{{item.user_avatar_url}}" (click)="view(i)" />
             <div class="desc">
                 <div>{{item.user_name}}</div>

@@ -8,6 +8,7 @@ import { EmployerAdsPage } from '../ads/employer-ads';
 import { EmployerService } from '../../../provider/employer-service';
 import { EmployerCurLocationPage } from '../curlocation/employer-curlocation';
 import { EmployerHelpPage } from '../help/employer-help';
+import { SplashPage } from '../../splash/splash';
 
 @Component({
   selector: 'page-employer-setting',
@@ -132,6 +133,14 @@ export class EmployerSettingPage {
     localStorage.setItem('user_info', "");
     localStorage.setItem('user_setting', "");
     localStorage.setItem('user_profile', "");
+    let loader = this.loading.create({
+      content: 'Login...',
+    });
+    loader.present();
+    setTimeout(() => {
+      loader.dismiss();
+      //this.navCtrl.setRoot(SplashPage);
+    }, 3000);
     window.location.reload();
   }
 
