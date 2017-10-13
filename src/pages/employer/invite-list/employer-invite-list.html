@@ -14,8 +14,8 @@
             <img class="user_avatar" src="{{item.user_avatar_url}}" (click)="view(i)"/>
             <div class="desc">
                 <div>{{item.user_name}}</div>
-                <small></small><br/>
-                <small></small>
+                <small>Invited {{item.time}}</small><br/>
+                <small>{{item.distance}}</small>
             </div>
             <div class='fright' (click)="delete(i)">
                 <ion-icon name="ios-close"></ion-icon>
