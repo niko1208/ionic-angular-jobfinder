@@ -8,6 +8,7 @@ import { EmployerAdsPage } from '../ads/employer-ads';
 import { EmployerService } from '../../../provider/employer-service';
 import { EmployerCurLocationPage } from '../curlocation/employer-curlocation';
 import { EmployerHelpPage } from '../help/employer-help';
+import { SplashPage } from '../../splash/splash';
 
 @Component({
   selector: 'page-employer-setting',
@@ -21,7 +22,7 @@ export class EmployerSettingPage {
   ischat = false;
   isapp = false;
 
-  distance = '0';
+  distance = '1';
   constructor(public navCtrl: NavController, 
     public config: Config,
     public util: UtilService,
@@ -40,13 +41,42 @@ export class EmployerSettingPage {
     this.user_setting = JSON.parse(localStorage.getItem('user_setting'));
     this.user_profile = JSON.parse(localStorage.getItem('user_profile'));
 
-    this.distance = this.user_setting.setting_emp_distance;
-    if(this.user_setting.setting_emp_notification_chat == 'YES') {
-      this.ischat = true;
+    if(this.user_setting != null) { 
+      this.distance = this.user_setting.setting_emp_distance;
+      if(this.user_setting.setting_emp_notification_chat == 'YES') {
+        this.ischat = true;
+      }
+      if(this.user_setting.setting_emp_notification_applicant == 'YES') {
+        this.isapp = true;
+      }
+    } else {
+      this.user_setting = {};
+      this.user_setting['setting_emp_distance'] = "1";
+      this.user_setting['setting_emp_employer_id'] = "";
+      this.user_setting['setting_emp_id'] = "";
+      this.user_setting['setting_emp_location_address'] = "Select your current location";
+      this.user_setting['setting_emp_location_lat'] = "";
+      this.user_setting['setting_emp_location_lng'] = "";
+      this.user_setting['setting_emp_notification_applicant'] = "";
+      this.user_setting['setting_emp_notification_chat'] = "";
+      let user_setting = JSON.stringify(this.user_setting);
+      localStorage.setItem('user_setting', user_setting);
     }
-    if(this.user_setting.setting_emp_notification_applicant == 'YES') {
-      this.isapp = true;
+    if(this.user_profile == null) {
+      this.user_profile = {};
+      this.user_profile['profile_emp_about'] = "";
+      this.user_profile['profile_emp_bus_size_max'] = "";
+      this.user_profile['profile_emp_bus_size_min'] = "";
+      this.user_profile['profile_emp_bus_size_title'] = "";
+      this.user_profile['profile_emp_date'] = "";
+      this.user_profile['profile_emp_employer_id'] = "";
+      this.user_profile['profile_emp_founded'] = "";
+      this.user_profile['profile_emp_id'] = "";
+      this.user_profile['profile_emp_tech'] = "#alljobs";
+      let user_profile = JSON.stringify(this.user_profile);
+      localStorage.setItem('user_profile', user_profile);
     }
+
     console.log(this.user_info);
     console.log(this.user_setting);
     console.log(this.user_profile);
@@ -103,6 +133,14 @@ export class EmployerSettingPage {
     localStorage.setItem('user_info', "");
     localStorage.setItem('user_setting', "");
     localStorage.setItem('user_profile', "");
+    let loader = this.loading.create({
+      content: 'Login...',
+    });
+    loader.present();
+    setTimeout(() => {
+      loader.dismiss();
+      //this.navCtrl.setRoot(SplashPage);
+    }, 3000);
     window.location.reload();
   }
 

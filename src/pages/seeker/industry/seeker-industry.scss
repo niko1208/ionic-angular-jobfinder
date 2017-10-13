@@ -1,0 +1,18 @@
+page-seeker-industry{
+    ion-col{
+        color: $jblue;
+        background: #fff;
+        border: 1px solid $jblue;
+        font-size: 12px;
+        text-align: center;
+    }
+    ion-col.sel{
+        background: $jblue;
+        color: #fff;
+    }
+    .tbar.toolbar-md{
+        padding: 0px;
+        min-height: 10px;
+        padding-top: 1px;
+    }
+}

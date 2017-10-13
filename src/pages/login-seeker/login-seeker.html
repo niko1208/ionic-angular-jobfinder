@@ -7,18 +7,28 @@
         <h2 text-center>Welcome!</h2>
         <ion-item class="form-item">        
             <ion-label> <ion-icon name="mail"></ion-icon></ion-label>
-            <ion-input clearInput type="text" placeholder="Email"></ion-input>
+            <ion-input clearInput type="text" [(ngModel)]="email" placeholder="Email"></ion-input>
         </ion-item>
         <ion-item class="form-item">        
             <ion-label> <ion-icon name="lock"></ion-icon></ion-label>
-            <ion-input type="password" placeholder="Password"></ion-input>
+            <ion-input type="password" [(ngModel)]="password" placeholder="Password"></ion-input>
         </ion-item>
         <button ion-button full round color="jblue" (click)="login()">Login</button>
+    </div>
+    <div text-center class="socialbuttons">
+        <button ion-button round color="jred" (click)="login_g()">
+            <ion-icon name="logo-googleplus"></ion-icon>
+            Sign-in
+        </button>
+        <button ion-button round color="jf" (click)="login_fb()">
+            <ion-icon name="logo-facebook"></ion-icon>
+            Sign-in
+        </button>
     </div>
 
     <div class="div_forgot_password" text-center>
         <small>Forgot Password?</small>
-        <span>Click here to reset!</span>
+        <span (click)="goReset()">Click here to reset!</span>
     </div>
 
 </ion-content>

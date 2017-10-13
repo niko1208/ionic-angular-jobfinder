@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-navbar color="jblue" hideBackButton="true">
+        <ion-icon name="list" class="iconlist" (click)="goList()"></ion-icon>
+        <ion-icon name="map" class="iconmap"></ion-icon>
+        <ion-title text-center>Jobs</ion-title>
+        <ion-icon name="ios-heart-outline" class="iconheart" (click)="goLiked()"></ion-icon>
+        <ion-icon name="ios-briefcase-outline" class="iconapplied" (click)="goApplied()"></ion-icon>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div class="top_header">
+        <ion-searchbar #q [(ngModel)]="searchValue" (keyup.enter)="search(q.value)" pleceholder="">
+        </ion-searchbar>
+        <div style="padding: 0px 8px;">
+            <ion-select #indus interface="popover" [(ngModel)]="queryIndustry" (ionChange)="change(indus.value)" style="padding: 4px 5px;">
+                <ion-option value="">#alljobs</ion-option>
+                <ion-option *ngFor="let item of arrIndustry; let i = index;" value="{{item}}">{{item}}</ion-option>
+            </ion-select>
+        </div>
+    </div>
+    <div #mapsjob id='mapsjob'></div>
+</ion-content>

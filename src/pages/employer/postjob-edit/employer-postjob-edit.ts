@@ -1,10 +1,11 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { NavController, LoadingController, NavParams } from 'ionic-angular';
+import { NavController, LoadingController, NavParams, ActionSheetController } from 'ionic-angular';
 import { Config } from '../../../provider/config';
 import { UtilService } from '../../../provider/util-service';
 import { Auth } from '../../../provider/auth';
 import { EmployerService } from '../../../provider/employer-service';
 import { EmployerEditjobLocationPage } from '../editjob-location/employer-editjob-location';
+import { Camera, File, Transfer, FilePath  } from 'ionic-native';
 import * as $ from 'jquery';
 
 @Component({
@@ -30,6 +31,10 @@ export class EmployerPostJobEditPage {
   bedit = false;
   data: any;
 
+  backimage = null;
+  image = null;
+  opt = 0;
+
   @ViewChild('fileInp') fileInput: ElementRef;
   @ViewChild('fileInp1') fileInput1: ElementRef;
 
@@ -39,11 +44,76 @@ export class EmployerPostJobEditPage {
     public auth: Auth,
     public employerService: EmployerService,
     public loading: LoadingController,
+    public actionSheetCtrl: ActionSheetController,
     public navParams: NavParams) {
         this.arrIndustry = ["#hospitality", "#entertainment", "#fastfood", "#construction", "#sales", "#retail", "#notforprofit", "#logistics", "#administration", "#agedcare", "#banking", "#callcentre", "#childcare", "#consumergoods", "#creative", "#defence", "#education", "#entrepreneur", "#financialservices", "#government", "#healthcare", "#hr", "#legal", "#manufacturing", "#marketing", "#media", "#mining", "#officesupport", "#professionalservices", "#property", "#recreation", "#recruitment", "#selfemployed", "#software", "#sports", "#technicalsupport", "#technology", "#telecommunications", "#tourism", "#trades", "#transport", "#cleaning", "#fashion", "#hairandbeauty", "#services"];
         this.arrPosition = ["Full Time", "Part Time", "Casual", "Contract", "Internship"];
         this.data = this.navParams.get('data');
         console.log(this.data);
+  }
+
+  presentActionSheet(opt) {
+    this.opt = opt;
+   const actionSheet = this.actionSheetCtrl.create({
+     title: '',
+     buttons: [
+       {
+         text: 'Camera',
+         handler: () => {
+           //this.clickCamera = true;
+           this.takePicture(opt, Camera.PictureSourceType.CAMERA);
+         }
+       },
+       {
+         text: 'Libaray',
+         handler: () => {
+           //this.clickCamera = true;
+           this.takePicture(opt, Camera.PictureSourceType.PHOTOLIBRARY);
+           //this.upload_image();
+         }
+       },
+       {
+         text: 'Cancel',
+         role: 'cancel',
+         handler: () => {
+         }
+       }
+     ]
+   });
+   actionSheet.present();
+ }
+  
+   takePicture(opt, sourceType){
+     var options = {
+      quality: 50,
+      //allow: true,
+      sourceType: sourceType,
+      destinationType: Camera.DestinationType.DATA_URL,
+      //saveToPhotoAlbum: false,
+      //encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 1000,
+      targetHeight: 1000
+    };
+    Camera.getPicture(options).then((imagePath) => {
+      // imageData is a base64 encoded string
+        if(this.opt == 0) {
+          this.backimage = "data:image/jpeg;base64," + imagePath;
+          $('#back_img1').css('background-image', 'url('+this.backimage+')');
+        } else {
+          this.image = "data:image/jpeg;base64," + imagePath;
+          $('#image1').attr('src', this.image);
+        }
+        //var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
+        //var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
+        //this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+    }, (err) => {
+       if(this.opt == 0) {
+        this.backimage = null;
+       } else {
+         this.image = null;
+       }
+      console.log(err);
+    });
   }
 
   ionViewWillEnter() {
@@ -88,17 +158,7 @@ export class EmployerPostJobEditPage {
 
       image.src = url;
   }
-  convBase64ToFile(dataURI) {
-    var byteString = atob(dataURI.split(',')[1]);
-    var ab = new ArrayBuffer(byteString.length);
-    var ia = new Uint8Array(ab);
-    for (var i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-    }
-    var blob = new Blob([ia], { type: 'image/jpeg' });
-    var file = new File([blob], "image.jpg");
-    return file;
-  }
+  
 
   upload_back() {
     this.fileInput.nativeElement.click();
@@ -170,7 +230,7 @@ export class EmployerPostJobEditPage {
     }
     console.log(this.data);
     
-    let param = {"avatar" : this.file_image, "background" : this.file_image_back, "employer_id" : this.config.user_id, "employer_name" : user_name, "company_name" : this.company_name, "job_title" : this.job_title, "job_description" : this.job_desc, "job_requirement" : this.job_req, "time_available" : this.job_time, "industry" : this.job_industry, "location_address" : this.data.job_location_address, "location_lat" : this.data.job_location_lat, "location_lng" : this.data.job_location_lng, "job_id" : job_id};
+    let param = {"avatar" : this.image, "background" : this.backimage, "employer_id" : this.config.user_id, "employer_name" : user_name, "company_name" : this.company_name, "job_title" : this.job_title, "job_description" : this.job_desc, "job_requirement" : this.job_req, "time_available" : this.job_time, "industry" : this.job_industry, "location_address" : this.data.job_location_address, "location_lat" : this.data.job_location_lat, "location_lng" : this.data.job_location_lng, "job_id" : job_id};
     
     let loader = this.loading.create({
       content: 'Loading...',
@@ -178,20 +238,17 @@ export class EmployerPostJobEditPage {
     loader.present();
 
     if(this.bedit) {
-      this.employerService.postData("editjob_web", param)
+      this.employerService.postData("editjob1", param)
       .subscribe(data => { console.log(data);
           loader.dismissAll();
           if(data.status == "success") {
-            
+            this.navCtrl.pop();
+          } else {
+            this.util.createAlert("Job Edit Failed", data.result);
           }
-      })
-    } else {
-      this.employerService.postData("createjob", param)
-      .subscribe(data => { console.log(data);
-          loader.dismissAll();
-          if(data.status == "success") {
-            
-          }
+      }, err => {
+        loader.dismissAll();
+        this.util.createAlert("Failed", "Server error");
       })
     }
   }
@@ -201,7 +258,21 @@ export class EmployerPostJobEditPage {
   }
 
   deleteJob() {
+    let loader = this.loading.create({
+      content: 'Loading...',
+    });
+    loader.present();
 
+    let param = {"job_id" : this.data.job_id};
+    this.employerService.postData("deletejob", param)
+    .subscribe(data => { console.log(data);
+        loader.dismissAll();
+        if(data.status == "success") {
+          this.navCtrl.pop();
+        } else {
+          this.util.createAlert("Job Delete Failed", data.result);
+        }
+    })
   }
 
 }

@@ -1,0 +1,45 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>About</ion-title>
+        <ion-buttons right>
+            <div class="fright" tappable (click)="save()">Save</div>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class='cont_detail' padding>
+    
+    <div class="div_sec">
+        <ion-label>Mobile :</ion-label>
+        <ion-input [(ngModel)]="data.user_mobile"></ion-input>
+    </div>
+    <div class="div_sec">
+        <ion-label>Email :</ion-label>
+        <ion-input [(ngModel)]="data.user_email"></ion-input>
+    </div>
+    <div class="div_sec">
+        <ion-label>Gender :</ion-label>
+        <ion-select [(ngModel)]="data.user_gender">
+            <ion-option value="Male">Male</ion-option>
+            <ion-option value="Female">Female</ion-option>
+        </ion-select>
+    </div>
+    <div class="div_sec">
+        <ion-label>Date of Birth :</ion-label>
+        <ion-input [(ngModel)]="data.user_birthday" disabled readonly (click)="showDate()"></ion-input>
+    </div>
+    <div class="div_sec">
+        <ion-label>Tell Us More :</ion-label>
+        <ion-textarea [(ngModel)]="data.user_about"></ion-textarea>
+    </div>
+    <ion-item class='upload'>
+        <ion-label>Upload your Video <small style='font-size:8px'>(optional)</small> : 
+            <ion-icon name="ios-cloud-upload-outline" (click)="upload_photo()"></ion-icon>
+        </ion-label>
+    </ion-item>
+    <video width="100%" controls>
+        <source src="{{data.user_video_url}}" type="video/mp4">
+    </video>
+    <input type="file" name="file_photo_sabout" id="file_photo_sabout" (change)="setFile($event)" #fileInpsabout style="display:none" />
+
+</ion-content>

@@ -9,13 +9,13 @@
 </ion-header>
 
 <ion-content>
-    <div class="back_img" id="back_img" (click)="upload_back()">
-        <ion-icon *ngIf="file_image_back == null" class="cam_back" name="ios-camera-outline" ></ion-icon>
+    <div class="back_img" id="back_img" (click)="presentActionSheet(0)">
+        <ion-icon *ngIf="imageback == null" class="cam_back" name="ios-camera-outline" ></ion-icon>
     </div>
     <input type="file" name="file_back" id="file_back" (change)="setFileBack($event)" #fileInp style="display:none" />
-    <div class="image" (click)="upload_image()">
-        <img *ngIf="file_image != null" id="image" src="" />
-        <ion-icon *ngIf="file_image == null" class="cam_image" name="ios-camera-outline"></ion-icon>
+    <div class="image" (click)="presentActionSheet(1)">
+        <img id="imagee" src="" />
+        <ion-icon *ngIf="image == null" class="cam_image" name="ios-camera-outline"></ion-icon>
     </div>
     <input type="file" name="file_image" id="file_image" (change)="setFileImage($event)" #fileInp1 style="display:none" />
     <div class="div_sec">

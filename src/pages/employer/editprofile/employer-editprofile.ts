@@ -1,9 +1,11 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { NavController, LoadingController, NavParams } from 'ionic-angular';
+import { NavController, LoadingController, NavParams, ActionSheetController } from 'ionic-angular';
 import { Config } from '../../../provider/config';
 import { UtilService } from '../../../provider/util-service';
 import { Auth } from '../../../provider/auth';
 import { EmployerService } from '../../../provider/employer-service';
+import { Camera, File, Transfer, FilePath  } from 'ionic-native';
+import { DatePicker } from '@ionic-native/date-picker';
 import * as $ from 'jquery';
 
 @Component({
@@ -20,6 +22,8 @@ export class EmployerEditProfilePage {
   data: any;
   userinfo: any;
 
+  public image = null;
+
   @ViewChild('fileInp') fileInput: ElementRef;
 
   constructor(public navCtrl: NavController, 
@@ -28,12 +32,67 @@ export class EmployerEditProfilePage {
     public auth: Auth,
     public employerService: EmployerService,
     public loading: LoadingController,
+    public actionSheetCtrl: ActionSheetController,
+    private datePicker: DatePicker,
     public navParams: NavParams) {
         this.arrIndustry = ["#hospitality", "#entertainment", "#fastfood", "#construction", "#sales", "#retail", "#notforprofit", "#logistics", "#administration", "#agedcare", "#banking", "#callcentre", "#childcare", "#consumergoods", "#creative", "#defence", "#education", "#entrepreneur", "#financialservices", "#government", "#healthcare", "#hr", "#legal", "#manufacturing", "#marketing", "#media", "#mining", "#officesupport", "#professionalservices", "#property", "#recreation", "#recruitment", "#selfemployed", "#software", "#sports", "#technicalsupport", "#technology", "#telecommunications", "#tourism", "#trades", "#transport", "#cleaning", "#fashion", "#hairandbeauty", "#services"];
         this.arrPosition = ["Full Time", "Part Time", "Casual", "Contract", "Internship"];
         this.data = navParams.get('data');
         this.userinfo = navParams.get('userinfo');
 
+  }
+  presentActionSheet() {
+   const actionSheet = this.actionSheetCtrl.create({
+     title: '',
+     buttons: [
+       {
+         text: 'Camera',
+         handler: () => {
+           //this.clickCamera = true;
+           this.takePicture(Camera.PictureSourceType.CAMERA);
+         }
+       },
+       {
+         text: 'Libaray',
+         handler: () => {
+           //this.clickCamera = true;
+           this.takePicture(Camera.PictureSourceType.PHOTOLIBRARY);
+           //this.upload_image();
+         }
+       },
+       {
+         text: 'Cancel',
+         role: 'cancel',
+         handler: () => {
+         }
+       }
+     ]
+   });
+   actionSheet.present();
+ }
+  
+   takePicture(opt){
+     var options = {
+      quality: 50,
+      //allow: true,
+      sourceType: opt,
+      destinationType: Camera.DestinationType.DATA_URL,
+      //saveToPhotoAlbum: false,
+      //encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 1000,
+      targetHeight: 1000
+    };
+    Camera.getPicture(options).then((imagePath) => {
+      // imageData is a base64 encoded string
+        this.image = "data:image/jpeg;base64," + imagePath;
+        $('#image_emp').attr('src', this.image);
+        //var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
+        //var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
+        //this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+    }, (err) => {
+      this.image = null;
+        console.log(err);
+    });
   }
 
   ionViewWillEnter() {
@@ -59,17 +118,21 @@ export class EmployerEditProfilePage {
   }
 
   save() {
-    if(!(this.file_image)) {
+    if(!(this.image)) {
       this.util.createAlert("", "Please insert your avatar");
+      return;
     }
     if(this.userinfo.user_name == "") {
       this.util.createAlert("", "Please insert your name");
+      return;
     }
     if(this.data.profile_emp_about == "" || this.data.profile_emp_about == "Please select Founded Date") {
       this.util.createAlert("", "Please insert your description");
+      return;
     }
     if(this.data.profile_emp_founded == "") {
       this.util.createAlert("", "When was your company founded? Please select date");
+      return;
     }
 
     var strBusSizeMin = '1';
@@ -95,7 +158,7 @@ export class EmployerEditProfilePage {
         strBusSizeMax = "5000";
     }
     
-    let param = {"avatar" : this.file_image, "employer_id" : this.config.user_id, "name" : this.userinfo.user_name, "about" : this.data.profile_emp_about, "founded" : this.data.profile_emp_founded, "info_tech" : this.data.profile_emp_tech, "bus_size_title" : this.data.profile_emp_bus_size_title, "bus_size_min" : strBusSizeMin, "bus_size_max" : strBusSizeMax};
+    let param = {"avatar" : this.image, "employer_id" : this.config.user_id, "name" : this.userinfo.user_name, "about" : this.data.profile_emp_about, "founded" : this.data.profile_emp_founded, "info_tech" : this.data.profile_emp_tech, "bus_size_title" : this.data.profile_emp_bus_size_title, "bus_size_min" : strBusSizeMin, "bus_size_max" : strBusSizeMax};
     
     let loader = this.loading.create({
       content: 'Loading...',
@@ -116,6 +179,19 @@ export class EmployerEditProfilePage {
         }
     })
     
+  }
+
+  showDate() {
+    this.datePicker.show({
+      date: new Date(this.data.profile_emp_founded),
+      mode: 'date',
+      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+    }).then(
+      date => {
+        this.data.profile_emp_founded = this.config.formatDate(date);
+      },
+      err => console.log('Error occurred while getting date: ', err)
+    );
   }
 
 }

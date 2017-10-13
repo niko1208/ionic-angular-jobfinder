@@ -1,0 +1,45 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        
+        <ion-title text-center>Job Detail</ion-title>
+        
+    </ion-navbar>
+</ion-header>
+
+<ion-content text-center>
+   
+    <div class="back_img" [style.backgroundImage]="'url('+data.job_job_background_url+')'"></div>
+    <img src="{{data.job_job_avatar_url}}" class="user_avatar" />
+    <img class="jobbot" *ngIf="data.job_bot_state == '1'" src="assets/images/AVABOT.PNG"/>
+    <div style="margin-top:-30px">{{data.job_company_name}}</div>
+    <div>{{data.job_job_title}}</div>
+    <small>Posted {{data.timeago}}</small><br/>
+    <small>{{data.applicants_cnt}} applies &nbsp;&nbsp; {{data.distance}}</small>
+    <div text-center padding>Share on</div>
+    <div text-center>
+        <img class="social" src="http://icons.iconarchive.com/icons/yootheme/social-bookmark/256/social-facebook-box-blue-icon.png" (click)="share(0)">
+        <img class="social" src="http://icons.iconarchive.com/icons/limav/flat-gradient-social/256/Twitter-icon.png" (click)="share(1)">
+    </div>
+    <ion-row class="buttons">
+        <ion-col padding>
+            <button ion-button full round class="bt_green" (click)="like()">Like</button>
+        </ion-col>
+        <ion-col padding>
+            <button ion-button full round class="bt_blue" (click)="apply()">Apply</button>
+        </ion-col>
+    </ion-row>
+    <div>Job Description</div>
+    <div text-left padding>
+        <small>{{data.job_job_description}}</small>
+    </div>
+    <div>Job Requirement</div>
+    <div text-left padding>
+        <small>{{data.job_job_requirement}}</small>
+    </div>
+    <div>Position: {{data.job_time_available}}</div>
+    <br/>
+    <div>Job Location</div>
+    <div padding>
+        <small>{{data.job_location_address}}</small>
+    </div>
+</ion-content>

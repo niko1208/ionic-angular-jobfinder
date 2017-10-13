@@ -98,7 +98,18 @@ ion-content.cont_detail.content-md{
 div.scroll-content{
     overflow-y: auto;
 }
-
+.toolbar .searchbar-md{
+    padding: 5px;
+    background: #CCC;
+}
+.searchbar-md .searchbar-input{
+    padding: 0px 45px;
+    font-size: 12px;
+    line-height: 2.5rem;
+}
+.searchbar-md .searchbar-search-icon{
+    top: 5px;
+}
 @media (min-width: 500px) {
     button.button.button-md{
         max-width: 500px;
@@ -108,10 +119,5 @@ div.scroll-content{
 }
 
 @media (max-height: 650px) {
-    div.scroll-content{
-        min-height: 560px;
-    }
-    .ion-page > ion-content{
-        overflow-y: scroll;
-    }
+    
 }

@@ -9,10 +9,10 @@
 </ion-header>
 
 <ion-content>
-    <div class="back_img" id="back_img1" (click)="upload_back()">
+    <div class="back_img" id="back_img1" (click)="presentActionSheet(0)">
     </div>
     <input type="file" name="file_back" id="file_back" (change)="setFileBack($event)" #fileInp style="display:none" />
-    <div class="image" (click)="upload_image()">
+    <div class="image" (click)="presentActionSheet(1)">
         <img id="image1" src="" />
     </div>
     <input type="file" name="file_image" id="file_image" (change)="setFileImage($event)" #fileInp1 style="display:none" />

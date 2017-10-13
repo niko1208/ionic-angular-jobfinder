@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>References</ion-title>
+        <ion-buttons right>
+            <div class="fright" tappable (click)="save()">Save</div>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class='cont_detail' padding>
+    
+    <div class="div_sec">
+        <ion-label>Name :</ion-label>
+        <ion-input [(ngModel)]="data.reference_name"></ion-input>
+    </div>
+    <div class="div_sec">
+        <ion-label>Company :</ion-label>
+        <ion-input [(ngModel)]="data.reference_company"></ion-input>
+    </div>
+    <div class="div_sec">
+        <ion-label>Position :</ion-label>
+        <ion-input [(ngModel)]="data.reference_position"></ion-input>
+    </div>
+    <div class="div_sec">
+        <ion-label>Email :</ion-label>
+        <ion-input [(ngModel)]="data.reference_email"></ion-input>
+    </div>
+    <div class="div_sec">
+        <ion-label>Mobile :</ion-label>
+        <ion-input [(ngModel)]="data.reference_mobile"></ion-input>
+    </div>
+
+    <div text-center *ngIf="edit">
+        <button ion-button round color="jred" (click)="delete()">delete</button>
+    </div>
+</ion-content>

@@ -89,7 +89,7 @@ export class LoginEmployerPage {
   }
 
   goReset() {
-      this.navCtrl.push(ResetEmployerPage, null, this.config.navOptions);
+      this.navCtrl.push(ResetEmployerPage, {userType: "employer"}, this.config.navOptions);
   }
 
 }

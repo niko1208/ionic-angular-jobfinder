@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>Chat</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list class="chat_room">
+        <ion-item *ngFor="let item of list; let i = index;">
+            <div *ngIf="item.message_bot_sender == 'bot'" class="sec_send">
+                <img class="jobbot" src="assets/images/AVABOT.PNG"/>
+                <div class="sec_uname">AVA, {{getDate(item.mdate) | amTimeAgo}}</div>
+                <div class="sec_message">{{item.message_bot_text}}</div>
+            </div>
+            <div *ngIf="item.message_bot_sender == 'seeker'" class="sec_receive">
+                <div class="sec_uname">{{user_name}}, {{getDate(item.mdate) | amTimeAgo}}</div>
+                <div class="sec_message">{{item.message_bot_text}}</div>
+            </div>
+        </ion-item>
+    </ion-list>
+    <div *ngIf="end" padding>
+        <button ion-button full round color="jred" (click)="dismiss()">End Chat Session and Tap to Close</button>
+        <div padding style="background:#3ac7f3; color:#fff">Score : {{resScore}}</div>
+    </div>
+    <ion-scroll scrollX="true" id="upic" *ngIf="!end">
+        <div *ngFor="let item of aryAnswer; let i = index" class='bt_item' (click)="clickAnswer(item.bot_answer_text)">{{item.bot_answer_text}}</div>
+    </ion-scroll>
+    <div class="div_box" *ngIf="!end">
+        <ion-textarea [(ngModel)]="sendText"></ion-textarea>
+        <button ion-button round color="jblue" class="bt_small" (click)="send()">Send</button>
+    </div>
+</ion-content>

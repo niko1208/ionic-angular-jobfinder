@@ -1,0 +1,114 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>Edit Profile</ion-title>
+        <ion-buttons right>
+            <div class="fright" (click)="save()">Save</div>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class='cont_detail'>
+    <div class="image" id="div_image_eseeker" (click)="presentActionSheet()" [style.backgroundImage]="'url('+userinfo.user_avatar_url+')'">
+        <img id="image_eseeker" src="{{userinfo.user_avatar_url}}" style="display: none" />
+    </div>
+    <input type="file" name="file_image_seditprofile" id="file_image_seditprofile" (change)="setFileImage($event)" #fileInpsedit style="display:none" />
+
+    <ion-label class="lb_title">general Info</ion-label>
+    <ion-item class="div_sec">
+        <ion-label class='lb_icon'><ion-icon name='ios-contact-outline'></ion-icon></ion-label>
+        <ion-label>Name</ion-label>
+        <ion-input [(ngModel)]="userinfo.user_name" text-right></ion-input>
+    </ion-item>
+    <ion-item class="div_sec" (click)="goAbout()">
+        <ion-label class='lb_icon'><ion-icon name='ios-information-circle-outline'></ion-icon></ion-label>
+        <ion-label>About</ion-label>
+        <ion-label text-right style="white-space: normal;">
+            <ion-icon class="lbarrowright" name="ios-arrow-forward-outline"></ion-icon>
+            <div class="ffright">{{userinfo.user_about}}</div>
+        </ion-label>
+    </ion-item>
+    
+    <ion-label class="lb_title">Experience
+        <ion-icon class="iconadd" name="add" (click)="goExp(null)"></ion-icon>
+    </ion-label>
+    <div *ngFor="let item of experience; let i = index;">
+    <ion-item class="div_sec" (click)="goExp(item)">
+        <ion-label class='lb_icon'><ion-icon name='ios-briefcase-outline'></ion-icon></ion-label>
+        <ion-label>Experience</ion-label>
+        <ion-label text-right>
+            <ion-icon class="lbarrowright" name="ios-arrow-forward-outline"></ion-icon>
+            <div class="ffright"><b>{{item.experience_company}}</b><br/>
+                {{item.experience_role}}<br/>
+                {{item.experience_though}}<br/>
+                {{item.experience_description}}<br/>
+            </div>
+        </ion-label>
+    </ion-item>
+    </div>
+
+    <ion-label class="lb_title">Current work
+        <ion-icon class="iconadd" name="add" (click)="goCurwork(null)"></ion-icon>
+    </ion-label>
+    <div *ngFor="let item of curwork; let i = index;">
+    <ion-item class="div_sec" (click)="goCurwork(item)">
+        <ion-label class='lb_icon'><ion-icon name='ios-hammer-outline'></ion-icon></ion-label>
+        <ion-label>{{item.curwork_company}}</ion-label>
+        <ion-label text-right>
+            <ion-icon class="lbarrowright" name="ios-arrow-forward-outline"></ion-icon>
+            <div class="ffright"><b>{{item.curwork_role}}</b><br/>
+                {{item.curwork_period}}<br/>
+                {{item.curwork_description}}<br/>
+            </div>
+        </ion-label>
+    </ion-item>
+    </div>
+
+    <ion-label class="lb_title">Education
+        <ion-icon class="iconadd" name="add" (click)="goEdu(null)"></ion-icon>
+    </ion-label>
+    <div *ngFor="let item of education; let i = index;">
+    <ion-item class="div_sec" (click)="goEdu(item)">
+        <ion-label class='lb_icon'><ion-icon name='ios-school-outline'></ion-icon></ion-label>
+        <ion-label>{{item.education_school}}</ion-label>
+        <ion-label text-right>
+            <ion-icon class="lbarrowright" name="ios-arrow-forward-outline"></ion-icon>
+            <div class="ffright"><b>{{item.education_level}}</b><br/>
+                {{item.education_area}}<br/>
+                {{item.education_from}} - {{item.education_to}}<br/>
+            </div>
+        </ion-label>
+    </ion-item>
+    </div>
+
+    <ion-label class="lb_title">Language
+        <ion-icon class="iconadd" name="add" (click)="goLang(null)"></ion-icon>
+    </ion-label>
+    <div *ngFor="let item of language; let i = index;">
+    <ion-item class="div_sec" (click)="goLang(item)">
+        <ion-label class='lb_icon'><ion-icon name='ios-planet-outline'></ion-icon></ion-label>
+        <ion-label>{{item.language_language}}</ion-label>
+        <ion-label text-right>
+            <ion-icon class="lbarrowright" name="ios-arrow-forward-outline"></ion-icon>
+            <div class="ffright"><b>{{item.language_proficiency}}</b></div>
+        </ion-label>
+    </ion-item>
+    </div>
+
+    <ion-label class="lb_title">Reference
+        <ion-icon class="iconadd" name="add" (click)="goRef(null)"></ion-icon>
+    </ion-label>
+    <div *ngFor="let item of reference; let i = index;">
+    <ion-item class="div_sec" (click)="goRef(item)">
+        <ion-label class='lb_icon'><ion-icon name='ios-people-outline'></ion-icon></ion-label>
+        <ion-label>{{item.reference_name}}</ion-label>
+        <ion-label text-right>
+            <ion-icon class="lbarrowright" name="ios-arrow-forward-outline"></ion-icon>
+            <div class="ffright"><b>{{item.reference_position}}</b><br/>
+                {{item.reference_company}}<br/>
+            </div>
+        </ion-label>
+    </ion-item>
+    </div>
+
+    <br/>
+</ion-content>

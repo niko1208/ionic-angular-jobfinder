@@ -1,0 +1,84 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>Settings</ion-title>
+        <ion-buttons right>
+            <div class="fright" (click)="save()">Save</div>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content class='cont_detail'>
+    <ion-label class="lb_title">discovery settings</ion-label>
+    <ion-item (click)="goLocation()">
+        <ion-label class='lb_icon'><ion-icon name='ios-locate-outline'></ion-icon></ion-label>
+        <ion-label>My current Location</ion-label>
+        <ion-label text-right>
+            <ion-icon class="lbarrowright" name="ios-arrow-forward-outline"></ion-icon>
+            <div class="ffright">{{user_setting?.setting_location_address}}</div>
+        </ion-label>
+    </ion-item>
+    <ion-item no-lines>
+        <ion-label class='lb_icon'><ion-icon name='ios-navigate-outline'></ion-icon></ion-label>
+        <ion-label>Maximum Distance</ion-label>
+        <ion-label text-right>100 km</ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-range min="0" max="100" [(ngModel)]="distance" color="secondary">
+            <ion-label range-left>0</ion-label>
+            <ion-label range-right>{{distance}}</ion-label>
+        </ion-range>
+    </ion-item>
+    <ion-item (click)="goindustry()">
+        <ion-label class='lb_icon'><ion-icon name='ios-briefcase-outline'></ion-icon></ion-label>
+        <ion-label>Industry</ion-label>
+        <ion-label text-right>
+            <ion-icon class="lbarrowright" name="ios-arrow-forward-outline"></ion-icon>
+            <div class="ffright">{{dd?.industry}}<br/>{{dd?.time}}</div>
+        </ion-label>
+        
+    </ion-item>
+    
+    <ion-label class="lb_title">notifications</ion-label>
+    <ion-item>
+        <ion-label class='lb_icon'><ion-icon name='ios-chatboxes-outline'></ion-icon></ion-label>
+        <ion-label>Chat Messages</ion-label>
+        <ion-label text-right>
+            <ion-toggle [(ngModel)]="ischat"></ion-toggle>
+        </ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-label class='lb_icon'><ion-icon name='ios-appstore-outline'></ion-icon></ion-label>
+        <ion-label>Shortlist Status</ion-label>
+        <ion-label text-right>
+            <ion-toggle [(ngModel)]="isshortlist"></ion-toggle>
+        </ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-label class='lb_icon'><ion-icon name='ios-appstore-outline'></ion-icon></ion-label>
+        <ion-label>Invite Status</ion-label>
+        <ion-label text-right>
+            <ion-toggle [(ngModel)]="isinvite"></ion-toggle>
+        </ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-label class='lb_icon'><ion-icon name='ios-appstore-outline'></ion-icon></ion-label>
+        <ion-label>Follow Update</ion-label>
+        <ion-label text-right>
+            <ion-toggle [(ngModel)]="isfollow"></ion-toggle>
+        </ion-label>
+    </ion-item>
+    
+    <ion-label class="lb_title">Contact us</ion-label>
+    <ion-item (click)="help()">
+        <ion-label class='lb_icon'><ion-icon name='ios-help-outline'></ion-icon></ion-label>
+        <ion-label>Help & Support</ion-label>
+        <ion-label text-right><ion-icon name="ios-arrow-forward-outline"></ion-icon></ion-label>
+    </ion-item>
+    <ion-item (click)="logout()">
+        <ion-label class='lb_icon'><ion-icon name='ios-log-out-outline'></ion-icon></ion-label>
+        <ion-label>Log Out</ion-label>
+        <ion-label text-right><ion-icon name="ios-arrow-forward-outline"></ion-icon></ion-label>
+    </ion-item>
+    
+</ion-content>

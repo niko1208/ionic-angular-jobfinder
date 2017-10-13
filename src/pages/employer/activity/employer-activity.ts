@@ -14,6 +14,7 @@ import { EmployerPostJobEditPage } from '../postjob-edit/employer-postjob-edit';
 export class EmployerActivityPage {
 
   list: any;
+  slist: any;
   constructor(public navCtrl: NavController, 
     public config: Config,
     public util: UtilService,
@@ -37,6 +38,7 @@ export class EmployerActivityPage {
         loader.dismissAll();
         if(data.status == "success") {
           this.list = data.result; console.log(this.list);
+          this.search("");
         }
     })
   }
@@ -57,6 +59,21 @@ export class EmployerActivityPage {
     }, this.config.navOptions);
   }
 
+  search(value) {
+    console.log(value);
+    this.slist = this.filterItems(value);
+  }
+  filterItems(searchTerm) {
+    return this.list.filter((item) => {
+      for(var key in item) { 
+        if(item[key].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+          return true;
+        }
+      }
+      return false;
+      //return item.job_job_title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+    })
+  }
 
 
 }

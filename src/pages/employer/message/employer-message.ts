@@ -4,6 +4,7 @@ import { Config } from '../../../provider/config';
 import { UtilService } from '../../../provider/util-service';
 import { Auth } from '../../../provider/auth';
 import { MessageService } from '../../../provider/message-service';
+import { EmployerMessageroomPage } from '../messageroom/employer-messageroom';
 import * as $ from 'jquery';
 
 @Component({
@@ -69,51 +70,7 @@ export class EmployerMessagePage {
   }
 
   openMessage(item, i) {
-    this.loadBack();
-    
-    this.pending = true;
-
-    this.sitem = item;
-
-    $('.item').removeClass('sel');
-    $('#item_'+i).addClass('sel');
-    this.sendText = "";
-    this.file_image = null;
-
-    let room_id = item.room_id;
-    let otherType = "seeker";
-    let otherID = item.user_id;
-    let param = {"room_id" : room_id, "other_type" : otherType, "other_id" : otherID};
-    let loader = this.loading.create({
-      content: 'Loading...',
-    });
-    loader.present();
-
-    this.avatar_url = item.user_avatar_url;
-    //let my_name = this.user_info.user_name;
-    //let my_avatar_url = this.user_info.user_avatar_url;
-
-    this.messageService.postData("loadmessages", param)
-    .subscribe(data => { console.log(data);
-        loader.dismissAll();
-        if(data.status == "success") {
-          this.mlist = data.result;
-          for(let i =0;i <this.mlist.length; i++) {
-            this.mlist[i]['mdate'] = new Date(this.mlist[i].timediff*1000);
-            this.mlist[i]['senderID'] = this.mlist[i]['message_sender_type']+"_"+this.mlist[i]['message_sender_id'];
-            this.mlist[i]['my_senderID'] = "employer_"+this.config.user_id;
-            this.mlist[i]['img_url'] = this.avatar_url;
-          }
-          setTimeout(() => {
-            $('.chat_room').scrollTop($('.chat_room').prop("scrollHeight"));
-          }, 1000);
-        }
-        this.pending = false;
-    }, error => {
-        this.pending = false;
-        loader.dismissAll();
-        alert("Error");
-    });
+    this.navCtrl.push(EmployerMessageroomPage, {item: item}, this.config.navOptions);
   }
 
   loadNewMessage() {

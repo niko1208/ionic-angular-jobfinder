@@ -1,0 +1,38 @@
+page-seeker-help{
+    ion-item.item-md{
+        position: relative;
+    }
+    ion-item.item-md h3{
+        color: #000;
+        font-size: 18px;
+        padding-bottom: 10px;
+        white-space: normal;
+    }
+    ion-item div{
+        color: #555;
+        white-space: normal;
+        line-height: 24px;
+        display: none;
+    }
+    ion-item div.show_div{
+        display: block;
+    }
+    ion-icon.arrow{
+        position: absolute;
+        color: #555;
+        font-size: 32px;
+        right: 10px;
+        top: 10px;
+    }
+    textarea.text-input-md{
+        min-height: 100px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        padding: 5px 10px;
+    }
+    .bt_blue{
+        border: 2px solid #3ac7f3;
+        background: #fff;
+        color: #3ac7f3;
+    }
+}

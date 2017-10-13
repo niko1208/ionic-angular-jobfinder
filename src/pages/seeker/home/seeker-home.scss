@@ -1,0 +1,32 @@
+page-seeker-home{
+    ion-navbar img{
+        height: 64px;
+        padding-top: 20px;
+        padding-bottom: 5px;
+    }
+    ion-card.ads{
+        height: 320px;
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        margin: 0px;
+        margin-bottom: 5px;
+        position: relative
+    }
+    .follow{
+        position: absolute;
+        right: 2px;
+        top: 0px;
+        font-size: 30px;
+        color: white;
+        background: #333;
+    }
+    .follow img{
+        width: 40px;
+        height: 40px;
+    }
+    .div_cont{
+        width: 100%;
+        height: 100%;
+    }
+}

@@ -11,6 +11,7 @@ import { EmployerService } from '../../../provider/employer-service';
 export class EmployerInvitePage {
 
   list: any;
+  slist: any;
   jobSeekerID: any;
   constructor(public navCtrl: NavController, 
     public config: Config,
@@ -36,6 +37,7 @@ export class EmployerInvitePage {
         loader.dismissAll();
         if(data.status == "success") {
           this.list = data.result;
+          this.search("");
         }
     })
   }
@@ -52,6 +54,7 @@ export class EmployerInvitePage {
         loader.dismissAll();
         if(data.status == "success") {
           this.list.slice(i, 1);
+          this.search("");
         }
     })
   }
@@ -62,4 +65,17 @@ export class EmployerInvitePage {
     return da;
   }
 
+  search(value) {
+    this.slist = this.filterItems(value);
+  }
+  filterItems(searchTerm) {
+    return this.list.filter((item) => {
+      for(var key in item) { 
+        if(item[key].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+          return true;
+        }
+      }
+      return false;
+    })
+  }
 }

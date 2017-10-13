@@ -1,0 +1,134 @@
+page-seeker-chatbot{
+    .sec_uname{
+        color: #555;
+        font-size: 12px;
+        margin-bottom: 5px; 
+    }
+    .sec_message{
+        color: #fff;
+        padding: 8px 15px;
+        vertical-align: top;
+        overflow: hidden;
+        box-sizing: border-box;
+        display: inline-block;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        position: relative;
+        max-width: 500px;
+        white-space: normal;
+    }
+    .item-md{
+        padding-left: 5px;
+    }
+    ion-item img, ion-item div.desc{
+        float: left;
+    }
+    .sec_send{
+        float: left;
+        padding-bottom: 5px;
+    }
+    .sec_receive{
+        float: right;
+    }
+    .sec_send,
+    .sec_receive{
+        max-width: 90%;
+        margin: auto;
+        position: relative;
+    }
+    .jobbot{
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        left: 0px;
+        bottom: 0px;
+        border-radius: 50px;
+        z-index: 1;
+    }
+    .bt_item{
+        width: 150px;
+        padding: 5px;
+        color: #fff;
+        background: #f11;
+        text-align: center;
+        border-radius: 5px;
+        margin-left: 5px;
+        font-size: 16px;
+        display: inline-block;
+    }
+    .sec_send .sec_message{
+        background: #ddd;
+        color: #000;
+    }
+    .sec_send .sec_message:after{
+        content: '';
+        display: block;
+        position: absolute;
+        left: -17px;
+        bottom: 0px;
+        width: 0;
+        height: 0;
+        border-left: 17px solid transparent;
+        border-right: 0px solid transparent;
+        border-bottom: 20px solid #ddd;
+    }
+    .sec_receive .sec_message:after{
+        content: '';
+        display: block;
+        position: absolute;
+        right: -17px;
+        bottom: 0px;
+        width: 0;
+        height: 0;
+        border-left: 0px solid transparent;
+        border-right: 17px solid transparent;
+        border-bottom: 20px solid #f96f59;
+    }
+    .sec_receive .sec_message{
+        background: #f96f59;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 0px;
+        float: right
+    }
+    ion-list,
+    ion-list.chat_room{
+        height: calc(100vh - 140px);
+        overflow-y: scroll;
+    }
+    ion-list.chat_room{
+        height: calc(100vh - 310px);
+    }
+    ion-list.chat_room ion-item .item-inner{
+        border-bottom: 0px !important;
+    }
+    #upic{
+        height: 40px;
+        min-width: 100%;
+        white-space: nowrap;
+    }
+    .div_box{
+        position: relative;
+    }
+    
+    .bt_small{
+        float: right;
+    }
+    textarea.text-input {
+        display: block;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 5px 10px;
+        min-height: 30px;
+    }
+    .img_sender{
+        width: 30px;
+        height: 30px;
+        border-radius: 30px;
+        margin-top: 26px;
+        margin-right: 5px;
+    }
+    .sec_send div{
+        margin-left: 33px;
+    }
+}

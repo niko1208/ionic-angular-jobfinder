@@ -10,6 +10,10 @@ export class Config {
     public user_type: any;
     public user_id: any;
     public user_state: any;
+    public arrIndustry = [];
+    public arrPosition = [];
+
+    public userinfo = {user_info:null, user_experience:null, user_curwork:null, user_education:null, user_language:null, user_reference:null, user_setting:null};
 
     constructor() {
         this.navOptions = {
@@ -19,6 +23,9 @@ export class Config {
             animation: 'ios-transition',
             direction: 'back'
         };
+
+        this.arrIndustry = ["#alljobs", "#hospitality", "#entertainment", "#fastfood", "#construction", "#sales", "#retail", "#notforprofit", "#logistics", "#administration", "#agedcare", "#banking", "#callcentre", "#childcare", "#consumergoods", "#creative", "#defence", "#education", "#entrepreneur", "#financialservices", "#government", "#healthcare", "#hr", "#legal", "#manufacturing", "#marketing", "#media", "#mining", "#officesupport", "#professionalservices", "#property", "#recreation", "#recruitment", "#selfemployed", "#software", "#sports", "#technicalsupport", "#technology", "#telecommunications", "#tourism", "#trades", "#transport", "#cleaning", "#fashion", "#hairandbeauty", "#services"];
+        this.arrPosition = ["Full Time", "Part Time", "Casual", "Contract", "Internship"];
     }
 
     validateEmail(email) {
@@ -26,7 +33,7 @@ export class Config {
          return re.test(email);
     }
 
-    getAPIURL() {
+    public getAPIURL() {
         return "https://jobfinder.cloud/jobfinder";
     }
     
@@ -142,4 +149,14 @@ export class Config {
         return strDiffDate
     }
     
+  formatDate(date) {
+    var m_names = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+
+    var d = date; //new Date(date);
+    var curr_date = d.getDate();
+    var curr_month = d.getMonth();
+    var curr_year = d.getFullYear();
+    return (m_names[curr_month] + " " + curr_date + ", " + curr_year);
+  }
+
 }

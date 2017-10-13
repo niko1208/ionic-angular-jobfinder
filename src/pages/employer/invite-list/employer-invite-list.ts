@@ -13,6 +13,7 @@ import { EmployerSeekerDetailPage } from '../detail/employer-seeker-detail';
 export class EmployerInviteListPage {
 
   list: any;
+  slist: any;
   data: any;
   constructor(public navCtrl: NavController, 
     public config: Config,
@@ -38,6 +39,7 @@ export class EmployerInviteListPage {
         loader.dismissAll();
         if(data.status == "success") {
           this.list = data.result;
+          this.search("");
         }
     })
   }
@@ -54,5 +56,18 @@ export class EmployerInviteListPage {
     this.navCtrl.push(EmployerSeekerDetailPage, {seeker_id: seekerID});
   }
 
+  search(value) {
+    this.slist = this.filterItems(value);
+  }
+  filterItems(searchTerm) {
+    return this.list.filter((item) => {
+      for(var key in item) { 
+        if(item[key].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+          return true;
+        }
+      }
+      return false;
+    })
+  }
 
 }

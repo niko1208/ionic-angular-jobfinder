@@ -37,9 +37,46 @@ import { EmployerPostJobPage } from '../pages/employer/postjob/employer-postjob'
 import { EmployerPostJobEditPage } from '../pages/employer/postjob-edit/employer-postjob-edit';
 import { EmployerActivityPage } from '../pages/employer/activity/employer-activity';
 import { EmployerMessagePage } from '../pages/employer/message/employer-message';
+import { EmployerMessageroomPage } from '../pages/employer/messageroom/employer-messageroom';
 import { EmployerHelpPage } from '../pages/employer/help/employer-help';
 import { EmployerPostjobLocationPage } from '../pages/employer/postjob-location/employer-postjob-location';
 import { EmployerEditjobLocationPage } from '../pages/employer/editjob-location/employer-editjob-location';
+
+
+
+import { SeekerTabsPage } from '../pages/seeker/tabs/seeker-tabs';
+import { SeekerHomePage } from '../pages/seeker/home/seeker-home';
+import { SeekerSettingPage } from '../pages/seeker/setting/seeker-setting';
+import { SeekerProfilePage } from '../pages/seeker/profile/seeker-profile';
+import { SeekerJobsPage } from '../pages/seeker/jobs/seeker-jobs';
+import { SeekerMessagePage } from '../pages/seeker/message/seeker-message';
+
+import { SeekerAdsPage } from '../pages/seeker/ads/seeker-ads';
+import { SeekerIndustryPage } from '../pages/seeker/industry/seeker-industry';
+import { SeekerCurLocationPage } from '../pages/seeker/curlocation/seeker-curlocation';
+import { SeekerEditProfilePage } from '../pages/seeker/editprofile/seeker-editprofile';
+import { SeekerJobdetailPage } from '../pages/seeker/jobdetail/seeker-jobdetail';
+import { SeekerSavedPage } from '../pages/seeker/saved/seeker-saved';
+import { SeekerAppliedPage } from '../pages/seeker/applied/seeker-applied';
+import { SeekerEditaboutPage } from '../pages/seeker/editabout/seeker-editabout';
+import { SeekerEditcurworkPage } from '../pages/seeker/editcurwork/seeker-editcurwork';
+import { SeekerEditeducationPage } from '../pages/seeker/editeducation/seeker-editeducation';
+import { SeekerEditexperiencePage } from '../pages/seeker/editexperience/seeker-editexperience';
+import { SeekerEditlanguagePage } from '../pages/seeker/editlanguage/seeker-editlanguage';
+import { SeekerEditreferencePage } from '../pages/seeker/editreference/seeker-editreference';
+import { SeekerMessageroomPage } from '../pages/seeker/messageroom/seeker-messageroom';
+import { SeekerJobsmapPage } from '../pages/seeker/jobsmap/seeker-jobsmap';
+import { SeekerHelpPage } from '../pages/seeker/help/seeker-help';
+import { SeekerChatbotPage } from '../pages/seeker/chatbot/seeker-chatbot';
+
+
+import { Camera } from '@ionic-native/camera';
+import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture';
+import { DatePicker } from '@ionic-native/date-picker';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { Facebook } from '@ionic-native/facebook';
+import { GooglePlus } from '@ionic-native/google-plus';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 import { HttpModule } from '@angular/http';
 import { Push } from '@ionic-native/push';
@@ -48,6 +85,7 @@ import { Config } from '../provider/config';
 import { UtilService } from '../provider/util-service';
 import { Auth } from '../provider/auth';
 import { EmployerService } from '../provider/employer-service';
+import { SeekerService } from '../provider/seeker-service';
 import { MessageService } from '../provider/message-service';
 
 @NgModule({
@@ -86,7 +124,32 @@ import { MessageService } from '../provider/message-service';
     EmployerEditjobLocationPage,
     ResetEmployerPage,
     EmployerAddbotPage,
-    EmployerBotweightPage
+    EmployerBotweightPage,
+    EmployerMessageroomPage,
+
+    SeekerTabsPage,
+    SeekerHomePage,
+    SeekerSettingPage,
+    SeekerJobsPage,
+    SeekerProfilePage,
+    SeekerMessagePage,
+    SeekerAdsPage,
+    SeekerIndustryPage,
+    SeekerCurLocationPage,
+    SeekerEditProfilePage,
+    SeekerJobdetailPage,
+    SeekerSavedPage,
+    SeekerAppliedPage,
+    SeekerEditaboutPage,
+    SeekerEditcurworkPage,
+    SeekerEditeducationPage,
+    SeekerEditexperiencePage,
+    SeekerEditlanguagePage,
+    SeekerEditreferencePage,
+    SeekerMessageroomPage,
+    SeekerJobsmapPage,
+    SeekerHelpPage,
+    SeekerChatbotPage
   ],
   imports: [
     BrowserModule,
@@ -130,16 +193,49 @@ import { MessageService } from '../provider/message-service';
     EmployerEditjobLocationPage,
     ResetEmployerPage,
     EmployerAddbotPage,
-    EmployerBotweightPage
+    EmployerBotweightPage,
+    EmployerMessageroomPage,
+
+    SeekerTabsPage,
+    SeekerHomePage,
+    SeekerSettingPage,
+    SeekerJobsPage,
+    SeekerProfilePage,
+    SeekerMessagePage,
+    SeekerAdsPage,
+    SeekerIndustryPage,
+    SeekerCurLocationPage,
+    SeekerEditProfilePage,
+    SeekerJobdetailPage,
+    SeekerSavedPage,
+    SeekerAppliedPage,
+    SeekerEditaboutPage,
+    SeekerEditcurworkPage,
+    SeekerEditeducationPage,
+    SeekerEditexperiencePage,
+    SeekerEditlanguagePage,
+    SeekerEditreferencePage,
+    SeekerMessageroomPage,
+    SeekerJobsmapPage,
+    SeekerHelpPage,
+    SeekerChatbotPage
   ],
   providers: [
     StatusBar,
+    Camera,
+    MediaCapture,
+    DatePicker,
+    SocialSharing,
+    Facebook,
+    GooglePlus,
+    NativeStorage,
     SplashScreen,
     Config,
     UtilService,
     Auth,
     Push,
     EmployerService,
+    SeekerService,
     MessageService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

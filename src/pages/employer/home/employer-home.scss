@@ -74,6 +74,9 @@ page-employer-home{
     .arrow_next{
         right: 10px;
     }
+    .swiper-pagination{
+        display: none;
+    }
 
     @media (min-width: 500px) {
         .buttons{

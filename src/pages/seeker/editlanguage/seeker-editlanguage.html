@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>Language</ion-title>
+        <ion-buttons right>
+            <div class="fright" tappable (click)="save()">Save</div>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class='cont_detail' padding>
+    
+    <div class="div_sec">
+        <ion-label>Language :</ion-label>
+        <ion-input [(ngModel)]="data.language_language"></ion-input>
+    </div>
+    <div class="div_sec">
+        <ion-label>Highest Level Achieved :</ion-label>
+        <ion-select [(ngModel)]="data.language_proficiency">
+            <ion-option value="Basic">Basic</ion-option>
+            <ion-option value="Conversational">Conversational</ion-option>
+            <ion-option value="Fluent">Fluent</ion-option>
+            <ion-option value="Native">Native</ion-option>
+        </ion-select>
+    </div>
+
+    <div text-center *ngIf="edit">
+        <button ion-button round color="jred" (click)="delete()">delete</button>
+    </div>
+</ion-content>
