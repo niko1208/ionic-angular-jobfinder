@@ -53,7 +53,7 @@ export class EmployerEditProfilePage {
          }
        },
        {
-         text: 'Libaray',
+         text: 'Library',
          handler: () => {
            //this.clickCamera = true;
            this.takePicture(Camera.PictureSourceType.PHOTOLIBRARY);

@@ -85,7 +85,7 @@ export class EmployerPostJobPage {
           }
         },
         {
-          text: 'Libaray',
+          text: 'Library',
           handler: () => {
             //this.clickCamera = true;
             this.takePicture(opt, Camera.PictureSourceType.PHOTOLIBRARY);
@@ -210,7 +210,7 @@ export class EmployerPostJobPage {
     if(this.bedit) {
       job_id = this.data.job_id;
     }
-    let param = {"avatar" : this.image, "background" : this.backimage, "employer_id" : this.config.user_id, "employer_name" : user_name, "company_name" : this.company_name, "job_title" : this.job_title, "job_description" : this.job_desc, "job_requirement" : this.job_req, "time_available" : this.job_time, "industry" : this.job_industry, "location_address" : this.data.job_location_address, "location_lat" : this.data.job_location_lat, "location_lng" : this.data.job_location_lng, "job_id" : job_id};
+    let param = {"avatar" : this.image, "background" : this.backimage, "employer_id" : this.config.user_id, "employer_name" : user_name, "company_name" : this.company_name, "job_title" : this.job_title, "job_description" : this.job_desc, "job_requirement" : this.job_req, "time_available" : this.job_time, "industry" : this.job_industry, "location_address" : this.data.job_location_address, "location_lat" : this.data.job_location_lat, "location_lng" : this.data.job_location_lng, "job_id" : job_id, "job_bot_state":"0"};
 
     if(user_info.user_membership == 'basic') {
       let loader = this.loading.create({
@@ -240,6 +240,7 @@ export class EmployerPostJobPage {
           {
             text: "Sure! Add Bot",
             handler: data => {
+              param['job_bot_state'] = "1";
               this.navCtrl.push(EmployerAddbotPage, {param: param, view: this.viewCtrl}, this.config.navOptions);
             }
           }, 

@@ -77,6 +77,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { Geolocation } from '@ionic-native/geolocation';
 
 import { HttpModule } from '@angular/http';
 import { Push } from '@ionic-native/push';
@@ -229,6 +230,7 @@ import { MessageService } from '../provider/message-service';
     Facebook,
     GooglePlus,
     NativeStorage,
+    Geolocation,
     SplashScreen,
     Config,
     UtilService,

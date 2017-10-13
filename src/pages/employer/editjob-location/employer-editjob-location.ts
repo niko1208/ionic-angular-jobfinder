@@ -3,6 +3,7 @@ import { NavController, LoadingController, NavParams, ViewController } from 'ion
 import { Config } from '../../../provider/config';
 import { UtilService } from '../../../provider/util-service';
 import { EmployerService } from '../../../provider/employer-service';
+import { Geolocation } from '@ionic-native/geolocation';
 declare var google;
 
 @Component({
@@ -28,6 +29,7 @@ export class EmployerEditjobLocationPage {
     public employerService: EmployerService,
     public viewCtrl: ViewController,
     public loading: LoadingController,
+    private geolocation: Geolocation,
     public navParams: NavParams) {
         
   }
@@ -40,6 +42,23 @@ export class EmployerEditjobLocationPage {
     this.data = this.navParams.get('data');
     let self = this;
     self.address = this.data.job_location_address;
+    if(this.data.job_location_address == 'location_address' || this.data.job_location_address == '') {
+      this.geolocation.getCurrentPosition().then((resp) => {
+        self.lat = resp.coords.latitude;
+        self.lng = resp.coords.longitude;
+        self.loadMap();
+      }).catch((error) => {
+        alert('The Geolocation service failed');
+        self.lat = 22.285831;
+        self.lng = 114.1582283;
+        self.loadMap();
+      });
+    } else {
+      self.lat = this.data.job_location_lat;
+      self.lng = this.data.job_location_lng;
+      self.loadMap();
+    }
+    /*
     if(this.data.job_location_address == 'location_address') {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
@@ -63,6 +82,7 @@ export class EmployerEditjobLocationPage {
       self.lng = this.data.job_location_lng;
       self.loadMap();
     }
+    */
   }
 
   loadMap(){
