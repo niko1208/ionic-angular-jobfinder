@@ -35,7 +35,7 @@ export class EmployerInvitePage {
     this.employerService.postData("loadinvitejobs", param)
     .subscribe(data => {
         loader.dismissAll();
-        if(data.status == "success") {
+        if(data.status == "success") { console.log(data.result);
           this.list = data.result;
           this.search("");
         }
@@ -53,7 +53,7 @@ export class EmployerInvitePage {
     .subscribe(data => { 
         loader.dismissAll();
         if(data.status == "success") {
-          this.list.slice(i, 1);
+          this.list.splice(i, 1);
           this.search("");
         }
     })

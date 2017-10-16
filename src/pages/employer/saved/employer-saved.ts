@@ -61,7 +61,8 @@ export class EmployerSavedPage {
     .subscribe(data => { 
         loader.dismissAll();
         if(data.status == "success") {
-          this.list.slice(i, 1);
+          this.list.splice(i, 1);
+          this.search("");
         } else {
           this.util.createAlert("Failed", data.result);
         }

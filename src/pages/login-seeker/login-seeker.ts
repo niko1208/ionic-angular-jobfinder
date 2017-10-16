@@ -40,6 +40,9 @@ export class LoginSeekerPage {
   }
 
   doFbLogin(){
+    //1968148010124162 - my
+    //1421989254537239 - markhan
+
     let permissions = new Array<string>();
     let nav = this.navCtrl;
 	  let env = this;

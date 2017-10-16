@@ -100,6 +100,6 @@
     <plugin name="cordova-plugin-x-socialsharing" spec="^5.2.0" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="phonegap-plugin-push" spec="^1.10.5">
-        <variable name="SENDER_ID" value="931832809761" />
+        <variable name="SENDER_ID" value="395456395630" />
     </plugin>
 </widget>
