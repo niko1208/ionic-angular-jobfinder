@@ -1,0 +1,45 @@
+page-seeker-editinterest{
+    ion-content.cont_detail.content-md{
+        background: #fff;
+    }
+    .div_sec{
+        padding: 5px 10px;
+        position: relative;
+    }
+    .div_sec ion-label{
+        font-weight: bold;
+        padding-left: 10px;
+        margin: 8px 8px;
+    }
+    .div_sec ion-input,
+    .div_sec ion-textarea,
+    .div_sec ion-select{
+        border-radius: 50px;
+        border: 1px solid #ddd;
+    }
+    .div_sec ion-select{
+        max-width: 100%;
+        padding: 8px 16px;
+    }
+    .div_sec ion-textarea{
+        border-radius: 5px;
+        min-height: 100px;
+    }
+    .div_sec .text-input-md{
+        margin: 8px 8px;
+        padding: 0px 10px;
+    }
+    .div_sec textarea.text-input-md{
+        min-height: 100px;
+    }
+    .upload ion-icon{
+        float: right;
+        background: #3ac7f3;
+        font-size: 24px;
+        color: #fff;
+        border-radius: 50px;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+    }
+}

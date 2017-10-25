@@ -10,6 +10,8 @@ import { SeekerEditeducationPage } from '../editeducation/seeker-editeducation';
 import { SeekerEditexperiencePage } from '../editexperience/seeker-editexperience';
 import { SeekerEditlanguagePage } from '../editlanguage/seeker-editlanguage';
 import { SeekerEditreferencePage } from '../editreference/seeker-editreference';
+import { SeekerEditcertificationPage } from '../editcertification/seeker-editcertification';
+import { SeekerEditinterestPage } from '../editinterest/seeker-editinterest';
 import { Camera, File, Transfer, FilePath  } from 'ionic-native';
 import * as $ from 'jquery';
 declare var cordova : any; 
@@ -30,6 +32,8 @@ export class SeekerEditProfilePage {
   education: any;
   language: any;
   reference: any;
+  interest: any;
+  cert: any;
   clickCamera = false;
 
   @ViewChild('fileInpsedit') fileInput: ElementRef;
@@ -147,6 +151,8 @@ export class SeekerEditProfilePage {
             this.education = data.resultEducation;
             this.language = data.resultLanguage;
             this.reference = data.resultReference;
+            this.interest = data.resultInterest;
+            this.cert = data.resultCertification;
         } else {
           this.util.createAlert("Failed to Load!", data.result);
         }
@@ -196,6 +202,14 @@ export class SeekerEditProfilePage {
   goRef(item){
     let edit = (item == null)? false : true;
     this.navCtrl.push(SeekerEditreferencePage, {data: item, edit:edit}, this.config.navOptions);
+  }
+  goCert(item){
+    let edit = (item == null)? false : true;
+    this.navCtrl.push(SeekerEditcertificationPage, {data: item, edit:edit}, this.config.navOptions);
+  }
+  goInterest(item){
+    let edit = (item == null)? false : true;
+    this.navCtrl.push(SeekerEditinterestPage, {data: item, edit:edit}, this.config.navOptions);
   }
 
   save() {

@@ -13,30 +13,12 @@ import { SeekerTabsPage } from '../pages/seeker/tabs/seeker-tabs';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = SplashPage;
+  rootPage:any
 
   constructor(public platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public push: Push, public config: Config) {
 
-    let user_id = localStorage.getItem('user_id');
-    let user_type = localStorage.getItem('user_type');
-    let user_state = localStorage.getItem('user_state');
-    if(user_id != null && user_id != "" && user_state == '1') {
-      this.config.user_id = user_id;
-      this.config.user_type = user_type;
-      if(user_type == 'employer') {
-        this.rootPage = EmployerTabsPage;
-      } else {
-        let user_info = JSON.parse(localStorage.getItem('user_info'));
-        let user_setting = JSON.parse(localStorage.getItem('user_setting'));
-        this.config.userinfo['user_info'] = user_info;
-        this.config.userinfo['user_setting'] = user_setting;
-        
-        this.rootPage = SeekerTabsPage;
-      }
-    }
-
+    
     platform.ready().then(() => {
-      
       if(platform.is('ios')) {
         this.config.platform = 'ios';
       } else if(platform.is('android')) {
@@ -44,11 +26,30 @@ export class MyApp {
       } else {
         this.config.platform = 'other';
       }
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       this.initPushNotification();
       statusBar.styleDefault();
       splashScreen.hide();
+
+      let user_id = localStorage.getItem('user_id');
+      let user_type = localStorage.getItem('user_type');
+      let user_state = localStorage.getItem('user_state');
+      if(user_id != null && user_id != "" && user_state == '1') {
+        this.config.user_id = user_id;
+        this.config.user_type = user_type;
+        if(user_type == 'employer') {
+          this.rootPage = EmployerTabsPage;
+        } else {
+          let user_info = JSON.parse(localStorage.getItem('user_info'));
+          let user_setting = JSON.parse(localStorage.getItem('user_setting'));
+          this.config.userinfo['user_info'] = user_info;
+          this.config.userinfo['user_setting'] = user_setting;
+          
+          this.rootPage = SeekerTabsPage;
+        }
+      } else {
+        this.rootPage = SplashPage;
+      }
+
     });
   }
 
@@ -59,7 +60,7 @@ export class MyApp {
     }
     const options: PushOptions = {
       android: {
-        senderID: '931832809761'
+        senderID: '395456395630'
       },
       ios: {
         alert: 'true',

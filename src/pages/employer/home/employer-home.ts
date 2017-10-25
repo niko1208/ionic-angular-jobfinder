@@ -19,6 +19,8 @@ export class EmployerHomePage {
   queryIndustry = "";
   list: any;
   slist: any;
+  showSearch = false;
+
   @ViewChild('slides') slides: Slides;
 
   constructor(public navCtrl: NavController, 
@@ -134,6 +136,16 @@ export class EmployerHomePage {
 
   goMap() {
     this.navCtrl.push(EmployerHomeMapPage);
+  }
+
+  asearch() {
+    this.showSearch = true;
+  }
+  cancel() {
+    this.showSearch = false;
+  }
+  done() {
+    
   }
 
   search(value) {
