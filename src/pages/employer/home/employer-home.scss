@@ -103,9 +103,21 @@ page-employer-home{
         padding: 5px 10px;
         position: relative;
     }
+    .div_sec .overlay{
+        position: absolute;
+        background: rgba(255,255,255,0.5);
+        width: calc(100% - 10px);
+        height: calc(100% - 30px);
+        top: 30px;
+        z-index: 1;
+    }
+    .div_sec ion-checkbox{
+        position: absolute;
+        top: 12px;
+    }
     .div_sec ion-label{
         font-weight: bold;
-        padding-left: 10px;
+        padding-left: 16px;
         margin: 8px 8px;
     }
     .div_sec ion-input,

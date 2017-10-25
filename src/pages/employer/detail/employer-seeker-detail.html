@@ -57,6 +57,12 @@
         <ion-icon name="arrow-forward"></ion-icon>
     </ion-item>
 
+    <ion-label class="lb_title">Certification</ion-label>
+    <ion-item *ngFor="let item of list?.resultCertification">
+        <ion-label class='lb_icon'><ion-icon name='ios-information-circle-outline'></ion-icon></ion-label>
+        <ion-label>{{item.certification_certification}}</ion-label>
+    </ion-item>
+
     <ion-label class="lb_title">Language</ion-label>
     <ion-item *ngFor="let item of list?.resultLanguage">
         <ion-label class='lb_icon'><ion-icon name='ios-book-outline'></ion-icon></ion-label>
@@ -65,6 +71,12 @@
             {{item.language_proficiency}}
         </ion-label>
         <ion-icon name="arrow-forward"></ion-icon>
+    </ion-item>
+
+    <ion-label class="lb_title">Interest</ion-label>
+    <ion-item *ngFor="let item of list?.resultInterest">
+        <ion-label class='lb_icon'><ion-icon name='ios-information-circle-outline'></ion-icon></ion-label>
+        <ion-label>{{item.interest_interest}}</ion-label>
     </ion-item>
 
     <ion-label class="lb_title">Reference</ion-label>
