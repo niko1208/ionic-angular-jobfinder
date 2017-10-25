@@ -64,6 +64,8 @@ import { SeekerEditeducationPage } from '../pages/seeker/editeducation/seeker-ed
 import { SeekerEditexperiencePage } from '../pages/seeker/editexperience/seeker-editexperience';
 import { SeekerEditlanguagePage } from '../pages/seeker/editlanguage/seeker-editlanguage';
 import { SeekerEditreferencePage } from '../pages/seeker/editreference/seeker-editreference';
+import { SeekerEditcertificationPage } from '../pages/seeker/editcertification/seeker-editcertification';
+import { SeekerEditinterestPage } from '../pages/seeker/editinterest/seeker-editinterest';
 import { SeekerMessageroomPage } from '../pages/seeker/messageroom/seeker-messageroom';
 import { SeekerJobsmapPage } from '../pages/seeker/jobsmap/seeker-jobsmap';
 import { SeekerHelpPage } from '../pages/seeker/help/seeker-help';
@@ -77,6 +79,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { Geolocation } from '@ionic-native/geolocation';
 
 import { HttpModule } from '@angular/http';
 import { Push } from '@ionic-native/push';
@@ -149,7 +152,9 @@ import { MessageService } from '../provider/message-service';
     SeekerMessageroomPage,
     SeekerJobsmapPage,
     SeekerHelpPage,
-    SeekerChatbotPage
+    SeekerChatbotPage,
+    SeekerEditcertificationPage,
+    SeekerEditinterestPage
   ],
   imports: [
     BrowserModule,
@@ -218,7 +223,9 @@ import { MessageService } from '../provider/message-service';
     SeekerMessageroomPage,
     SeekerJobsmapPage,
     SeekerHelpPage,
-    SeekerChatbotPage
+    SeekerChatbotPage,
+    SeekerEditcertificationPage,
+    SeekerEditinterestPage
   ],
   providers: [
     StatusBar,
@@ -229,6 +236,7 @@ import { MessageService } from '../provider/message-service';
     Facebook,
     GooglePlus,
     NativeStorage,
+    Geolocation,
     SplashScreen,
     Config,
     UtilService,

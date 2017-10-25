@@ -29,6 +29,7 @@ export class EmployerInviteListPage {
   }
 
   loadData() {
+    let user_setting = JSON.parse(localStorage.getItem('user_setting'));
     let loader = this.loading.create({
       content: 'Loading...',
     });
@@ -39,6 +40,10 @@ export class EmployerInviteListPage {
         loader.dismissAll();
         if(data.status == "success") {
           this.list = data.result;
+          for(let i=0; i<this.list.length; i++) {
+            this.list[i]['time'] = this.config.getDiffDateString(this.list[i].timediff);
+            this.list[i]['distance'] = this.config.calcCrow(this.list[i].setting_location_lat, this.list[i].setting_location_lng, user_setting.setting_emp_location_lat, user_setting.setting_emp_location_lng);
+          }
           this.search("");
         }
     })
@@ -48,7 +53,21 @@ export class EmployerInviteListPage {
   }
 
   delete(i) {
-
+    let loader = this.loading.create({
+      content: 'Loading...',
+    });
+    loader.present();
+    let seekerID = this.list[i].user_id;
+    let param = {"job_id" : this.data.job_id, "seeker_id" : seekerID};
+    this.employerService.postData("deletejobapplicant", param)
+    .subscribe(data => { console.log(data);
+        loader.dismissAll();
+        if(data.status == "success") {
+          this.list.splice(i, 1);
+        } else {
+          this.util.createAlert("Failed", data.result);
+        }
+    })
   }
 
   view(i) {

@@ -3,6 +3,7 @@ import { NavController, LoadingController, ViewController } from 'ionic-angular'
 import { Config } from '../../../provider/config';
 import { UtilService } from '../../../provider/util-service';
 import { SeekerService } from '../../../provider/seeker-service';
+import { Geolocation } from '@ionic-native/geolocation';
 
 declare var google;
 
@@ -25,6 +26,7 @@ export class SeekerCurLocationPage {
     public util: UtilService,
     public seekerService: SeekerService,
     public viewCtrl: ViewController,
+    private geolocation: Geolocation,
     public loading: LoadingController) {
         
   }
@@ -50,23 +52,16 @@ export class SeekerCurLocationPage {
     console.log(this.user_setting);
     let self = this;
     if(this.user_setting == null || (this.user_setting != null && this.user_setting.setting_emp_location_lat == '')) {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            self.user_setting.setting_emp_location_lat = position.coords.latitude;
-            self.user_setting.setting_emp_location_lng = position.coords.longitude;
-            self.loadMap();
-          }, function() {
-            self.user_setting.setting_emp_location_lat = 22.285831;
-            self.user_setting.setting_emp_location_lng = 114.1582283;
-            alert('The Geolocation service failed');
-            self.loadMap();
-          });
-        } else {
-          self.user_setting.setting_emp_location_lat = 22.285831;
-          self.user_setting.setting_emp_location_lng = 114.1582283;
-          alert("Browser doesn't support Geolocation");
-          self.loadMap();
-        }
+      this.geolocation.getCurrentPosition().then((resp) => {
+        self.user_setting.setting_emp_location_lat = resp.coords.latitude;
+        self.user_setting.setting_emp_location_lng = resp.coords.longitude;
+        self.loadMap();
+      }).catch((error) => {
+        alert('The Geolocation service failed');
+        self.user_setting.setting_emp_location_lat = 22.285831;
+        self.user_setting.setting_emp_location_lng = 114.1582283;
+        self.loadMap();
+      });
     } else { 
       self.loadMap();
     }

@@ -65,7 +65,7 @@ export class EmployerPostJobEditPage {
          }
        },
        {
-         text: 'Libaray',
+         text: 'Library',
          handler: () => {
            //this.clickCamera = true;
            this.takePicture(opt, Camera.PictureSourceType.PHOTOLIBRARY);

@@ -94,7 +94,8 @@ export class EmployerApplicantPage {
     .subscribe(data => { console.log(data);
         loader.dismissAll();
         if(data.status == "success") {
-            this.list = data.result;
+            this.list[i]['job_applicants_seeker_state'] = "1";
+            this.search("");
         }
     })
   }
@@ -109,7 +110,8 @@ export class EmployerApplicantPage {
     .subscribe(data => { console.log(data);
         loader.dismissAll();
         if(data.status == "success") {
-            this.list = data.result;
+          this.list.splice(i, 1);
+          this.search("");
         }
     })
     }

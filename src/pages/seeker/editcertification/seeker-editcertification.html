@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>{{title}}</ion-title>
+        <ion-buttons right>
+            <div class="fright" tappable (click)="save()">Save</div>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class='cont_detail' padding>
+    
+    <div class="div_sec">
+        <ion-label>Certification :</ion-label>
+        <ion-select [(ngModel)]="data.certification_certification">
+            <ion-option value=""></ion-option>
+            <ion-option value="{{item}}" *ngFor="let item of list">{{item}}</ion-option>
+        </ion-select>
+    </div>
+    
+    <div text-center *ngIf="edit">
+        <button ion-button round color="jred" (click)="delete()">delete</button>
+    </div>
+
+</ion-content>

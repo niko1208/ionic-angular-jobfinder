@@ -16,9 +16,13 @@ import { NativeStorage } from '@ionic-native/native-storage';
   templateUrl: 'login-seeker.html'
 })
 export class LoginSeekerPage {
-    FB_APP_ID: number = 1968148010124162;
+    FB_APP_ID: number = 1421989254537239;
     public email: any;
     public password: any;
+    public sresponse = "";
+    public suser = "";
+    public serror1 = "";
+    public serror2 = "";
 
   constructor(public navCtrl: NavController, 
     public config: Config,
@@ -40,21 +44,27 @@ export class LoginSeekerPage {
   }
 
   doFbLogin(){
+    //1968148010124162 - my
+    //1421989254537239 - markhan
+
     let permissions = new Array<string>();
     let nav = this.navCtrl;
 	  let env = this;
     //the permissions your facebook app needs from the user
-    permissions = ["public_profile"];
-
+    permissions = ["public_profile", "email"];
 
     this.fb.login(permissions)
     .then(function(response){
+      console.log(response);
+      this.sresponse = JSON.stringify(response);
       let userId = response.authResponse.userID;
       let params = new Array<string>();
 
       //Getting name and gender properties
       env.fb.api("/me?fields=name,gender", params)
       .then(function(user) {
+        console.log(user);
+        this.suser = JSON.stringify(user);
         user.picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
         //now we have the users info, let's save it in the NativeStorage
         env.nativeStorage.setItem('user',
@@ -64,13 +74,14 @@ export class LoginSeekerPage {
           picture: user.picture
         })
         .then(function(){
+          alert('success');
           this.socialLogin(user.name, user.email, user.first_name, user.picture, 'facebook');
         }, function (error) {
-          console.log(error);
+          this.serror1 = JSON.stringify(error);
         })
       })
     }, function(error){
-      console.log(error);
+      this.serror2 = JSON.stringify(error);
     });
   }
 
@@ -238,6 +249,6 @@ export class LoginSeekerPage {
       this.doFbLogin();
   }
   login_g() {
-      
+      this.doGoogleLogin();
   }
 }
