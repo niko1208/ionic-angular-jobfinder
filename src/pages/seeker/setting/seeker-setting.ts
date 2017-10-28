@@ -79,6 +79,8 @@ export class SeekerSettingPage {
 
     localStorage.setItem('user_info', '');
     localStorage.setItem('user_setting', '');
+    localStorage.setItem('user_education', '');
+    localStorage.setItem('user_curwork', '');
 
     this.config.userinfo = {user_info:null, user_experience:null, user_curwork:null, user_education:null, user_language:null, user_reference:null, user_setting:null};
 

@@ -48,15 +48,15 @@ export class SplashPage {
   }
 
   prev() {
-    this.slides.lockSwipes(false);
+    //this.slides.lockSwipes(false);
     this.slides.slidePrev();
-    this.slides.lockSwipes(true);
+    //this.slides.lockSwipes(true);
   }
 
   next() {
-    this.slides.lockSwipes(false);
+    //this.slides.lockSwipes(false);
     this.slides.slideNext();
-    this.slides.lockSwipes(true);
+    //this.slides.lockSwipes(true);
   }
 
   goSignup() {

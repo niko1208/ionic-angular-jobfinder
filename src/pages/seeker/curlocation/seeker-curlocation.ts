@@ -51,15 +51,16 @@ export class SeekerCurLocationPage {
     this.user_setting = this.config.userinfo['user_setting'];
     console.log(this.user_setting);
     let self = this;
-    if(this.user_setting == null || (this.user_setting != null && this.user_setting.setting_emp_location_lat == '')) {
+    if(this.user_setting == null || (this.user_setting != null && this.user_setting.setting_location_lat == '')) {
       this.geolocation.getCurrentPosition().then((resp) => {
-        self.user_setting.setting_emp_location_lat = resp.coords.latitude;
-        self.user_setting.setting_emp_location_lng = resp.coords.longitude;
+        self.user_setting.setting_location_lat = resp.coords.latitude;
+        self.user_setting.setting_location_lng = resp.coords.longitude;
         self.loadMap();
       }).catch((error) => {
         alert('The Geolocation service failed');
-        self.user_setting.setting_emp_location_lat = 22.285831;
-        self.user_setting.setting_emp_location_lng = 114.1582283;
+        self.user_setting = {setting_location_lat:'', setting_location_lng:''};
+        self.user_setting.setting_location_lat = 22.285831;
+        self.user_setting.setting_location_lng = 114.1582283;
         self.loadMap();
       });
     } else { 

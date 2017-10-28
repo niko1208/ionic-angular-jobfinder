@@ -206,7 +206,7 @@ export class LoginSeekerPage {
       this.auth.login(param, 'jobseeker')
       .subscribe(data => { console.log(data);
           loader.dismissAll();
-          if(data.status == "success") {
+          if(data.status == "success") { console.log(data);
               this.config.user_type = "seeker";
               this.config.user_id = data.resultUser.user_id;
               this.config.user_state = data.resultUser.user_state;
@@ -217,9 +217,13 @@ export class LoginSeekerPage {
 
                 let resultUser = JSON.stringify(data.resultUser);
                 let resultSetting = JSON.stringify(data.resultSetting);
+                let resultEducation = JSON.stringify(data.resultEducation);
+                let resultCurwork = JSON.stringify(data.resultCurWork);
 
                 localStorage.setItem('user_info', resultUser);
                 localStorage.setItem('user_setting', resultSetting);
+                localStorage.setItem('user_education', resultEducation);
+                localStorage.setItem('user_curwork', resultCurwork);
 
                 this.config.userinfo['user_info'] = data.resultUser;
                 this.config.userinfo['user_setting'] = data.resultSetting;
