@@ -39,7 +39,100 @@ export class SeekerJobsPage {
   }
 
   loadData() {
+    let user_info = JSON.parse(localStorage.getItem('user_info'));
     let user_setting = JSON.parse(localStorage.getItem('user_setting'));
+    let user_education = localStorage.getItem('user_education');
+    let user_curwork = localStorage.getItem('user_curwork');
+    console.log(user_info);
+    console.log(user_setting);
+    let user_about = user_info.user_about;
+
+    if(!user_setting || user_setting == "" || user_setting == null || user_setting.setting_distance == "") { 
+      let alert = this.alertCtrl.create({
+        title: "Alert!",
+        message: "Please define your search parameters in Settings first",
+        enableBackdropDismiss: false,
+        buttons: [
+          {
+            text: "Go to Settings",
+            handler: data => {
+              this.navCtrl.parent.select(1); 
+              //this.navCtrl.push(EmployerSettingPage, null, this.config.navOptions);
+            }
+          },
+          {
+            text: "Cancel",
+            role: 'cancel'
+          }
+        ]
+      });
+      alert.present();
+      return;
+    } else if (user_about == null || user_about == "") { 
+      let alert = this.alertCtrl.create({
+        title: "Please complete your profile!",
+        message: "Name, About, Education and Current Work details are compulsory fields!",
+        enableBackdropDismiss: false,
+        buttons: [
+          {
+            text: "Go to Profile",
+            handler: data => {
+              this.navCtrl.parent.select(2); 
+              //this.navCtrl.push(EmployerSettingPage, null, this.config.navOptions);
+            }
+          },
+          {
+            text: "Cancel",
+            role: 'cancel'
+          }
+        ]
+      });
+      alert.present();
+      return;
+    } else if (user_education == null || user_education.length == 0) { 
+      let alert = this.alertCtrl.create({
+        title: "Please complete your profile!",
+        message: "Name, About, Education and Current Work details are compulsory fields!",
+        enableBackdropDismiss: false,
+        buttons: [
+          {
+            text: "Go to Profile",
+            handler: data => {
+              this.navCtrl.parent.select(2); 
+              //this.navCtrl.push(EmployerSettingPage, null, this.config.navOptions);
+            }
+          },
+          {
+            text: "Cancel",
+            role: 'cancel'
+          }
+        ]
+      });
+      alert.present();
+      return;
+    } else if (user_curwork == null || user_curwork.length == 0) { 
+      let alert = this.alertCtrl.create({
+        title: "Please complete your profile!",
+        message: "Name, About, Education and Current Work details are compulsory fields!",
+        enableBackdropDismiss: false,
+        buttons: [
+          {
+            text: "Go to Profile",
+            handler: data => {
+              this.navCtrl.parent.select(2); 
+              //this.navCtrl.push(EmployerSettingPage, null, this.config.navOptions);
+            }
+          },
+          {
+            text: "Cancel",
+            role: 'cancel'
+          }
+        ]
+      });
+      alert.present();
+      return;
+    }
+
     let loader = this.loading.create({
       content: 'Loading...',
     });

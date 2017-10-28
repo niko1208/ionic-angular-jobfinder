@@ -56,12 +56,14 @@ export class EmployerCurLocationPage {
             self.user_setting.setting_emp_location_lng = position.coords.longitude;
             self.loadMap();
           }, function() {
+            self.user_setting = {setting_emp_location_lat:'', setting_emp_location_lng:''};
             self.user_setting.setting_emp_location_lat = 22.285831;
             self.user_setting.setting_emp_location_lng = 114.1582283;
             alert('The Geolocation service failed');
             self.loadMap();
           });
         } else {
+          self.user_setting = {setting_emp_location_lat:'', setting_emp_location_lng:''};
           self.user_setting.setting_emp_location_lat = 22.285831;
           self.user_setting.setting_emp_location_lng = 114.1582283;
           alert("Browser doesn't support Geolocation");
