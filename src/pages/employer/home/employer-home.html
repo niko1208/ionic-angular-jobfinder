@@ -8,7 +8,86 @@
 </ion-header>
 
 <ion-content>
+    <div class="asearch_dlg" *ngIf="showSearch">
+        <div class="div_sec">
+            <div class="overlay" *ngIf="!isexperience"></div>
+            <ion-checkbox [(ngModel)]="isexperience" (click)="clickExperience()"></ion-checkbox>
+            <ion-label>Experience :</ion-label>
+            <ion-row>
+                <ion-col col-3 text-right>City : </ion-col>
+                <ion-col col-9><ion-input placeholder="City" [(ngModel)]="queryExperienceCity" ></ion-input></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-3 text-right>Country : </ion-col>
+                <ion-col col-9><ion-input placeholder="Country" [(ngModel)]="queryExperienceCountry"></ion-input></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-3 text-right>Role : </ion-col>
+                <ion-col col-9><ion-input placeholder="Role" [(ngModel)]="queryExperienceRole"></ion-input></ion-col>
+            </ion-row>
+        </div>
+        <div class="div_sec">
+            <div class="overlay" *ngIf="!iscurwork"></div>
+            <ion-checkbox [(ngModel)]="iscurwork" (click)="clickCurwork()"></ion-checkbox>
+            <ion-label>Current Work :</ion-label>
+            <ion-row>
+                <ion-col col-3 text-right>City : </ion-col>
+                <ion-col col-9><ion-input placeholder="City" [(ngModel)]="queryCurWorkCity"></ion-input></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-3 text-right>Country : </ion-col>
+                <ion-col col-9><ion-input placeholder="Country" [(ngModel)]="queryCurWorkCountry"></ion-input></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-3 text-right>Role : </ion-col>
+                <ion-col col-9><ion-input placeholder="Role" [(ngModel)]="queryCurWorkRole"></ion-input></ion-col>
+            </ion-row>
+        </div>
+        <div class="div_sec">
+            <div class="overlay" *ngIf="!isedu"></div>
+            <ion-checkbox [(ngModel)]="isedu" (click)="clickEdu()"></ion-checkbox>
+            <ion-label>Education :</ion-label>
+            <ion-row>
+                <ion-col col-3 text-right></ion-col>
+                <ion-col col-9><ion-input placeholder="Area of Study" [(ngModel)]="queryEducation"></ion-input></ion-col>
+            </ion-row>
+        </div>
+        <div class="div_sec">
+            <div class="overlay" *ngIf="!islang"></div>
+            <ion-checkbox [(ngModel)]="islang" (click)="clickLang()"></ion-checkbox>
+            <ion-label>Language :</ion-label>
+            <ion-row>
+                <ion-col col-3 text-right></ion-col>
+                <ion-col col-9><ion-input placeholder="Insert Language" [(ngModel)]="queryLanguage"></ion-input></ion-col>
+            </ion-row>
+        </div>
+        <div class="div_sec">
+            <div class="overlay" *ngIf="!iscert"></div>
+            <ion-checkbox [(ngModel)]="iscert" (click)="clickCert()"></ion-checkbox>
+            <ion-label>Professional Certification :</ion-label>
+            <ion-row>
+                <ion-col col-3 text-right></ion-col>
+                <ion-col col-9><ion-input placeholder="Professional Certification" [(ngModel)]="queryCertificate"></ion-input></ion-col>
+            </ion-row>
+        </div>
+        <div class="div_sec">
+            <div class="overlay" *ngIf="!isinterest"></div>
+            <ion-checkbox [(ngModel)]="isinterest" (click)="clickInterest()"></ion-checkbox>
+            <ion-label>Interest :</ion-label>
+            <ion-row>
+                <ion-col col-3 text-right></ion-col>
+                <ion-col col-9><ion-input placeholder="Interest" [(ngModel)]="queryInterest"></ion-input></ion-col>
+            </ion-row>
+        </div>
+        <br/>    
+        <div text-center>
+            <button ion-button round color="jred" (click)="cancel()">Cancel</button>
+            <button ion-button round color="jblue" (click)="done()">Done</button>
+        </div>
+        <br/>
+    </div>
     <div class="top_header">
+        <ion-icon class="asearch" tappable name="ios-funnel-outline" (click)="asearch()"></ion-icon>
         <ion-searchbar #q [(ngModel)]="searchValue" (keyup.enter)="search(q.value)" pleceholder="">
         </ion-searchbar>
         <div style="padding: 0px 8px;">

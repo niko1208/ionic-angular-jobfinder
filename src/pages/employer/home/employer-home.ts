@@ -17,7 +17,28 @@ export class EmployerHomePage {
 
   arrIndustry = [];
   queryIndustry = "";
-  list: any;
+  list: any;showSearch = false;
+
+  queryExperienceCity = ""; 
+  queryExperienceCountry = "";
+  queryExperienceRole = "";
+  queryCurWorkCity = "";
+  queryCurWorkCountry = "";
+  queryCurWorkRole = "";
+  queryEducation = "";
+  queryLanguage = "";
+  queryCertificate = "";
+  queryInterest = "";
+
+  isexperience = false;
+  iscurwork = false;
+  isedu = false;
+  islang = false;
+  iscert = false;
+  isinterest = false;
+
+  ttime = 300;
+
   @ViewChild('slides') slides: Slides;
 
   constructor(public navCtrl: NavController, 
@@ -29,6 +50,63 @@ export class EmployerHomePage {
         
         this.arrIndustry = ["#hospitality", "#entertainment", "#fastfood", "#construction", "#sales", "#retail", "#notforprofit", "#logistics", "#administration", "#agedcare", "#banking", "#callcentre", "#childcare", "#consumergoods", "#creative", "#defence", "#education", "#entrepreneur", "#financialservices", "#government", "#healthcare", "#hr", "#legal", "#manufacturing", "#marketing", "#media", "#mining", "#officesupport", "#professionalservices", "#property", "#recreation", "#recruitment", "#selfemployed", "#software", "#sports", "#technicalsupport", "#technology", "#telecommunications", "#tourism", "#trades", "#transport", "#cleaning", "#fashion", "#hairandbeauty", "#services"];
 
+  }
+
+  clickExperience() {
+    //this.isexperience = !(this.isexperience);
+    setTimeout(() => {
+      if(!(this.isexperience)) {
+        this.queryEducation = ""; 
+        this.queryExperienceCountry = "";
+        this.queryExperienceRole = "";
+      }
+    }, this.ttime);
+  }
+  clickCurwork() {
+    //this.iscurwork = !(this.iscurwork);
+    setTimeout(() => {
+      if(!(this.iscurwork)) {
+        this.queryCurWorkCity = "";
+        this.queryCurWorkCountry = "";
+        this.queryCurWorkRole = "";
+      }
+    }, this.ttime);
+  }
+  clickEdu() {
+    //this.isedu = !(this.isedu);
+    setTimeout(() => {
+      if(!(this.isedu)) {
+        this.queryEducation = ""; 
+      }
+    }, this.ttime);
+  }
+  clickLang() {
+    //this.islang = !(this.islang);
+    setTimeout(() => {
+      if(!(this.islang)) {
+        this.queryLanguage = ""; 
+      }
+    }, this.ttime);
+  }
+  clickCert() {
+    //this.iscert = !(this.iscert);
+    setTimeout(() => {
+      if(!(this.iscert)) {
+        this.queryCertificate = ""; 
+      }
+    }, this.ttime);
+  }
+  clickInterest() {
+    //this.isinterest = !(this.isinterest);
+    setTimeout(() => {
+      if(!(this.isinterest)) {
+        this.queryInterest = ""; 
+      }
+    }, this.ttime);
+  }
+
+  ionViewWillLeave() {
+    this.showSearch = false;
   }
 
   ionViewWillEnter() {
@@ -62,7 +140,8 @@ export class EmployerHomePage {
       content: 'Loading...',
     });
     loader.present();
-    let param = {"employer_id" : this.config.user_id, "industry" : this.queryIndustry};
+    let param = {"employer_id" : this.config.user_id, "industry" : this.queryIndustry, "experience_city" : this.queryExperienceCity, "experience_country" : this.queryExperienceCountry, "experience_role" : this.queryExperienceRole, "curwork_city" : this.queryCurWorkCity, "curwork_country" : this.queryCurWorkCountry, "curwork_role" : this.queryCurWorkRole, "education" : this.queryEducation, "language" : this.queryLanguage, "certificate" : this.queryCertificate, "interest" : this.queryInterest};
+    
     this.employerService.loadMatchedJobSeekers(param)
     .subscribe(data => {
         loader.dismissAll();
@@ -134,6 +213,16 @@ export class EmployerHomePage {
     this.navCtrl.push(EmployerHomeMapPage);
   }
 
+  asearch() {
+    this.showSearch = true;
+  }
+  cancel() {
+    this.showSearch = false;
+  }
+  done() {
+    this.showSearch = false;
+    this.loadData();
+  }
   search(value) {
     
   }
