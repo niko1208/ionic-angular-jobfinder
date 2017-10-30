@@ -16,6 +16,8 @@ import { EmployerHomeMapPage } from '../home-map/employer-home-map';
 export class EmployerHomePage {
 
   arrIndustry = [];
+  arrCertification = [];
+  arrInterest = [];
   queryIndustry = "";
   list: any;showSearch = false;
 
@@ -49,6 +51,10 @@ export class EmployerHomePage {
     public loading: LoadingController) {
         
         this.arrIndustry = ["#hospitality", "#entertainment", "#fastfood", "#construction", "#sales", "#retail", "#notforprofit", "#logistics", "#administration", "#agedcare", "#banking", "#callcentre", "#childcare", "#consumergoods", "#creative", "#defence", "#education", "#entrepreneur", "#financialservices", "#government", "#healthcare", "#hr", "#legal", "#manufacturing", "#marketing", "#media", "#mining", "#officesupport", "#professionalservices", "#property", "#recreation", "#recruitment", "#selfemployed", "#software", "#sports", "#technicalsupport", "#technology", "#telecommunications", "#tourism", "#trades", "#transport", "#cleaning", "#fashion", "#hairandbeauty", "#services"];
+
+        this.arrCertification = ["#Sijil Kemahiran Malaysia ( SKM 1 )", "#Sijil Kemahiran Malaysia ( SKM 2 )", "#Sijil Kemahiran Malaysia ( SKM 3)", "#Diploma Kemahiran Malaysia ( DKM )", "#Diploma Lanjutan Kemahiran Malaysia ( DLKM )", "#IEP/IELTS", "#Certification in Early Childhood Education", "#Certification in English", "#ESOL UK", "#PCIF", "#TEFL (LTTC) UK", "#Certificate in Outsourcing Professional ( COP )", "#Professional Engineer ( PE )", "#CEng", "#CSci", "#CEnv", "#CEng", "#CSDA", "#CSDP", "#WCET", "#CCP", "#IPPC", "#CQIF", "#IFP", "#CFP", "#ACCA", "#CPA", "#CFA", "#CIMA", "#ACA", "#CFE", "#CIA", "#CISA", "#Microsoft Professional Certification", "#Oracle Professional Certification", "#CISCO Professional Certification", "#CIPD Level 3", "#CIPD Level 5", "#CIPD Level 7", "#CHA", "#SCAE Barista Basic", "#SCAE Barista Intermediate", "#SCAE Barista Professional", "#Latte Art Basic", "#Latte Art Advanced", "#Mixologist", "CIDB Green Card"];
+
+        this.arrInterest = ["#Reading", "#Travelling", "#Blogging", "#Collecting", "#Volunteer Work/Community", "#Cooking", "#Child Care", "#Sports", "#Music", "#Puzzles and Strategy games", "#Club memberships", "#Public speaking", "#Board games", "#Photography", "#Art & Cultural pursuits", "#Gardening", "#Others"];
 
   }
 
@@ -141,7 +147,7 @@ export class EmployerHomePage {
     });
     loader.present();
     let param = {"employer_id" : this.config.user_id, "industry" : this.queryIndustry, "experience_city" : this.queryExperienceCity, "experience_country" : this.queryExperienceCountry, "experience_role" : this.queryExperienceRole, "curwork_city" : this.queryCurWorkCity, "curwork_country" : this.queryCurWorkCountry, "curwork_role" : this.queryCurWorkRole, "education" : this.queryEducation, "language" : this.queryLanguage, "certificate" : this.queryCertificate, "interest" : this.queryInterest};
-    
+
     this.employerService.loadMatchedJobSeekers(param)
     .subscribe(data => {
         loader.dismissAll();

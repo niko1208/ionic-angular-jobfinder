@@ -67,7 +67,11 @@
             <ion-label>Professional Certification :</ion-label>
             <ion-row>
                 <ion-col col-3 text-right></ion-col>
-                <ion-col col-9><ion-input placeholder="Professional Certification" [(ngModel)]="queryCertificate"></ion-input></ion-col>
+                <ion-col col-9>
+                    <ion-select [(ngModel)]="queryCertificate" placeholder="Professional Certification">
+                        <ion-option value="{{item}}" *ngFor="let item of arrCertification">{{item}}</ion-option>
+                    </ion-select>
+                </ion-col>
             </ion-row>
         </div>
         <div class="div_sec">
@@ -76,7 +80,11 @@
             <ion-label>Interest :</ion-label>
             <ion-row>
                 <ion-col col-3 text-right></ion-col>
-                <ion-col col-9><ion-input placeholder="Interest" [(ngModel)]="queryInterest"></ion-input></ion-col>
+                <ion-col col-9>
+                    <ion-select [(ngModel)]="queryInterest" placeholder="Interest">
+                        <ion-option value="{{item}}" *ngFor="let item of arrInterest">{{item}}</ion-option>
+                    </ion-select>
+                </ion-col>
             </ion-row>
         </div>
         <br/>    
