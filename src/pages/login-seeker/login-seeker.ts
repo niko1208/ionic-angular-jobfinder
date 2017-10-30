@@ -1,5 +1,5 @@
 import { Component  } from '@angular/core';
-import { NavController, LoadingController, ViewController } from 'ionic-angular';
+import { NavController, LoadingController, ViewController, Platform } from 'ionic-angular';
 import { Config } from '../../provider/config';
 import { UtilService } from '../../provider/util-service';
 import { Auth } from '../../provider/auth';
@@ -24,19 +24,22 @@ export class LoginSeekerPage {
     public serror1 = "";
     public serror2 = "";
 
-  constructor(public navCtrl: NavController, 
+  constructor(
+    public navCtrl: NavController, 
     public config: Config,
     public util: UtilService,
     public loading: LoadingController,
     public viewCtrl: ViewController,
     public seekerService: SeekerService,
-  	public fb: Facebook,
+    public platform: Platform,
+  	public facebook: Facebook,
   	public gp: GooglePlus,
   	public nativeStorage: NativeStorage,
-    public auth: Auth) {
+    public auth: Auth
+  ) {
         this.email = "";// "test5@mail.com";
         this.password = "";//"test5";
-        this.fb.browserInit(this.FB_APP_ID, "v2.8");
+        // this.fb.browserInit(this.FB_APP_ID, "v2.8");
   }
 
   goback() {
@@ -46,55 +49,61 @@ export class LoginSeekerPage {
   doFbLogin(){
     //1968148010124162 - my
     //1421989254537239 - markhan
+    let permissions = ['public_profile', 'email'];
+    this.platform.ready().then(() => {
+      this.facebook.login(permissions).then((res) => {
+        console.log(res);
 
-    let permissions = new Array<string>();
-    let nav = this.navCtrl;
-	  let env = this;
-    //the permissions your facebook app needs from the user
-    permissions = ["public_profile", "email"];
+        //do something
+        
+      });
+    })
 
-    this.fb.login(permissions)
-    .then(function(response){
-      console.log(response);
-      this.sresponse = JSON.stringify(response);
-      let userId = response.authResponse.userID;
-      let params = new Array<string>();
+    // this.fb.login(permissions)
+    // .then(function(response){
+    //   console.log(response);
+    //   this.sresponse = JSON.stringify(response);
+    //   let userId = response.authResponse.userID;
+    //   let params = new Array<string>();
 
-      //Getting name and gender properties
-      env.fb.api("/me?fields=name,gender", params)
-      .then(function(user) {
-        console.log(user);
-        this.suser = JSON.stringify(user);
-        user.picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
-        //now we have the users info, let's save it in the NativeStorage
-        env.nativeStorage.setItem('user',
-        {
-          name: user.name,
-          gender: user.gender,
-          picture: user.picture
-        })
-        .then(function(){
-          alert('success');
-          this.socialLogin(user.name, user.email, user.first_name, user.picture, 'facebook');
-        }, function (error) {
-          this.serror1 = JSON.stringify(error);
-        })
-      })
-    }, function(error){
-      this.serror2 = JSON.stringify(error);
-    });
+    //   //Getting name and gender properties
+    //   env.fb.api("/me?fields=name,gender", params)
+    //   .then(function(user) {
+    //     console.log(user);
+    //     this.suser = JSON.stringify(user);
+    //     user.picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
+    //     //now we have the users info, let's save it in the NativeStorage
+    //     env.nativeStorage.setItem('user',
+    //     {
+    //       name: user.name,
+    //       gender: user.gender,
+    //       picture: user.picture
+    //     })
+    //     .then(function(){
+    //       alert('success');
+    //       this.socialLogin(user.name, user.email, user.first_name, user.picture, 'facebook');
+    //     }, function (error) {
+    //       this.serror1 = JSON.stringify(error);
+    //     })
+    //   })
+    // }, function(error){
+    //   this.serror2 = JSON.stringify(error);
+    // });
   }
 
   doFbLogout(){
-		var nav = this.navCtrl;
-		let env = this;
-		this.fb.logout()
-		.then(function(response) {
-			//user logged out so we will remove him from the NativeStorage
-			env.nativeStorage.remove('user');
-		}, function(error){
-			console.log(error);
-		});
+    this.platform.ready().then(() => {
+      this.facebook.logout();
+    });
+		// var nav = this.navCtrl;
+		// let env = this;
+		// this.fb.logout()
+		// .then(function(response) {
+		// 	//user logged out so we will remove him from the NativeStorage
+		// 	env.nativeStorage.remove('user');
+		// }, function(error){
+		// 	console.log(error);
+		// });
 	}
 
   doGoogleLogin(){

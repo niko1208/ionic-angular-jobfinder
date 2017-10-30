@@ -84,7 +84,7 @@
     <plugin name="cordova-plugin-camera" spec="^2.4.1" />
     <plugin name="cordova-plugin-datepicker" spec="^0.9.3" />
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
-    <plugin name="cordova-plugin-facebook4" spec="file:cordova-plugin-facebook4">
+    <plugin name="cordova-plugin-facebook4" spec="^1.9.1">
         <variable name="APP_ID" value="1968148010124162" />
         <variable name="APP_NAME" value="jobfinder" />
     </plugin>
