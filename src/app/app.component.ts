@@ -49,7 +49,7 @@ export class MyApp {
       console.warn('Push notifications not initialized. Cordova is not available - Run in physical device');
       return;
     }
-    const options: PushOptions = {
+    const options: any = {
       android: {
         senderID: '931832809761'
       },

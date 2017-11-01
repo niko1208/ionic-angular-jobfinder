@@ -19,7 +19,8 @@ export class EmployerHomePage {
   arrCertification = [];
   arrInterest = [];
   queryIndustry = "";
-  list: any;showSearch = false;
+  list: any;
+  showSearch = false;
 
   queryExperienceCity = ""; 
   queryExperienceCountry = "";
