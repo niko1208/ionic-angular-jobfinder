@@ -76,7 +76,7 @@ import { Camera } from '@ionic-native/camera';
 import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture';
 import { DatePicker } from '@ionic-native/date-picker';
 import { SocialSharing } from '@ionic-native/social-sharing';
-import { Facebook } from '@ionic-native/facebook';
+import { Facebook, FacebookLoginResponse  } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Geolocation } from '@ionic-native/geolocation';
