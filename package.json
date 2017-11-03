@@ -83,11 +83,11 @@
             "cordova-plugin-nativestorage": {},
             "cordova-plugin-geolocation": {},
             "cordova-plugin-googleplus": {
-                "REVERSED_CLIENT_ID": "317689615285-2ss4s9gvmj3vj0rrpt0976u282f2sg9c.apps.googleusercontent.com"
+                "REVERSED_CLIENT_ID": "gd0jt56ivjkpipb4qi4icfbc2tlbactk-36960936434.apps.googleusercontent.com"
             },
             "cordova-plugin-facebook4": {
-                "APP_ID": "214225935767090",
-                "APP_NAME": "Team Trainer"
+                "APP_ID": "1421989254537239",
+                "APP_NAME": "JobFinder"
             }
         },
         "platforms": [

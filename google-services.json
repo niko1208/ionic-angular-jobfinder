@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "43463906963",
+    "project_id": "jobfinderapp-248ce"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:43463906963:android:8e46e039c1788aee",
+        "android_client_info": {
+          "package_name": "com.jobfinder.job"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "43463906963-ktcablt2cbfci4iq4bpipkjvi65tj0dg.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "43463906963-ucv7co7p9butdr4id6nulh38tkoun3j6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jobfinder.job",
+            "certificate_hash": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFWqFfEA-zwPF5TD4XS_12176gCLHYXCk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

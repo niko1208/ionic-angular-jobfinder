@@ -47,10 +47,19 @@ export class LoginSeekerPage {
   doFbLogin(){
     //1968148010124162 - my
     //1421989254537239 - markhan
+    let env = this;
     let permissions = ['public_profile', 'email'];
     this.platform.ready().then(() => {
       this.facebook.login(permissions).then((res) => {
         console.log(res);
+        let userId = res.authResponse.userID;
+        let params = new Array<string>();
+        env.facebook.api("/me?fields=name,gender,email", params)
+        .then(function(user) {
+          console.log(user);
+          var picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
+          env.socialLogin(user.name, user.email, user.name, picture, 'facebook');
+        });
       });
     });
     /*
@@ -111,6 +120,7 @@ export class LoginSeekerPage {
 	}
 
   doGoogleLogin(){
+    //SHA-1 : 69:7B:D1:DD:35:2E:3B:51:0F:84:FF:0A:A6:A7:EB:86:01:F7:BE:1F
     let nav = this.navCtrl;
     let env = this;
     let loading = this.loading.create({
@@ -118,24 +128,17 @@ export class LoginSeekerPage {
     });
     loading.present();
     this.gp.login({
-      'scopes': '', // optional, space-separated list of scopes, If not included or empty, defaults to `profile` and `email`.
-      'webClientId': '317689615285-2ss4s9gvmj3vj0rrpt0976u282f2sg9c.apps.googleusercontent.com', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
+      'scopes': '',
+      'webClientId': '43463906963-ktcablt2cbfci4iq4bpipkjvi65tj0dg.apps.googleusercontent.com', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
       'offline': true
-    })
+      })
     .then(function (user) {
+      console.log(user);
       loading.dismiss();
-
-      env.nativeStorage.setItem('user', {
-        name: user.displayName,
-        email: user.email,
-        picture: user.imageUrl
-      })
-      .then(function(){
-        this.socialLogin(user.displayName, user.email, user.first_name, user.imageUrl, 'google');
-      }, function (error) {
-        console.log(error);
-      })
+      this.socialLogin(user.displayName, user.email, user.displayName, user.imageUrl, 'google');
+      
     }, function (error) {
+      console.log(error);
       loading.dismiss();
     });
   }
