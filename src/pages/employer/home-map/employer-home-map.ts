@@ -18,27 +18,27 @@ export class EmployerHomeMapPage {
   arrIndustry = [];
   arrCertification = [];
   arrInterest = [];
-  queryIndustry = "";
   list: any;
+  slist: any;
   showSearch = false;
 
-  queryExperienceCity = ""; 
-  queryExperienceCountry = "";
-  queryExperienceRole = "";
-  queryCurWorkCity = "";
-  queryCurWorkCountry = "";
-  queryCurWorkRole = "";
-  queryEducation = "";
-  queryLanguage = "";
-  queryCertificate = "";
-  queryInterest = "";
+  public queryExperienceCity = ""; 
+  public queryExperienceCountry = "";
+  public queryExperienceRole = "";
+  public queryCurWorkCity = "";
+  public queryCurWorkCountry = "";
+  public queryCurWorkRole = "";
+  public queryEducation = "";
+  public queryLanguage = "";
+  public queryCertificate = "";
+  public queryInterest = "";
 
-  isexperience = false;
-  iscurwork = false;
-  isedu = false;
-  islang = false;
-  iscert = false;
-  isinterest = false;
+  public isexperience = false;
+  public iscurwork = false;
+  public isedu = false;
+  public islang = false;
+  public iscert = false;
+  public isinterest = false;
 
   ttime = 300;
   @ViewChild('slides') slides: Slides;
@@ -63,52 +63,52 @@ export class EmployerHomeMapPage {
   clickExperience() {
     //this.isexperience = !(this.isexperience);
     setTimeout(() => {
-      if(!(this.isexperience)) {
-        this.queryEducation = ""; 
-        this.queryExperienceCountry = "";
-        this.queryExperienceRole = "";
+      if(!(this.config.isexperience)) {
+        this.config.queryEducation = ""; 
+        this.config.queryExperienceCountry = "";
+        this.config.queryExperienceRole = "";
       }
     }, this.ttime);
   }
   clickCurwork() {
     //this.iscurwork = !(this.iscurwork);
     setTimeout(() => {
-      if(!(this.iscurwork)) {
-        this.queryCurWorkCity = "";
-        this.queryCurWorkCountry = "";
-        this.queryCurWorkRole = "";
+      if(!(this.config.iscurwork)) {
+        this.config.queryCurWorkCity = "";
+        this.config.queryCurWorkCountry = "";
+        this.config.queryCurWorkRole = "";
       }
     }, this.ttime);
   }
   clickEdu() {
     //this.isedu = !(this.isedu);
     setTimeout(() => {
-      if(!(this.isedu)) {
-        this.queryEducation = ""; 
+      if(!(this.config.isedu)) {
+        this.config.queryEducation = ""; 
       }
     }, this.ttime);
   }
   clickLang() {
     //this.islang = !(this.islang);
     setTimeout(() => {
-      if(!(this.islang)) {
-        this.queryLanguage = ""; 
+      if(!(this.config.islang)) {
+        this.config.queryLanguage = ""; 
       }
     }, this.ttime);
   }
   clickCert() {
     //this.iscert = !(this.iscert);
     setTimeout(() => {
-      if(!(this.iscert)) {
-        this.queryCertificate = ""; 
+      if(!(this.config.iscert)) {
+        this.config.queryCertificate = ""; 
       }
     }, this.ttime);
   }
   clickInterest() {
     //this.isinterest = !(this.isinterest);
     setTimeout(() => {
-      if(!(this.isinterest)) {
-        this.queryInterest = ""; 
+      if(!(this.config.isinterest)) {
+        this.config.queryInterest = ""; 
       }
     }, this.ttime);
   }
@@ -130,14 +130,15 @@ export class EmployerHomeMapPage {
       content: 'Loading...',
     });
     loader.present();
-    //let param = {"employer_id" : this.config.user_id, "industry" : this.queryIndustry};
-    let param = {"employer_id" : this.config.user_id, "industry" : this.queryIndustry, "experience_city" : this.queryExperienceCity, "experience_country" : this.queryExperienceCountry, "experience_role" : this.queryExperienceRole, "curwork_city" : this.queryCurWorkCity, "curwork_country" : this.queryCurWorkCountry, "curwork_role" : this.queryCurWorkRole, "education" : this.queryEducation, "language" : this.queryLanguage, "certificate" : this.queryCertificate, "interest" : this.queryInterest};
+    let param = {"employer_id" : this.config.user_id, "industry" : this.config.queryIndustry, "experience_city" : this.config.queryExperienceCity, "experience_country" : this.config.queryExperienceCountry, "experience_role" : this.config.queryExperienceRole, "curwork_city" : this.config.queryCurWorkCity, "curwork_country" : this.config.queryCurWorkCountry, "curwork_role" : this.config.queryCurWorkRole, "education" : this.config.queryEducation, "language" : this.config.queryLanguage, "certificate" : this.config.queryCertificate, "interest" : this.config.queryInterest};
 
     this.employerService.loadMatchedJobSeekers(param)
     .subscribe(data => {
         loader.dismissAll();
         if(data.status = "success") {
           this.list = data.result; console.log(this.list);
+          
+          this.search(this.config.searchValue);
           this.loadMap();
         }
     })
@@ -182,7 +183,7 @@ export class EmployerHomeMapPage {
     circle.bindTo('center', marker, 'position');
     
     //========================
-    let list = this.list;
+    let list = this.slist;
     var mark = [];
     var ll = [];
     var ct = [];
@@ -227,7 +228,7 @@ export class EmployerHomeMapPage {
   }
 
   goSeeker(i) {
-    let seekerID = this.list[i].user_id;
+    let seekerID = this.slist[i].user_id;
     this.navCtrl.push(EmployerSeekerDetailPage, {seeker_id: seekerID});
   }
 
@@ -239,17 +240,66 @@ export class EmployerHomeMapPage {
     this.navCtrl.push(EmployerSavedPage);
   }
 
+  
   asearch() {
     this.showSearch = true;
+
+    this.queryExperienceCity = this.config.queryExperienceCity; 
+    this.queryExperienceCountry = this.config.queryExperienceCountry;
+    this.queryExperienceRole = this.config.queryExperienceRole;
+    this.queryCurWorkCity = this.config.queryCurWorkCity;
+    this.queryCurWorkCountry =this.config.queryCurWorkCountry;
+    this.queryCurWorkRole = this.config.queryCurWorkRole;
+    this.queryEducation = this.config.queryEducation;
+    this.queryLanguage = this.config.queryLanguage;
+    this.queryCertificate = this.config.queryCertificate;
+    this.queryInterest = this.config.queryInterest;
+
+    this.isexperience = this.config.isexperience;
+    this.iscurwork = this.config.iscurwork;
+    this.isedu = this.config.isedu;
+    this.islang = this.config.islang;
+    this.iscert = this.config.iscert;
+    this.isinterest = this.config.isinterest;
   }
   cancel() {
     this.showSearch = false;
+    
+    this.config.queryExperienceCity = this.queryExperienceCity; 
+    this.config.queryExperienceCountry = this.queryExperienceCountry;
+    this.config.queryExperienceRole = this.queryExperienceRole;
+    this.config.queryCurWorkCity = this.queryCurWorkCity;
+    this.config.queryCurWorkCountry =this.queryCurWorkCountry;
+    this.config.queryCurWorkRole = this.queryCurWorkRole;
+    this.config.queryEducation = this.queryEducation;
+    this.config.queryLanguage = this.queryLanguage;
+    this.config.queryCertificate = this.queryCertificate;
+    this.config.queryInterest = this.queryInterest;
+
+    this.config.isexperience = this.isexperience;
+    this.config.iscurwork = this.iscurwork;
+    this.config.isedu = this.isedu;
+    this.config.islang = this.islang;
+    this.config.iscert = this.iscert;
+    this.config.isinterest = this.isinterest;
   }
   done() {
     this.showSearch = false;
     this.loadData();
   }
   search(value) {
-    
+    value = this.config.searchValue;
+    this.slist = this.filterItems(value);
+    this.loadMap();
+  }
+  filterItems(searchTerm) {
+    return this.list.filter((item) => {
+      for(var key in item) { 
+        if(item[key].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+          return true;
+        }
+      }
+      return false;
+    })
   }
 }

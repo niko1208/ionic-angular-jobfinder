@@ -11,6 +11,28 @@ export class Config {
     public user_id: any;
     public user_state: any;
 
+
+    public queryExperienceCity = ""; 
+    public queryExperienceCountry = "";
+    public queryExperienceRole = "";
+    public queryCurWorkCity = "";
+    public queryCurWorkCountry = "";
+    public queryCurWorkRole = "";
+    public queryEducation = "";
+    public queryLanguage = "";
+    public queryCertificate = "";
+    public queryInterest = "";
+
+    public isexperience = false;
+    public iscurwork = false;
+    public isedu = false;
+    public islang = false;
+    public iscert = false;
+    public isinterest = false;
+
+    public queryIndustry = "";
+    public searchValue ="";
+    
     constructor() {
         this.navOptions = {
             animation: 'ios-transition'
