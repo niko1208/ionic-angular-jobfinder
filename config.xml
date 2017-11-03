@@ -90,7 +90,7 @@
     </plugin>
     <plugin name="cordova-plugin-geolocation" spec="^2.4.3" />
     <plugin name="cordova-plugin-googleplus" spec="^5.1.1">
-        <variable name="REVERSED_CLIENT_ID" value="gd0jt56ivjkpipb4qi4icfbc2tlbactk-36960936434.apps.googleusercontent.com" />
+        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.43463906963-ktcablt2cbfci4iq4bpipkjvi65tj0dg" />
     </plugin>
     <plugin name="cordova-plugin-media-capture" spec="^1.4.3" />
     <plugin name="cordova-plugin-nativestorage" spec="^2.2.2" />

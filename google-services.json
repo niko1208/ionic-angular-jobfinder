@@ -13,11 +13,19 @@
       },
       "oauth_client": [
         {
+          "client_id": "43463906963-p686nl0j8un157crch8lnn5gkpp3reip.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jobfinder.job",
+            "certificate_hash": "697bd1dd352e3b510f84ff0aa6a7eb8601f7be1f"
+          }
+        },
+        {
           "client_id": "43463906963-ktcablt2cbfci4iq4bpipkjvi65tj0dg.apps.googleusercontent.com",
           "client_type": 3
         },
         {
-          "client_id": "43463906963-ucv7co7p9butdr4id6nulh38tkoun3j6.apps.googleusercontent.com",
+          "client_id": "43463906963-71i8l8oelvk38p688p6j23g5mb5d5gkj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.jobfinder.job",

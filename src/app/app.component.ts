@@ -33,18 +33,22 @@ export class MyApp {
       let user_id = localStorage.getItem('user_id');
       let user_type = localStorage.getItem('user_type');
       let user_state = localStorage.getItem('user_state');
-      if(user_id != null && user_id != "" && user_state == '1') {
+      if(user_id != null && user_id != "") {
         this.config.user_id = user_id;
         this.config.user_type = user_type;
-        if(user_type == 'employer') {
-          this.rootPage = EmployerTabsPage;
+        if(user_state == '1') {
+          if(user_type == 'employer') {
+            this.rootPage = EmployerTabsPage;
+          } else {
+            let user_info = JSON.parse(localStorage.getItem('user_info'));
+            let user_setting = JSON.parse(localStorage.getItem('user_setting'));
+            this.config.userinfo['user_info'] = user_info;
+            this.config.userinfo['user_setting'] = user_setting;
+            
+            this.rootPage = SeekerTabsPage;
+          }
         } else {
-          let user_info = JSON.parse(localStorage.getItem('user_info'));
-          let user_setting = JSON.parse(localStorage.getItem('user_setting'));
-          this.config.userinfo['user_info'] = user_info;
-          this.config.userinfo['user_setting'] = user_setting;
-          
-          this.rootPage = SeekerTabsPage;
+          this.rootPage = SplashPage;
         }
       } else {
         this.rootPage = SplashPage;
