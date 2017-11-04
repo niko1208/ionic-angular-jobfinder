@@ -16,8 +16,13 @@ declare var google;
 export class EmployerHomeMapPage {
 
   arrIndustry = [];
-  queryIndustry = "";
+  arrCertification = [];
+  arrInterest = [];
   list: any;
+  slist: any;
+  showSearch = false;
+
+  ttime = 300;
   @ViewChild('slides') slides: Slides;
   @ViewChild('map') mapElement: ElementRef;
   map: any;
@@ -31,6 +36,10 @@ export class EmployerHomeMapPage {
         
         this.arrIndustry = ["#hospitality", "#entertainment", "#fastfood", "#construction", "#sales", "#retail", "#notforprofit", "#logistics", "#administration", "#agedcare", "#banking", "#callcentre", "#childcare", "#consumergoods", "#creative", "#defence", "#education", "#entrepreneur", "#financialservices", "#government", "#healthcare", "#hr", "#legal", "#manufacturing", "#marketing", "#media", "#mining", "#officesupport", "#professionalservices", "#property", "#recreation", "#recruitment", "#selfemployed", "#software", "#sports", "#technicalsupport", "#technology", "#telecommunications", "#tourism", "#trades", "#transport", "#cleaning", "#fashion", "#hairandbeauty", "#services"];
 
+        this.arrCertification = ["#Sijil Kemahiran Malaysia ( SKM 1 )", "#Sijil Kemahiran Malaysia ( SKM 2 )", "#Sijil Kemahiran Malaysia ( SKM 3)", "#Diploma Kemahiran Malaysia ( DKM )", "#Diploma Lanjutan Kemahiran Malaysia ( DLKM )", "#IEP/IELTS", "#Certification in Early Childhood Education", "#Certification in English", "#ESOL UK", "#PCIF", "#TEFL (LTTC) UK", "#Certificate in Outsourcing Professional ( COP )", "#Professional Engineer ( PE )", "#CEng", "#CSci", "#CEnv", "#CEng", "#CSDA", "#CSDP", "#WCET", "#CCP", "#IPPC", "#CQIF", "#IFP", "#CFP", "#ACCA", "#CPA", "#CFA", "#CIMA", "#ACA", "#CFE", "#CIA", "#CISA", "#Microsoft Professional Certification", "#Oracle Professional Certification", "#CISCO Professional Certification", "#CIPD Level 3", "#CIPD Level 5", "#CIPD Level 7", "#CHA", "#SCAE Barista Basic", "#SCAE Barista Intermediate", "#SCAE Barista Professional", "#Latte Art Basic", "#Latte Art Advanced", "#Mixologist", "CIDB Green Card"];
+
+        this.arrInterest = ["#Reading", "#Travelling", "#Blogging", "#Collecting", "#Volunteer Work/Community", "#Cooking", "#Child Care", "#Sports", "#Music", "#Puzzles and Strategy games", "#Club memberships", "#Public speaking", "#Board games", "#Photography", "#Art & Cultural pursuits", "#Gardening", "#Others"]
+
   }
 
   ionViewWillEnter() {
@@ -42,16 +51,22 @@ export class EmployerHomeMapPage {
   }
 
   loadData() {
+    let user_setting = JSON.parse(localStorage.getItem('user_setting'));
     let loader = this.loading.create({
       content: 'Loading...',
     });
     loader.present();
-    let param = {"employer_id" : this.config.user_id, "industry" : this.queryIndustry};
+    let param = {"employer_id" : this.config.user_id, "industry" : this.config.queryIndustry, "experience_city" : this.config.queryExperienceCity, "experience_country" : this.config.queryExperienceCountry, "experience_role" : this.config.queryExperienceRole, "curwork_city" : this.config.queryCurWorkCity, "curwork_country" : this.config.queryCurWorkCountry, "curwork_role" : this.config.queryCurWorkRole, "education" : this.config.queryEducation, "language" : this.config.queryLanguage, "certificate" : this.config.queryCertificate, "interest" : this.config.queryInterest};
     this.employerService.loadMatchedJobSeekers(param)
     .subscribe(data => {
         loader.dismissAll();
         if(data.status = "success") {
           this.list = data.result; console.log(this.list);
+          for(let i=0; i<this.list.length; i++) {
+            let item = this.list[i];
+            this.list[i]['distance'] = this.config.calcCrow(this.list[i].setting_location_lat, this.list[i].setting_location_lng, user_setting.setting_emp_location_lat, user_setting.setting_emp_location_lng);
+          }
+          this.search("");
           this.loadMap();
         }
     })
@@ -96,7 +111,7 @@ export class EmployerHomeMapPage {
     circle.bindTo('center', marker, 'position');
     
     //========================
-    let list = this.list;
+    let list = this.slist;
     var mark = [];
     var ll = [];
     var ct = [];
@@ -155,7 +170,30 @@ export class EmployerHomeMapPage {
     this.navCtrl.push(EmployerSavedPage);
   }
 
+  asearch() {
+    this.showSearch = true;
+  }
+  cancel() {
+    this.showSearch = false;
+  }
+  done() {
+    this.showSearch = false;
+    this.loadData();
+  }
+
   search(value) {
-    
+    value = this.config.searchValue;
+    this.slist = this.filterItems(value);
+    this.loadMap();
+  }
+  filterItems(searchTerm) {
+    return this.list.filter((item) => {
+      for(var key in item) { 
+        if(item[key].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+          return true;
+        }
+      }
+      return false;
+    })
   }
 }

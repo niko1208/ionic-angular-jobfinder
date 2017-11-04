@@ -18,28 +18,9 @@ export class EmployerHomePage {
   arrIndustry = [];
   arrCertification = [];
   arrInterest = [];
-  queryIndustry = "";
   list: any;
   slist: any;
   showSearch = false;
-
-  queryExperienceCity = ""; 
-  queryExperienceCountry = "";
-  queryExperienceRole = "";
-  queryCurWorkCity = "";
-  queryCurWorkCountry = "";
-  queryCurWorkRole = "";
-  queryEducation = "";
-  queryLanguage = "";
-  queryCertificate = "";
-  queryInterest = "";
-
-  isexperience = false;
-  iscurwork = false;
-  isedu = false;
-  islang = false;
-  iscert = false;
-  isinterest = false;
 
   ttime = 300;
 
@@ -63,52 +44,52 @@ export class EmployerHomePage {
   clickExperience() {
     //this.isexperience = !(this.isexperience);
     setTimeout(() => {
-      if(!(this.isexperience)) {
-        this.queryEducation = ""; 
-        this.queryExperienceCountry = "";
-        this.queryExperienceRole = "";
+      if(!(this.config.isexperience)) {
+        this.config.queryEducation = ""; 
+        this.config.queryExperienceCountry = "";
+        this.config.queryExperienceRole = "";
       }
     }, this.ttime);
   }
   clickCurwork() {
     //this.iscurwork = !(this.iscurwork);
     setTimeout(() => {
-      if(!(this.iscurwork)) {
-        this.queryCurWorkCity = "";
-        this.queryCurWorkCountry = "";
-        this.queryCurWorkRole = "";
+      if(!(this.config.iscurwork)) {
+        this.config.queryCurWorkCity = "";
+        this.config.queryCurWorkCountry = "";
+        this.config.queryCurWorkRole = "";
       }
     }, this.ttime);
   }
   clickEdu() {
     //this.isedu = !(this.isedu);
     setTimeout(() => {
-      if(!(this.isedu)) {
-        this.queryEducation = ""; 
+      if(!(this.config.isedu)) {
+        this.config.queryEducation = ""; 
       }
     }, this.ttime);
   }
   clickLang() {
     //this.islang = !(this.islang);
     setTimeout(() => {
-      if(!(this.islang)) {
-        this.queryLanguage = ""; 
+      if(!(this.config.islang)) {
+        this.config.queryLanguage = ""; 
       }
     }, this.ttime);
   }
   clickCert() {
     //this.iscert = !(this.iscert);
     setTimeout(() => {
-      if(!(this.iscert)) {
-        this.queryCertificate = ""; 
+      if(!(this.config.iscert)) {
+        this.config.queryCertificate = ""; 
       }
     }, this.ttime);
   }
   clickInterest() {
     //this.isinterest = !(this.isinterest);
     setTimeout(() => {
-      if(!(this.isinterest)) {
-        this.queryInterest = ""; 
+      if(!(this.config.isinterest)) {
+        this.config.queryInterest = ""; 
       }
     }, this.ttime);
   }
@@ -148,7 +129,7 @@ export class EmployerHomePage {
       content: 'Loading...',
     });
     loader.present();
-    let param = {"employer_id" : this.config.user_id, "industry" : this.queryIndustry, "experience_city" : this.queryExperienceCity, "experience_country" : this.queryExperienceCountry, "experience_role" : this.queryExperienceRole, "curwork_city" : this.queryCurWorkCity, "curwork_country" : this.queryCurWorkCountry, "curwork_role" : this.queryCurWorkRole, "education" : this.queryEducation, "language" : this.queryLanguage, "certificate" : this.queryCertificate, "interest" : this.queryInterest};
+    let param = {"employer_id" : this.config.user_id, "industry" : this.config.queryIndustry, "experience_city" : this.config.queryExperienceCity, "experience_country" : this.config.queryExperienceCountry, "experience_role" : this.config.queryExperienceRole, "curwork_city" : this.config.queryCurWorkCity, "curwork_country" : this.config.queryCurWorkCountry, "curwork_role" : this.config.queryCurWorkRole, "education" : this.config.queryEducation, "language" : this.config.queryLanguage, "certificate" : this.config.queryCertificate, "interest" : this.config.queryInterest};
 
     this.employerService.loadMatchedJobSeekers(param)
     .subscribe(data => {
@@ -234,6 +215,7 @@ export class EmployerHomePage {
   }
 
   search(value) {
+    value = this.config.searchValue;
     this.slist = this.filterItems(value);
   }
   filterItems(searchTerm) {

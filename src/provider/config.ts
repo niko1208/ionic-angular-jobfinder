@@ -13,6 +13,29 @@ export class Config {
     public arrIndustry = [];
     public arrPosition = [];
 
+        
+    queryExperienceCity = ""; 
+    queryExperienceCountry = "";
+    queryExperienceRole = "";
+    queryCurWorkCity = "";
+    queryCurWorkCountry = "";
+    queryCurWorkRole = "";
+    queryEducation = "";
+    queryLanguage = "";
+    queryCertificate = "";
+    queryInterest = "";
+
+    isexperience = false;
+    iscurwork = false;
+    isedu = false;
+    islang = false;
+    iscert = false;
+    isinterest = false;
+
+    searchValue = "";
+    queryIndustry = "";
+
+
     public userinfo = {user_info:null, user_experience:null, user_curwork:null, user_education:null, user_language:null, user_reference:null, user_setting:null};
 
     constructor() {
