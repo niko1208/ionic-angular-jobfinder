@@ -24,7 +24,8 @@ export class LoginSeekerPage {
     public serror1 = "";
     public serror2 = "";
 
-  constructor(public navCtrl: NavController, 
+  constructor(
+    public navCtrl: NavController, 
     public config: Config,
     public util: UtilService,
     public loading: LoadingController,
@@ -34,9 +35,11 @@ export class LoginSeekerPage {
     public facebook: Facebook,
   	public gp: GooglePlus,
   	public nativeStorage: NativeStorage,
-    public auth: Auth) {
+    public auth: Auth
+  ) {
         this.email = "";// "test5@mail.com";
         this.password = "";//"test5";
+
         //this.fb.browserInit(this.FB_APP_ID, "v2.8");
   }
 
@@ -69,12 +72,12 @@ export class LoginSeekerPage {
     //the permissions your facebook app needs from the user
     permissions = ["public_profile", "email"];
 
-    this.fb.login(permissions)
-    .then(function(response){
-      console.log(response);
-      this.sresponse = JSON.stringify(response);
-      let userId = response.authResponse.userID;
-      let params = new Array<string>();
+    // this.fb.login(permissions)
+    // .then(function(response){
+    //   console.log(response);
+    //   this.sresponse = JSON.stringify(response);
+    //   let userId = response.authResponse.userID;
+    //   let params = new Array<string>();
 
       //Getting name and gender properties
       env.fb.api("/me?fields=name,gender", params)
