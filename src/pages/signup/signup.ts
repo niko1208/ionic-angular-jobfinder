@@ -83,6 +83,13 @@ export class SignupPage {
         if(data.status == "success") {
           this.config.user_id = data.resultUser.user_id;
           this.config.user_type = this.type;
+          this.config.user_state = data.resultUser.user_state;
+
+          localStorage.setItem('user_id', this.config.user_id);
+          localStorage.setItem('user_state', this.config.user_state);
+          localStorage.setItem('user_type', this.config.user_type);
+          localStorage.setItem('user_email', data.resultUser.user_email);
+          
           this.navCtrl.push(SignupVerifyPage, {email: this.email}, this.config.navOptions);
         } else {
           this.util.createAlert("Registration Failed", data.result);

@@ -31,15 +31,16 @@ export class LoginSeekerPage {
     public loading: LoadingController,
     public viewCtrl: ViewController,
     public seekerService: SeekerService,
-    public platform: Platform,
-  	public facebook: Facebook,
+  	public platform: Platform,
+    public facebook: Facebook,
   	public gp: GooglePlus,
   	public nativeStorage: NativeStorage,
     public auth: Auth
   ) {
         this.email = "";// "test5@mail.com";
         this.password = "";//"test5";
-        // this.fb.browserInit(this.FB_APP_ID, "v2.8");
+
+        //this.fb.browserInit(this.FB_APP_ID, "v2.8");
   }
 
   goback() {
@@ -49,15 +50,27 @@ export class LoginSeekerPage {
   doFbLogin(){
     //1968148010124162 - my
     //1421989254537239 - markhan
+    let env = this;
     let permissions = ['public_profile', 'email'];
     this.platform.ready().then(() => {
       this.facebook.login(permissions).then((res) => {
         console.log(res);
-
-        //do something
-        
+        let userId = res.authResponse.userID;
+        let params = new Array<string>();
+        env.facebook.api("/me?fields=name,gender,email", params)
+        .then(function(user) {
+          console.log(user);
+          var picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
+          env.socialLogin(user.name, user.email, user.name, picture, 'facebook');
+        });
       });
-    })
+    });
+    /*
+    let permissions = new Array<string>();
+    let nav = this.navCtrl;
+	  let env = this;
+    //the permissions your facebook app needs from the user
+    permissions = ["public_profile", "email"];
 
     // this.fb.login(permissions)
     // .then(function(response){
@@ -66,47 +79,51 @@ export class LoginSeekerPage {
     //   let userId = response.authResponse.userID;
     //   let params = new Array<string>();
 
-    //   //Getting name and gender properties
-    //   env.fb.api("/me?fields=name,gender", params)
-    //   .then(function(user) {
-    //     console.log(user);
-    //     this.suser = JSON.stringify(user);
-    //     user.picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
-    //     //now we have the users info, let's save it in the NativeStorage
-    //     env.nativeStorage.setItem('user',
-    //     {
-    //       name: user.name,
-    //       gender: user.gender,
-    //       picture: user.picture
-    //     })
-    //     .then(function(){
-    //       alert('success');
-    //       this.socialLogin(user.name, user.email, user.first_name, user.picture, 'facebook');
-    //     }, function (error) {
-    //       this.serror1 = JSON.stringify(error);
-    //     })
-    //   })
-    // }, function(error){
-    //   this.serror2 = JSON.stringify(error);
-    // });
+      //Getting name and gender properties
+      env.fb.api("/me?fields=name,gender", params)
+      .then(function(user) {
+        console.log(user);
+        this.suser = JSON.stringify(user);
+        user.picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
+        //now we have the users info, let's save it in the NativeStorage
+        env.nativeStorage.setItem('user',
+        {
+          name: user.name,
+          gender: user.gender,
+          picture: user.picture
+        })
+        .then(function(){
+          alert('success');
+          this.socialLogin(user.name, user.email, user.first_name, user.picture, 'facebook');
+        }, function (error) {
+          this.serror1 = JSON.stringify(error);
+        })
+      })
+    }, function(error){
+      this.serror2 = JSON.stringify(error);
+    });
+    */
   }
 
   doFbLogout(){
     this.platform.ready().then(() => {
-      this.facebook.logout();
+     this.facebook.logout();
     });
-		// var nav = this.navCtrl;
-		// let env = this;
-		// this.fb.logout()
-		// .then(function(response) {
-		// 	//user logged out so we will remove him from the NativeStorage
-		// 	env.nativeStorage.remove('user');
-		// }, function(error){
-		// 	console.log(error);
-		// });
+    /*
+		var nav = this.navCtrl;
+		let env = this;
+		this.fb.logout()
+		.then(function(response) {
+			//user logged out so we will remove him from the NativeStorage
+			env.nativeStorage.remove('user');
+		}, function(error){
+			console.log(error);
+		});
+    */
 	}
 
   doGoogleLogin(){
+    //SHA-1 : 69:7B:D1:DD:35:2E:3B:51:0F:84:FF:0A:A6:A7:EB:86:01:F7:BE:1F
     let nav = this.navCtrl;
     let env = this;
     let loading = this.loading.create({
@@ -114,24 +131,17 @@ export class LoginSeekerPage {
     });
     loading.present();
     this.gp.login({
-      'scopes': '', // optional, space-separated list of scopes, If not included or empty, defaults to `profile` and `email`.
-      'webClientId': '317689615285-2ss4s9gvmj3vj0rrpt0976u282f2sg9c.apps.googleusercontent.com', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
+      'scopes': '',
+      'webClientId': '43463906963-ktcablt2cbfci4iq4bpipkjvi65tj0dg.apps.googleusercontent.com', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
       'offline': true
-    })
+      })
     .then(function (user) {
+      console.log(user);
       loading.dismiss();
-
-      env.nativeStorage.setItem('user', {
-        name: user.displayName,
-        email: user.email,
-        picture: user.imageUrl
-      })
-      .then(function(){
-        this.socialLogin(user.displayName, user.email, user.first_name, user.imageUrl, 'google');
-      }, function (error) {
-        console.log(error);
-      })
+      this.socialLogin(user.displayName, user.email, user.displayName, user.imageUrl, 'google');
+      
     }, function (error) {
+      console.log(error);
       loading.dismiss();
     });
   }

@@ -1,5 +1,5 @@
 import { Component  } from '@angular/core';
-import { NavController, LoadingController, NavParams } from 'ionic-angular';
+import { NavController, LoadingController, NavParams, AlertController } from 'ionic-angular';
 import { Config } from '../../provider/config';
 import { UtilService } from '../../provider/util-service';
 import { Auth } from '../../provider/auth';
@@ -15,7 +15,8 @@ export class SignupVerifyPage {
     public vcode: any;
     public email: any;
 
-  constructor(public navCtrl: NavController, 
+  constructor(public alertCtrl: AlertController,
+    public navCtrl: NavController, 
     public config: Config,
     public util: UtilService,
     public auth: Auth,
@@ -24,8 +25,28 @@ export class SignupVerifyPage {
         this.email = navParams.get('email');
   }
 
+  ionViewWillLeave() {
+
+  }
+
   goback() {
-      this.navCtrl.pop(this.config.navOptionsBack);
+    let alert:any = this.alertCtrl.create({
+        title: "",
+        message: "Are you sure you want to go back? You will need to login or sign up again to verify your email address!",
+        buttons: [
+            {
+                text: 'Yes, Go Back',
+                handler: () => {
+                    this.navCtrl.pop(this.config.navOptionsBack);
+                }
+            },
+            {
+                text: 'No',
+                role: 'cancel'
+            }
+        ]
+    });
+    alert.present();
   }
 
   resend() {

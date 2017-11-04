@@ -3,6 +3,7 @@ import { NavController,  } from 'ionic-angular';
 import { Slides } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { SignupPage } from '../signup/signup';
+import { SignupVerifyPage } from '../signup-verify/signup-verify';
 import { Config } from '../../provider/config';
 import $ from 'jquery';
 
@@ -15,7 +16,11 @@ export class SplashPage {
   @ViewChild(Slides) slides: Slides;
 
   constructor(public navCtrl: NavController, public config: Config) {
-
+    let user_id = localStorage.getItem('user_id');
+    let user_state = localStorage.getItem('user_state');
+    if(user_id != null && user_id != "" && user_state != '1') {
+      this.navCtrl.push(SignupVerifyPage, {email: localStorage.getItem('user_email')}, this.config.navOptions);
+    }
   }
 
   ngAfterViewInit() {
