@@ -98,8 +98,10 @@ export class SeekerEditeducationPage {
   }
 
   showDate() {
+    let cdate = new Date(this.data.education_from);
+    if(this.data.education_from == "") cdate = new Date();
     this.datePicker.show({
-      date: new Date(this.data.education_from),
+      date: cdate,
       mode: 'date',
       androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
     }).then(

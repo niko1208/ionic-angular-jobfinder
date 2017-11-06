@@ -83,8 +83,10 @@ export class SeekerEditaboutPage {
   }
 
   showDate() {
+    let cdate = new Date(this.data.user_birthday);
+    if(this.data.user_birthday == "") cdate = new Date();
     this.datePicker.show({
-      date: new Date(this.data.user_birthday),
+      date: cdate,
       mode: 'date',
       androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
     }).then(
