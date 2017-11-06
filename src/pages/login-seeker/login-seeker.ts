@@ -132,10 +132,10 @@ export class LoginSeekerPage {
     loading.present();
     this.gp.login({
       'scopes': '',
-      'webClientId': '43463906963-ktcablt2cbfci4iq4bpipkjvi65tj0dg.apps.googleusercontent.com', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
+      'webClientId': '204579564006-5n2efqh7ikjn7cd9680fpj8khvgust8j.apps.googleusercontent.com', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
       'offline': true
       })
-    .then(function (user) {
+    .then( (user) => {
       console.log(user);
       loading.dismiss();
       this.socialLogin(user.displayName, user.email, user.displayName, user.imageUrl, 'google');
@@ -150,10 +150,10 @@ export class LoginSeekerPage {
     let nav = this.navCtrl;
     let env = this;
     this.gp.logout()
-    .then(function (response) {
+    .then( (response) => {
       env.nativeStorage.remove('user');
 
-    },function (error) {
+    }, (error) => {
       console.log(error);
     })
   }
