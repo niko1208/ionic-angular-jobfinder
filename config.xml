@@ -21,7 +21,7 @@
     <preference name="FadeSplashScreenDuration" value="300" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="5000" />
+    <preference name="SplashScreenDelay" value="10000" />
     <preference name="orientation" value="portrait" />
     <preference name="LoadUrlTimeoutValue" value="70000" />
     <platform name="android">
@@ -90,7 +90,7 @@
     </plugin>
     <plugin name="cordova-plugin-geolocation" spec="^2.4.3" />
     <plugin name="cordova-plugin-googleplus" spec="^5.1.1">
-        <variable name="REVERSED_CLIENT_ID" value="apps.googleusercontent.com.204579564006-5n2efqh7ikjn7cd9680fpj8khvgust8j" />
+        <variable name="REVERSED_CLIENT_ID" value="apps.googleusercontent.com.395456395630-vllbu9ofvdbuo1j0mahdtdm4k7fur9l0" />
     </plugin>
     <plugin name="cordova-plugin-media-capture" spec="^1.4.3" />
     <plugin name="cordova-plugin-nativestorage" spec="^2.2.2" />

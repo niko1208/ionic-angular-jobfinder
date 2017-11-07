@@ -132,7 +132,7 @@ export class LoginSeekerPage {
     loading.present();
     this.gp.login({
       'scopes': '',
-      'webClientId': '204579564006-5n2efqh7ikjn7cd9680fpj8khvgust8j.apps.googleusercontent.com', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
+      'webClientId': '395456395630-vllbu9ofvdbuo1j0mahdtdm4k7fur9l0.apps.googleusercontent.com', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
       'offline': true
       })
     .then( (user) => {
@@ -159,6 +159,7 @@ export class LoginSeekerPage {
   }
 
   socialLogin(user, email, pass, avatar_url, social) {
+    localStorage.setItem('user_email', email);
     let loader = this.loading.create({
       content: 'Login...',
     });
@@ -169,7 +170,7 @@ export class LoginSeekerPage {
     .subscribe(data => { console.log(data);
         loader.dismissAll();
         if(data.status == "success") {
-            this.config.user_type = "seeker";
+            this.config.user_type = "jobseeker";
             this.config.user_id = data.resultUser.user_id;
             this.config.user_state = data.resultUser.user_state;
 
@@ -192,13 +193,15 @@ export class LoginSeekerPage {
                   this.navCtrl.remove(index);
               });
             } else {
-                this.navCtrl.push(SignupVerifyPage, {email: email}, this.config.navOptions);
+                this.navCtrl.push(SignupVerifyPage, {email: data.resultUser.user_email}, this.config.navOptions);
             }
             
         } else {
+            loader.dismissAll();
             this.util.createAlert("SignIn Failed", data.result);
         }
     }, err => {
+        loader.dismissAll();
         this.util.createAlert("SignIn Failed", "Server error!");
     })
   }

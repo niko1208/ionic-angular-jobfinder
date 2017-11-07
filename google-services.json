@@ -1,27 +1,35 @@
 {
   "project_info": {
-    "project_number": "204579564006",
-    "firebase_url": "https://jb-finder.firebaseio.com",
-    "project_id": "jb-finder",
-    "storage_bucket": "jb-finder.appspot.com"
+    "project_number": "395456395630",
+    "firebase_url": "https://jobfinder-af5df.firebaseio.com",
+    "project_id": "jobfinder-af5df",
+    "storage_bucket": "jobfinder-af5df.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:204579564006:android:8e46e039c1788aee",
+        "mobilesdk_app_id": "1:395456395630:android:8e46e039c1788aee",
         "android_client_info": {
           "package_name": "com.jobfinder.job"
         }
       },
       "oauth_client": [
         {
-          "client_id": "204579564006-5n2efqh7ikjn7cd9680fpj8khvgust8j.apps.googleusercontent.com",
+          "client_id": "395456395630-q1evpq9gvksp9js1hnov9s68qtlpcniv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jobfinder.job",
+            "certificate_hash": "697bd1dd352e3b510f84ff0aa6a7eb8601f7be1f"
+          }
+        },
+        {
+          "client_id": "395456395630-vllbu9ofvdbuo1j0mahdtdm4k7fur9l0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAzgA8jeHyIcHSh_cZ__YvG7vRO8EA-NO8"
+          "current_key": "AIzaSyBPnxWGa2pYR0XGzlSGBuTAU4yql_RYKRc"
         }
       ],
       "services": {
@@ -29,8 +37,20 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "395456395630-sifm6ehobggtqh7dpsvj8vph7ej7kgd0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.findtapconnect.JobFinder"
+              }
+            },
+            {
+              "client_id": "395456395630-vllbu9ofvdbuo1j0mahdtdm4k7fur9l0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

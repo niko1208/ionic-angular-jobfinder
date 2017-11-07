@@ -58,7 +58,8 @@ export class SignupVerifyPage {
         content: 'Loading...',
       });
       loader.present();
-
+      //alert(this.config.user_type);
+      //alert(JSON.stringify(param));
       this.auth.reverify(param, this.config.user_type)
       .subscribe(data => {
           loader.dismissAll();
@@ -82,6 +83,8 @@ export class SignupVerifyPage {
       });
       loader.present();
       let param = {"user_id" : this.config.user_id, "verify_code" : this.vcode, "device" : this.config.platform, "token" : this.config.deviceToken};
+      //alert(this.config.user_type);
+      //alert(JSON.stringify(param));
       this.auth.verify(param, this.config.user_type)
       .subscribe(data => {
           loader.dismissAll();
