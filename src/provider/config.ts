@@ -24,6 +24,7 @@ export class Config {
     queryLanguage = "";
     queryCertificate = "";
     queryInterest = "";
+    queryPosition = "";
 
     isexperience = false;
     iscurwork = false;
@@ -31,6 +32,7 @@ export class Config {
     islang = false;
     iscert = false;
     isinterest = false;
+    isposition = false;
 
     searchValue = "";
     queryIndustry = "";

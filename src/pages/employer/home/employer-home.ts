@@ -93,6 +93,13 @@ export class EmployerHomePage {
       }
     }, this.ttime);
   }
+  clickPosition() {
+    setTimeout(() => {
+      if(!(this.config.isposition)) {
+        this.config.queryPosition = ""; 
+      }
+    }, this.ttime);
+  }
 
   ionViewWillLeave() {
     this.showSearch = false;
@@ -129,7 +136,7 @@ export class EmployerHomePage {
       content: 'Loading...',
     });
     loader.present();
-    let param = {"employer_id" : this.config.user_id, "industry" : this.config.queryIndustry, "experience_city" : this.config.queryExperienceCity, "experience_country" : this.config.queryExperienceCountry, "experience_role" : this.config.queryExperienceRole, "curwork_city" : this.config.queryCurWorkCity, "curwork_country" : this.config.queryCurWorkCountry, "curwork_role" : this.config.queryCurWorkRole, "education" : this.config.queryEducation, "language" : this.config.queryLanguage, "certificate" : this.config.queryCertificate, "interest" : this.config.queryInterest};
+    let param = {"employer_id" : this.config.user_id, "industry" : this.config.queryIndustry, "experience_city" : this.config.queryExperienceCity, "experience_country" : this.config.queryExperienceCountry, "experience_role" : this.config.queryExperienceRole, "curwork_city" : this.config.queryCurWorkCity, "curwork_country" : this.config.queryCurWorkCountry, "curwork_role" : this.config.queryCurWorkRole, "education" : this.config.queryEducation, "language" : this.config.queryLanguage, "certificate" : this.config.queryCertificate, "interest" : this.config.queryInterest, "position" : this.config.queryPosition};
 
     this.employerService.loadMatchedJobSeekers(param)
     .subscribe(data => {
