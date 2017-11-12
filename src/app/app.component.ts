@@ -26,7 +26,6 @@ export class MyApp {
       } else {
         this.config.platform = 'other';
       }
-      this.initPushNotification();
       statusBar.styleDefault();
       splashScreen.hide();
 
@@ -53,7 +52,8 @@ export class MyApp {
       } else {
         this.rootPage = SplashPage;
       }
-
+      
+      this.initPushNotification();
     });
   }
 

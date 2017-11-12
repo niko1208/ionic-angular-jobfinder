@@ -74,6 +74,9 @@ import { SeekerChatbotPage } from '../pages/seeker/chatbot/seeker-chatbot';
 
 import { Camera } from '@ionic-native/camera';
 import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture';
+//import { VideoEditor } from '@ionic-native/video-editor';
+//import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+//import { File } from '@ionic-native/file';
 import { DatePicker } from '@ionic-native/date-picker';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Facebook, FacebookLoginResponse  } from '@ionic-native/facebook';
@@ -246,6 +249,8 @@ import { MessageService } from '../provider/message-service';
     SeekerService,
     MessageService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
+    //,VideoEditor
+    //,FileTransfer, FileTransferObject, File
   ]
 })
 export class AppModule {}

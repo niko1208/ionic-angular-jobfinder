@@ -73,10 +73,17 @@ export class SeekerMessageroomPage {
          }
        },
        {
-         text: 'Send Video',
+         text: 'Take Video',
          handler: () => {
            this.isphoto = false;
            this.takeVideo();
+         }
+       },
+       {
+         text: 'Get Video',
+         handler: () => {
+           this.isphoto = false;
+           this.getVideo();
          }
        },
        {
@@ -134,8 +141,58 @@ export class SeekerMessageroomPage {
       return cordova.file.dataDirectory + video;
     }
   }
-  takeVideo(){
-    MediaCapture.captureVideo((videodata) => { alert('takevideo');
+  getVideo() {
+    
+    var options = {
+      sourceType: 2,
+      mediaType: 1
+    };
+ 
+    Camera.getPicture(options).then((data) => {
+      var ary = data.split('/');
+      data = "file://" + data;
+      this.isLoading = true;
+      let room_id = this.sitem.message_room_id;
+      let my_type = this.sitem.message_sender_type; my_type = "seeker";
+      let other_id = this.sitem.user_id;
+      let send_type = "sendvideo1";
+      let self = this;
+
+      var targetPath = data;
+      var filename = ary[ary.length-1];
+      //var targetPath = this.pathForImage(filename); alert(targetPath);
+
+      self.pending = true;
+      var param = {"room_id" : room_id, "sender_type" : my_type, "sender_id" : self.config.user_id, "message_text" : self.sendText, "message_type" : "video", "other_id" : other_id,  "videoThumb": ""};
+      
+      var options = {
+        fileKey: "file",
+        fileName: filename,
+        chunkedMode: false,
+        mimeType: "video/mp4",
+        params : param
+      };
+      
+      const fileTransfer = new Transfer();
+      let url = this.config.getAPIURL() + "/message/sendvideo1.php";
+      fileTransfer.upload(targetPath, url, options).then((data: any) => {
+        self.isLoading = false;
+        data = JSON.parse(data.response);
+        console.log(data);
+        self.loadNewMessage();
+      }, err => {
+        console.log(JSON.stringify(err));
+        self.isLoading = false;
+        alert('Error while uploading file.');
+      });
+    })
+  }
+  takeVideo(){ 
+    //[{"name":"VID_20171110_111504.mp4","localURL":"cdvfile://localhost/sdcard/DCIM/Camera/VID_20171110_111504.mp4","type":"video/mp4","lastModified":null,"lastModifiedDate":1510283706000,"size":333454,"start":0,"end":0,"fullPath":"file:///storage/sdcard/DCIM/Camera/VID_20171110_111504.mp4"}]
+    
+    
+    MediaCapture.captureVideo().then((videodata) => {
+      console.log(JSON.stringify(videodata));
       this.isLoading = true;
       let room_id = this.sitem.message_room_id;
       let my_type = this.sitem.message_sender_type; my_type = "seeker";
@@ -144,11 +201,14 @@ export class SeekerMessageroomPage {
       let self = this;
 
       this.video = videodata.toString();
-      var targetPath = this.pathForImage(this.video); alert(targetPath);
-      var filename = this.video;
+      videodata = videodata[0];
+      var targetPath = videodata['fullPath'];
+      var filename = videodata['name'];
+      //var targetPath = this.pathForImage(filename); alert(targetPath);
 
       self.pending = true;
       var param = {"room_id" : room_id, "sender_type" : my_type, "sender_id" : self.config.user_id, "message_text" : self.sendText, "message_type" : "video", "other_id" : other_id,  "videoThumb": ""};
+      
       var options = {
         fileKey: "file",
         fileName: filename,
@@ -156,61 +216,20 @@ export class SeekerMessageroomPage {
         mimeType: "video/mp4",
         params : param
       };
+      
       const fileTransfer = new Transfer();
-      let url = this.config.getAPIURL() + "/jobseeker/sendvideo.php";
+      let url = this.config.getAPIURL() + "/message/sendvideo1.php";
       fileTransfer.upload(targetPath, url, options).then((data: any) => {
+        self.isLoading = false;
+        data = JSON.parse(data.response);
+        console.log(data);
         self.loadNewMessage();
       }, err => {
+        console.log(JSON.stringify(err));
         self.isLoading = false;
         alert('Error while uploading file.');
       });
-      /*
-      self.messageService.postData(send_type, param)
-      .subscribe(data => { 
-        self.isLoading = false;
-          if(data.status == "success") {
-            self.loadNewMessage();
-          } else {
-            this.util.createAlert("Failed", data.result);
-          }
-          self.video = null;
-          self.pending = false;
-      }, error => {
-          self.isLoading = false;
-          self.video = null;
-          self.pending = false;
-          self.util.createAlert("Internet connection failed", "Please check your internet connection and try again.");
-      });
-
-      /*
-      let url = this.video;
-      let $video = $('#videop');
-      $video.attr('src', "");
-      var step_2_events_fired = 0;
-      $video.one('loadedmetadata loadeddata suspend', function() {
-          if (++step_2_events_fired == 3) {
-              self.pending = true;
-              var param = {"room_id" : room_id, "sender_type" : my_type, "sender_id" : self.config.user_id, "message_text" : self.sendText, "message_type" : "video", "other_id" : other_id, "video": videodata, "videoThumb": ""};
-              self.messageService.postData(send_type, param)
-              .subscribe(data => { 
-                self.isLoading = false;
-                  if(data.status == "success") {
-                    self.loadNewMessage();
-                  } else {
-                    this.util.createAlert("Failed", data.result);
-                  }
-                  self.video = null;
-                  self.pending = false;
-              }, error => {
-                  self.isLoading = false;
-                  self.video = null;
-                  self.pending = false;
-                  self.util.createAlert("Internet connection failed", "Please check your internet connection and try again.");
-              });
-              
-          }
-      }).prop('src', url);
-      */
+      
     })
   }
 

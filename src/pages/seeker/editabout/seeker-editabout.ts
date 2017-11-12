@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild  } from '@angular/core';
-import { NavController, LoadingController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, LoadingController, NavParams, ViewController, ActionSheetController } from 'ionic-angular';
+import { Camera, MediaCapture, File, Transfer, FilePath, MediaFile } from 'ionic-native';
 import { Config } from '../../../provider/config';
 import { UtilService } from '../../../provider/util-service';
 import { SeekerService } from '../../../provider/seeker-service';
@@ -14,6 +15,9 @@ export class SeekerEditaboutPage {
   
   @ViewChild('fileInpsabout') fileInpsabout: ElementRef;
   data: any;
+  video: any;
+  targetPath: any;
+  filename: any;
   constructor(public navCtrl: NavController, 
     public config: Config,
     public util: UtilService,
@@ -21,6 +25,7 @@ export class SeekerEditaboutPage {
     public loading: LoadingController,
     public viewCtrl: ViewController,
     public navParams: NavParams,
+    public actionSheetCtrl: ActionSheetController,
     private datePicker: DatePicker) {
         this.data = navParams.get('data');
   }
@@ -30,11 +35,61 @@ export class SeekerEditaboutPage {
   }
 
   loadData() {
-    
+    this.video = this.data.user_video_url;
   }
 
-  upload_photo(){
+  presentActionSheet() {
+   const actionSheet = this.actionSheetCtrl.create({
+     title: '',
+     buttons: [
+       {
+         text: 'Get Video',
+         handler: () => {
+           this.upload_video1();
+         }
+       },
+       {
+         text: 'Take Video',
+         handler: () => {
+           this.upload_video();
+         }
+       },
+       {
+         text: 'Cancel',
+         role: 'cancel',
+         handler: () => {
+         }
+       }
+     ]
+   });
+   actionSheet.present();
+ }
 
+  upload_video1() {
+    var tt = this;
+    
+    var options = {
+      sourceType: 2,
+      mediaType: 1
+    };
+ 
+    Camera.getPicture(options).then((data) => {
+      var ary = data.split('/');
+      data = "file://" + data;
+      tt.video = data;
+      tt.targetPath = data;
+      tt.filename = ary[ary.length-1];
+    });
+  }
+
+  upload_video() {
+    var tt = this;
+    MediaCapture.captureVideo().then((videodata) => {
+      console.log(JSON.stringify(videodata));
+      this.video = videodata[0];
+      tt.targetPath = this.video['fullPath'];
+      tt.filename = this.video['name'];
+    });
   }
 
   save() {
@@ -71,15 +126,46 @@ export class SeekerEditaboutPage {
     });
     loader.present();
 
-    this.seekerService.postData("editseekerabout", param)
-    .subscribe(data => { 
-        loader.dismissAll();
+    var tt = this;
+    if(this.video && this.video != this.data.user_video_url) {
+      
+
+      var options = {
+        fileKey: "file",
+        fileName: tt.filename,
+        chunkedMode: false,
+        mimeType: "video/mp4",
+        params : param
+      };
+      
+      const fileTransfer = new Transfer();
+      let url = this.config.getAPIURL() + "/jobseeker/editseekeraboutvideo1.php";
+      fileTransfer.upload(tt.targetPath, url, options).then((data: any) => {
+        loader.dismiss();
+        data = JSON.parse(data.response);
+        console.log(data);
         if(data.status == "success") {
-          this.navCtrl.pop();
+          tt.navCtrl.pop();
         } else {
-          this.util.createAlert("Failed", data.result)
+          tt.util.createAlert("Failed", data.result)
         }
-    })
+      }, err => {
+        console.log(JSON.stringify(err));
+        loader.dismiss();
+        alert('Error while uploading file.');
+      });
+      
+    } else {
+      this.seekerService.postData("editseekerabout", param)
+      .subscribe(data => { 
+          loader.dismissAll();
+          if(data.status == "success") {
+            this.navCtrl.pop();
+          } else {
+            this.util.createAlert("Failed", data.result)
+          }
+      })
+    }
   }
 
   showDate() {
