@@ -6,6 +6,8 @@ import { Auth } from '../../../provider/auth';
 import { MessageService } from '../../../provider/message-service';
 import * as $ from 'jquery';
 import { Camera, MediaCapture, File, Transfer, FilePath } from 'ionic-native';
+import { VideoEditor } from '@ionic-native/video-editor';
+import { Base64 } from '@ionic-native/base64';
 declare var cordova : any;
 @Component({
   selector: 'page-seeker-messageroom',
@@ -43,6 +45,8 @@ export class SeekerMessageroomPage {
     public messageService: MessageService,
     public loading: LoadingController,
     public navParams: NavParams,
+    private videoEditor: VideoEditor,
+    private base64: Base64,
     public actionSheetCtrl: ActionSheetController) {
         this.sitem = navParams.get('item');
         this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
@@ -147,89 +151,128 @@ export class SeekerMessageroomPage {
       sourceType: 2,
       mediaType: 1
     };
- 
+    var tt = this;
     Camera.getPicture(options).then((data) => {
       var ary = data.split('/');
-      data = "file://" + data;
-      this.isLoading = true;
-      let room_id = this.sitem.message_room_id;
-      let my_type = this.sitem.message_sender_type; my_type = "seeker";
-      let other_id = this.sitem.user_id;
-      let send_type = "sendvideo1";
-      let self = this;
-
-      var targetPath = data;
-      var filename = ary[ary.length-1];
-      //var targetPath = this.pathForImage(filename); alert(targetPath);
-
-      self.pending = true;
-      var param = {"room_id" : room_id, "sender_type" : my_type, "sender_id" : self.config.user_id, "message_text" : self.sendText, "message_type" : "video", "other_id" : other_id,  "videoThumb": ""};
+      var data1 = "file://" + data;
       
-      var options = {
-        fileKey: "file",
-        fileName: filename,
-        chunkedMode: false,
-        mimeType: "video/mp4",
-        params : param
-      };
-      
-      const fileTransfer = new Transfer();
-      let url = this.config.getAPIURL() + "/message/sendvideo1.php";
-      fileTransfer.upload(targetPath, url, options).then((data: any) => {
-        self.isLoading = false;
-        data = JSON.parse(data.response);
-        console.log(data);
-        self.loadNewMessage();
-      }, err => {
-        console.log(JSON.stringify(err));
-        self.isLoading = false;
-        alert('Error while uploading file.');
-      });
+      tt.videoEditor.createThumbnail({
+        fileUri: data1,
+        outputFileName: 'abc',
+        atTime: 1,
+        quality: 100
+      })
+      .then((data) => {
+        const fs:string = cordova.file.dataDirectory;
+        var ary1 = data.split('/'); 
+        //data = fs + ary1[ary1.length-1];
+        data = "file://" + data;
+        //alert(data);
+        tt.base64.encodeFile(data).then((base64File) => {
+          var ary1 = base64File.split(','); 
+          let imagefile = "data:image/jpeg;base64," + ary1[1];
+          console.log(imagefile);
+
+          this.isLoading = true;
+          let room_id = this.sitem.message_room_id;
+          let my_type = this.sitem.message_sender_type; my_type = "seeker";
+          let other_id = this.sitem.user_id;
+          let send_type = "sendvideo1";
+          let self = this;
+
+          var targetPath = data1;
+          var filename = ary[ary.length-1];
+          //var targetPath = this.pathForImage(filename); alert(targetPath);
+
+          self.pending = true;
+          var param = {"room_id" : room_id, "sender_type" : my_type, "sender_id" : self.config.user_id, "message_text" : self.sendText, "message_type" : "video", "other_id" : other_id,  "videoThumb": imagefile};
+          
+          var options = {
+            fileKey: "file",
+            fileName: filename,
+            chunkedMode: false,
+            mimeType: "video/mp4",
+            params : param
+          };
+          
+          const fileTransfer = new Transfer();
+          let url = this.config.getAPIURL() + "/message/sendvideo1.php";
+          fileTransfer.upload(targetPath, url, options).then((data: any) => {
+            self.isLoading = false;
+            data = JSON.parse(data.response);
+            console.log(data);
+            self.loadNewMessage();
+          }, err => {
+            console.log(JSON.stringify(err));
+            self.isLoading = false;
+            alert('Error while uploading file.');
+          });
+        }, (err) => {
+          console.log(err);
+        });
+      })
     })
   }
   takeVideo(){ 
     //[{"name":"VID_20171110_111504.mp4","localURL":"cdvfile://localhost/sdcard/DCIM/Camera/VID_20171110_111504.mp4","type":"video/mp4","lastModified":null,"lastModifiedDate":1510283706000,"size":333454,"start":0,"end":0,"fullPath":"file:///storage/sdcard/DCIM/Camera/VID_20171110_111504.mp4"}]
     
-    
+    var tt = this;
     MediaCapture.captureVideo().then((videodata) => {
       console.log(JSON.stringify(videodata));
-      this.isLoading = true;
-      let room_id = this.sitem.message_room_id;
-      let my_type = this.sitem.message_sender_type; my_type = "seeker";
-      let other_id = this.sitem.user_id;
-      let send_type = "sendvideo1";
-      let self = this;
-
       this.video = videodata.toString();
       videodata = videodata[0];
-      var targetPath = videodata['fullPath'];
-      var filename = videodata['name'];
-      //var targetPath = this.pathForImage(filename); alert(targetPath);
+      var data = videodata['fullPath'];
+      
+      tt.videoEditor.createThumbnail({
+        fileUri: data,
+        outputFileName: 'abc',
+        atTime: 1,
+        quality: 100
+      })
+      .then((data) => {
+        data = "file://" + data;
+        tt.base64.encodeFile(data).then((base64File) => {
+          var ary1 = base64File.split(','); 
+          let imagefile = "data:image/jpeg;base64," + ary1[1];
+                  
+          this.isLoading = true;
+          let room_id = this.sitem.message_room_id;
+          let my_type = this.sitem.message_sender_type; my_type = "seeker";
+          let other_id = this.sitem.user_id;
+          let send_type = "sendvideo1";
 
-      self.pending = true;
-      var param = {"room_id" : room_id, "sender_type" : my_type, "sender_id" : self.config.user_id, "message_text" : self.sendText, "message_type" : "video", "other_id" : other_id,  "videoThumb": ""};
-      
-      var options = {
-        fileKey: "file",
-        fileName: filename,
-        chunkedMode: false,
-        mimeType: "video/mp4",
-        params : param
-      };
-      
-      const fileTransfer = new Transfer();
-      let url = this.config.getAPIURL() + "/message/sendvideo1.php";
-      fileTransfer.upload(targetPath, url, options).then((data: any) => {
-        self.isLoading = false;
-        data = JSON.parse(data.response);
-        console.log(data);
-        self.loadNewMessage();
-      }, err => {
-        console.log(JSON.stringify(err));
-        self.isLoading = false;
-        alert('Error while uploading file.');
-      });
-      
+          
+          var targetPath = videodata['fullPath'];
+          var filename = videodata['name'];
+          //var targetPath = this.pathForImage(filename); alert(targetPath);
+
+          tt.pending = true;
+          var param = {"room_id" : room_id, "sender_type" : my_type, "sender_id" : tt.config.user_id, "message_text" : tt.sendText, "message_type" : "video", "other_id" : other_id,  "videoThumb": imagefile};
+          
+          var options = {
+            fileKey: "file",
+            fileName: filename,
+            chunkedMode: false,
+            mimeType: "video/mp4",
+            params : param
+          };
+          
+          const fileTransfer = new Transfer();
+          let url = this.config.getAPIURL() + "/message/sendvideo1.php";
+          fileTransfer.upload(targetPath, url, options).then((data: any) => {
+            tt.isLoading = false;
+            data = JSON.parse(data.response);
+            console.log(data);
+            tt.loadNewMessage();
+          }, err => {
+            console.log(JSON.stringify(err));
+            tt.isLoading = false;
+            alert('Error while uploading file.');
+          });
+        }, (err) => {
+          console.log(err);
+        });
+      })
     })
   }
 
