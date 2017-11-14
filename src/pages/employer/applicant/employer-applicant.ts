@@ -111,6 +111,7 @@ export class EmployerApplicantPage {
         loader.dismissAll();
         if(data.status == "success") {
           this.list.splice(i, 1);
+          this.data.applies = eval(this.data.applies) - 1;
           this.search("");
         }
     })
