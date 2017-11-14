@@ -22,23 +22,6 @@ export class EmployerHomeMapPage {
   slist: any;
   showSearch = false;
 
-  public queryExperienceCity = ""; 
-  public queryExperienceCountry = "";
-  public queryExperienceRole = "";
-  public queryCurWorkCity = "";
-  public queryCurWorkCountry = "";
-  public queryCurWorkRole = "";
-  public queryEducation = "";
-  public queryLanguage = "";
-  public queryCertificate = "";
-  public queryInterest = "";
-
-  public isexperience = false;
-  public iscurwork = false;
-  public isedu = false;
-  public islang = false;
-  public iscert = false;
-  public isinterest = false;
 
   ttime = 300;
   @ViewChild('slides') slides: Slides;
@@ -112,6 +95,13 @@ export class EmployerHomeMapPage {
       }
     }, this.ttime);
   }
+  clickPosition() {
+    setTimeout(() => {
+      if(!(this.config.isposition)) {
+        this.config.queryPosition = ""; 
+      }
+    }, this.ttime);
+  }
 
   ionViewWillLeave() {
     this.showSearch = false;
@@ -130,7 +120,7 @@ export class EmployerHomeMapPage {
       content: 'Loading...',
     });
     loader.present();
-    let param = {"employer_id" : this.config.user_id, "industry" : this.config.queryIndustry, "experience_city" : this.config.queryExperienceCity, "experience_country" : this.config.queryExperienceCountry, "experience_role" : this.config.queryExperienceRole, "curwork_city" : this.config.queryCurWorkCity, "curwork_country" : this.config.queryCurWorkCountry, "curwork_role" : this.config.queryCurWorkRole, "education" : this.config.queryEducation, "language" : this.config.queryLanguage, "certificate" : this.config.queryCertificate, "interest" : this.config.queryInterest};
+    let param = {"employer_id" : this.config.user_id, "industry" : this.config.queryIndustry, "experience_city" : this.config.queryExperienceCity, "experience_country" : this.config.queryExperienceCountry, "experience_role" : this.config.queryExperienceRole, "curwork_city" : this.config.queryCurWorkCity, "curwork_country" : this.config.queryCurWorkCountry, "curwork_role" : this.config.queryCurWorkRole, "education" : this.config.queryEducation, "language" : this.config.queryLanguage, "certificate" : this.config.queryCertificate, "interest" : this.config.queryInterest, "position" : this.config.queryPosition};
 
     this.employerService.loadMatchedJobSeekers(param)
     .subscribe(data => {
@@ -243,45 +233,9 @@ export class EmployerHomeMapPage {
   
   asearch() {
     this.showSearch = true;
-
-    this.queryExperienceCity = this.config.queryExperienceCity; 
-    this.queryExperienceCountry = this.config.queryExperienceCountry;
-    this.queryExperienceRole = this.config.queryExperienceRole;
-    this.queryCurWorkCity = this.config.queryCurWorkCity;
-    this.queryCurWorkCountry =this.config.queryCurWorkCountry;
-    this.queryCurWorkRole = this.config.queryCurWorkRole;
-    this.queryEducation = this.config.queryEducation;
-    this.queryLanguage = this.config.queryLanguage;
-    this.queryCertificate = this.config.queryCertificate;
-    this.queryInterest = this.config.queryInterest;
-
-    this.isexperience = this.config.isexperience;
-    this.iscurwork = this.config.iscurwork;
-    this.isedu = this.config.isedu;
-    this.islang = this.config.islang;
-    this.iscert = this.config.iscert;
-    this.isinterest = this.config.isinterest;
   }
   cancel() {
     this.showSearch = false;
-    
-    this.config.queryExperienceCity = this.queryExperienceCity; 
-    this.config.queryExperienceCountry = this.queryExperienceCountry;
-    this.config.queryExperienceRole = this.queryExperienceRole;
-    this.config.queryCurWorkCity = this.queryCurWorkCity;
-    this.config.queryCurWorkCountry =this.queryCurWorkCountry;
-    this.config.queryCurWorkRole = this.queryCurWorkRole;
-    this.config.queryEducation = this.queryEducation;
-    this.config.queryLanguage = this.queryLanguage;
-    this.config.queryCertificate = this.queryCertificate;
-    this.config.queryInterest = this.queryInterest;
-
-    this.config.isexperience = this.isexperience;
-    this.config.iscurwork = this.iscurwork;
-    this.config.isedu = this.isedu;
-    this.config.islang = this.islang;
-    this.config.iscert = this.iscert;
-    this.config.isinterest = this.isinterest;
   }
   done() {
     this.showSearch = false;

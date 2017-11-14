@@ -10,6 +10,19 @@
 <ion-content>
     <div class="asearch_dlg" *ngIf="showSearch">
         <div class="div_sec">
+            <div class="overlay" *ngIf="!config.isposition"></div>
+            <ion-checkbox [(ngModel)]="config.isposition" (click)="clickPosition()"></ion-checkbox>
+            <ion-label>Position :</ion-label>
+            <ion-row>
+                <ion-col col-3 text-right></ion-col>
+                <ion-col col-9>
+                    <ion-select [(ngModel)]="config.queryPosition" placeholder="Position">
+                        <ion-option value="{{item}}" *ngFor="let item of config.arrPosition">{{item}}</ion-option>
+                    </ion-select>
+                </ion-col>
+            </ion-row>
+        </div>
+        <div class="div_sec">
             <div class="overlay" *ngIf="!config.isexperience"></div>
             <ion-checkbox [(ngModel)]="config.isexperience" (click)="clickExperience()"></ion-checkbox>
             <ion-label>Experience :</ion-label>

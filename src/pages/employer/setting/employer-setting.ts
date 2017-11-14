@@ -108,6 +108,9 @@ export class EmployerSettingPage {
         if(data.status == "success") {
           let userSetting = JSON.stringify(this.user_setting);
           localStorage.setItem('user_setting', userSetting);
+          this.util.createAlert("Successfully saved settings", "");
+        } else {
+          this.util.createAlert("Settings Save Failed", "");
         }
     })
   }
