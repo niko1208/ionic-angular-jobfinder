@@ -6,7 +6,8 @@ import { Auth } from '../../../provider/auth';
 import { MessageService } from '../../../provider/message-service';
 
 import { Camera, MediaCapture, File, Transfer, FilePath, MediaFile } from 'ionic-native';
-//import { VideoEditor } from '@ionic-native/video-editor';
+import { VideoEditor } from '@ionic-native/video-editor';
+import { Base64 } from '@ionic-native/base64';
 //import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 //import { File } from '@ionic-native/file';
 import * as $ from 'jquery';
@@ -46,7 +47,8 @@ export class EmployerMessageroomPage {
     public loading: LoadingController,
     public navParams: NavParams,
   	public platform: Platform,
-    //private videoEditor: VideoEditor,
+    private videoEditor: VideoEditor,
+    private base64: Base64,
     //private transfer: FileTransfer,
     //private file: File,
     public actionSheetCtrl: ActionSheetController) {
@@ -142,25 +144,37 @@ export class EmployerMessageroomPage {
       return cordova.file.dataDirectory + video;
     }
   }
+  
   getVideo() {
     var tt = this;
     var options = {
       sourceType: 2,
       mediaType: 1
     };
- 
+    
     Camera.getPicture(options).then((data) => {
       var ary = data.split('/');
-      data = "file://" + data;
-      /*
+      data = "file://" + data; alert(data);
+      
       tt.videoEditor.createThumbnail({
         fileUri: data,
-        outputFileName: 'abc.jpg'
+        outputFileName: 'abc',
+        atTime: 1,
+        quality: 100
       })
-      .then((fileUri: string) => console.log('video transcode success', fileUri))
-      .catch((error: any) => console.log('video transcode error', error));
+      .then((data) => {
+        const fs:string = cordova.file.dataDirectory;
+        var ary1 = data.split('/');
+        data = fs + ary1[ary1.length-1];
+        alert(data);
+        tt.base64.encodeFile(data).then((base64File) => {
+          console.log(base64File);
+        }, (err) => {
+          console.log(err);
+        });
+      })
       if(1) return;
-      */
+      
       this.isLoading = true;
       let room_id = this.sitem.message_room_id;
       let my_type = this.sitem.message_sender_type; my_type = "employer";
