@@ -41,6 +41,7 @@ import { EmployerMessageroomPage } from '../pages/employer/messageroom/employer-
 import { EmployerHelpPage } from '../pages/employer/help/employer-help';
 import { EmployerPostjobLocationPage } from '../pages/employer/postjob-location/employer-postjob-location';
 import { EmployerEditjobLocationPage } from '../pages/employer/editjob-location/employer-editjob-location';
+import { EmployerNotificationPage } from '../pages/employer/notification/employer-notification';
 
 
 
@@ -70,6 +71,7 @@ import { SeekerMessageroomPage } from '../pages/seeker/messageroom/seeker-messag
 import { SeekerJobsmapPage } from '../pages/seeker/jobsmap/seeker-jobsmap';
 import { SeekerHelpPage } from '../pages/seeker/help/seeker-help';
 import { SeekerChatbotPage } from '../pages/seeker/chatbot/seeker-chatbot';
+import { SeekerNotificationPage } from '../pages/seeker/notification/seeker-notification';
 
 
 import { Camera } from '@ionic-native/camera';
@@ -133,6 +135,7 @@ import { MessageService } from '../provider/message-service';
     EmployerAddbotPage,
     EmployerBotweightPage,
     EmployerMessageroomPage,
+    EmployerNotificationPage,
 
     SeekerTabsPage,
     SeekerHomePage,
@@ -158,7 +161,8 @@ import { MessageService } from '../provider/message-service';
     SeekerHelpPage,
     SeekerChatbotPage,
     SeekerEditcertificationPage,
-    SeekerEditinterestPage
+    SeekerEditinterestPage,
+    SeekerNotificationPage
   ],
   imports: [
     BrowserModule,
@@ -204,6 +208,7 @@ import { MessageService } from '../provider/message-service';
     EmployerAddbotPage,
     EmployerBotweightPage,
     EmployerMessageroomPage,
+    EmployerNotificationPage,
 
     SeekerTabsPage,
     SeekerHomePage,
@@ -229,7 +234,8 @@ import { MessageService } from '../provider/message-service';
     SeekerHelpPage,
     SeekerChatbotPage,
     SeekerEditcertificationPage,
-    SeekerEditinterestPage
+    SeekerEditinterestPage,
+    SeekerNotificationPage
   ],
   providers: [
     StatusBar,

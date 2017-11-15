@@ -163,7 +163,7 @@ export class Config {
             }
             else
             {
-                strDiffDate = "("+divDiffRest+") mins ago";
+                strDiffDate = ""+divDiffRest+" mins ago";
             }
         }
         else

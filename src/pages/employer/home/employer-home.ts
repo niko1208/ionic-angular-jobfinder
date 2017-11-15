@@ -8,6 +8,7 @@ import { EmployerSettingPage } from '../setting/employer-setting';
 import { UtilService } from '../../../provider/util-service';
 import { EmployerService } from '../../../provider/employer-service';
 import { EmployerHomeMapPage } from '../home-map/employer-home-map';
+import { EmployerNotificationPage } from '../notification/employer-notification';
 
 @Component({
   selector: 'page-employer-home',
@@ -21,6 +22,7 @@ export class EmployerHomePage {
   list: any;
   slist: any;
   showSearch = false;
+  isnoti = false;
 
   ttime = 300;
 
@@ -148,6 +150,11 @@ export class EmployerHomePage {
             this.list[i]['distance'] = this.config.calcCrow(this.list[i].setting_location_lat, this.list[i].setting_location_lng, user_setting.setting_emp_location_lat, user_setting.setting_emp_location_lng);
           }
           this.search("");
+          if(data.resultNotifications.length > 0) {
+            this.isnoti = true;
+          } else {
+            this.isnoti = false;
+          }
         }
     }, error => {
         loader.dismissAll();
@@ -219,6 +226,9 @@ export class EmployerHomePage {
   done() {
     this.showSearch = false;
     this.loadData();
+  }
+  goNoti() {
+    this.navCtrl.push(EmployerNotificationPage);
   }
 
   search(value) {

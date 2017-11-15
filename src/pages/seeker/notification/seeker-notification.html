@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>Notifications</ion-title>
+        <ion-buttons right>
+            <div class="fright" (click)="delete()">Delete All</div>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let item of list; let i = index;" (click)="goPage(item)">
+            <div class="desc">
+                <div>{{item.msg}}</div>
+                <small>{{item.date}}</small>
+            </div>
+        </ion-item>
+    </ion-list>
+</ion-content>

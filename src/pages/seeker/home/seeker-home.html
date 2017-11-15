@@ -3,6 +3,8 @@
         <ion-title text-center>
             <img src='assets/images/Jobfinder_logo.png'/>
         </ion-title>
+        <ion-icon name="ios-notifications" class="iconnoti" (click)="goNoti()"></ion-icon>
+        <div class='noti' *ngIf="isnoti"></div>
     </ion-navbar>
 </ion-header>
 <ion-content id="content">

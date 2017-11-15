@@ -11,7 +11,7 @@ page-employer-home{
     }
     .iconheart{
         left: auto;
-        right: 10px;
+        right: 40px;
     }
     .iconmap{
         left: 40px;
@@ -148,6 +148,24 @@ page-employer-home{
     }
     .div_sec ion-row ion-col:first-child{
         padding-top: 12px;
+    }
+    .iconnoti{
+        position: absolute;
+        right: 10px;
+        top: 18px;
+        font-size: 28px;
+        color: #fff;
+        z-index: 9;
+    }
+    .noti{
+        position: absolute;
+        right: 10px;
+        top: 20px;
+        background: #f00;
+        border-radius: 10px;
+        width: 7px;
+        height: 7px;
+        z-index: 10;
     }
 
     @media (min-width: 500px) {

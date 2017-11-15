@@ -29,4 +29,22 @@ page-seeker-home{
         width: 100%;
         height: 100%;
     }
+    .iconnoti{
+        position: absolute;
+        right: 10px;
+        top: 18px;
+        font-size: 28px;
+        color: #3ac7f3;
+        z-index: 9;
+    }
+    .noti{
+        position: absolute;
+        right: 10px;
+        top: 20px;
+        background: #f00;
+        border-radius: 10px;
+        width: 7px;
+        height: 7px;
+        z-index: 10;
+    }
 }

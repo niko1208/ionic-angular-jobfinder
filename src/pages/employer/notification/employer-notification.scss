@@ -1,0 +1,55 @@
+page-employer-notification{
+    .user_avatar{
+        width: 70px;
+        height: 70px;
+        border: 2px solid #fff;
+        box-shadow: #555 0px 0px 1px;
+        border-radius: 100px;
+    }
+    .top_header{
+    }
+    .iconnoti{
+        position: absolute;
+        right: 10px;
+        top: 18px;
+        font-size: 28px;
+        color: #fff;
+        z-index: 9;
+    }
+    .noti{
+        position: absolute;
+        right: 10px;
+        top: 20px;
+        background: #f00;
+        border-radius: 10px;
+        width: 7px;
+        height: 7px;
+        z-index: 10;
+    }
+    ion-item.item-md{
+        border-bottom: 1px solid #eee;
+    }
+    ion-item img,
+    ion-item div.desc{
+        float: left;
+    }
+    ion-item div.desc{
+        width: calc(100% - 180px);
+        padding: 5px;
+        padding-left: 10px;
+    }
+    ion-item button.button-md{
+        margin-top: 5px;
+        width: 60px;
+    }
+    .bt_blue{
+        border: 1px solid #3ac7f3;
+        background: #fff;
+        color: #3ac7f3;
+    }
+    div.fright{
+        width: 70px;
+        float: right;
+        text-align: right;
+    }
+}

@@ -4,6 +4,7 @@ import { Config } from '../../../provider/config';
 import { UtilService } from '../../../provider/util-service';
 import { SeekerService } from '../../../provider/seeker-service';
 import { SeekerAdsPage } from '../ads/seeker-ads';
+import { SeekerNotificationPage } from '../notification/seeker-notification';
 import * as $ from 'jquery';
 
 @Component({
@@ -14,6 +15,7 @@ export class SeekerHomePage {
 
   list: any;
   slist: any;
+  isnoti = false;
   constructor(public navCtrl: NavController, 
     public config: Config,
     public util: UtilService,
@@ -48,6 +50,11 @@ export class SeekerHomePage {
               let w = $('#content').width();
               $('.ads').css('height', w+'px');
             }, 500);
+            if(data.resultNotifications.length > 0) {
+            this.isnoti = true;
+          } else {
+            this.isnoti = false;
+          }
         } else {
           this.util.createAlert("Failed to Load!", data.result);
         }
@@ -55,6 +62,10 @@ export class SeekerHomePage {
       loader.dismissAll();
       this.util.createAlert("Server Failed!", "");
     });
+  }
+
+  goNoti() {
+    this.navCtrl.push(SeekerNotificationPage);
   }
 
   follow(item) {
