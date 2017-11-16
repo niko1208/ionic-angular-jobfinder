@@ -19,7 +19,7 @@
                         </div>
                         <div class="sec_video" *ngIf="item.message_type == 'video'">
                             <a href="{{item.message_source_url}}" target="_blank">
-                                <video poster="{{item.message_thumb_url}}">
+                                <video poster="{{item.message_thumb_url}}" controls>
                                     <source src="{{item.message_source_url}}" type="video/mp4">
                                 </video>
                             </a>
@@ -36,7 +36,7 @@
                         </div>
                         <div class="sec_video" *ngIf="item.message_type == 'video'">
                             <a href="{{item.message_source_url}}" target="_blank">
-                                <video poster="{{item.message_thumb_url}}">
+                                <video poster="{{item.message_thumb_url}}" controls>
                                     <source src="{{item.message_source_url}}" type="video/mp4">
                                 </video>
                             </a>
@@ -48,7 +48,7 @@
                 <div class="loading" *ngIf="isLoading"><div>Sending...</div></div>
                 <ion-textarea [(ngModel)]="sendText"></ion-textarea>
                 <ion-icon name="ios-attach" (click)="presentActionSheet()"></ion-icon>
-                <input type="file" name="file_image" id="file_image" #fileInp (change)="setFileImage($event)" style="display:none" />
+                <!--<input type="file" name="file_image" id="file_image" #fileInp (change)="setFileImage($event)" style="display:none" />-->
                 <button ion-button round color="jblue" class="bt_small" (click)="send()">Send</button>
             </div>
             <div class='vc'>
@@ -58,3 +58,8 @@
         </ion-col>
     </ion-row>
 </ion-content>
+<!--
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore d:/my-release-key.keystore F:/Projects/ionic-angular-jobfinder/platforms/android/build/outputs/apk/android-release-unsigned.apk my-key-alias
+
+zipalign -v 4 F:/Projects/ionic-angular-jobfinder/platforms/android/build/outputs/apk/android-release-unsigned.apk jobfinder.apk
+-->

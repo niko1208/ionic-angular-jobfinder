@@ -328,7 +328,7 @@ export class EmployerMessageroomPage {
     let otherID = this.sitem.user_id;
     let param = {"room_id" : room_id, "other_type" : otherType, "other_id" : otherID};
     this.messageService.postData("loadmessages", param)
-    .subscribe(data => { console.log(data);
+    .subscribe(data => { //console.log(data);
         if(data.status == "success") {
           let mlist = data.result;
           for(let i =0;i <mlist.length; i++) {

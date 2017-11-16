@@ -19,7 +19,7 @@
                         </div>
                         <div class="sec_video" *ngIf="item.message_type == 'video'">
                             <a href="{{item.message_source_url}}" target="_blank">
-                                <video poster="{{item.message_thumb_url}}">
+                                <video poster="{{item.message_thumb_url}}" controls>
                                     <source src="{{item.message_source_url}}" type="video/mp4">
                                 </video>
                             </a>
@@ -36,7 +36,7 @@
                         </div>
                         <div class="sec_video" *ngIf="item.message_type == 'video'">
                             <a href="{{item.message_source_url}}" target="_blank">
-                                <video poster="{{item.message_thumb_url}}">
+                                <video poster="{{item.message_thumb_url}}" controls>
                                     <source src="{{item.message_source_url}}" type="video/mp4">
                                 </video>
                             </a>

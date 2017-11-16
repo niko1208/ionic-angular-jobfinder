@@ -287,7 +287,7 @@ export class SeekerMessageroomPage {
     this.file_image = null;
 
     let room_id = item.room_id;
-    let otherType = "seeker";
+    let otherType = "employer";
     let otherID = item.user_id;
     let param = {"room_id" : room_id, "other_type" : otherType, "other_id" : otherID};
     let loader = this.loading.create({
@@ -325,7 +325,7 @@ export class SeekerMessageroomPage {
   loadNewMessage() {
     this.pending = true;
     let room_id = this.sitem.room_id;
-    let otherType = "seeker";
+    let otherType = "employer";
     let otherID = this.sitem.user_id;
     let param = {"room_id" : room_id, "other_type" : otherType, "other_id" : otherID};
     this.messageService.postData("loadmessages", param)
