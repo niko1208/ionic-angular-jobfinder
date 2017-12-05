@@ -28,6 +28,7 @@ export class SeekerMessagePage {
   isLoading = false;
 
   pending = true;
+  timer = null;
 
 
   @ViewChild('fileInp') fileInput: ElementRef;
@@ -47,6 +48,10 @@ export class SeekerMessagePage {
 
     this.loadData();
 
+  }
+
+  ionViewWillLeave() {
+    clearTimeout(this.timer);
   }
 
   loadData() {
@@ -219,7 +224,7 @@ export class SeekerMessagePage {
 
   loadBack() {
     let self = this;
-    setTimeout(() => {
+    this.timer = setTimeout(() => {
       self.loadBack();
     }, 5000);
 

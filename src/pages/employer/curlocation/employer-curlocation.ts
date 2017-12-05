@@ -74,9 +74,28 @@ export class EmployerCurLocationPage {
     }
   }
   
-  loadMap(){
+  goCurLocation() {
+    var self = this;
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        self.loadMap(position.coords.latitude, position.coords.longitude);
+      }, function() {
+        alert('The Geolocation service failed');
+        self.loadMap();
+      });
+    } else {
+      alert("Doesn't support Geolocation");
+    }
+  }
+
+  loadMap(lat = 0, lng = 0){
     
-    let latLng = new google.maps.LatLng(this.user_setting.setting_emp_location_lat, this.user_setting.setting_emp_location_lng);
+    var latLng;
+    if(lat == 0) {
+      latLng = new google.maps.LatLng(this.user_setting.setting_emp_location_lat, this.user_setting.setting_emp_location_lng);
+    } else {
+      latLng = new google.maps.LatLng(lat, lng);
+    }
     let mapOptions = {
       center: latLng,
       zoom: 15,
@@ -102,6 +121,9 @@ export class EmployerCurLocationPage {
         self.infowindow.open(this.map, this);
     });
 
+    if(!self.user_setting.setting_emp_location_address || self.user_setting.setting_emp_location_address == "") {
+      self.geocodePosition(geocoder, latLng);
+    }
     google.maps.event.addListener(this.map, 'click', function(event) {
         self.marker.setPosition(event.latLng); 
         self.geocodePosition(geocoder, event.latLng);

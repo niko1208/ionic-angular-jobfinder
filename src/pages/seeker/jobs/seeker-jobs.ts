@@ -68,7 +68,8 @@ export class SeekerJobsPage {
       });
       alert.present();
       return;
-    } else if (user_about == null || user_about == "") { 
+    }
+     if (user_about == null || user_about == "") { 
       let alert = this.alertCtrl.create({
         title: "Please complete your profile!",
         message: "Name, About, Education and Current Work details are compulsory fields!",
@@ -89,7 +90,8 @@ export class SeekerJobsPage {
       });
       alert.present();
       return;
-    } else if (user_education == null || user_education.length == 0) { 
+    }
+    if (user_education == null || user_education.length == 0) { 
       let alert = this.alertCtrl.create({
         title: "Please complete your profile!",
         message: "Name, About, Education and Current Work details are compulsory fields!",
@@ -110,7 +112,8 @@ export class SeekerJobsPage {
       });
       alert.present();
       return;
-    } else if (user_curwork == null || user_curwork.length == 0) { 
+    } 
+     if (user_curwork == null || user_curwork.length == 0) { 
       let alert = this.alertCtrl.create({
         title: "Please complete your profile!",
         message: "Name, About, Education and Current Work details are compulsory fields!",
@@ -261,11 +264,11 @@ export class SeekerJobsPage {
   }
   filterItems(searchTerm) {
     return this.list.filter((item) => {
-      for(var key in item) { 
-        if(item[key].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+      //for(var key in item) { 
+        if(item['job_job_title'].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
           return true;
         }
-      }
+      //}
       return false;
     })
   }

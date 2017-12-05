@@ -73,6 +73,7 @@ import { SeekerHelpPage } from '../pages/seeker/help/seeker-help';
 import { SeekerChatbotPage } from '../pages/seeker/chatbot/seeker-chatbot';
 import { SeekerNotificationPage } from '../pages/seeker/notification/seeker-notification';
 
+import { VideoPage } from "../pages/seeker/video/video";
 
 import { Camera } from '@ionic-native/camera';
 import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture';
@@ -96,6 +97,7 @@ import { Auth } from '../provider/auth';
 import { EmployerService } from '../provider/employer-service';
 import { SeekerService } from '../provider/seeker-service';
 import { MessageService } from '../provider/message-service';
+import { Calendar } from '@ionic-native/calendar';
 
 @NgModule({
   declarations: [
@@ -162,7 +164,8 @@ import { MessageService } from '../provider/message-service';
     SeekerChatbotPage,
     SeekerEditcertificationPage,
     SeekerEditinterestPage,
-    SeekerNotificationPage
+    SeekerNotificationPage,
+    VideoPage
   ],
   imports: [
     BrowserModule,
@@ -235,7 +238,8 @@ import { MessageService } from '../provider/message-service';
     SeekerChatbotPage,
     SeekerEditcertificationPage,
     SeekerEditinterestPage,
-    SeekerNotificationPage
+    SeekerNotificationPage,
+    VideoPage
   ],
   providers: [
     StatusBar,
@@ -257,7 +261,8 @@ import { MessageService } from '../provider/message-service';
     MessageService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
     ,VideoEditor
-    ,Base64
+    ,Base64,
+    Calendar
     //,FileTransfer, FileTransferObject, File
   ]
 })

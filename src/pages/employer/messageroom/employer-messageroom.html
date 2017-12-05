@@ -1,6 +1,11 @@
 <ion-header>
     <ion-navbar color="jblue">
         <ion-title text-center>Messaging</ion-title>
+        <ion-buttons right>
+            <div class="fright" (click)="openCalendar()">
+                <ion-icon name='ios-calendar-outline'></ion-icon>
+            </div>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
@@ -14,12 +19,12 @@
                         <div class="sec_message" *ngIf="item.message_type == 'text'">{{item.message_text}}</div>
                         <div class="sec_photo" *ngIf="item.message_type == 'photo'">
                             <a href="{{item.message_thumb_url}}" target="_blank">
-                                <img src="{{item.message_thumb_url}}"/>
+                                <img src="{{item.message_thumb_url}}" (load)="doScroll()"/>
                             </a>
                         </div>
                         <div class="sec_video" *ngIf="item.message_type == 'video'">
                             <a href="{{item.message_source_url}}" target="_blank">
-                                <video poster="{{item.message_thumb_url}}" controls>
+                                <video poster="{{item.message_thumb_url}}" controls (load)="doScroll()">
                                     <source src="{{item.message_source_url}}" type="video/mp4">
                                 </video>
                             </a>
@@ -31,12 +36,12 @@
                         <div class="sec_message" *ngIf="item.message_type == 'text'">{{item.message_text}}</div>
                         <div class="sec_photo" *ngIf="item.message_type == 'photo'">
                             <a href="{{item.message_thumb_url}}" target="_blank">
-                                <img src="{{item.message_thumb_url}}"/>
+                                <img src="{{item.message_thumb_url}}" (load)="doScroll()"/>
                             </a>
                         </div>
                         <div class="sec_video" *ngIf="item.message_type == 'video'">
                             <a href="{{item.message_source_url}}" target="_blank">
-                                <video poster="{{item.message_thumb_url}}" controls>
+                                <video poster="{{item.message_thumb_url}}" controls (load)="doScroll()">
                                     <source src="{{item.message_source_url}}" type="video/mp4">
                                 </video>
                             </a>

@@ -61,7 +61,7 @@ export class SeekerChatbotPage {
           
           let dictSelectedAnswersIndex = [];
           for(let i =0;i <this.list.length; i++) {
-            this.list[i]['mdate'] = new Date(this.list[i].timediff*1000);
+            this.list[i]['mdate'] = this.list[i].message_bot_date;//this.config.getDiffDateString(this.list[i].timediff);
             let message_bot_answer_correct =this.list[i].message_bot_answer_correct;
             this.sum_answered_question = this.sum_answered_question + eval(message_bot_answer_correct);
             
@@ -133,6 +133,10 @@ export class SeekerChatbotPage {
     return false;
   }
 
+  retFunc() {
+    console.log(this.list);
+  }
+
   sendAnswerText(senderType, text) {
     let job_bot_question_weight = this.data.resultQuestion[this.sum_answered_question].job_bot_question_weight;
 
@@ -151,39 +155,6 @@ export class SeekerChatbotPage {
             this.sum_answered_question ++;
             if(this.sum_answered_question == 5) {
               this.sendBotText("Cool. Thanks for your answers, the hiring manager will review them and get back to you shortly.");
-              //==================================
-              let dictSelectedAnswersIndex = [];
-              for(let i =0;i <this.list.length; i++) {
-                let message_bot_answer_correct =this.list[i].message_bot_answer_correct;
-                if (message_bot_answer_correct == 1)
-                {
-                    let bot_answer_point = this.list[i]["message_bot_answer_weight"];
-                    dictSelectedAnswersIndex.push(bot_answer_point);
-                }
-              }
-              let arrayQuestions = this.data.resultQuestion;
-              let totalWeight = 0;
-              let sum = 0;
-              for(let iIndex = 0; iIndex<arrayQuestions.length; iIndex++)
-                {
-                    let answer_point = dictSelectedAnswersIndex[iIndex];
-                    if(answer_point != "-1")
-                    {
-                        let dictQuestions = arrayQuestions[iIndex];
-
-                        let job_bot_question_weight = dictQuestions.job_bot_question_weight;
-                        totalWeight = totalWeight + eval(job_bot_question_weight);
-                        
-                        sum = sum + answer_point * eval(job_bot_question_weight);
-                    }
-                }
-                this.resScore = sum / totalWeight;
-                if(this.resScore >= 40) {
-                  this.applyJob();
-                } else {
-                  this.declineJob();
-                }
-                //======================================================
             } else {
               let bot_question_id = this.data.resultQuestion[this.sum_answered_question].bot_question_id;
               let bot_question_text = this.data.resultQuestion[this.sum_answered_question].bot_question_text;
@@ -208,13 +179,13 @@ export class SeekerChatbotPage {
     });
     
   }
-  sendBotText(text) {
+  sendBotText(text, callback=null) {
     let param = {"job_id" : this.job_id, "sender_type" : 'bot', "seeker_id" : this.config.user_id, "message_text" : text, "question_weight" : 0, "answer_weight" : 0, "answer_correct" : 0};
     this.messageService.postData("botsendtext", param)
     .subscribe(data => { 
       if(data.status == "success") {
         this.loader.dismiss();
-        this.loadMessage();
+        this.loadMessage(callback);
       } else {
         this.loader.dismiss();
         this.util.createAlert("Failed", data.result);
@@ -224,13 +195,54 @@ export class SeekerChatbotPage {
     });
   }
 
-  loadMessage() {
+  loadMessage(callback=null) {
      let param = {"seeker_id" : this.config.user_id, "job_id" : this.job_id};
     this.messageService.postData("botloadmessages", param)
-    .subscribe(data => { 
+    .subscribe(data => { console.log(data);
         if(data.status == "success") {
           this.list = data.result;
+          for(let i =0;i <this.list.length; i++) {
+            this.list[i]['mdate'] = this.list[i].message_bot_date;//this.config.getDiffDateString(this.list[i].timediff);
+          }
+          if(this.sum_answered_question == 5) {
+            //==================================
+            let dictSelectedAnswersIndex = []; console.log(this.list);
+            for(let i =0;i <this.list.length; i++) {
+              let message_bot_answer_correct =this.list[i].message_bot_answer_correct;
+              if (message_bot_answer_correct == 1)
+              {
+                  let bot_answer_point = this.list[i]["message_bot_answer_weight"];
+                  dictSelectedAnswersIndex.push(bot_answer_point);
+              }
+            }
+            let arrayQuestions = this.data.resultQuestion; console.log(dictSelectedAnswersIndex);
+            let totalWeight = 0;
+            let sum = 0; console.log(arrayQuestions);
+            for(let iIndex = 0; iIndex<arrayQuestions.length; iIndex++)
+              {
+                  let answer_point = dictSelectedAnswersIndex[iIndex]; console.log(answer_point);
+                  if(answer_point != "-1")
+                  {
+                      let dictQuestions = arrayQuestions[iIndex]; console.log(dictQuestions);
+
+                      let job_bot_question_weight = dictQuestions.job_bot_question_weight;
+                      totalWeight = totalWeight + eval(job_bot_question_weight);
+                      
+                      sum = sum + answer_point * eval(job_bot_question_weight);
+                  }
+              }
+              console.log(totalWeight); console.log(sum);
+              this.resScore = sum / totalWeight;
+              this.resScore = parseFloat(this.resScore.toFixed(2));
+              if(this.resScore >= 40) {
+                this.applyJob();
+              } else {
+                this.declineJob();
+              }
+              //======================================================
+          }
         }
+        if(callback) callback();
     });
   }
 

@@ -113,7 +113,7 @@
         <div class="asearch" tappable name="ios-funnel-outline" (click)="asearch()">
             <img src="assets/images/home_advanced_search.png" />
         </div>
-        <ion-searchbar #q [(ngModel)]="config.searchValue" (keyup.enter)="search(q.value)" pleceholder="">
+        <ion-searchbar #q [(ngModel)]="config.searchValue" (keyup.enter)="search(q.value)" (ionInput)="search(q.value)" pleceholder="">
         </ion-searchbar>
         <div style="padding: 0px 8px;">
             <ion-select #indus interface="popover" [(ngModel)]="config.queryIndustry" (ionChange)="change(indus.value)">
@@ -130,7 +130,7 @@
             <div>{{item.user_name}}</div>
             <small>{{item.distance}}</small>
             <div>About</div>
-            <small>{{item.user_about}}</small>
+            <small class='aboutus'>{{item.user_about}}</small>
             <ion-row class="buttons">
                 <ion-col padding>
                     <button ion-button full round class="bt_green" (click)="like(i)">Like</button>

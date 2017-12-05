@@ -52,6 +52,26 @@ export class SeekerCurLocationPage {
     console.log(this.user_setting);
     let self = this;
     if(this.user_setting == null || (this.user_setting != null && this.user_setting.setting_location_lat == '')) {
+      self.user_setting = {setting_location_lat:'', setting_location_lng:''};
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          self.user_setting.setting_location_lat = position.coords.latitude;
+          self.user_setting.setting_location_lng = position.coords.longitude;
+          self.loadMap();
+        }, function() {
+          
+          self.user_setting.setting_location_lat = 22.285831;
+          self.user_setting.setting_location_lng = 114.1582283;
+          alert('The Geolocation service failed');
+          self.loadMap();
+        });
+      } else {
+        self.user_setting.setting_location_lat = 22.285831;
+        self.user_setting.setting_location_lng = 114.1582283;
+        alert("Doesn't support Geolocation");
+        self.loadMap();
+      }
+      /*
       this.geolocation.getCurrentPosition().then((resp) => {
         self.user_setting.setting_location_lat = resp.coords.latitude;
         self.user_setting.setting_location_lng = resp.coords.longitude;
@@ -63,14 +83,34 @@ export class SeekerCurLocationPage {
         self.user_setting.setting_location_lng = 114.1582283;
         self.loadMap();
       });
+      */
     } else { 
       self.loadMap();
     }
   }
   
-  loadMap(){
+  goCurLocation() {
+    var self = this;
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        self.loadMap(position.coords.latitude, position.coords.longitude);
+      }, function() {
+        alert('The Geolocation service failed');
+        self.loadMap();
+      });
+    } else {
+      alert("Doesn't support Geolocation");
+    }
+  }
+
+  loadMap(lat = 0, lng = 0){
     
-    let latLng = new google.maps.LatLng(this.user_setting.setting_location_lat, this.user_setting.setting_location_lng);
+    var latLng;
+    if(lat == 0) {
+      latLng = new google.maps.LatLng(this.user_setting.setting_location_lat, this.user_setting.setting_location_lng);
+    } else {
+      latLng = new google.maps.LatLng(lat, lng);
+    }
     let mapOptions = {
       center: latLng,
       zoom: 15,
@@ -95,12 +135,16 @@ export class SeekerCurLocationPage {
     google.maps.event.addListener(this.marker, 'click', function() {
         self.infowindow.open(this.map, this);
     });
-
+    console.log(self.user_setting.setting_location_address);
+    if(!self.user_setting.setting_location_address || self.user_setting.setting_location_address == "") {
+      self.geocodePosition(geocoder, latLng);
+    }
     google.maps.event.addListener(this.map, 'click', function(event) {
         self.marker.setPosition(event.latLng); 
         self.geocodePosition(geocoder, event.latLng);
         //this.map.setCenter(event.latLng);
-        self.user_setting.setting_location_lat = event.latLng.lat(); self.user_setting.setting_location_lng = event.latLng.lng();
+        self.user_setting.setting_location_lat = event.latLng.lat(); 
+        self.user_setting.setting_location_lng = event.latLng.lng();
     });
     
 

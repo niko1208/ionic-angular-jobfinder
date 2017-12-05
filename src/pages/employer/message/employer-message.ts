@@ -198,9 +198,8 @@ export class EmployerMessagePage {
     this.isLoading = true;
     let room_id = this.sitem.message_room_id;
     let my_type = this.sitem.message_sender_type; my_type = "employer";
-    let other_id = this.sitem.user_id;
+    let other_id = this.sitem.user_id; alert(other_id);
     let param = {"room_id" : room_id, "sender_type" : my_type, "sender_id" : this.config.user_id, "message_text" : this.sendText, "message_type" : "text", "other_id" : other_id};
-
     this.messageService.postData("sendtext", param)
     .subscribe(data => { 
       this.isLoading = false;

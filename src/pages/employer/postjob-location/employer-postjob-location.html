@@ -14,5 +14,6 @@
         <ion-searchbar #q [(ngModel)]="searchValue" (keyup.enter)="search(q.value)" pleceholder="">
         </ion-searchbar>
     </div>
+    <div class='map_cur' id="map_cur" (click)="goCurLocation()"><ion-icon name="ios-locate-outline"></ion-icon></div>
     <div #map2 id='map2'></div>
 </ion-content>

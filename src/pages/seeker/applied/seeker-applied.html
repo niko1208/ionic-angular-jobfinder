@@ -11,10 +11,14 @@
 <ion-content>
     <ion-list>
         <ion-item *ngFor="let item of slist; let i = index;" (click)="goDetail(i)">
+            <div class='item_decline' *ngIf="item.state=='decline'">
+                <ion-icon name='close' tappable (click)="declineJob(item, i)"></ion-icon>
+            </div>
             <img class="user_avatar" src="{{item.job_job_avatar_url}}" />
             <div class="desc">
-                <div>{{item.job_company_name}}</div>
-                <small>Applied {{item.timeago}}</small><br/>
+                <div>{{item.job_job_title}}</div>
+                <small *ngIf="item.state == 'invite'">Invited {{item.timeago}}</small><br/>
+                <small *ngIf="item.state != 'invite'">Applied {{item.timeago}}</small><br/>
                 <small>{{item.distance}}
                     <span *ngIf="item.state == 'shortlist'">(Shortlisted)</span>
                     <span *ngIf="item.state == 'invite'">(Invited)</span>

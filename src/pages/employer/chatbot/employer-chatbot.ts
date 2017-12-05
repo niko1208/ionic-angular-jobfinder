@@ -49,7 +49,7 @@ export class EmployerChatbotPage {
           let sum_answered_question = 0;
           let dictSelectedAnswersIndex = [];
           for(let i =0;i <this.list.length; i++) {
-            this.list[i]['mdate'] = new Date(this.list[i].timediff*1000);
+            this.list[i]['mdate'] = this.list[i].message_bot_date;
             let message_bot_answer_correct =this.list[i].message_bot_answer_correct;
             sum_answered_question = sum_answered_question + message_bot_answer_correct;
             
@@ -76,7 +76,8 @@ export class EmployerChatbotPage {
                     sum = sum + answer_point * eval(job_bot_question_weight);
                 }
             }
-            this.resScore = sum / totalWeight
+            this.resScore = sum / totalWeight;
+            if(totalWeight == 0) this.resScore = 0;
             console.log(this.resScore);
 
           setTimeout(() => {

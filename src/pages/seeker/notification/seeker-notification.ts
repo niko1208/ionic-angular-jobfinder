@@ -45,7 +45,7 @@ export class SeekerNotificationPage {
               if(noti_type == "message_text" || noti_type == "message_photo" || noti_type == "message_video") {
                   this.list[i]['msg'] = "You have received a notification in messaging";
               } else {
-                  this.list[i]['msg'] = "You have received a notification in Activity";
+                  this.list[i]['msg'] = "You have received a notification in Applied Jobs";
               }
           }
           this.search("");

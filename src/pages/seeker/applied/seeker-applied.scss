@@ -42,4 +42,19 @@ page-seeker-applied{
         color: #7cbb22;
         font-size: 30px;
     }
+    ion-list ion-item{
+        position: relative;
+    }
+    .item_decline{
+        position: absolute;
+        width: calc(100% - 20px);
+        height: 100%;
+        background: rgba(255,255,255,0.6);
+    }
+    .item_decline ion-icon{
+        position: absolute;
+        right: 10px;
+        top: 20px;
+        color: #f00;
+    }
 }

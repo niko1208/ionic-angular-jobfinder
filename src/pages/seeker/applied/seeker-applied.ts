@@ -41,7 +41,7 @@ export class SeekerAppliedPage {
           this.list = data.result;
           for(let i=0; i<this.list.length; i++) {
             let item = this.list[i];
-            this.list[i]['timeago'] = this.config.getDiffDateString(this.list[i].timediff);
+            this.list[i]['timeago'] = this.config.getDiffDateString(this.list[i].timeapplydiff);
             this.list[i]['distance'] = this.config.calcCrow(this.list[i].job_location_lat, this.list[i].job_location_lng, user_setting.setting_location_lat, user_setting.setting_location_lng);
           }
           this.search("");
@@ -53,7 +53,29 @@ export class SeekerAppliedPage {
 
   goDetail(i) {
     let item = this.list[i];
-    this.navCtrl.push(SeekerJobdetailPage, {data: item});
+    if(item.state == 'decline') {
+    } else {
+      this.navCtrl.push(SeekerJobdetailPage, {data: item});
+    }
+  }
+
+  declineJob(item, i) {
+    let user_setting = JSON.parse(localStorage.getItem('user_setting'));
+    let loader = this.loading.create({
+      content: 'Loading...',
+    });
+    loader.present();
+    let param = {"job_id" : item.job_id, "seeker_id" : this.config.user_id};
+    this.seekerService.postData("applyjobcancel", param)
+    .subscribe(data => {
+        loader.dismissAll();
+        if(data.status == "success") {
+          this.list.splice(i, 1);
+          this.search("");
+        } else {
+          this.util.createAlert("Failed", data.result);
+        }
+    })
   }
 
   search(value) {
@@ -61,11 +83,11 @@ export class SeekerAppliedPage {
   }
   filterItems(searchTerm) {
     return this.list.filter((item) => {
-      for(var key in item) { 
-        if(item[key].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+      //for(var key in item) { 
+        if(item['job_job_title'].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
           return true;
         }
-      }
+      //}
       return false;
     })
   }

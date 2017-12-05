@@ -37,9 +37,13 @@
             <ion-icon name="ios-cloud-upload-outline" (click)="presentActionSheet()"></ion-icon>
         </ion-label>
     </ion-item>
-    <video width="100%" controls>
-        <source src="{{data.user_video_url}}" type="video/mp4">
-    </video>
+    <div class="videoitem" (click)="goPlayer()">
+        <img src="{{thumb1}}" />
+    </div>
+    <!--
+    <video #videoPlayer preload="metadata" width="100%" controls poster="{{data.user_video_thumb_url}}">
+        <source id='video' src="{{data.user_video_url}}" type="video/mp4">
+    </video> -->
     <input type="file" name="file_photo_sabout" id="file_photo_sabout" (change)="setFile($event)" #fileInpsabout style="display:none" />
 
 </ion-content>

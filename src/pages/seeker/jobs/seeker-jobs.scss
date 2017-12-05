@@ -107,6 +107,12 @@ page-seeker-jobs{
         position: absolute;
         left: 30px;
     }
+    small.jobdesc{
+        line-height: 20px;
+        height: 40px;
+        overflow: hidden;
+        display: block;
+    }
 
     @media (min-width: 500px) {
         .buttons{

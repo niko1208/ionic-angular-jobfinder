@@ -55,11 +55,11 @@ export class SeekerSavedPage {
   }
   filterItems(searchTerm) {
     return this.list.filter((item) => {
-      for(var key in item) { 
-        if(item[key].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+      //for(var key in item) { 
+        if(item['job_job_title'].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
           return true;
         }
-      }
+      //}
       return false;
     })
   }

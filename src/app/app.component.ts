@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { Config } from '../provider/config';
+import { UtilService } from '../provider/util-service';
 
 import { SplashPage } from '../pages/splash/splash';
 import { EmployerTabsPage } from '../pages/employer/tabs/employer-tabs';
@@ -15,7 +16,7 @@ import { SeekerTabsPage } from '../pages/seeker/tabs/seeker-tabs';
 export class MyApp {
   rootPage:any
 
-  constructor(public platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public push: Push, public config: Config) {
+  constructor(public platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public push: Push, public config: Config, public util: UtilService) {
 
     
     platform.ready().then(() => {
@@ -76,13 +77,14 @@ export class MyApp {
     const pushObject: PushObject = this.push.init(options);
     
     pushObject.on('registration').subscribe((data: any) => {
-      console.log('device token -> ' + data.registrationId);
+      alert('device token -> ' + data.registrationId);
       this.config.deviceToken = data.registrationId;
       //alert("Device : " + this.config.deviceToken);
     });
 
     pushObject.on('notification').subscribe((data: any) => {
-      alert('message -> ' + data.message);
+      //alert('message -> ' + data.message);
+      this.util.creatToast(data.message);
       //if user using app and push notification comes
       if (data.additionalData.foreground) { 
         
@@ -97,4 +99,17 @@ export class MyApp {
   }
   
 }
+
+/*
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore d:/my-release-key.keystore F:/Projects/ionic-angular-jobfinder/platforms/android/build/outputs/apk/android-release-unsigned.apk my-key-alias
+
+zipalign -v 4 F:/Projects/ionic-angular-jobfinder/platforms/android/build/outputs/apk/android-release-unsigned.apk jobfinder.apk
+
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore d:/my-release-key.keystore F:/Projects/kilton/dev-q4/platforms/android/build/outputs/apk/android-release-unsigned.apk my-key-alias
+
+zipalign -v 4 F:/Projects/kilton/dev-q4/platforms/android/build/outputs/apk/android-release-unsigned.apk jobfinder.apk
+
+
+*/
 

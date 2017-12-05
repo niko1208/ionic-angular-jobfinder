@@ -8,6 +8,7 @@ import * as $ from 'jquery';
 import { Camera, MediaCapture, File, Transfer, FilePath } from 'ionic-native';
 import { VideoEditor } from '@ionic-native/video-editor';
 import { Base64 } from '@ionic-native/base64';
+import { Calendar } from '@ionic-native/calendar';
 declare var cordova : any;
 @Component({
   selector: 'page-seeker-messageroom',
@@ -46,12 +47,20 @@ export class SeekerMessageroomPage {
     public loading: LoadingController,
     public navParams: NavParams,
     private videoEditor: VideoEditor,
+    private calendar: Calendar,
     private base64: Base64,
     public actionSheetCtrl: ActionSheetController) {
         this.sitem = navParams.get('item');
         this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
   }
   
+  openCalendar(){
+    this.calendar.openCalendar(new Date()).then(
+        (msg) => { console.log(msg); },
+        (err) => { console.log(err); }
+    );
+  }
+
   ionViewWillEnter() {
     this.tabBarElement.style.display = 'none';
     this.user_info = JSON.parse(localStorage.getItem('user_info'));
@@ -121,7 +130,7 @@ export class SeekerMessageroomPage {
         .subscribe(data => { 
           this.isLoading = false;
             if(data.status == "success") {
-              this.loadNewMessage();
+              this.loadMessage();
               this.image = null;
             } else {
               this.util.createAlert("Failed", data.result);
@@ -195,13 +204,13 @@ export class SeekerMessageroomPage {
             params : param
           };
           
-          const fileTransfer = new Transfer();
-          let url = this.config.getAPIURL() + "/message/sendvideo1.php";
+          const fileTransfer = new Transfer(); console.log(fileTransfer);
+          let url = this.config.getAPIURL() + "/message/sendvideo1.php"; console.log(url);
           fileTransfer.upload(targetPath, url, options).then((data: any) => {
             self.isLoading = false;
             data = JSON.parse(data.response);
             console.log(data);
-            self.loadNewMessage();
+            self.loadMessage();
           }, err => {
             console.log(JSON.stringify(err));
             self.isLoading = false;
@@ -263,7 +272,7 @@ export class SeekerMessageroomPage {
             tt.isLoading = false;
             data = JSON.parse(data.response);
             console.log(data);
-            tt.loadNewMessage();
+            tt.loadMessage();
           }, err => {
             console.log(JSON.stringify(err));
             tt.isLoading = false;
@@ -310,9 +319,6 @@ export class SeekerMessageroomPage {
             this.mlist[i]['my_senderID'] = "seeker_"+this.config.user_id;
             this.mlist[i]['img_url'] = this.avatar_url;
           }
-          setTimeout(() => {
-            $('.chat_room').scrollTop($('.chat_room').prop("scrollHeight"));
-          }, 1000);
         }
         this.pending = false;
     }, error => {
@@ -322,7 +328,46 @@ export class SeekerMessageroomPage {
     });
   }
 
+  doScroll() {
+    this.scrollBottom();
+  }
+
+  scrollBottom() {
+    var that = this;
+    setTimeout(function () {
+      $('.chat_room').scrollTop($('.chat_room').prop("scrollHeight"));
+    }, 300);
+  }
+
   loadNewMessage() {
+    this.pending = true;
+    let room_id = this.sitem.room_id;
+    let otherType = "employer";
+    let otherID = this.sitem.user_id;
+    let param = {"room_id" : room_id, "other_type" : otherType, "other_id" : otherID};
+    this.messageService.postData("loadmessagesnew", param)
+    .subscribe(data => { console.log(data);
+        if(data.status == "success") {
+          let mlist = data.result;
+          for(let i =0;i <mlist.length; i++) {
+            mlist[i]['mdate'] = new Date(mlist[i].timediff*1000);
+            mlist[i]['senderID'] = mlist[i]['message_sender_type']+"_"+mlist[i]['message_sender_id'];
+            mlist[i]['my_senderID'] = "seeker_"+this.config.user_id;
+            mlist[i]['img_url'] = this.avatar_url;
+            this.mlist.push(mlist[i]);
+          }
+          if(mlist.length > 0) {
+            this.doScroll();
+          }
+        }
+        this.pending = false;
+    }, error => {
+        this.pending = false;
+        //alert("Error");
+    });
+  }
+
+  loadMessage() {
     this.pending = true;
     let room_id = this.sitem.room_id;
     let otherType = "employer";
@@ -402,7 +447,7 @@ export class SeekerMessageroomPage {
               .subscribe(data => { 
                 self.isLoading = false;
                   if(data.status == "success") {
-                    self.loadNewMessage();
+                    self.loadMessage();
                     self.file_image = null;
                   } else {
                     this.util.createAlert("Failed", data.result);
@@ -425,7 +470,7 @@ export class SeekerMessageroomPage {
       .subscribe(data => { 
         this.isLoading = false;
           if(data.status == "success") {
-            this.loadNewMessage();
+            this.loadMessage();
             this.file_image = null;
           } else {
             this.util.createAlert("Failed", data.result);
@@ -454,7 +499,7 @@ export class SeekerMessageroomPage {
     .subscribe(data => { 
       this.isLoading = false;
         if(data.status == "success") { 
-          this.loadNewMessage();
+          this.loadMessage();
           this.sendText = "";
         } else {
           this.util.createAlert("Failed", data.result);

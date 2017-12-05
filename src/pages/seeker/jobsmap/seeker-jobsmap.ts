@@ -70,10 +70,29 @@ export class SeekerJobsmapPage {
     })
   }
 
-  loadMap(){
+  goCurLocation() {
+    var self = this;
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        self.loadMap(position.coords.latitude, position.coords.longitude);
+      }, function() {
+        alert('The Geolocation service failed');
+        self.loadMap();
+      });
+    } else {
+      alert("Doesn't support Geolocation");
+    }
+  }
+
+  loadMap(lat = 0, lng = 0){
     let user_setting = JSON.parse(localStorage.getItem('user_setting'));
     console.log(user_setting);
-    let latLng = new google.maps.LatLng(user_setting.setting_location_lat, user_setting.setting_location_lng);
+    var latLng;
+    if(lat == 0) {
+      latLng = new google.maps.LatLng(user_setting.setting_location_lat, user_setting.setting_location_lng);
+    } else {
+      latLng = new google.maps.LatLng(lat, lng);
+    }
     let mapOptions = {
       center: latLng,
       zoom: 15,

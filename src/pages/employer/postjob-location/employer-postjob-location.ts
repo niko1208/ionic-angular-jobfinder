@@ -79,10 +79,29 @@ export class EmployerPostjobLocationPage {
     */
   }
 
-  loadMap(){
+  goCurLocation() {
+    var self = this;
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        self.loadMap(position.coords.latitude, position.coords.longitude);
+      }, function() {
+        alert('The Geolocation service failed');
+        self.loadMap();
+      });
+    } else {
+      alert("Doesn't support Geolocation");
+    }
+  }
+
+  loadMap(lat = 0, lng = 0){
     console.log('loadmap');
     
-    let latLng = new google.maps.LatLng(this.data.job_location_lat, this.data.job_location_lng);
+    var latLng;
+    if(lat == 0) {
+      latLng = new google.maps.LatLng(this.data.job_location_lat, this.data.job_location_lng);
+    } else {
+      latLng = new google.maps.LatLng(lat, lng);
+    }
     let mapOptions = {
       center: latLng,
       zoom: 15,

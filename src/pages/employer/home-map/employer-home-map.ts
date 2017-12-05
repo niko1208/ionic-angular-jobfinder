@@ -72,10 +72,29 @@ export class EmployerHomeMapPage {
     })
   }
 
-  loadMap(){
+  goCurLocation() {
+    var self = this;
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        self.loadMap(position.coords.latitude, position.coords.longitude);
+      }, function() {
+        alert('The Geolocation service failed');
+        self.loadMap();
+      });
+    } else {
+      alert("Doesn't support Geolocation");
+    }
+  }
+
+  loadMap(lat = 0, lng = 0){
     let user_setting = JSON.parse(localStorage.getItem('user_setting'));
     console.log(user_setting);
-    let latLng = new google.maps.LatLng(user_setting.setting_emp_location_lat, user_setting.setting_emp_location_lng);
+    var latLng;
+    if(lat == 0) {
+      latLng = new google.maps.LatLng(user_setting.setting_emp_location_lat, user_setting.setting_emp_location_lng);
+    } else {
+      latLng = new google.maps.LatLng(lat, lng);
+    }
     let mapOptions = {
       center: latLng,
       zoom: 15,
@@ -171,28 +190,31 @@ export class EmployerHomeMapPage {
   }
 
   asearch() {
+    $('#map_cur').css('display', 'none');
     this.showSearch = true;
   }
   cancel() {
+    $('#map_cur').css('display', 'block');
     this.showSearch = false;
   }
   done() {
+    $('#map_cur').css('display', 'block');
     this.showSearch = false;
     this.loadData();
   }
 
-  search(value) {
+  search(value) { console.log(this.config.searchValue);
     value = this.config.searchValue;
     this.slist = this.filterItems(value);
     this.loadMap();
   }
   filterItems(searchTerm) {
     return this.list.filter((item) => {
-      for(var key in item) { 
-        if(item[key].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+      //for(var key in item) { 
+        if(item['user_name'].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
           return true;
         }
-      }
+      //}
       return false;
     })
   }
@@ -202,7 +224,7 @@ export class EmployerHomeMapPage {
     //this.isexperience = !(this.isexperience);
     setTimeout(() => {
       if(!(this.config.isexperience)) {
-        this.config.queryEducation = ""; 
+        this.config.queryExperienceCity = ""; 
         this.config.queryExperienceCountry = "";
         this.config.queryExperienceRole = "";
       }

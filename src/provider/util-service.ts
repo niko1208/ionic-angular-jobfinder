@@ -9,7 +9,7 @@ export class UtilService {
         public toastCtrl: ToastController) {
     }
 
-    creatToast(message, position = 'top', duration = 2000) {
+    creatToast(message, position = 'top', duration = 5000) {
         this.toastCtrl.create({message:message, position: position, cssClass: 'animated bounceInRight', duration: duration})
         .present();
     }

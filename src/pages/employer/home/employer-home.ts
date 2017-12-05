@@ -47,7 +47,7 @@ export class EmployerHomePage {
     //this.isexperience = !(this.isexperience);
     setTimeout(() => {
       if(!(this.config.isexperience)) {
-        this.config.queryEducation = ""; 
+        this.config.queryExperienceCity = ""; 
         this.config.queryExperienceCountry = "";
         this.config.queryExperienceRole = "";
       }
@@ -231,17 +231,17 @@ export class EmployerHomePage {
     this.navCtrl.push(EmployerNotificationPage);
   }
 
-  search(value) {
+  search(value) { 
     value = this.config.searchValue;
     this.slist = this.filterItems(value);
   }
   filterItems(searchTerm) {
     return this.list.filter((item) => {
-      for(var key in item) { 
-        if(item[key].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+      //for(var key in item) { 
+        if(item['user_name'].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
           return true;
         }
-      }
+      //}
       return false;
     })
   }

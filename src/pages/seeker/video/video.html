@@ -1,0 +1,11 @@
+<ion-header>
+    <ion-navbar color="jblue">
+        <ion-title text-center>Video Player</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <video *ngIf="data" #videoPlayer preload="metadata" width="100%" controls autoplay>
+        <source id='video' src="{{data}}" type="video/mp4">
+    </video>
+</ion-content>
